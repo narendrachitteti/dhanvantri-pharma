@@ -368,16 +368,14 @@ const PatientBill = () => {
     const printWindow = window.open("", "", "height=600");
     printWindow.document.open();
     printWindow.document.write(printContent);
+    printWindow.document.close();
 
-    // Trigger the print operation
     printWindow.print();
 
-    // Close the print window after printing
     printWindow.onafterprint = function () {
-      printWindow.close();
+        printWindow.close();
     };
-  };
-};
+};}
 
 
 
@@ -386,7 +384,7 @@ const PatientBill = () => {
 
   return (
     <>
-         <PharmacyNav />
+    <PharmacyNav/>
    
       <div className="patientbill-page">
        

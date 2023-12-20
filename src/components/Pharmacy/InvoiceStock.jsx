@@ -292,13 +292,15 @@ const [stockName, /* setStockName */] = useState("");
         "http://localhost:5000/api/addInvoice",
         newInvoice
       );
-
+  
       console.log(response.data);
       window.alert("Invoice added successfully");
-      window.location.reload();
+      window.location.reload(); // Reloading the page might not be the best user experience, consider other UI updates instead
     } catch (error) {
       console.error(error);
+      // Handle error if the request fails
     }
+    
   };
 
   const calculateTotalPriceBeforeTax = () => {
