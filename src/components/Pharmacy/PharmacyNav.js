@@ -108,7 +108,7 @@ const PharmacyNav = () => {
               <div className="dropdown-content">
                 <Link to="/ItemDescription">Item Description</Link>
                 <Link to="/Stockists">Stockists</Link>
-                <Link to="/StockistInvoice">Stockists Invoices</Link>
+                <Link to="/invoicestock">Stockists Invoices</Link>
               </div>
             </div>
           </div>
