@@ -18,7 +18,7 @@ import Dbdetails from "./components/Pharmacy/Dbdetails";
 import Pharmapurchase from "./components/Pharmacy/Pharmapurchase.jsx";
 import SalesReceipt from "./components/Pharmacy/SalesReceipt.jsx";
 import StockistInvoice from './components/Pharmacy/StockistInvoice.jsx';
-
+import Form3 from './components/Form3'
 function App() {
   return (
     <div className="App">
@@ -45,6 +45,7 @@ function App() {
           <Route path="/PharmacyPurchase" element={<Pharmapurchase/>}/>
           <Route path="/SalesReceipt" element={<SalesReceipt/>}/>
           <Route path="/PharmaLab" element={<PharmaLab/>}/>
+          <Route path="/Form3" element={<Form3/>}/>
         </Routes>
       </Router>
     </div>
