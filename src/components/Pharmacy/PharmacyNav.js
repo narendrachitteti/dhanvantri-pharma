@@ -79,7 +79,7 @@ const PharmacyNav = () => {
           <div className="nav-item">
             <Link to="/PharmacyHome" style={{textDecoration:'none', color:'white',fontWeight:'bolder',fontSize:'2rem'}} >
              
-            VCN
+            DP
             </Link>
           </div>
           <div className="nav-item">
@@ -104,9 +104,9 @@ const PharmacyNav = () => {
   
           <div className="nav-item">
             <div className="dropdown">
-              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Select Invoice</h6>
+              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Item Description</h6>
               <div className="dropdown-content">
-                <Link to="/InvoiceStock">Invoice Stocks</Link>
+                <Link to="/ItemDescription">Item Description</Link>
                 <Link to="/Stockists">Stockists</Link>
                 <Link to="/StockistInvoice">Stockists Invoices</Link>
               </div>
@@ -125,27 +125,8 @@ const PharmacyNav = () => {
               </div>
             </div>
           </div>
-          <div className="nav-item">
-            <Link
-              to="/Billingreports"
-              style={{ textDecoration: "none"}} className="billrepote"
-            >
-             <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Billing Reports</h6>
-            </Link>
-           
-          </div>
           
-            <div className="nav-item">
-            <div className="dropdown">
-              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Modules</h6>
-              <div className="dropdown-content">
-                <Link to="/Pharmacypurchase">Pharmacy purchase</Link>
-                <Link to="/SalesReceipt">Sales Receipt</Link>
-                
-
-              </div>
-            </div>
-          </div>
+              
         </div>
         <div className="add-pbill-dropdown">
           <Link to="/PharmacyBilling" className="add-pbill-icon-link">
