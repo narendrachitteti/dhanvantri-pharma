@@ -1,0 +1,130 @@
+/* Global styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Specific styles for Form3-vik */
+.Form3-vik {
+    width: 95%;
+    margin: auto;
+}
+
+.Form3-vik h2 {
+    color: #333;
+}
+
+.Form3-vik button {
+    background-color: rgb(35, 101, 126);
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.Form3-vik .modal {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.Form3-vik .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.Form3-vik .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Form3-vik .close:hover,
+.Form3-vik .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Form3-vik table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.Form3-vik th,
+.Form3-vik td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.Form3-vik th {
+    background-color: rgb(139, 195, 215);
+    color: white;
+}
+
+.Form3-vik button {
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.Form3-vik form {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.Form3-vik label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.Form3-vik input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.Form3-vik table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.Form3-vik table, th, td {
+    border: 1px solid #ddd;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+    .Form3-vik .modal-content {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .Form3-vik .modal-content {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .Form3-vik .modal-content {
+        width: 95%;
+    }
+}

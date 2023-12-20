@@ -1,27 +1,25 @@
-
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import "./Itemdescription.css";
-import PharmacyNav from "./PharmacyNav";
+import './Itemdescription.css'
 
-const companyData = ["Company1", "Company2", "Company3"];
-const categoriesData = ["Category A", "Category B", "Category C"];
-const groupsData = ["Group 1", "Group 2", "Group 3"];
-const schedulesData = ["Schedule 1", "Schedule 2", "Schedule 3"];
-const drugCompositionData = ["drug1", "drug2", "drug3"];
-const taxCodeData = ["tax1", "tax2", "tax3"];
-const hsnData = ["3004", "3003", "2002"];
 
 const ItemDescription = () => {
+    const [companyData, setCompanyData] = useState([]);
+  const [taxCodeData, setTaxCodeData] = useState([]);
+  const [categoriesData,setCategoriesData] = useState([]);
+  const [groupsData, setGroupsData] = useState([]);
+  const [schedulesData, setSchedulesData] = useState([]);
+  const [drugCompositionData, setDrugCompositionData] = useState([]);
+  const [hsnData, setHsnData] = useState([]);
+
   const [formData, setFormData] = useState({
     product: "",
-    company: companyData[0],
-    taxCode: taxCodeData[0],
-    category: categoriesData[0],
-    group: groupsData[0],
-    schedule: schedulesData[0],
-    drugComposition: drugCompositionData[0],
+    company: "",
+    taxCode: "",
+    category: "",
+    group: "",
+    schedule: "",
+    drugComposition: "",
     purchaseRate: "",
     salesRate: "",
     unit: "",
@@ -29,73 +27,54 @@ const ItemDescription = () => {
     unitPerBox: "",
     lotQty: "",
     lotrate: "",
-    hsn: hsnData[0],
+    hsn: "",
     mrp: "",
     reltr: "",
     salesman: "0",
     narration: "",
     distrrate: "",
   });
-
-
-// ---------------------------------
-
-const handlePrint = () => {
-  const printWindow = window.open("", "_blank");
-
-  printWindow.document.write("<html><head><title>Print</title>");
-  printWindow.document.write(
-    `<style>
-      table {
-        border-collapse: collapse;
-        width: 60%;
-        margin:0px 20%;
-      }
-      th{
-        font-weight:bold;
-      }
-      th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-      .footer {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        padding: 10px;
-      }
-    </style></head><body>`
-  );
-
-
-  printWindow.document.write("<table>");
-  printWindow.document.write("<tr><th>Field</th><th>Value</th></tr>");
-
-  // Iterate over form data and add table rows
-  for (const [field, value] of Object.entries(formData)) {
-    printWindow.document.write(<tr><th>${field}</th><td>${value}</td></tr>);
-  }
-
-  printWindow.document.write("</table>");
-
-   // Include the current date and time in the footer
-   const currentDate = new Date();
-   const formattedDate = currentDate.toLocaleString();
-   printWindow.document.write(<div class="footer">Printed on: ${formattedDate}</div>);
-
-  printWindow.document.write("</body></html>");
-  printWindow.document.close();
-  printWindow.print();
-
   
-};
-
-
-// -------------------------------------
-
-
-
+const handlePrint = () => {
+    const printWindow = window.open("", "_blank");
+  
+    printWindow.document.write("<html><head><title>Print</title>");
+    printWindow.document.write(
+      `<style>
+        table {
+          border-collapse: collapse;
+          width: 60%;
+          margin: 0 auto;
+        }
+        th, td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        }
+        .footer {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          padding: 10px;
+        }
+      </style></head><body>`
+    );
+  
+    printWindow.document.write("<table>");
+    printWindow.document.write("<tr><th>Field</th><th>Value</th></tr>");
+    for (const [field, value] of Object.entries(formData)) {
+      printWindow.document.write(<tr><th>${field}</th><td>${value}</td></tr>);
+    }
+    printWindow.document.write("</table>");
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString();
+    printWindow.document.write(<div class="footer">Printed on: ${formattedDate}</div>);
+  
+    printWindow.document.write("</body></html>");
+    printWindow.document.close();
+    printWindow.print();
+  };
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -107,24 +86,19 @@ const handlePrint = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log("Form data submitted:", formData);
 
     try {
-      const response = await fetch("http://localhost:5001/api/submit-form", {
+      const response = await fetch("http://localhost:5000/api/submit-form", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
         console.log("Form data submitted successfully");
-        // console.log("Form data submitted:", formData); 
-        // You can redirect or perform other actions upon successful submission
       } else {
-        // console.error("Failed to submit form data");
         console.error("Failed to submit form data. Server returned:", response.status, response.statusText);
       }
     } catch (error) {
@@ -132,10 +106,63 @@ const handlePrint = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/distinctCompanies");
+        const data = await response.json();
+  
+        if (data && typeof data === "object") {
+          if (
+            data.hasOwnProperty("companies") &&
+            Array.isArray(data.companies) &&
+            data.hasOwnProperty("taxCodes") &&
+            Array.isArray(data.taxCodes) &&
+            data.hasOwnProperty("category") &&
+            Array.isArray(data.category) &&
+            data.hasOwnProperty("group") &&
+            Array.isArray(data.group) &&
+            data.hasOwnProperty("schedule") &&
+            Array.isArray(data.schedule) &&
+            data.hasOwnProperty("drugComposition") &&
+            Array.isArray(data.drugComposition) &&
+            data.hasOwnProperty("hsn") &&
+            Array.isArray(data.hsn)
+          ) {
+            setCompanyData(data.companies);
+            setTaxCodeData(data.taxCodes);
+            setCategoriesData(data.category);
+            setGroupsData(data.group);
+            setSchedulesData(data.schedule);
+            setDrugCompositionData(data.drugComposition);
+            setHsnData(data.hsn);
+  
+            setFormData({
+              ...formData,
+              company: data.companies[0],
+              taxCode: data.taxCodes[0],
+              category: data.category[0],
+              group: data.group[0],
+              schedule: data.schedule[0],
+              drugComposition: data.drugComposition[0],
+              hsn: data.hsn[0],
+            });
+          } else {
+            console.error("Data received from the API is not in the expected format:", data);
+          }
+        } else {
+          console.error("Invalid data received from the API:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+ 
   return (
 
-    <>
-    <PharmacyNav/>
     <div  className="item-description-total">
     <form className="item-form-container" onSubmit={handleSubmit}>
     <div className="item-content">
@@ -155,7 +182,7 @@ const handlePrint = () => {
          <label className="label">Company:</label>
         <Select className="item-company-1"
           name="company"
-          value={{ label: formData.company, value: formData.company }}
+          value={{ label: formData.company, value: formData.companyData }}
           options={companyData.map((company) => ({
             label: company,
             value: company,
@@ -164,6 +191,7 @@ const handlePrint = () => {
             handleSelectChange("company", selectedOption)
           }
         />
+        
          
       <label className="item-label-sec">
         Selected Company: 
@@ -171,8 +199,9 @@ const handlePrint = () => {
         className="input-selec-c"
           type="text"
           name="selectedCompany"
-          value={formData.company}
-          disabled
+          value={formData.selectedCompany}
+          onChange={handleInputChange}
+          
         />
      </label>
       </div>
@@ -423,13 +452,12 @@ const handlePrint = () => {
              <button>Delete</button>
              <button>Save</button>
              <button  onClick={handlePrint}>Print</button>
-             <button>Configure</button>
+             
              <button>Exit</button>
       </div>
       </div>
     </form>
     </div>
-    </>
   );
 };
 

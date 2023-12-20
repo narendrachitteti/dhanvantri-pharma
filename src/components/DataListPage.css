@@ -1,0 +1,404 @@
+.dali-total{
+    margin-top: 5%;
+    margin-left: 10vw;
+   
+}
+.dali-div-search{
+    border: 1px solid gray;
+    border-radius: 3px;
+    width: 20vw;
+    height: 5vh;
+    /* align-items: center;  */
+}
+.dali-search-in{
+    width: 17vw;
+    height: 4.5vh;
+    border: none;
+    outline: 0;
+}
+.dali-ser-icon{
+    background-color: transparent;
+    border: none;
+}
+.dali-icon{
+    font-size: 20px;
+    color: rgb(0, 153, 255);
+    margin-bottom: -6px;
+}
+
+
+.dali-table{
+    border: 1px solid gray;
+    border-collapse: collapse;
+    width: 70vw;
+    text-align: center;
+}
+.dali-table th{
+    border: 1px solid gray;
+    border-collapse: collapse;
+    padding: 5px 0px;
+    background-color:rgb(0, 153, 255) ;
+    color: white;
+}
+.dali-table td{
+    border: 1px solid gray;
+    border-collapse: collapse;
+    padding: 4px 0px;
+}
+.dali-edit-btn{
+    background: transparent;
+    border: none;
+}
+.dali-edit-icon{
+   color: #00b69d;
+   font-size: 25px;
+}
+.dali-delete-btn{
+    margin-left: 8px;
+    background: transparent;
+    border: none;
+}
+.dali-delete-icon{
+   color: red;
+   font-size: 25px;
+}
+.dali-edit-span{
+    font-weight: bold;
+    font-size: 20px;
+}
+.dali-modal-edit{
+    height: 90vh;
+    width: 58vw;
+    /* border: 1px solid gray; */
+    background-color: rgb(255, 240, 240);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    /* box-shadow: 2px 2px 10px ; */
+    /* box-shadow: rgba(0, 0, 0, 0.09) 0px 20px 10px, rgba(0, 0, 0, 0.09) 0px 10px 10px, rgba(0, 0, 0, 0.09) 0px 10px 10px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
+}
+.dali-product-in{
+    width: 48.4vw;
+    height: 5vh;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+.dali-com-sele{
+    width: 20vw;
+    margin-left: 0.2%;
+}
+.dali-edit-popup{
+    display: flex;
+    /* flex-direction: column; */
+    padding: 25px;
+}
+
+.dali-textc-selec{
+    width: 20vw;
+}
+.dali-pop-1strow, .dali-pop-2ndrow, .dali-pop-3rdrow {
+    margin-top: 0.5%;
+    display: flex;
+    align-items: center;
+}
+.dali-pop-4throw{
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+}
+.dali-cat-sele{
+    width: 20vw;
+}
+.dali-grp-sele{
+    width: 20vw;
+    margin-left: 1.8%;
+}
+.dali-she-sele{
+    width: 20vw;
+    margin-left: 0.8%;
+}
+.dali-rows{
+    margin-left: 5%;
+}
+.dali-prate-in, .dali-pack-in{
+    height: 3.5vh;
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+.dali-pur-sale-rate{
+    display: flex;
+    margin-top: 0.5%;
+    /* margin-bottom: 0.5%; */
+    border: 1px solid gray;
+    padding: 3px;
+    width: 54vw;
+}
+.dali-sales-r{
+    margin-left: 21%;
+}
+/* .dali-pack-lab{ */
+    /* margin-top: 10%; */
+/* } */
+.dali-pack-div{
+    border: 1px solid gray;
+    padding: 3px; 
+    width: 54vw;
+}
+.dali-lot-div{
+    border: 1px solid gray;
+    padding: 3px; 
+    width: 54vw;
+}
+.dali-other-div{
+    border: 1px solid gray;
+    padding: 3px; 
+    width: 54vw;
+}
+.dali-row-labels{
+    color:#2173b0 ;
+}
+.dali-dc-sele,.dali-dc-sele-drug {
+    width: 10vw;
+    /* margin-left: 0.1%; */
+}
+.dali-narr-div{
+    margin-top: 1%;
+}
+.dali-narr-in{
+    width: 47.6vw;
+    height: 4vh;
+    border: 1px solid gray;
+    border-radius: 4px;
+    margin-left: 1.3%;
+}
+.dali-btn-div{
+    margin-top: 1.5%;
+    margin-left: 22vw;
+}
+.dali-btn-div button{
+    padding: 7px 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: #2173b0;
+    color: white;
+}
+.dali-pop-can{
+    margin-left: 5%;
+}
+.dali-modal-delete{
+    height: 25vh;
+    width: 30vw;
+    background-color: rgb(255, 240, 240);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+ }
+.dali-pop-head{
+    margin-top: 5vh;
+}
+.dali-pop-btnns{
+    padding: 7px 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #2173b0;
+    color: white;
+    margin-left: 5%;
+}
+/* ----------------------------------------- */
+
+.dali-product-deti-popup{
+    height: 98vh;
+    width: 60vw;
+    background-color: rgb(255, 240, 240);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;  
+}
+.dali-pd-pop-tdiv{
+    padding-top: 1%;
+    margin: 1% 2% 1% 0%;
+}
+.dali-pd-pop-div{
+    display: flex;
+    flex-direction: column;
+}
+.dali-pd-pop-span{
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #2173b0;
+    text-align: center;
+    margin-left: 45%;
+}
+.dali-pd-pop-table{
+    width: 25vw;
+    /* border: 1px solid gray; */
+    /* border-collapse: collapse; */
+}
+
+.dali-pd-pop-1strow{
+    display: flex;
+    margin-left: 5vw;
+}
+.dali-pd-pop-1strow label{
+    color: #2173b0;
+    /* font: 1.2rem; */
+}
+.dali-pd-pop-1strow input{
+    /* border: none; */
+    outline: 0;
+    width: 20vw;
+    height: 2.7vh;
+    border: 1px solid gray;
+    border-radius: 3px;
+    /* background-color: transparent; */
+    /* font-size: 1rem; */
+}
+.dali-pd-pop-1strow input[readonly] {
+    cursor: not-allowed;
+  }
+.dali-pd-pop-rowr{
+    margin-left: 22%;
+}
+.dali-pd-pop-span-1{
+    margin-left: 5vw;
+    margin-top: 1.2%;
+    font-size: 1rem;
+}
+/* .dali-pd-pop-table th{
+    border: 1px solid gray;
+    border-collapse: collapse;
+    font-size: 0.7rem;
+    text-align: left;
+    padding: 4px 0px;
+}
+.dali-pd-pop-table td{
+    border: 1px solid gray;
+    border-collapse: collapse;
+} */
+.dali-pd-pop-btns{
+    margin-left:35%;
+}
+.dali-pd-pop-btns button{
+    padding: 5px 15px;
+    background-color: #2173b0;
+    border: none;
+    border-radius: 3px;
+    color: white;
+}
+.dali-pd-pop-cancel{
+    margin-left: 5%;
+}
+/* ------------------------------------------- */
+
+@media(max-width:425px){
+    .dali-total{
+        margin-top: 5%;
+        margin-left: 2vw;
+    }
+    .dali-div-search{
+        width: 40vw;
+    }
+    .dali-search-in{
+        width: 31vw;
+    }
+
+    .dali-table{
+        width: 95vw;
+    }
+    .dali-table th{
+        padding: 3px 0px;
+        font-size: 0.7rem;
+    }
+    .dali-table td{
+        padding: 2px 0px;
+        font-size: 0.7rem;
+    }
+    .dali-delete-btn{
+        margin-left: 2px;
+    }
+    .dali-edit-icon{
+       font-size: 18px;
+    }
+    .dali-delete-icon{
+       font-size: 18px;
+    }
+    .dali-modal-edit{
+        height: 85vh;
+        width: 90vw;
+       overflow-y:scroll;
+       display:block;
+       border: none; 
+    }
+    .dali-edit-popup{
+        padding: 10px;
+    }
+    .dali-product-in{
+        width: 58vw;
+        margin-left: 4%;
+    }
+
+    .dali-com-sele,  .dali-cat-sele,  .dali-textc-selec{
+        font-size: 0.7rem;
+        width: 22vw;
+    }
+    .dali-grp-sele{
+        font-size: 0.7rem;
+        width: 22vw;
+        margin-left: 4%;  
+    }
+    .dali-she-sele{
+        font-size: 0.7rem;
+        width: 22vw;
+        margin-left: 2%;
+    }
+    .dali-rows{
+        margin-left: 0.1%;
+    }
+    .dali-pur-sale-rate, .dali-pack-div, .dali-lot-div,.dali-other-div{
+        width: 80vw;
+    }
+    .dali-sales-r {
+        margin-left: 1%;
+    }
+    .dali-pack{
+        display: flex;
+        flex-direction: column;
+        margin-left: 4%;
+    }
+    .dali-pack-in{
+        width: 60vw;
+    }
+    .dali-dc-sele{
+        width: 37vw;
+        margin-left: 16%;
+        font-size: 0.7rem;
+    }
+    .dali-dc-sele-drug{
+        width: 37vw;
+        font-size: 0.7rem;
+    }
+    .dali-narr-in{
+        width: 60vw;
+        margin-left: 0.1%;
+    }
+
+    .dali-pop-4throw{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .dali-btn-div{
+        margin-left: 26vw;
+    }
+
+
+
+    .dali-modal-delete{
+        height: 30vh;
+        width: 60vw;
+    }
+    .dali-pop-head{
+        margin-top: 5vh;
+    }
+    .dali-pop-btnns{
+        padding: 7px 15px;
+        border-radius: 4px;
+        border: none;
+        background-color: #2173b0;
+        color: white;
+        margin-left: 5%;
+    }
+}
