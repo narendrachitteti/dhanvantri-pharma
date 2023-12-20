@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import "./Itemdescription.css";
+import PharmacyNav from "./PharmacyNav";
 
 const companyData = ["Company1", "Company2", "Company3"];
 const categoriesData = ["Category A", "Category B", "Category C"];
@@ -133,6 +134,8 @@ const handlePrint = () => {
 
   return (
 
+    <>
+    <PharmacyNav/>
     <div  className="item-description-total">
     <form className="item-form-container" onSubmit={handleSubmit}>
     <div className="item-content">
@@ -426,6 +429,7 @@ const handlePrint = () => {
       </div>
     </form>
     </div>
+    </>
   );
 };
 
