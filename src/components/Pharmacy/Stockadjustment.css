@@ -1,0 +1,152 @@
+/* Stock Adjustment
+.page-containerv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin:60px;
+}
+
+.content-containerv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.bexport-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .content-containerv {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .bexport-button {
+    margin-top: 0;
+  }
+
+  .search-bar {
+    width: auto;
+  }
+}
+.bexportSectionv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  width: 90%;
+  padding: 20px;
+  margin: 0 auto; /* Center horizontally */
+  border-top: 3px solid rgb(66, 190, 232);
+}
+
+.bexportTitlev {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.bexport-contentv {
+  display: flex; /* Allow elements to wrap on smaller screens */
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.bexport-contentv label,
+.bexport-contentv select,
+.bexport-contentv input {
+  margin: 2px;
+  /* Equal width for all elements */
+  min-width: 100px; /* Minimum width for elements to avoid squeezing */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+  
+.bexportButtonv {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+/* ... (any additional styles you have) */
+
+.search-add-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 20px auto;
+  border:1px solid gray;
+  height:90%;
+  width:93%;
+}
+
+.search-bar {
+  display: flex;
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin:20px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  
+}
+
+.add-stockists-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-right:20px;
+  height:40px;
+  margin:20px;
+}
+.stockists-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+}
+
+/* Table header */
+.stockists-table th {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Table rows */
+.stockists-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Alternating row background color */
+.stockists-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Hover effect on rows */
+.stockists-table tbody tr:hover {
+  background-color: #e0e0e0;
+} 

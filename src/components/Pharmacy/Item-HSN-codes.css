@@ -1,0 +1,139 @@
+
+.hsnc-total{
+    border: 1px solid gray;
+    width: 60vw;
+    margin-left: 10vw;
+    margin-top: 0.1%;
+    height: 90vh;
+    
+}
+.hsnc-contents{
+    padding: 0px 60px ;
+}
+.hsnc-pwise-set{
+    margin-top: 5%;
+    background-color:rgb(211, 229, 241) ;
+    /* background-color: #667a72; */
+    border: 1px solid gray;
+    padding: 2%;
+}
+.legend-product-wise{
+    font-style: roboto;
+    font-size: 1.3rem;
+}
+.hsnc-pwise-select{
+    width: 40vw;
+    height: 5vh;
+    border: 1px solid gray;
+    border-radius: 4px;
+    margin-left: 3%;
+}
+.hsnc-pwise-hsn{
+    margin-top: 1.5%;
+    display: flex;
+    margin-bottom: 2%;
+}
+.hsnc-pwise-hsn-in{
+    height: 5vh;
+    border: 1px solid gray;
+    border-radius: 4px;
+    width: 19vw;
+}
+.labeltaxcode{
+    display: flex;
+}
+.hsnc-pwise-btn{
+    padding: 6px 15px;
+    margin-left: 8vw;
+    cursor: pointer;
+    background-color:#9B8BF4 ;
+    border: none;
+    color: white;
+    border-radius: 4px;
+}
+.hsnc-tc{
+    margin-top: 1.5%;
+    display: flex;
+    margin-bottom: 2%;
+}
+.hsnc-tc-selec{
+    height: 5vh;
+    border: 1px solid gray;
+    border-radius: 4px;
+    width: 18.5vw;
+    margin-left: 1.8%;
+}
+.hsnc-2nd-content{
+    padding: 0px 50px;
+}
+
+
+
+.hsnc-up-span{
+    font-weight: bold;
+}
+
+@media(max-width:768px){
+
+    .hsnc-pwise-btn{
+        cursor: pointer;
+        background-color:#9B8BF4 ;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        font-size: 16px;
+        height: 5vh;
+    }
+    
+.hsnc-total{
+    border: 1px solid gray;
+    width: 81vw;
+    margin-left: 10vw;
+    margin-top: 0.1%;
+    height: 100vh;
+    
+}
+
+
+
+}
+
+@media(max-width:425px){
+    .hsnc-total{
+        width: 90vw;
+        height: 100vh;
+        margin-left: 5vw;   
+    }
+    .hsnc-contents{
+        padding: 0px 10px ;
+    }
+    .hsnc-pwise-select{
+        width: 50vw;
+        margin-left: 5.5%;
+    }
+    .hsnc-pwise-hsn-in{
+        width: 25vw;
+    }
+    .hsnc-pwise-btn{
+        margin-top: 1vh;
+        padding: 6px 10px;
+        font-size: 10px;
+        height: 5vh;
+        margin-left: 4.5vw;
+    }
+    .hsnlabelscode{
+        display: flex;
+    }
+    .hsnc-tc-selec{
+        width: 23.3vw;
+        margin-left: 2%;
+    }
+    .hsnc-2nd-content{
+        padding: 0px 20px;
+    }
+    .hsnc-up-span{
+        font-weight: bold;
+        font-size: 13px;
+    }
+    
+}
