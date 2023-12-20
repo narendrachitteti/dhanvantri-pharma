@@ -15,7 +15,7 @@ function App() {
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
           <Route path='/invoicestock' element={<InvoiceStock/>}/>
           <Route path='/Drugmaster' element={<PharmaLab/>}/>
-          <Route path='/pharmabilling' element={<PatientBill/>}/>
+          <Route path='/Pharmabilling' element={<PatientBill/>}/>
 
         </Routes>
       </Router>

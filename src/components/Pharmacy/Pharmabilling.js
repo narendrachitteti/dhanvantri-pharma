@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
-import "./pharmabilling.css";
-import PharmacyNav from "./PharmacyNav";
+import "./PatientBill.css";
+import Navbar from "./PharmacyNav";
 const PatientBill = () => {
   const [quantity, setQuantity] = useState('');
   const [medicines, setMedicines] = useState([]);
@@ -368,16 +368,14 @@ const PatientBill = () => {
     const printWindow = window.open("", "", "height=600");
     printWindow.document.open();
     printWindow.document.write(printContent);
+    printWindow.document.close();
 
-    // Trigger the print operation
     printWindow.print();
 
-    // Close the print window after printing
     printWindow.onafterprint = function () {
-      printWindow.close();
+        printWindow.close();
     };
-  };
-};
+};}
 
 
 
@@ -386,7 +384,7 @@ const PatientBill = () => {
 
   return (
     <>
-         <PharmacyNav />
+      <Navbar />
    
       <div className="patientbill-page">
        
