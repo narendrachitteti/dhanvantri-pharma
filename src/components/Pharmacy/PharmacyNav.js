@@ -118,6 +118,8 @@ const PharmacyNav = () => {
               <div className="dropdown-content">
                 <Link to="/CreateOrder">Create Order</Link>
                 <Link to="/OrderList">Order list</Link>
+                <Link to="/Drugmaster">Drug Master</Link>
+                
                 
 
               </div>

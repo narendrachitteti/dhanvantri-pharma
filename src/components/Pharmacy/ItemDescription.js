@@ -4,7 +4,7 @@ import { LuSearch } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Select from "react-select";
 import Popup from 'reactjs-popup';
-import './Itemdes.css';
+import './Itemdescription.css';
 
 const companyData = ["Company1", "Company2", "Company3"];
 const categoriesData = ["Category A", "Category B", "Category C"];
