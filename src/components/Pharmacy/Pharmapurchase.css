@@ -1,0 +1,528 @@
+.phamrapurchase-page {
+    margin: 3% 0 0 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    /* border: 2px solid grey; */
+    height: 100%;
+    display: flex;
+}
+
+.pharma-header-sec {
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    width: 65vw;
+    border: 2px solid grey;
+    margin-left: 3%;
+}
+
+.pharma-lists {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    margin: 1%;
+}
+
+.pharma-lists button {
+    height: 5vh;
+    width: 10vw;
+    border: none;
+    background-color: rgb(7, 153, 134);
+    color: #fff;
+    font-weight: bold;
+}
+.pharmapurchase-details {
+    height: 35vh;
+    width: 35vw;
+    background-color: skyblue;
+    margin: 1%;
+}
+.pharmap-1-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.calender-icon {
+    font-size: 1.4rem;
+    color: rgb(85, 55, 10);
+    margin-top: 3%;
+}
+.cal-inp {
+    height: 3vh;
+    width: auto;
+    border: none;
+    margin-top: 3%;
+}
+.date-label {
+    font-size: .8rem;
+    margin-top: 3%;
+}
+.pharma-sel-1 {
+    height: 3.5vh;
+    width: auto;
+    border: none;
+    margin-top: 3%;
+}
+.pharma-sel-2 {
+    height: 3.5vh;
+    width: auto;
+    border: none;
+    margin-top: 3%;
+}
+.pblabel {
+    font-size: .8rem;
+    margin-top: 3%;
+}
+.cal-inp-2-row {
+    height: 3vh;
+    width: 6vw;
+    border: none;
+    margin-top: 3%;
+}
+.pharma-sel-2-row {
+    height: 3.5vh;
+    width: 6vw;
+    border: none;
+    margin-top: 3%;
+}
+.pharmap-2-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2%;
+}
+.pharma-3-row {
+    margin-top: 2%;
+}
+.supply-label {
+    font-size: .9rem;
+    margin-left:2px
+}
+.supply-inp {
+    height: 3.5vh;
+    width: 12vw;
+    border: none;
+}
+.sup-label {
+    font-size: .9rem;
+    margin-left: 1.4%;
+}
+.pharma-4-row {
+    margin-top: 7%;
+    display: inline-flex;
+}
+.sup-inp {
+    height: 3.5vh;
+    width: 9vw;
+    border: none;
+}
+.supb-date-label {
+    font-size: .9rem;
+    margin-left: 1.8%;
+}
+.supb-inp {
+    height: 3.5vh;
+    width: 9vw;
+    border: none;
+}
+.pharma-1-table {
+    height: 35vh;
+    width: 35vw;
+    background-color: skyblue;
+    margin: 1%;
+}
+
+.pharma-puchase-details-page-section {
+    display: flex;
+}
+
+.pharma-purchase-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: scroll;
+    height: 35vh;
+    display: block;
+    border: none;
+}
+
+.pharma-table-header {
+    height: 6vh;
+    /* width: 100%; */
+    background-color: rgb(7, 153, 134);
+    color: #fff;
+    font-size: .9rem;
+}
+
+.pharma-table-data input {
+    width: 6vw;
+    height: 5vh;
+    outline: 1px;
+    border: 1px solid grey;
+}
+
+.suplier-details-sec {
+    height: 85vh;
+    width: 25vw;
+    border: 1px solid grey;
+}
+
+/* .text-areaclass {
+    /* height: 65vh;
+    /* width: 19vw; */ 
+    /* /* border: none;
+    border: 1px solid grey;
+    outline: none;
+    margin-left: 1%; */ 
+
+.text-area-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px 15px;
+  }
+  .medicine-inp{
+    width: 180px;
+  }
+  
+  .text-areaclass {
+    display: flex;
+    flex-wrap: wrap;
+    width: 65%; /* Adjust the width as needed */
+  }
+  
+  .text-labelinput {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    margin-left: 3%;
+   
+  }
+  .trc-labels-cvv{
+    width: 150px;
+    text-align: left;
+  }
+  .trc-inputs-cvv{
+    /* margin-left: 10%; */
+    width: 150px;
+    /* justify-content: right; */
+    margin-top: -24px;
+    margin-left: 52%;
+    outline-width: 0px;
+    border: none;
+    background: none;
+  }
+
+.Supplier-details-heading {
+    margin-left: 30%;
+    font-weight: bold;
+}
+.main-container001{
+    width: 35%;
+    height: 519px;
+    border: #131212;
+    overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  margin-left: 20px;
+  margin-top: 30px;
+  background-color: #f0f0f0;
+}
+.btn-001{
+    width: 10%;
+    height: 20%;
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: rgb(126, 201, 221);
+    border-radius: 10px;
+    margin-left: 350px;
+}
+.btn-001:hover{
+    background-color: rgb(3, 95, 72);
+    color: #f7f4f4;
+}
+
+.pharma-table-2 {
+    width: 100%;
+    font-size: 1rem;
+    /* border-collapse: collapse; */
+    overflow-x: scroll;
+    height: 20vh;
+    display: block;
+    border: none;
+}
+
+.pharma-table-2 th {
+    background-color: rgb(7, 153, 134);
+    font-size: 0.8rem;
+    width: 10.5vw;
+    height: 3.5vh;
+    color: #fff;
+}
+
+.pharma-table-2 input {
+    width: 10vw;
+}
+
+.pharma-table-data-sel {
+    height: auto;
+    width: 8vw;
+    font-size: 0.8rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    .pharma-header-sec {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 65vw;
+        border: 2px solid grey;
+        margin-left: 3%;
+    }
+    .pharma-table-2 {
+        width: 100%;
+        font-size: 1rem;
+        /* border-collapse: collapse; */
+        height: 20vh;
+        display: block;
+        border: none;
+    }
+    .pharma-purchase-table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow-x: scroll;
+        height: 35vh;
+        display: block;
+        border: none;
+    }
+
+    .pharma-1-table {
+        height: 30vh;
+        width: 62vw;
+        background-color: skyblue;
+        margin: 1%;
+    }
+    .pharmapurchase-details {
+        height: 40vh;
+        width: 62vw;
+        margin: 1%;
+    }
+    .pharma-4-row {
+        margin-top: 5%;
+        display: inline-flex;
+    }
+    .supply-inp {
+        height: 3.5vh;
+        width: 55vw;
+        border: none;
+    }
+    .pharma-puchase-details-page-section {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .btn-001{
+        width: 30%;
+        height: 15%;
+        padding: 10px 15px;
+        margin-top: 10px;
+        background-color: rgb(126, 201, 221);
+        border-radius: 10px;
+        margin-left: 70vw;
+    }
+    .phamrapurchase-page {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pharma-header-sec {
+        height: auto;
+        width: 95vw;
+    }
+
+    .pharma-puchase-details-page-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pharmapurchase-details {
+        height: 35vh;
+        width: 92.5vw;
+        margin: 1%;
+    }
+
+    .pharma-1-table {
+        height: 25vh;
+        width: 92.5vw;
+        margin: 1%;
+    }
+
+    .pharma-purchase-table {
+        margin: 2% 1%;
+        width: 92vw;
+    }
+    .supply-inp {
+        height: 3.0vh;
+        width: 5vw;
+        border: none;
+    }
+
+    .pharma-purchase-table th {
+        font-size: 0.6rem;
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    .pharma-table-data input {
+        width: 15vw;
+    }
+
+    .pharma-purchase-table td {
+        font-size: 0.6rem;
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    .pharma-table-data-sel {
+        width: 18vw;
+        font-size: 0.6rem;
+    }
+
+    .pharma-table-2 {
+        margin: 2% 1%;
+        width: 92vw;
+    }
+    .btn-sub{
+        width: 150px;
+        height: 20%;
+        padding: 10px 15px;
+        margin-top: 10px;
+        background-color: rgb(126, 201, 221);
+        border-radius: 10px;
+    }
+    .btn-sub:hover{
+        background-color: rgb(213, 126, 214);
+        color: #131212;
+    }
+    .medicine-inp{
+        width: 100px;
+      }
+
+    .pharma-table-2 th {
+        height: 4vh;
+        width: 25vw;
+        font-size: 0.6rem;
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    .pharma-table-2 input {
+        width: 30vw;
+    }
+
+    /* .text-areaclass {
+        height: 85vh;
+        width: 85vw;
+        border: 1px solid gray;
+        margin: 1% 1% 0px 5%;
+    } */
+
+    .pharma-lists {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        margin: 1%;
+    }
+
+    .pharma-lists button {
+        height: 5vh;
+        width: 90%;
+        border: none;
+        background-color: rgb(7, 153, 134);
+        color: #fff;
+        font-weight: bold;
+        margin-top: 1%;
+    }
+
+    .date-label,
+    .pblabel,
+    .date-label,
+    .sup-label,
+    .supb-date-label,
+    .supply-label {
+        font-size: .7rem;
+        margin-top: 1%;
+    }
+
+    .cal-inp-2-row,
+    .sup-inp,
+    .supb-inp,
+    .pharma-sel-2-row {
+        height: 3vh;
+        width: 16vw;
+        border: none;
+        margin-top: 3%;
+    }
+
+    .supply-inp {
+        height: 3vh;
+        width: 78vw;
+        margin-top: 1%;
+    }
+    .main-container{
+        width: 90%;
+        height: 485px;
+        border: #131212;
+        overflow-x: hidden;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      
+      background-color: #f0f0f0;
+      padding: 10px 15px;
+    }
+    .text-area-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 5px 15px;
+      }
+     
+      /* .text-areaclass {
+        display: flex;
+        flex-wrap: wrap;
+        width: 110%; /* Adjust the width as needed */
+      
+      
+      .text-labelinput {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        margin-left: 3%;
+       
+      }
+      .trc-labels-cvv{
+        width: 150px;
+      }
+      .trc-inputs-cvv{
+        /* margin-left: 10%; */
+        width:90px;
+        /* justify-content: right; */
+        /* margin-top: -10px; */
+        margin-left: 90%;
+      }
+
+      .main-container001{
+        width: 35%;
+        height: 519px;
+        border: #131212;
+        overflow-x: hidden;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      margin-left: 20px;
+      margin-top: 10px;
+      background-color: #f0f0f0;
+    }
+}

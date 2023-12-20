@@ -5,36 +5,12 @@ import './Itemdescription.css'
 
 const ItemDescription = () => {
     const [companyData, setCompanyData] = useState([]);
-  const [taxCodeData, setTaxCodeData] = useState([
-    // "Tax Code 1",
-    // "Tax Code 2",
-    // "Tax Code 3",
-  ]);
-  const [categoriesData,setCategoriesData] = useState([
-    // "Category X",
-    // "Category Y",
-    // "Category Z",
-  ]);
-  const [groupsData, setGroupsData] = useState([
-    // "Group 1",
-    // "Group 2",
-    // "Group 3",
-  ]);
-  const [schedulesData, setSchedulesData] = useState([
-    // "Schedule A",
-    // "Schedule B",
-    // "Schedule C",
-  ]);
-  const [drugCompositionData, setDrugCompositionData] = useState([
-    // "Composition 1",
-    // "Composition 2",
-    // "Composition 3",
-  ]);
-  const [hsnData, setHsnData] = useState([
-    // "HSN Code 123",
-    // "HSN Code 456",
-    // "HSN Code 789",
-  ]);
+  const [taxCodeData, setTaxCodeData] = useState([]);
+  const [categoriesData,setCategoriesData] = useState([]);
+  const [groupsData, setGroupsData] = useState([]);
+  const [schedulesData, setSchedulesData] = useState([]);
+  const [drugCompositionData, setDrugCompositionData] = useState([]);
+  const [hsnData, setHsnData] = useState([]);
 
   const [formData, setFormData] = useState({
     product: "",
@@ -86,15 +62,10 @@ const handlePrint = () => {
   
     printWindow.document.write("<table>");
     printWindow.document.write("<tr><th>Field</th><th>Value</th></tr>");
-  
-    // Iterate over form data and add table rows
     for (const [field, value] of Object.entries(formData)) {
       printWindow.document.write(<tr><th>${field}</th><td>${value}</td></tr>);
     }
-  
     printWindow.document.write("</table>");
-  
-    // Include the current date and time in the footer
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleString();
     printWindow.document.write(<div class="footer">Printed on: ${formattedDate}</div>);
@@ -104,7 +75,6 @@ const handlePrint = () => {
     printWindow.print();
   };
   
-// -------------------------------------
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -119,7 +89,7 @@ const handlePrint = () => {
     console.log("Form data submitted:", formData);
 
     try {
-      const response = await fetch("http://localhost:5001/api/submit-form", {
+      const response = await fetch("http://localhost:5000/api/submit-form", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -139,17 +109,15 @@ const handlePrint = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5001/api/distinctCompanies");
+        const response = await fetch("http://localhost:5000/api/distinctCompanies");
         const data = await response.json();
   
         if (data && typeof data === "object") {
-          // Check for existence of properties and ensure they are arrays
           if (
             data.hasOwnProperty("companies") &&
             Array.isArray(data.companies) &&
             data.hasOwnProperty("taxCodes") &&
             Array.isArray(data.taxCodes) &&
-            // Add similar checks for other properties
             data.hasOwnProperty("category") &&
             Array.isArray(data.category) &&
             data.hasOwnProperty("group") &&
@@ -181,11 +149,9 @@ const handlePrint = () => {
             });
           } else {
             console.error("Data received from the API is not in the expected format:", data);
-            // Handle the case where the data is not in the expected format
           }
         } else {
           console.error("Invalid data received from the API:", data);
-          // Handle the case where the data is not an object
         }
       } catch (error) {
         console.error("Error fetching data:", error);

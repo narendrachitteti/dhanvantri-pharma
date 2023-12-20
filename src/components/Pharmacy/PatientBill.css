@@ -1,0 +1,324 @@
+.patientbill-page{
+  margin-top: 0%;
+  margin-left: 0%;
+  margin-right: 0%;
+  padding: 10px;
+  border: 2px solid grey;
+}
+
+.gst-ph-header{
+  display: flex;
+}
+
+.patient-bill-header{
+  display: flex;
+  margin-bottom: 2%;
+}
+.patient-invoice{
+  margin-left: 45%;
+}
+.invoice-date{
+  margin-left: 50%;
+}
+.pharma-bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.pharma-bill-tablehead th, .pharma-bill-table-body td {
+  border: 1px solid #ddd;
+  height: 5vh;
+  width: 8vw;
+  text-align: left;
+}
+.pharma-bill-tablehead{
+  background-color: #9b8bf4;
+  border-collapse: collapse;
+  /* width: 10vw; */
+}
+
+.pharma-bill-table-foot td {
+  border: 1px solid #ddd;
+  height: 5vh;
+  width: 10vw;
+  text-align: right;
+}
+.width100{
+  width: 100%;
+}
+
+.pharma-bill-table-foot .subtotal {
+  font-weight: bold;
+}
+.pharma-bill-input {
+  width: 100%;
+  /* height: 5vh; */
+  /* width: 10vw; */
+  box-sizing: border-box;
+}
+.pharma-bill-input-date {
+  width: 100%;
+  height: 5vh;
+  width: 10vw;
+  box-sizing: border-box;
+}
+.pharma-bill-table-body tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.pharma-bill-table-body tr:hover {
+  background-color: #e6e6e6;
+}
+
+.Add-btn{
+  height: 6vh;
+  width: 10vw;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  background-color: #9b8bf4;
+  color: #fff;
+  margin-left: 45%;
+  margin-bottom: 1%;
+}
+.class567{
+  text-align: center !important;
+}
+.search-btn{
+  padding: 3px;
+  outline: none;
+  border-radius: 3px;
+  border: none;
+  
+  background-color: #9b8bf4;
+  color: #fff;
+}
+.pharma-title{
+  text-align: center;
+font-size: 3rem;
+font-weight: bold;
+}
+.submit-btn{
+  background-color:#9b8bf4 ;
+}
+.title-row{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.5rem;
+}
+.plus-icon{
+  font-size: 3rem;
+  color: rgb(19, 97, 128);
+}
+.tax-title{
+  text-align: center;
+}
+.tax-title-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.gst-text{
+  margin-left: 10px;
+}
+.paharma-head-para{
+  text-align: justify;
+}
+.total-tag{
+  font-size: 0.6rem;
+}
+.pharma-bill-details{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1%;
+}
+.pharma-bill-details-2{
+  display: flex;
+  justify-content: space-between;
+
+}
+.pharma-bill-input-date-2{
+  height: 4.1vh;
+  width: 13.4vw;
+  box-sizing: border-box;
+}
+.pharma-labels{
+  font-weight: bold;
+}
+.pharma-head-inputs{
+  width: 100%;
+  padding: 4px;
+}
+.pharma-sign{
+  font-weight: bold;
+  margin: 1% 2%;
+}
+.sign-area{
+  /* height: 6vh; */
+  width: 10vw;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+}
+.gst-ph-head,.gst-ph-head-dl{
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+.gst-ph-head{
+  margin-left: 70vw;
+}
+.phone-text{
+  margin-left: 0.9vw;
+}
+.gst-ph-head-2{
+  float: left;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+.pharma-subtotal{
+  float: right;
+  font-weight: bold;
+}
+
+/* 425 * 553 */
+
+@media (max-width: 429px) {
+
+  
+  .title-row{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+  .pharma-title{
+      text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+    }
+    .plus-icon{
+      font-size: 1.2rem;
+      color: rgb(19, 97, 128);
+    }
+    .tax-title{
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    .paharma-head-para{
+      text-align: justify;
+      font-size: 0.7rem;
+    }
+    .gst-text{
+      margin-left: 10px;
+      font-size: 0.6rem;
+    }
+    .pharma-bill-table23{
+     
+      width: 100%;
+      font-size: 0.6rem;
+      overflow-x: scroll;
+      height: auto;
+      display: block;
+      border: none;
+    }
+    .pharma-bill-table-body td {
+      font-size: 0.6rem;
+    }
+  
+     
+    .pharma-bill-table {
+      overflow-x: auto;
+      max-width: 100%; 
+  }
+
+  .pharma-bill-table-body tr {
+      white-space: nowrap;
+  }
+
+  .pharma-bill-tablehead th,
+  .pharma-bill-table-body td {
+      min-width: 50px; 
+  }
+  .pharma-bill-details{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1%;
+      font-size: 0.6rem;
+    }
+    .pharma-bill-details-2{
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6rem;
+    }
+    .del-btn{
+      font-size: 0.6rem;
+      width: 10vw;
+  }
+  .dl-1-text,.dl-2-text,.gst-text,.phone-text{
+    font-size: 10px;
+  }
+
+.gst-ph-head{
+  margin-left: 35vw;
+}
+.phone-text{
+  margin-left: 11px;
+}
+
+.Add-btn{
+  height: 5vh;
+  width: 10vw;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  background-color: #9b8bf4;
+  color: #fff;
+  margin-left: 45%;
+  font-size: 13px;
+  margin-bottom: 1%;
+}
+
+.pharma-subtotal{
+  float: right;
+  font-weight: bold;
+  font-size: 10px;
+}
+.PatientId-Label{
+  font-size: 10px;
+}
+.PatientId-input{
+  width: 100px;
+}
+.search-btn{
+  padding: 2px;
+  font-size: 10px;
+  outline: none;
+  border-radius: 3px;
+  border: none;
+  
+  background-color: #9b8bf4;
+  color: #fff;
+}
+
+.pharma-sign{
+  /* font-weight:small; */
+  font-size: 15px;
+  margin: 1% 2%;
+}
+
+}
+
+@media (max-width: 768px) {
+  .gst-ph-head{
+    margin-left: 38vw;
+  }
+  .phone-text{
+    margin-left: 10px;
+  }
+}

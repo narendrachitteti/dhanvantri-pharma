@@ -1,0 +1,301 @@
+/* Main container */
+.main-cont-PO-11 {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+   width: 100%;
+  /* margin: 0 auto; */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+.search-contain-PO-11,.search-bar-PO-11{
+  margin-left: 30px;
+}
+
+/* Heading styles */
+.Listheading-PO-11 {
+  font-size: 24px;
+}
+
+/* Button styles */
+.but-PO-11 {
+  border-radius: 3px;
+  background-color: #9b8bf4;
+  height: 30px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-top: 55px;
+}
+
+.but-PO-11:hover {
+  background-color: rgb(10, 13, 171);
+}
+
+/* Stock edit button */
+.stock-edit-button {
+  color: grey;
+  background: none; /* Remove black background */
+  border: none; /* Remove border */
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.stock-edit-button:hover {
+  color: darkgrey; /* Change color on hover */
+}
+
+/* Container styles */
+.contain-PO-11 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: rgb(239, 235, 235); */
+  width: 100%;
+}
+
+/* Search bar and input styles */
+.search-container-PO-11 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.search-bar-PO-11 {
+  padding: 5px;
+  border: 1px solid #ccc; /* Adjusted border color */
+  border-radius: 5px;
+}
+
+/* Medicine table styles */
+.medicine-table-PO-11 {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.medicine-table-PO-11 th,
+.medicine-table-PO-11 td {
+  border: 1px solid rgb(207, 204, 204);
+  padding: 8px;
+  width: 700px;
+  text-align: center;
+  background-color: #9b8bf4;
+}
+
+/* Table row hover effect */
+.medicine-table-PO-11 tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .grid-PO-11 {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-left: 0;
+  }
+
+  .search-contain-PO-11 {
+    margin-left: 10px;
+  }
+  .medicine-table-PO-11 th,
+.medicine-table-PO-11 td {
+   font-size: 0.8rem;
+}
+  .contain-PO-11 {
+    width: 100%;
+    padding: 10px;
+  }
+  .medicine-table-PO-11 {
+    width: 95%;
+    border-collapse: collapse;
+  }
+  .medicine-table-PO-11 th,
+.medicine-table-PO-11 td {
+  border: 1px solid rgb(207, 204, 204);
+  padding: 5px;
+  width: 700px;
+  text-align: center;
+  background-color: #9b8bf4;
+}
+
+/* Table row hover effect */
+.medicine-table-PO-11 tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 1200px) {
+  .grid-PO-11 {
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-left: -500px;
+  }
+
+  .search-contain-PO-11 {
+    margin-left: -900px;
+  }
+}
+
+/* Stock alert button styles */
+.stock-alert-button.red {
+  background-color: #f10a0a; /* Red color for stock less than 10 */
+  border: none; /* Remove border */
+}
+
+.stock-alert-button.green {
+  background-color: #37a63a; /* Green color for stock greater than or equal to 10 */
+  border: none; /* Remove border */
+}
+
+.stock-alert-button:hover {
+  opacity: 0.8;
+}
+
+/* Popup styles */
+.popup-ml {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content-ml {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  text-align: center;
+  position: relative;
+  /* height: 500px; */
+  max-height: auto;
+  margin-top: -22%;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Popup label and input styles */
+.popup-ml-label {
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.popup-content-ml .popup-ml-label:last-child {
+  margin-top: 20px;
+}
+
+.popup-ml-input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Popup button styles */
+.popup-ml-button {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.popup-ml-save {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 20px;
+  margin-right: 10px;
+}
+
+.popup-ml-cancel {
+  background-color: #ec1a1a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 20px;
+}
+
+/* Style for input groups */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.input-group label {
+  font-weight: bold;
+  text-align: left;
+  margin-top: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+/* Edit button styles */
+.stock-edit-button {
+  color: #0056b3; /* Blue color (you can change it to your preferred color) */
+  
+}
+
+.stock-edit-button:hover {
+  color: #00ffb3; /* Darker blue color on hover (you can change it) */
+}
+
+
+@media screen and (max-width: 425px) {
+  .med-list-arrow{
+    margin-left: -25%;
+  }
+  .Listheading-PO-11{
+    margin-left: 20%;
+  }
+  .contain-PO-11 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .medicine-table-PO-11 th,
+.medicine-table-PO-11 td {
+   font-size: 0.5rem;
+}
+.Listheading-PO-11{
+  font-size: 1rem;
+}
+.popup-content-ml {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  text-align: center;
+  position: relative;
+  height: 500px;
+  /* max-height: auto; */
+  margin-top: -110%;
+}
+}

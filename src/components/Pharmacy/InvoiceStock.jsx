@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { AiFillDelete } from "react-icons/ai";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import "./InvoiceStock.css";
-import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
 import PharmacyNav from "./PharmacyNav";
 
 const InvoiceStock = () => {
