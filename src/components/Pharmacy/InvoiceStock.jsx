@@ -39,12 +39,38 @@ const [stockName, /* setStockName */] = useState("");
   const [stockistOptions, setStockistOptions] = useState([]);
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
+
   
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
   // const [/*totalDiscountPercentage */, setTotalDiscountPercentage] = useState(0);
   const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
+
+
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
+  const data = [
+    {
+      slno: 1,
+      invoiceNumber: "INV001",
+      product: "Product A",
+      expiryDate: "2023-12-31",
+      daysToExpire: 15,
+    },
+    {
+      slno: 2,
+      invoiceNumber: "INV002",
+      product: "Product B",
+      expiryDate: "2023-12-20",
+      daysToExpire: 5,
+    },
+    // Add more data as needed
+  ];
+  const openPopup = () => {
+    console.log("Opening popup");
+    setPopupVisible(true);
+  };
 
 
   const handleGSTChange = (e) => {
@@ -481,6 +507,77 @@ const [stockName, /* setStockName */] = useState("");
                 onChange={(e) => setSupplieddate(e.target.value)}
               />
             </div>
+
+
+            
+
+            <div className="BatchExpiryContainer">
+              <button className="BatchExpiryButton" onClick={openPopup}>
+                About To Expire
+              </button>
+              {isPopupVisible && (
+                <div className="BatchExpiryPage">
+                  <button
+                    className="close-button"
+                    onClick={() => setPopupVisible(false)}
+                  >
+                    X
+                  </button>
+                  <hr />
+                  <div className="popupv-content-batchexpiry">
+                    <div className="popup-container-batch">
+                      <div className="TableContainerBatchExpiry">
+                        <table className="DataTableBatchExpiry">
+                          <thead>
+                            <tr>
+                              <th className="TableHeaderBatchExpiry">Sl. No</th>
+                              <th className="TableHeaderBatchExpiry">
+                                Invoice Number
+                              </th>
+                              <th className="TableHeaderBatchExpiry">
+                               StockName
+                              </th>
+                              <th className="TableHeaderBatchExpiry">
+                                Expiry Date
+                              </th>
+                              <th className="TableHeaderBatchExpiry">
+                                Days About to Expire
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {data.map((item) => (
+                              <tr key={item.slno}>
+                                <td className="TableCellBatchExpiry">
+                                  {item.slno}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.invoiceNumber}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.stockName}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.expiryDate}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.daysToExpire}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+
+
+
+
           </div>
         </div>
       </div>
