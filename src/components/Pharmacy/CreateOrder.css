@@ -1,0 +1,234 @@
+.create-purchase-order{
+  background-color: white;
+}
+.header-cpo{
+  
+  /* margin-bottom: 40px; */
+}
+.stocklist-cpo{
+  justify-content: space-evenly;
+  /* margin-right: 800px; */
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+.stocklist-cpo1{
+  display: inline-block;
+  justify-content: space-between;
+   /* margin: 10px; */
+}
+.stocklist-cposecond{
+  justify-content: space-between;
+  background-color: white;
+  /* margin-left: -700px; */
+ 
+}
+.stocklist-cpo2{
+  display: inline-block;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+.stocklist-table-cpo {
+background-color: whitesmoke;
+  width: 100%;
+  border-collapse: collapse;
+}
+.stocklist-table-cpo th,
+.stocklist-table-cpo td {
+padding: 20px;
+text-align: center;
+}
+.stocklist-cpo-buttonsecond {
+ float: right;
+}
+
+.stocklist-cpo1 {
+display: flex;
+flex-direction: column;
+margin: 10px;
+}
+
+.stocklist-cpo1 button {
+padding: 10px 20px; /* Adjust the padding as needed */
+background-color: #9b8bf4; /* Change the background color */
+color: white; /* Text color */
+border: none;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease; /* Add a smooth transition */
+}
+
+.stocklist-cpo1 button:hover {
+background-color: #0056b3; /* Change the background color on hover */
+}
+
+/* CreateOrder.css */
+.create-purchase-order {
+font-family: Arial, sans-serif;
+padding: 20px;
+}
+
+.header-cpo {
+margin-bottom: 20px;
+}
+
+.stocklist-cpo1,
+.stocklist-cpo2 {
+flex: 1;
+margin: 10px;
+padding: 10px;
+border-radius: 5px;
+width: 25%;
+}
+.cr-order-l {
+font-weight: bold;
+}
+
+
+.button48 {
+padding: 10px 20px;
+margin-top: 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-weight: bold;
+}
+
+.button-cpos{
+  background-color: #9b8bf4;
+  color: white;
+  border: none;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.button-cpoc {
+  color: white;
+  background-color: #f44336;
+  border: none;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* margin-right: 15px; */
+}
+.button-save-po{
+  background-color: #28a745;
+}
+.button-cancel-po{
+  background-color: #dc3545;
+}
+
+.stocklist-table-cpo {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+}
+
+.stocklist-table-cpo th,
+.stocklist-table-cpo td {
+border: 1px solid #ccc;
+padding: 8px;
+text-align: left;
+}
+
+.stocklist-cpo-buttonsecond {
+text-align: center;
+margin-top: 20px;
+}
+
+.print-co,
+.download-co {
+margin-right: 10px;
+background-color: #9b8bf4;
+color: white;
+padding: 7px 16px;
+border-radius: 4px;
+}
+
+/* Style for the background overlay */
+.popup-edit-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the edit form */
+.edit-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px;
+}
+
+/* Style for the edit form heading */
+.edit-form h3 {
+  margin: 0 0 20px;
+}
+
+/* Style for input fields */
+.edit-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Style for buttons */
+.edit-form button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #9b8bf4; /* Your desired button background color */
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Style for the cancel button */
+.edit-form .button-cancel-po {
+  background-color: red; /* Your desired cancel button background color */
+}
+
+
+.button-save-po{
+  background-color: #007bff;
+}
+
+@media print {
+body * {
+  visibility: hidden;
+}
+.print-container,
+.print-container * {
+  visibility: visible;
+}
+.print-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.print-hidden-button {
+  display: none;
+}
+.print-hidden-header {
+  display: none;
+}
+}
+
+@media screen and (max-width: 429px) {
+  .stocklist-table-cpo {
+    background-color: whitesmoke;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.5rem;
+    }
+}

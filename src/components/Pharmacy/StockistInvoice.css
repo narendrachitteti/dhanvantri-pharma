@@ -1,0 +1,171 @@
+/* Stockist Invoice Styles */
+.container_si {
+  margin: 10px;
+}
+
+.invoice-table_si {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-table_si th,
+.invoice-table_si td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  background-color: #9b8bf4;
+}
+
+.invoice-table_si tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.invoice-table_si tr:hover {
+  background-color: #ddd;
+}
+
+/* Status Dropdown Styles */
+.status-dropdown_si {
+  position: relative;
+}
+.status-dropdown_si select {
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* .status-dropdown_si button {
+  position: absolute;
+  top: 0;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+} */
+
+/* Edit and Delete Button Styles */
+.edit-button_si,
+.delete-button_si,
+.confirm-delete-button_si,
+.cancel-delete-button_si,
+.save-button_si,
+.cancel-button_si {
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.edit-button_si,
+.save-button_si,
+.cancel-button_si {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.delete-button_si {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.confirm-delete-button_si {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.cancel-delete-button_si {
+  background-color: #918f45;
+  color: #fff;
+}
+
+.save-button_si {
+  background-color: #28a745;
+  color: #fff;
+}
+.cancel-button_si {
+  background-color: #918f45;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .invoice-table_si {
+    width: 100%;
+    font-size: 0.9rem;
+    border-collapse: collapse;
+    overflow-x:scroll;
+    height:auto;
+    display:block;
+    border: none;
+  }   
+}
+
+
+@media screen and (max-width: 768px) {
+  .invoice-table{
+    width: 100%;
+    font-size: 0.6rem;
+    border-collapse: collapse;
+    overflow-x:scroll;
+    height:auto;
+    display:block;
+    border: none;
+
+  }
+.invoice-table th,
+.invoice-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+.container-table-tnx {
+  display: flex;
+  margin-top: 20px;
+}
+
+.invoice-table th {
+  background-color: #9b8bf4;
+  width: 100%;
+}
+
+}
+
+
+@media screen and (max-width: 429px) {
+  .input-container{
+    width: 80%;
+    margin: 10px 2px;
+    font-size: 0.9rem;
+  }
+  .invoice-table{
+    width: 100%;
+    font-size: 0.6rem;
+    border-collapse: collapse;
+    overflow-x:scroll;
+    height:auto;
+    display:block;
+    border: none;
+
+  }
+  .Amount-table-table {
+    width: 43%;
+    border: 1px solid black;
+    /* margin-top: 40px; */
+    margin-left: 57%;
+    font-size: 0.7rem;
+  }
+  .button-nhy {
+    margin-left: 20vw;
+  }
+  .hsn-input{
+    margin-left: 10px;
+  }
+  .rack-input{
+    margin-left: 24px;
+  }
+  .book-input{
+    margin-left: 22px;
+  }
+  .netp-input{
+    margin-left: 20px;
+  }
+ 
+}

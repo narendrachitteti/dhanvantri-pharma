@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
-import "./PatientBill.css";
-import Navbar from "./PharmacyNav";
+import PharmacyNav from "./PharmacyNav";
+import "./PharmacyBilling.css";
 const PatientBill = () => {
   const [quantity, setQuantity] = useState('');
   const [medicines, setMedicines] = useState([]);

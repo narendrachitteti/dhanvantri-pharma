@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { AiFillDelete } from "react-icons/ai";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import "./InvoiceStock.css";
-import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
 import PharmacyNav from "./PharmacyNav";
 
 const InvoiceStock = () => {
@@ -292,13 +292,15 @@ const [stockName, /* setStockName */] = useState("");
         "http://localhost:5000/api/addInvoice",
         newInvoice
       );
-
+  
       console.log(response.data);
       window.alert("Invoice added successfully");
-      window.location.reload();
+      window.location.reload(); // Reloading the page might not be the best user experience, consider other UI updates instead
     } catch (error) {
       console.error(error);
+      // Handle error if the request fails
     }
+    
   };
 
   const calculateTotalPriceBeforeTax = () => {

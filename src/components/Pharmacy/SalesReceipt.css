@@ -1,0 +1,504 @@
+@media print {
+    body {
+      font-family: Arial, sans-serif;
+    }
+  
+    .print-container {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .print-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+  
+    .print-label {
+      font-weight: bold;
+    }
+  
+    .print-value {
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+  }
+  
+
+
+.salesreceipt-page {
+    height: 90vh;
+    width: 80vw;
+    margin: 1% 5% 3% 5%;
+    border: 1px solid #000;
+}
+
+.sales-title {
+    margin-top: 1%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 4.3vh;
+    background-color: rgb(240, 240, 240);
+}
+.sales-nav{
+    margin-bottom: 10vh;
+}
+.sales-header-sec {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2%;
+}
+
+.sales-first-col {
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2%;
+}
+
+.sales-first-1-lab-inp,
+.sales-first-2-lab-inp,
+.sales-first-3-lab-inp,
+.sales-first-4-lab-inp,
+.sales-first-5-lab-inp,
+.sales-first-6-lab-inp,
+.sales-first-7-lab-inp,
+.sales-first-8-lab-inp,
+.sales-first-9-lab-inp label {
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.sales-first-1-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-left: 10%;
+    margin-top: 1%;
+    margin-left: 20.5%;
+}
+
+.sales-first-2-lab-inp input {
+    height: 7vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 10.9%;
+    display: flex;
+}
+
+.sales-first-3-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-left: 11.5%;
+    margin-top: 3%;
+    margin-left: 22%;
+}
+
+.sales-first-4-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 12.9%;
+}
+
+.sales-first-5-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 14%;
+}
+
+.sales-first-6-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 6.9%;
+}
+
+.sales-first-7-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 3.9%;
+}
+
+.sales-first-8-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 15.3%;
+}
+
+.sales-first-9-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+}
+
+/* -------------second-col-------------- */
+.sales-second-1-lab-inp,
+.sales-second-2-lab-inp,
+.sales-second-3-lab-inp,
+.sales-second-4-lab-inp,
+.sales-second-5-lab-inp,
+.sales-second-6-lab-inp,
+.sales-second-7-lab-inp,
+.sales-second-8-lab-inp,
+.sales-second-9-lab-inp label {
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.sales-second-1-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-left: 10%;
+    margin-top: 1%;
+    margin-left: 18.5%;
+}
+
+.sales-second-2-lab-inp input {
+    height: 7vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 8.5%;
+}
+
+.sales-second-3-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-left: 11.5%;
+    margin-top: 3%;
+    margin-left: 16.5%;
+}
+
+.sales-second-4-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 3.7%;
+}
+
+.sales-second-5-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 4%;
+}
+
+.sales-second-6-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 5.5%;
+}
+
+.sales-second-7-lab-inp input {
+    height: 3vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 6.5%;
+}
+
+.sales-second-8-lab-inp input {
+    height: 9vh;
+    width: 14vw;
+    margin-top: 3%;
+    margin-left: 4.5%;
+}
+
+.sales-second-col {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 22vw;
+    padding: 3%;
+}
+
+/* ----------3rd-col--------------- */
+.sales-third-col {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 16vw;
+    font-weight: 500;
+}
+
+.sales-third-ck1,
+.sales-third-ck2 {
+    font-weight: 500;
+    margin: 7% 1%;
+}
+
+.sales-third-inps input {
+    height: 4vh;
+    margin-top: 9%;
+    width: 15vw;
+    margin-left: 1%;
+}
+
+/* -------------4th-col------------- */
+.sales-forth-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    row-gap: 3%;
+    padding: 1%;
+}
+
+.sales-forth-col button {
+    height: 5vh;
+    width: 8vw;
+    border: none;
+    background-color: #00b69d;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.sales-forth-col button:hover {
+    transform: scale(1.1);
+}
+
+.sales-first-1-lab-inp {
+    display: flex;
+}
+
+.sales-third-sec-btn1 {
+    display: flex;
+}
+
+.sales-third-ck1 {
+    display: flex;
+}
+
+.sales-third-inps {
+    display: flex;
+    flex-direction: column;
+}
+
+.sales-table-total {
+    float: right;
+    margin: 2% 2%;
+}
+
+.sales-table-total span {
+    font-weight: 500;
+}
+
+.sales-table-total input {
+    height: 4vh;
+    width: 13vw;
+}
+
+.sales-receipt-table {
+    width: 100%;
+    margin-top: 2%;
+}
+
+.sales-receipt-table th {
+    height: 5vh;
+    background-color: #00b69d;
+    color: #fff;
+    border-collapse: collapse;
+}
+
+.salespage-noteicon {
+    color: #00b69d;
+    margin-left: 1%;
+}
+
+.sales-title p {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-left: .6em;
+    margin-top: 10px;
+}
+
+.printable-content {
+    display: none;
+}
+
+.printable-content.visible {
+    display: block;
+}
+
+.printable-content.hidden {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+
+    .salesreceipt-page {
+        height: 110vh;
+        width: 90vw;
+        margin: 5% 5% 3% 5%;
+        border: 1px solid #000;
+    }
+    .radionodesd{
+    margin-right: -px !important;
+    width: 20% !important;
+    }
+    .salesradiosandcheck{
+    width: 20% !important;
+
+    }
+    .checkboxsales{
+        margin-right: -px !important;
+        width: 20% !important;
+    }
+    .sales-receipt-table {
+        width: 100%;
+        margin-top: 2%;
+        font-size: 10px;
+    }
+    .recform-select{
+        width: 50vw;
+        margin-right: -20vw;
+    }
+
+}
+
+
+
+
+
+/*  media query for screens with a maximum width of 425px */
+@media only screen and (max-width: 425px) {
+    .sales-title p{
+        margin-top: 4%;
+    }
+    .sales-title{
+        margin-top: 8%;
+    }
+    .sales-third-sec-btn1,.sales-third-sec-btn2,.sales-third-sec-btn3,.sales-third-ck1,.sales-third-ck2{
+        margin-left: -140px;
+    }
+    .sales-third-ck1{
+        margin-top: -1px;
+    }
+    .sales-third-ck2{
+        margin-top: -20px;
+    }
+    .sales-third-sec-btn1-lable{
+        margin-left: -150px;
+    }
+    .salesreceipt-page {
+    margin: 50% 5% 3% 5%;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .sales-receipt-table {
+        width: 100%;
+        font-size: 0.6rem;
+        border-collapse: collapse;
+        overflow-x: scroll;
+        height: auto;
+        display: block;
+        border: none;
+    }
+
+    .salesx{
+        margin-top: -70px;
+    }
+    .sales-receipt-table th {
+        width: 100%;
+        height: auto;
+        font-size: .7rem;
+        border-collapse: collapse;
+        overflow-x: scroll;
+    }
+
+    .sales-header-sec {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        font-size: 0.6rem;
+    }
+
+    .sales-first-col label {
+        font-size: 0.7rem;
+    }
+
+    .sales-first-col input {
+        width: 65vw;
+    }
+
+    .sales-first-3-lab-inp input {
+        margin-left: 18%;
+    }
+
+    .sales-first-6-lab-inp input {
+        margin-left: 10%;
+    }
+
+    .sales-first-7-lab-inp input {
+        margin-left: 8%;
+    }
+
+    .sales-first-9-lab-inp input {
+        margin-left: 6%;
+    }
+
+    .sales-second-col {
+        width: 100%;
+    }
+
+    .sales-second-col label {
+        font-size: 0.7rem;
+    }
+
+    .sales-second-col input {
+        width: 65vw;
+    }
+
+    .sales-second-2-lab-inp input {
+        margin-left: 12.6%;
+    }
+
+    .sales-second-4-lab-inp input {
+        margin-left: 9%;
+    }
+
+    .sales-second-5-lab-inp input {
+        margin-left: 9%;
+    }
+
+    .sales-second-6-lab-inp input {
+        margin-left: 9.8%;
+    }
+
+    .sales-second-7-lab-inp input {
+        margin-left: 10.4%;
+    }
+
+    .sales-second-8-lab-inp input {
+        margin-left: 9%;
+    }
+    .sales-third-col {
+        width: 100%;
+        font-size: 1rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sales-third-inps input {
+        width: 90vw;
+        align-items: center;
+        margin-left: 5%;
+        margin-top: 1%;
+    }
+
+    .sales-forth-col button {
+        width: 70vw;
+        height: 5vh;
+        margin: 2% 5%;
+    }
+
+    .sales-table-total input {
+        width: 30vw;
+    }
+}

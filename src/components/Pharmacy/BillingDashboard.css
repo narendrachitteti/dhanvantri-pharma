@@ -1,0 +1,417 @@
+/* Appbilldb */
+.Appbilldb {
+  margin-bottom: 10px;
+}
+.billing-data-sel{
+  font-size: 1.1rem;
+}
+.la-bill-dash{
+  margin-top: 7px;
+  font-size: 1.2rem;
+}
+.date-head-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 95%;
+  margin: auto;
+}
+.date2{
+  font-size: larger;
+}
+
+.date-container button {
+  background-color: #9b8bf4;
+  border-radius: 5px;
+  color: white;
+  border: none;
+ 
+
+}
+
+.date-container label {
+  margin-right: 10px;
+}
+.date-container input {
+    margin-right: 10px;
+   
+    width: 27%;
+    margin-top: 10px;
+}
+
+.date-container label {
+  margin-right: 10px; /* Add some space between label and input fields */
+}
+
+
+/* Dashboard Icon Box */
+.dbicon-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Dashboard Card Container */
+.dbcard,
+.dbcard-container {
+  flex: 1;
+  max-width: 200px;
+  height: 100px;
+  margin: 0 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+
+}
+
+.dbcard {
+  flex: 1;
+  max-width: 200px;
+  height: 75px;
+  margin: 0 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-container2 {
+  display: flex;  /* Add a flex container to align items in a row */
+  justify-content: space-between; /* Spacing between items */
+  flex-wrap: wrap; /* Allow items to wrap to the next row */
+  gap: 1%;
+  margin: 1%;
+}
+
+.card2 {
+  flex: 1; /* Equal width for each card2 */
+  max-width: calc(46% - 25px); /* Maximum width of 33.33% with margin */
+  margin: 10px; /* Margin to separate items */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #fff;
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+
+/* Remove margin-top for the first card to avoid extra space at the top */
+.card2:first-child {
+  margin-top: 11px;
+}
+
+.card-heading {
+  display: flex;
+  justify-content: flex-start;
+  padding: 6px;
+  margin-top: -10px;
+  font-size: 3.5vh;
+  font-weight: 550;
+}
+.card-latestsales-head{
+    margin-top: -8%;
+    width: 25%;
+    margin-left: 0.8%;
+}
+.card-latestsales-fast{
+    margin-top: -9%;
+    width: 45%;
+    margin-left: 3%;
+
+}
+.card-stats-head{
+    margin-top: -9%;
+    width: 19%;
+    margin-left: 1%;
+}
+/* Statistics in Dashboard Card 2 */
+.statistic {
+  display: flex;
+  height: 35px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+
+.sales-search {
+  display: flex;
+  border: none;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.sales-pagination input {
+  border: none;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+}
+
+.table-container {
+  /* overflow-x: auto; */
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 19px;
+}
+.sales-table thead tr{
+  background-color: #9b8bf4;
+}
+.sales-table th,
+.sales-table td {
+  /* background-color: #ececec; */
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+.billing-dash-go{
+  background-color: #3E6EAB;
+  font-size: 1rem;
+  padding: 5px 9px;
+  margin-bottom: 5px;
+  /* height: 40px;
+  width: 100px; */
+}
+
+/* Media Query for Smaller Screens */
+@media screen and (max-width: 768px) {
+  .billing-data-sel{
+    font-size: 1rem;
+  }
+  .la-bill-dash{
+    font-size: 1.2rem;
+  }
+  .billing-dash-go{
+    background-color: #3E6EAB;
+    font-size: 1.2rem;
+    padding: 2px 17px;
+  }
+  .card2 {
+    width: 100%; /* Full width on smaller screens */
+    margin-right: 0; /* Remove margin between divs */
+   }
+   .date-container,
+   .date2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 1%;
+    }
+    .date-from{
+        margin-top: 10px;
+        background-color:"#3E6EAB";
+        height:"35px";
+        width:"50px";
+    }
+    .date-container{
+      margin-bottom: 15px;
+    }
+    
+    .date-container button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
+    
+    }
+    
+    .date-container label {
+      margin-right: 10px;
+    }
+    .date-container input {
+        margin-right: 10px;
+        height: 25px;
+        width: 70px;
+        margin-top: 10px;
+    }
+    
+    /* Updated styles for date-head-container */
+    .date-head-container {
+      display: flex; /* Use flex layout */
+      align-items: center; /* Vertically center align items */
+    }
+    .dbcard-container {
+        flex: 1;
+        max-width: 100px;
+        height: 80px;
+        margin: 0 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+      
+    }
+      
+    .dbcard {
+        flex: 1;
+        max-width: 70px;
+        height: 60px;
+        margin:  1px 2.5px;
+      
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 9px;
+    }
+      
+    .card-container2 {
+        display: flex;  /* Add a flex container to align items in a row */
+        justify-content: space-between; /* Spacing between items */
+        flex-wrap: wrap; /* Allow items to wrap to the next row */
+        gap: 1px;
+    }
+      
+    .card2 {
+        flex: 1; /* Equal width for each card2 */
+        max-width: calc(33.33% - 20px); /* Maximum width of 33.33% with margin */
+        height: 45vh;
+        margin: 10px; /* Margin to separate items */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+        box-sizing: border-box; /* Include padding and border in width */
+        font-size: 10px;
+    }
+      
+      
+      /* Remove margin-top for the first card to avoid extra space at the top */
+    .card2:first-child {
+        margin-top: 11px;
+    }
+      
+    .card-heading {
+        display: flex;
+        justify-content: flex-start;
+        padding: 6px;
+        margin-top: -10px;
+        font-size: 2.5vh;
+    }
+    .card-latestsales-head{
+          margin-top: -28%;
+          width: 85%;
+          margin-left: 0.8%;
+    }
+    .card-latestsales-fast{
+          margin-top: -27%;
+          width: 85%;
+          margin-left: 3%;
+      
+    }
+      .card-stats-head{
+          margin-top: -28%;
+          width: 59%;
+          margin-left: 1%;
+      }
+    .sales-pagination input {
+        margin-top:7px;
+        height: 20px;
+        width: 90px;
+        border: none;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .see-more-link{
+      font-size: medium;
+    }
+    .Appbilldb{
+      margin-top: 5vh;
+    }
+    .table-container {
+      overflow-x: auto; 
+      margin-top: -5vh;
+   }
+    
+}
+
+@media screen and (max-width: 429px) {
+  .billing-dash-go{
+    background-color: #3E6EAB;
+    padding: 5px 1px;
+    font-size: 13px;
+    width: 20px;
+    height: 10px;
+    margin-bottom: 5px;
+  }
+  .Appbilldb{
+    margin-top: 5vh;
+  }
+  .table-container {
+     overflow-x: auto; 
+  }
+  .date-container,
+.date2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  
+}
+.billing-dash-go{
+  background-color: #3E6EAB;
+  height: 40px;
+  width: 60px;
+}
+  .card2 {
+    width: 100%; /* Full width on smaller screens */
+    margin-right: 0; /* Remove margin between divs */
+   }
+   .dbcard,
+.dbcard-container {
+  flex: 1;
+  max-width: 75px;
+  height: 100px;
+  margin: 0 5px;
+  padding: 8px;
+
+}
+.dbcard {
+  flex: 1;
+  max-width: 75px;
+  height: 75px;
+  margin: 0 2px;
+  padding: 8px;
+ 
+}
+.card-container2 {
+  gap:1px;
+}
+.card2 {
+  flex: 1; /* Equal width for each card2 */
+  max-width: calc(30% - 5px); /* Maximum width of 33.33% with margin */
+  height: 48vh;
+  margin: 10px; /* Margin to separate items */
+}
+.sales-table th,
+.sales-table td {
+  /* background-color: #ececec; */
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+  font-size: 0.5rem;
+  overflow-x: scroll;
+}
+.sales-table {
+  width: 60%;
+  border-collapse: collapse;
+  margin-top: 19px;
+  overflow-x: scroll;
+
+}
+}

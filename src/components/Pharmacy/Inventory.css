@@ -1,0 +1,159 @@
+/* Inventory.css */
+.cont-OP{
+  padding: 1rem;
+}
+
+
+/* Table header styles */
+.heading-table-OP {
+  display: flex;
+  background-color: #9b8bf4;
+  color: rgb(12, 11, 11);
+  cursor: pointer;
+  /* position: sticky; */
+  top: 0;
+}
+
+.heading-cell-OP {
+  padding: 10px;
+  text-align: left;
+}
+
+.heading-cell-OP:hover {
+  background-color: #C5D3E5;
+  color: black;
+}
+
+.heading-top-OP {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.searchbar-OP {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+.searchbar-OP input {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/* Table styles */
+.data-table-OP {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  position: relative; /* Reset position */
+  /* overflow-x: hidden; / / Hide horizontal overflow */
+}
+
+.data-table-OP th,
+.data-table-OP td {
+  padding: 8px;
+  text-align: left;
+}
+
+.data-table-OP th {
+  background-color: #9b8bf4;
+  color: rgb(10, 9, 9);
+  position: sticky;
+  top: 0; /* Make the header sticky at the top */
+  /* z-index: 1; */
+}
+
+/* Scrollable table body */
+.data-table-OP tbody {
+  max-height: 400px; /* Set a max height for the scrollable body */
+  /* overflow-y: auto; Add vertical scroll to the body */
+  position: relative; /* Reset position */
+ /* Place it behind the table header */
+}
+
+.data-table-OP tbody tr:hover {
+  background-color: #C5D3E5;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .heading-table-OP {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .heading-cell-OP {
+    text-align: center;
+    padding: 10px;
+    border-right: none;
+  }
+
+  .heading-cell-OP:hover {
+    background-color: initial;
+  }
+
+  .searchbar-OP {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
+  }
+
+  .searchbar-OP input {
+    width: 100%;
+    max-width: none;
+  }
+
+  .heading-top-OP {
+    text-align: center;
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .data-table-OP th,
+  .data-table td {
+    text-align: center;
+    padding: 5px;
+  }
+
+  .data-table-OP th {
+    font-size: 14px;
+  }
+
+  .data-table-OP tbody tr:hover {
+    background-color: initial;
+  }
+}
+/* Add these styles to your existing CSS file */
+
+/* Pagination styles */
+.pagination {
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #9b8bf4;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #C5D3E5;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  padding: 5px 10px;
+}
