@@ -86,7 +86,7 @@ const PharmacyNav = () => {
             <div className="dropdown">
            <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Select Billing</h6>
               <div className="dropdown-content">
-                <Link to="/PatientBill">Pharma Billing</Link>
+                <Link to="/pharmabilling">Pharma Billing</Link>
                 <Link to="/BillingDashboard">Billing Dashboard</Link>
               </div>
             </div>

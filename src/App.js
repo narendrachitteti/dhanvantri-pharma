@@ -4,6 +4,7 @@ import PharmacyNav from './components/Pharmacy/PharmacyNav';
 import ItemDescription from './components/Pharmacy/ItemDescription';
 import InvoiceStock from './components/Pharmacy/InvoiceStock';
 import PharmaLab from './components/Pharmacy/PharmaLab';
+import PatientBill from './components/Pharmacy/Pharmabilling';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
           <Route path='/invoicestock' element={<InvoiceStock/>}/>
           <Route path='/Drugmaster' element={<PharmaLab/>}/>
-
+          <Route path='/pharmabilling' element={<PatientBill/>}/>
 
         </Routes>
       </Router>
