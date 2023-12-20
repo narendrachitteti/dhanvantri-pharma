@@ -384,7 +384,7 @@ const PatientBill = () => {
 
   return (
     <>
-      <Navbar />
+    <PharmacyNav/>
    
       <div className="patientbill-page">
        
