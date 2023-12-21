@@ -58,7 +58,7 @@ function App() {
           <Route path="/Form3" element={<Form3/>}/>
           <Route path='/Form' element={<Form/>}/>
           <Route path="/RetailLogin" element={<RetailLogin/>}/>
-          <Route path="/RetailWholecard" element={<RetailWholecard/>}/>
+          <Route path="/" element={<RetailWholecard/>}/>
           <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
           <Route path='/Stockist' element={<Stockist/>}/>
