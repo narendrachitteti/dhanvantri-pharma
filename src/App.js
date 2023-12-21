@@ -19,6 +19,7 @@ import Pharmapurchase from "./components/Pharmacy/Pharmapurchase.jsx";
 import SalesReceipt from "./components/Pharmacy/SalesReceipt.jsx";
 import StockistInvoice from './components/Pharmacy/StockistInvoice.jsx';
 import Form3 from './components/Form3'
+import Note from './components/Pharmacy/Creditnote.js';
 import Form from './components/Form'
 import RetailLogin from './components/LoginForms/RetailLogin.js';
 import RetailWholecard from './components/LoginForms/RetailWholeCard.js';
@@ -61,6 +62,7 @@ function App() {
           <Route path="/" element={<RetailWholecard/>}/>
           <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
+          <Route path="/Creditnote" element={<Note/>}/>
           <Route path='/Stockist' element={<Stockist/>}/>
         </Routes>
       </Router>
