@@ -39,24 +39,18 @@ const [stockName, /* setStockName */] = useState("");
   const [stockistOptions, setStockistOptions] = useState([]);
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
-<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
 
-=======
   const [isPopupVisible, setPopupVisible] = useState(false);
 
-  const openPopup = () => {
-    setPopupVisible(true);
-  };
->>>>>>> Stashed changes:src/components/Pharmacy/InvoiceStock.js
+  // const openPopup = () => {
+  //   setPopupVisible(true);
+  // };
   
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
   // const [/*totalDiscountPercentage */, setTotalDiscountPercentage] = useState(0);
   const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
-
-
-  const [isPopupVisible, setPopupVisible] = useState(false);
 
   const data = [
     {
@@ -515,22 +509,12 @@ const [stockName, /* setStockName */] = useState("");
                 onChange={(e) => setSupplieddate(e.target.value)}
               />
             </div>
-
-<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
-
             
-
-=======
-            
->>>>>>> Stashed changes:src/components/Pharmacy/InvoiceStock.js
             <div className="BatchExpiryContainer">
               <button className="BatchExpiryButton" onClick={openPopup}>
                 About To Expire
               </button>
-<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
-=======
 
->>>>>>> Stashed changes:src/components/Pharmacy/InvoiceStock.js
               {isPopupVisible && (
                 <div className="BatchExpiryPage">
                   <button
@@ -540,10 +524,7 @@ const [stockName, /* setStockName */] = useState("");
                     X
                   </button>
                   <hr />
-<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
-=======
                   
->>>>>>> Stashed changes:src/components/Pharmacy/InvoiceStock.js
                   <div className="popupv-content-batchexpiry">
                     <div className="popup-container-batch">
                       <div className="TableContainerBatchExpiry">
@@ -566,7 +547,6 @@ const [stockName, /* setStockName */] = useState("");
                             </tr>
                           </thead>
                           <tbody>
-<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
                             {data.map((item) => (
                               <tr key={item.slno}>
                                 <td className="TableCellBatchExpiry">
@@ -586,7 +566,6 @@ const [stockName, /* setStockName */] = useState("");
                                 </td>
                               </tr>
                             ))}
-=======
                             {/* {data.map((item) => ( */}
                               <tr >
                                 <td className="TableCellBatchExpiry">
@@ -606,7 +585,6 @@ const [stockName, /* setStockName */] = useState("");
                                 </td>
                               </tr>
                             
->>>>>>> Stashed changes:src/components/Pharmacy/InvoiceStock.js
                           </tbody>
                         </table>
                       </div>
@@ -618,12 +596,9 @@ const [stockName, /* setStockName */] = useState("");
 
 
 
-<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
 
 
-=======
             </div>
->>>>>>> Stashed changes:src/components/Pharmacy/InvoiceStock.js
           </div>
         </div>
      
