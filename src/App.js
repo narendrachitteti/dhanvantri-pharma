@@ -29,6 +29,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
 import Stockist from './components/Pharmacy/Stockist'
+import Form4 from './components/Form4.js';
 
 function App() {
   return (
@@ -57,7 +58,7 @@ function App() {
           <Route path="/SalesReceipt" element={<SalesReceipt/>}/>
           <Route path="/PharmaLab" element={<PharmaLab/>}/>
           <Route path="/Form3" element={<Form3/>}/>
-          <Route path='/Form' element={<Form/>}/>
+          <Route path='/Form' element={<Form4/>}/>
           <Route path="/RetailLogin" element={<RetailLogin/>}/>
           <Route path="/" element={<RetailWholecard/>}/>
           <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
