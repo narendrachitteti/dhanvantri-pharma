@@ -14,7 +14,7 @@ const InvoiceStock = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [tableData, setTableData] = useState([]);
-const [stockName, /* setStockName */] = useState("");
+  const [stockName, /* setStockName */] = useState("");
   const [date, setDate] = useState("");
   const [Medicine, setMedicine] = useState("");
   const [Manufacturer, setManufacturer] = useState("");
@@ -39,7 +39,6 @@ const [stockName, /* setStockName */] = useState("");
   const [stockistOptions, setStockistOptions] = useState([]);
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
-
   const [isPopupVisible, setPopupVisible] = useState(false);
 
   // const openPopup = () => {
@@ -52,27 +51,37 @@ const [stockName, /* setStockName */] = useState("");
   const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
 
-  const data = [
-    {
-      slno: 1,
-      invoiceNumber: "INV001",
-      product: "Product A",
-      expiryDate: "2023-12-31",
-      daysToExpire: 15,
-    },
-    {
-      slno: 2,
-      invoiceNumber: "INV002",
-      product: "Product B",
-      expiryDate: "2023-12-20",
-      daysToExpire: 5,
-    },
-    // Add more data as needed
-  ];
-  const openPopup = () => {
-    console.log("Opening popup");
-    setPopupVisible(true);
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+  
+  const openPopup = async () => {
+    try {
+      // Fetch about to expire products from the backend
+      const response = await axios.get("http://localhost:5000/api/aboutToExpireProducts");
+  
+      // Update the state with the fetched data
+      setTableData(response.data);
+      setPopupVisible(true);
+    } catch (error) {
+      console.error("Error fetching about to expire products:", error);
+      // Handle error
+    }
   };
+  
 
 
   const handleGSTChange = (e) => {
@@ -514,7 +523,6 @@ const [stockName, /* setStockName */] = useState("");
               <button className="BatchExpiryButton" onClick={openPopup}>
                 About To Expire
               </button>
-
               {isPopupVisible && (
                 <div className="BatchExpiryPage">
                   <button
@@ -547,7 +555,7 @@ const [stockName, /* setStockName */] = useState("");
                             </tr>
                           </thead>
                           <tbody>
-                            {data.map((item) => (
+                            {tableData.map((item) => (
                               <tr key={item.slno}>
                                 <td className="TableCellBatchExpiry">
                                   {item.slno}
@@ -565,26 +573,7 @@ const [stockName, /* setStockName */] = useState("");
                                   {item.daysToExpire}
                                 </td>
                               </tr>
-                            ))}
-                            {/* {data.map((item) => ( */}
-                              <tr >
-                                <td className="TableCellBatchExpiry">
-                                  
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                 
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                 
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                 
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                 
-                                </td>
-                              </tr>
-                            
+                            ))}          
                           </tbody>
                         </table>
                       </div>
@@ -593,6 +582,11 @@ const [stockName, /* setStockName */] = useState("");
                 </div>
               )}
             </div>
+
+
+
+
+
             </div>
           </div>
         </div>
