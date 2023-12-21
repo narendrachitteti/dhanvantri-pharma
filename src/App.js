@@ -58,7 +58,7 @@ function App() {
           <Route path="/SalesReceipt" element={<SalesReceipt/>}/>
           <Route path="/PharmaLab" element={<PharmaLab/>}/>
           <Route path="/Form3" element={<Form3/>}/>
-          <Route path='/Form' element={<Form4/>}/>
+          <Route path='/Form' element={<Form/>}/>
           <Route path="/RetailLogin" element={<RetailLogin/>}/>
           <Route path="/" element={<RetailWholecard/>}/>
           <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
