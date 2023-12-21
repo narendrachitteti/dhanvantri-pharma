@@ -45,11 +45,8 @@ const Form4 = () => {
   const handleAddDocument = async () => {
     try {
       await axios.post('http://localhost:5000/api/newmodels', newDocument);
-      // After adding, fetch the updated list of documents
       fetchDocuments();
-      // Close the form
       setShowAddForm(false);
-      // Reset the form fields
       setNewDocument({
         Company: '',
         HmsCode: '',

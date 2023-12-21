@@ -5,7 +5,7 @@ import PharmacyNav from "./PharmacyNav";
 
 
 const ItemDescription = () => {
-    const [companyData, setCompanyData] = useState([]);
+  const [companyData, setCompanyData] = useState([]);
   const [taxCodeData, setTaxCodeData] = useState([]);
   const [categoriesData,setCategoriesData] = useState([]);
   const [groupsData, setGroupsData] = useState([]);
@@ -115,38 +115,140 @@ const handlePrint = () => {
   
         if (data && typeof data === "object") {
           if (
+            // data.hasOwnProperty("taxCodes") &&
+            // Array.isArray(data.taxCodes) &&
+            data.hasOwnProperty("category") &&
+            Array.isArray(data.category) 
+            // data.hasOwnProperty("group") &&
+            // Array.isArray(data.group) &&
+            // data.hasOwnProperty("schedule") &&
+            // Array.isArray(data.schedule) &&
+            // data.hasOwnProperty("drugComposition") &&
+            // Array.isArray(data.drugComposition)
+          ) {
+            // setTaxCodeData(data.taxCodes);
+            setCategoriesData(data.category);
+            // setGroupsData(data.group);
+            // setSchedulesData(data.schedule);
+            // setDrugCompositionData(data.drugComposition);
+  
+            setFormData({
+              ...formData,
+              // company: data.companies[0],
+              // taxCode: data.taxCodes[0],
+              category: data.category[0],
+              // group: data.group[0],
+              // schedule: data.schedule[0],
+              // drugComposition: data.drugComposition[0],
+              // hsn: data.hsn[0],
+            });
+          } else {
+            console.error("Data received from the API is not in the expected format:", data);
+          }
+        } else {
+          console.error("Invalid data received from the API:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/companiesAndHsncodes");
+        const data = await response.json();
+
+        if (data && typeof data === "object") {
+          if (
             data.hasOwnProperty("companies") &&
             Array.isArray(data.companies) &&
-            data.hasOwnProperty("taxCodes") &&
-            Array.isArray(data.taxCodes) &&
-            data.hasOwnProperty("category") &&
-            Array.isArray(data.category) &&
-            data.hasOwnProperty("group") &&
-            Array.isArray(data.group) &&
-            data.hasOwnProperty("schedule") &&
-            Array.isArray(data.schedule) &&
-            data.hasOwnProperty("drugComposition") &&
-            Array.isArray(data.drugComposition) &&
             data.hasOwnProperty("hsn") &&
             Array.isArray(data.hsn)
           ) {
             setCompanyData(data.companies);
+            setHsnData(data.hsn);
+
+            setFormData({
+              ...formData,
+              company: data.companies[0] || '',
+              hsn: data.hsn[0] || '',
+            });
+          } else {
+            console.error("Data received from the API is not in the expected format:", data);
+          }
+        } else {
+          console.error("Invalid data received from the API:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/distincttaxcodes");
+        const data = await response.json();
+  
+        if (data && typeof data === "object") {
+          if (
+            data.hasOwnProperty("taxCodes") &&
+            Array.isArray(data.taxCodes) &&
+            data.hasOwnProperty("group") &&
+            Array.isArray(data.group) &&
+            data.hasOwnProperty("schedule") &&
+            Array.isArray(data.schedule)
+          ) {
             setTaxCodeData(data.taxCodes);
-            setCategoriesData(data.category);
             setGroupsData(data.group);
             setSchedulesData(data.schedule);
-            setDrugCompositionData(data.drugComposition);
-            setHsnData(data.hsn);
   
             setFormData({
               ...formData,
-              company: data.companies[0],
               taxCode: data.taxCodes[0],
-              category: data.category[0],
               group: data.group[0],
               schedule: data.schedule[0],
+            });
+          } else {
+            console.error("Data received from the API is not in the expected format:", data);
+          }
+        } else {
+          console.error("Invalid data received from the API:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/distinctdrug");
+        const data = await response.json();
+  
+        if (data && typeof data === "object") {
+          if (
+            data.hasOwnProperty("drugComposition") &&
+            Array.isArray(data.drugComposition)
+          ) {
+            setDrugCompositionData(data.drugComposition);
+  
+            setFormData({
+              ...formData,
               drugComposition: data.drugComposition[0],
-              hsn: data.hsn[0],
             });
           } else {
             console.error("Data received from the API is not in the expected format:", data);
@@ -161,6 +263,9 @@ const handlePrint = () => {
   
     fetchData();
   }, []);
+  
+  
+
  
   return (
     <>
@@ -212,7 +317,7 @@ const handlePrint = () => {
         <Select
           className="tax-code-selec"
           name="taxCode"
-          value={{ label: formData.taxCode, value: formData.taxCode }}
+          value={{ label: formData.taxCode, value: formData.taxCodeData }}
           options={taxCodeData.map((taxCode) => ({
             label: taxCode,
             value: taxCode,
