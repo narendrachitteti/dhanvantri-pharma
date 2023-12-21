@@ -103,7 +103,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
     margin-right: 6px;
-    background-color: #86b2ef;
+    background-color: #86b2ef;   
   }
   .delete-button_5{
     color: white;
@@ -173,14 +173,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Adjust the gap between pagination items */
-    margin-top: 20px; /* Adjust the top margin as needed */
+    gap: 10px;
+    margin-top: 30px;
+    /* margin-left: 690px; */
   }
   
   
   .pagination{
     display: flex;
     align-items: right;
+    list-style: none;
+    /* display: grid; */
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjust column width */
+  gap: 15px;
   }
 
   

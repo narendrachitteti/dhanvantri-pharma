@@ -39,12 +39,11 @@ const InvoiceStock = () => {
   const [stockistOptions, setStockistOptions] = useState([]);
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
-  const [isPopupVisible, setPopupVisible] = useState(false);
 
-  // const openPopup = () => {
-  //   setPopupVisible(true);
-  // };
-  
+  const [isPopupVisible,setPopupVisible] = useState(false);
+
+ 
+
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
   // const [/*totalDiscountPercentage */, setTotalDiscountPercentage] = useState(0);
@@ -52,34 +51,11 @@ const InvoiceStock = () => {
   const [stockistValue, setStockistValue] = useState("");
 
 
+  // const [isPopupVisible, setPopupVisible] = useState(false);
 
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-  
-  const openPopup = async () => {
-    try {
-      // Fetch about to expire products from the backend
-      const response = await axios.get("http://localhost:5000/api/aboutToExpireProducts");
-  
-      // Update the state with the fetched data
-      setTableData(response.data);
-      setPopupVisible(true);
-    } catch (error) {
-      console.error("Error fetching about to expire products:", error);
-      // Handle error
-    }
+  const openPopup = () => {
+    console.log("Opening popup");
+    setPopupVisible(true);
   };
   
 
@@ -518,6 +494,7 @@ const InvoiceStock = () => {
                 onChange={(e) => setSupplieddate(e.target.value)}
               />
             </div>
+
             
             <div className="BatchExpiryContainer">
               <button className="BatchExpiryButton" onClick={openPopup}>
@@ -582,8 +559,6 @@ const InvoiceStock = () => {
                 </div>
               )}
             </div>
-
-
 
 
 
@@ -663,7 +638,7 @@ const InvoiceStock = () => {
           </div>
           &nbsp;
           <div className="input-container-1">
-            <label htmlFor="Manufacturer">Manufacturer</label>
+            <label htmlFor="Manufacturer">Mfr</label>
             <input
               type="text"
               id="Manufacturer"
@@ -785,7 +760,26 @@ const InvoiceStock = () => {
             />
           </div>
           &nbsp;&nbsp;
-          
+          {/* <div className="input-container-2">
+            <label htmlFor="RackNo">Rack No</label>
+            <input className="rack-input"
+              type="text"
+              id="RackNo"
+              value={RackNo}
+              onChange={(e) => setRackNo(e.target.value)}
+            />
+          </div> */}
+          &nbsp;&nbsp;
+          {/* <div className="input-container-2">
+            <label htmlFor="BookNo">Book No</label>
+            <input className="book-input"
+              type="text"
+              id="BookNo"
+              value={BookNo}
+              onChange={(e) => setBookNo(e.target.value)}
+            />
+          </div> */}
+          &nbsp;&nbsp;
           <div className="input-container-2">
             <label htmlFor="NetPrice">Net Price</label>
             <input className="netp-input"
@@ -822,7 +816,7 @@ const InvoiceStock = () => {
             <thead >
               <tr>
                 <th>Product</th>
-                <th>Manufacturer</th>
+                <th>Mfr</th>
                 <th>Category</th>
                 <th>Batch</th>
                 <th>Expiry</th>

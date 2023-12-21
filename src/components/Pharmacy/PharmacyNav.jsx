@@ -107,8 +107,10 @@ const PharmacyNav = () => {
               <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Item Description</h6>
               <div className="dropdown-content">
                 <Link to="/ItemDescription">Item Description</Link>
-                <Link to="/Stockists">Stockists</Link>
+                <Link to="/Stockist">Stockists</Link>
                 <Link to="/invoicestock">Stockists Invoices</Link>
+                <Link to="/Form3">Form 3</Link>
+                <Link to="/Form">Form</Link>
               </div>
             </div>
           </div>
@@ -119,7 +121,7 @@ const PharmacyNav = () => {
                 <Link to="/CreateOrder">Create Order</Link>
                 <Link to="/OrderList">Order list</Link>
                 <Link to="/Drugmaster">Drug Master</Link>
-                
+                <Link to="/Creditnote">Credit/Debit Note</Link>
                 
 
               </div>

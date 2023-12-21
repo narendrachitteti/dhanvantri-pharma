@@ -1,10 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
-import { BASE_URL } from "../../services/Helpers";
 import "./PatientBill.css";
 import Navbar from "./PharmacyNav";
 const PatientBill = () => {
+  const [quantity, setQuantity] = useState('');
+  const [medicines, setMedicines] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState('');
+  const [HSNCode, setHSNCode] = useState('');
+  const [price, setPrice] = useState('');
+  const [manufacturer, setManufacturer] = useState('');
+  const [gst, setGst] = useState('');
+  const [selectedBatch, setSelectedBatch] = useState('');
+  const [batchExpiry, setBatchExpiry] = useState('');
+  const [batches, setBatches] = useState([]);
+  const [subtotalWithGST, setSubtotalWithGST] = useState(0);
+  const [subtotalWithoutGST, setSubtotalWithoutGST] = useState(0);
+  const [mobilenumber, setmobilenumber] = useState('');
+  const [patientName, setPatientName] = useState('');
+  const [date, setDate] = useState('');
   const [items, setItems] = useState([
     {
       _id: 1,
@@ -15,228 +29,28 @@ const PatientBill = () => {
       batch: "",
       expiryDate: "",
       gst: "",
-      totalWithGST: 0,
-      totalWithoutGST: 0,
+      totalWithGST: "",
+      totalWithoutGST: "",
     },
   ]);
+  const handleQuantityChange = (e, index) => {
+    const { value } = e.target;
 
-  const [formData, setFormData] = useState({
-    patientName: "",
-    doctorName: "",
-    medicineName: "",
-  });
-  const [patientDataDoc, setPatientDataDoc] = useState(null);
-  const [doctorData, setDoctorData] = useState(null);
-  const [medicineData, setMedicineData] = useState(null);
-  const [patientId, setPatientId] = useState("");
-  const [selectedDoctor, setSelectedDoctor] = useState("");
-  const [patientData, setPatientData] = useState(null);
-  const [error, setError] = useState(null);
-  const [medicines, setMedicines] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${BASE_URL}/api/allMedicines`)
-      .then((response) => {
-        if (Array.isArray(response.data.medicines)) {
-          const allMedicines = response.data.medicines.map((invoice) => {
-            if (Array.isArray(invoice.medicines)) {
-              return invoice.medicines.map((medicine) => medicine.Medicine);
-            } else {
-              return [];
-            }
-          });
-          const flattenedMedicines = [].concat(...allMedicines);
-          setMedicines(flattenedMedicines);
-        } else {
-          console.error("Medicines array not found in the response data.");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-  const handleInputChangeSearch = (event) => {
-    setPatientId(event.target.value.toUpperCase());
-  };
-
-  const handleSearch = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/api/v1/combined-data/${patientId}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const data = await response.json();
-      console.log("Fetched Data:", data);
-
-      // Add these console logs
-      console.log("Patient ID:", patientId);
-      console.log("formData.doctorName:", formData.doctorName); // Add this line
-      console.log("formData.doctorName:", selectedDoctor); // Add this line
-
-      setPatientDataDoc(data);
-      if (data && data.items && data.items.length > 0) {
-        const selectedDoctorName = data.items[0].selectdoctorname;
-        console.log("Selected Doctor Name:", selectedDoctorName);
-
-        // Update both selectedDoctor and formData.doctorName
-        setSelectedDoctor(selectedDoctorName);
-        setFormData((prevFormData) => ({ ...prevFormData, doctorName: selectedDoctorName }));
-      } else {
-        console.log("No items found in data.items");
-      }
-    } catch (error) {
-      setError("Error fetching data");
-    }
-  };
-
-
-  useEffect(() => {
-    console.log(patientDataDoc);
-  }, [patientDataDoc]);
-
-  useEffect(() => {
-    if (formData.patientName) {
-      axios
-        .get(`${BASE_URL}/v1/combined-data/${formData.patientName}`)
-        .then((response) => setPatientData(response.data))
-        .catch((error) =>
-          console.error("Error fetching patient data:", error.message)
-        );
-    }
-  }, [formData.patientName]);
-
-  useEffect(() => {
-    // Fetch doctor data when doctorName changes
-    if (formData.doctorName) {
-      axios
-        .get(`${BASE_URL}/api/doctors/${formData.doctorName}`)
-        .then((response) => {
-          setDoctorData(response.data);
-          console.log("Doctor Name:", response.data.doctorName);
-        })
-        .catch((error) =>
-          console.error("Error fetching doctor data:", error.message)
-        );
-    }
-  }, [formData.doctorName]);
-  const [invoiceNumbers, setInvoiceNumbers] = useState([]);
-  const [selectedInvoiceNumber, setSelectedInvoiceNumber] = useState(""); // State for the selected invoice number
-
-const fetchInvoiceNumbers = async () => {
-  try {
-    const response = await axios.get("http://localhost:5000/api/invoiceNumbers");
-    const invoiceNumbersData = response.data; // Assuming the response is an array of invoice numbers
-    setInvoiceNumbers(invoiceNumbersData);
-  } catch (error) {
-    console.error("Error fetching invoice numbers:", error);
-  }
-};
-
-// Fetch invoice numbers on component mount
-useEffect(() => {
-  fetchInvoiceNumbers();
-}, []);
-
-  // Fetch invoice numbers on component mount
-  useEffect(() => {
-    fetchInvoiceNumbers();
-  }, []);
-  
-
-  useEffect(() => {
-    // Fetch medicine data when medicineName changes
-    if (formData.medicineName) {
-      axios
-        .get(`${BASE_URL}/api/medicines/${formData.medicineName}`)
-        .then((response) => {
-          const updatedItems = [...items];
-          const firstItem = updatedItems[0];
-          if (firstItem) {
-            const medicineData = response.data;
-            firstItem.product = medicineData.productName;
-            firstItem.amount = medicineData.productPrice;
-            firstItem.manufactureDate = medicineData.manufactureDate;
-          }
-          setItems(updatedItems);
-        })
-        .catch((error) =>
-          console.error("Error fetching medicine data:", error.message)
-        );
-    }
-  }, [formData.medicineName]);
-
-  const [patientName, setPatientName] = useState("");
-  const [invoiceNo, setInvoiceNo] = useState("");
-  const [doctorName, setDoctorName] = useState("");
-  const [date, setDate] = useState("");
-  const [pharmaSign, setPharmaSign] = useState("");
-
-  const [subtotalWithGST, setSubtotalWithGST] = useState("");
-  const [subtotalWithoutGST, setSubtotalWithoutGST] = useState("");
-
-  useEffect(() => {
-    updateSubtotals();
-  }, [items]);
-
-  const handleInputChange = (event, itemId, field) => {
-    const { value } = event.target;
-    const updatedItems = items.map((item) => {
-      if (item._id === itemId) {
+    const updatedItems = items.map((item, i) => {
+      if (index === i) {
         return {
           ...item,
-          [field]:
-            field === "manufactureDate" || field === "expiryDate"
-              ? value
-              : value || "",
+          quantity: value,
         };
       }
       return item;
     });
+
     setItems(updatedItems);
+    setQuantity(value);
   };
 
-  const updateSubtotals = () => {
-    let totalWithGST = 0;
-    let totalWithoutGST = 0;
-
-    items.forEach((item) => {
-      if (item.quantity !== "" && item.amount !== "" && item.gst !== "") {
-        const amount = parseFloat(item.quantity) * parseFloat(item.amount);
-        const amountWithGST = amount * (1 + parseFloat(item.gst) / 100);
-        totalWithGST += amountWithGST;
-        totalWithoutGST += amount;
-      }
-    });
-
-    setSubtotalWithGST(totalWithGST.toFixed(2));
-    setSubtotalWithoutGST(totalWithoutGST.toFixed(2));
-  };
-
-  const handleInpChange = (event, itemId, field) => {
-    const { value } = event.target;
-    const updatedItems = items.map((item) => {
-      if (item._id === itemId) {
-        const updatedItem = { ...item, [field]: value || "" };
-        if (field === "quantity" || field === "amount" || field === "gst") {
-          const parsedQuantity = parseFloat(updatedItem.quantity) || 0;
-          const parsedAmount = parseFloat(updatedItem.amount) || 0;
-          const parsedGST = parseFloat(updatedItem.gst) || 0;
-
-          const calculatedAmount = parsedQuantity * parsedAmount;
-          updatedItem.totalWithGST = calculatedAmount * (1 + parsedGST / 100);
-          updatedItem.totalWithoutGST = calculatedAmount;
-        }
-        return updatedItem;
-      }
-      return item;
-    });
-    setItems(updatedItems);
-  };
-
+  // Function to add a new row/item to the list
   const handleAddRow = () => {
     const newItem = {
       _id: items.length + 1,
@@ -250,91 +64,337 @@ useEffect(() => {
       totalWithGST: 0,
       totalWithoutGST: 0,
     };
+    // Updating the state by adding the new item to the existing items array
     setItems([...items, newItem]);
   };
 
+  // Function to delete a row/item from the list based on itemId
   const handleDeleteRow = (itemId) => {
+    // Filtering out the item with the given itemId
     const updatedItems = items.filter((item) => item._id !== itemId);
+    // Updating the state with the filtered items array
     setItems(updatedItems);
   };
 
-  
-  const handleSubmit = async () => {
+  useEffect(() => {
+    const calculateTotals = () => {
+      let totalWithoutGST = 0;
+      let totalWithGST = 0;
+
+      items.forEach((item) => {
+        const quantityValue = parseFloat(item.quantity) || 0;
+        const priceValue = parseFloat(item.price) || 0;
+        const gstValue = parseFloat(item.gst) || 0;
+
+        const itemTotalWithoutGST = quantityValue * priceValue;
+        const itemTotalWithGST =
+          itemTotalWithoutGST + itemTotalWithoutGST * (gstValue / 100);
+
+        totalWithoutGST += itemTotalWithoutGST;
+        totalWithGST += itemTotalWithGST;
+      });
+
+      setSubtotalWithoutGST(totalWithoutGST.toFixed(2));
+      setSubtotalWithGST(totalWithGST.toFixed(2));
+    };
+
+    calculateTotals();
+  }, [items]);
+
+ 
+
+  useEffect(() => {
+    const fetchBatches = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/batchNumbers');
+        setBatches(response.data.batchNumbers);
+      } catch (error) {
+        console.error('Error fetching batches:', error);
+      }
+    };
+
+    fetchBatches();
+  }, []);
+
+  useEffect(() => {
+    const fetchMedicineNames = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/medicines');
+        setMedicines(response.data.medicines);
+      } catch (error) {
+        console.error('Error fetching medicines:', error);
+      }
+    };
+
+    fetchMedicineNames();
+  }, []);
+
+  const handleProductSelect = async (medicineName, index) => {
     try {
-      console.log("Patient ID:", patientId);
-      console.log("Doctor Name:", formData.doctorName);
+      const response = await axios.get(`http://localhost:5000/api/medicineDetails/${medicineName}`);
+      const medicineDetails = response.data;
   
-      console.log("Data to be sent to the backend:", {
-        patientName,
-        invoiceNo,
-        selectedDoctor,
-        date,
-        pharmaSign,
-        items,
-        subtotalWithGST,
-        subtotalWithoutGST,
-      });
-  
-     
-      console.log("Selected Doctor Name:", selectedDoctor);
-  
-      const response = await axios.post(`${BASE_URL}/api/v1/bill-data`, {
-        patientName,
-        invoiceNo,
-        selectedDoctor,
-        date,
-        pharmaSign,
-        items,
-        subtotalWithGST,
-        subtotalWithoutGST,
-      });
-  
-      console.log("Response:", response.data);
-  
-      setPatientName("");
-      setInvoiceNo("");
-      setDoctorName("");
-      setDate("");
-      setPharmaSign("");
-      setItems([
-        {
-          _id: 1,
-          product: "",
-          quantity: "",
-          amount: "",
-          manufactureDate: "",
-          batch: "",
-          expiryDate: "",
-          gst: "",
-          totalWithGST: 0,
-          totalWithoutGST: 0,
-        },
-      ]);
-      setSubtotalWithGST("");
-      setSubtotalWithoutGST("");
+      const updatedItems = [...items];
+      updatedItems[index] = {
+        ...updatedItems[index],
+        product: medicineName,
+        price: medicineDetails.price || '',
+        manufacturer: medicineDetails.Manufacturer || '',
+        gst: medicineDetails.Gst || '',
+      };
+      setItems(updatedItems);
     } catch (error) {
-      console.error('Axios Error:', error);
+      console.error('Error fetching medicine details:', error);
     }
   };
   
+  const handleBatchSelect = async (batchNumber, index) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/batchDetails/${batchNumber}`);
+      const fullExpiryDate = response.data.BatchExpiry;
+  
+      // Extract month and last two digits of the year
+      const dateObject = new Date(fullExpiryDate);
+      const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+      const year = dateObject.getFullYear().toString().slice(-2);
+  
+      // Form the desired format
+      const formattedExpiry = `${month}/${year}`;
+  
+      const updatedItems = [...items];
+      updatedItems[index] = {
+        ...updatedItems[index],
+        batch: batchNumber,
+        batchExpiry: formattedExpiry,
+      };
+      setItems(updatedItems);
+    } catch (error) {
+      console.error('Error fetching batch details:', error);
+    }
+  };
+  
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/patient-bill', {
+        patientName,
+        mobilenumber,
+        date,
+        items,
+        subtotalWithGST,
+        subtotalWithoutGST,
+      });
+  
+      // Check if response is defined and has a 'data' property
+      if (response && response.data) {
+        console.log('PatientBill submitted successfully:', response.data);
+  
+        // Reset the form or add other logic as needed
+        setPatientName('');
+        setmobilenumber('');
+        setDate('');
+        setItems([
+          {
+            _id: 1,
+            product: '',
+            quantity: '',
+            amount: '',
+            manufactureDate: '',
+            batch: '',
+            expiryDate: '',
+            gst: '',
+            totalWithGST: 0,
+            totalWithoutGST: 0,
+          },
+        ]);
+  
+        // You can add additional logic here, such as redirecting the user.
+      } else {
+        console.error('Unexpected response format:', response);
+      }
+    } catch (error) {
+      console.error('Error submitting PatientBill:', error);
+      console.error('Server response:', error.response ? error.response.data : 'No response data'); // Log server response details
+    }
+  };
+  
+  
+  const handlePrint = () => {
+    const imagePath = 'PharmacyLogo.jpg';
+    const imageUrl = `${process.env.PUBLIC_URL}/${imagePath}`;
+  
+    // Create an image element and set its source
+    const img = new Image();
+    img.src = imageUrl;
+  
+    // Wait for the image to load before continuing with print
+    img.onload = function () {
+    // Generate HTML content for printing
+    const printContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <!-- Include any necessary stylesheets or styling here -->
+          <style>
+          body {
+            font-family: 'Arial', sans-serif;
+          }
+          .billing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+          }
+          .billing-table th, .billing-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+          }
+          .print-container {
+            max-height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+            border-radius: 5px;
+           
+            background: #fff;
+           
+            position: relative;
+          }
+          .print-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+          }
+          .main-heading{
+              width:70%;
+              text-align: center;
+            }
+            .flex-change34{
+              display:flex;
+              justify-content: space-between;
+              border: 2px solid black;
+           }
+           .image45{
+            width:30%;
+           }
+           
+          .dl-info {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+          }
+          .contact-info {
+              display: flex;
+              flex-direction: column;
+              margin-bottom: 20px;
+              margin-right: 0px;
+
+            }
+            .flex-column {
+              margin-top: 30px;
+              display: flex;
+              justify-content: space-between;
+            }
+           
+          .dl-text, .contact-text {
+            margin-right: 20px;
+          }
+          .print-details2{
+              display: flex;
+              flex-direction: column;
+          }
+        </style>
+        </head>
+        <body>
+        <div class="print-container">
+        <div class="flex-change34">
+        <img class="image45" src="${imageUrl}">
+
+        <div class='main-heading'>
+        <h1>Dhanvantri Pharmacy </h1>
+        <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
+        Hampinagara , Bengaluru-560104</h3>
+        <h3>Mob:+91 9916351311</h3>
+        </div>
+        </div>
+        <div class="borderbox"></div>
+        <h3 class="print-title">Billing Details</h3>
+        <div class="flex-column">
+        <div class="dl-info">
+          <span class="dl-text">DL:20 KA-B41-180306</span>
+          <span class="dl-text">DL:20 KA-B41-180307</span>
+        </div>
+        <div class="contact-info">
+          <span class="gst-text">GSTIN:29BFNPM5181H1ZX</span>
+          <span class="phone-text">PHONE:+91 9886819877</span>
+        </div>
+      </div>
+          <!-- Include your billing details in the HTML content -->
+          <div>
+            <p class="print-details">Patient Name: ${patientName}</p>
+            <p class="print-details">Mobile number: ${mobilenumber}</p>
+            <p class="print-details">Date: ${date}</p>
+            <table class="billing-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Product Price</th>
+                  <th>Manufacturer</th>
+                  <th>Batch No</th>
+                  <th>Expiry Date</th>
+                  <th>GST (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                ${items
+                  .map(
+                    (item, index) => `
+                      <tr>
+                        <td>${item.product}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.price}</td>
+                        <td>${item.manufacturer}</td>
+                        <td>${item.batch}</td>
+                        <td>${item.batchExpiry}</td>
+                        <td>${item.gst}</td>
+                      </tr>
+                    `
+                  )
+                  .join("")}
+              </tbody>
+            </table>
+            <strong class="print-details2">Subtotal with GST: ${subtotalWithGST}</strong>
+            <strong class="print-details2">Subtotal without GST: ${subtotalWithoutGST}</strong>
+          </div>
+        </body>
+      </html>
+    `;
+
+    const printWindow = window.open("", "", "height=600");
+    printWindow.document.open();
+    printWindow.document.write(printContent);
+
+    // Trigger the print operation
+    printWindow.print();
+
+    // Close the print window after printing
+    printWindow.onafterprint = function () {
+      printWindow.close();
+    };
+  };
+};
 
 
+
+  
+ 
 
   return (
     <>
       <Navbar />
+   
       <div className="patientbill-page">
-        <div className="patendId">
-          <label className="PatientId-Label"  >
-            Patient ID:
-            <input  className="PatientId-input"
-              type="text"
-              value={patientId}
-              onChange={handleInputChangeSearch}
-            />
-          </label>
-          <button className="search-btn" onClick={handleSearch}>Search</button>
-        </div>
+       
         <div className="gst-ph-header">
         <div className="gst-ph-head-dl">
           <span className="dl-1-text">DL:20 KA-B41-180306</span>
@@ -349,7 +409,7 @@ useEffect(() => {
 
         <div className="title-row">
           <FaPlusCircle className="plus-icon" />
-          <span className="pharma-title">Matrical Pharma</span>
+          <span className="pharma-title">Dhanvantri Pharmacy</span>
           <FaPlusCircle className="plus-icon" />
         </div>
         <div className="tax-title-header">
@@ -360,69 +420,47 @@ useEffect(() => {
         </div>
 
         <div className="pharma-bill-details">
-          <div>
-            <label className="pharma-patientname-labels">Patient Name : </label>
-            <input
-              type="text"
-              value={patientDataDoc ? patientDataDoc.name || "" : ""}
-              readOnly
-              className="pharma-head-patientname-input"
-            />
-          </div>
-          <div className="input-container">
-    <label htmlFor="invoiceNumber"> Invoice Number</label>
-   
-    <select
-    type="text"
-  id="invoiceNumber"
-  value={selectedInvoiceNumber}
-  onChange={(e) => setSelectedInvoiceNumber(e.target.value)}
->
-  <option value="">Invoice Number</option>
-  {invoiceNumbers.map((invoice) => (
-    <option key={invoice.id} value={invoice.invoiceNumber}>
-      {invoice.invoiceNumber}
-    </option>
-  ))}
-</select>
-  </div>
+        <div>
+          <label className="pharma-patientname-labels">Patient Name : </label>
+          <input
+            type="text"
+            className="pharma-head-patientname-input"
+            value={patientName}
+            onChange={(e) => setPatientName(e.target.value)}
+          />
         </div>
-        <div className="pharma-bill-details-2">
-          <div>
-            <label className="pharma-doctor-label">Doctor Name : </label>
-            <input
-              type="text"
-              value={
-                patientDataDoc
-                  ? patientDataDoc.items[0].selectdoctorname || ""
-                  : ""
-              }
-              className="pharma-head-doctorname-input"
-              readOnly
-            />
-          </div>
-          <div>
-            <label className="pharma-date-label">Date : </label>
-            <input
-              type="date"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
-              className="pharma-bill-input-date-2"
-            />
-          </div>
+      </div>
+      <div className="pharma-bill-details-2">
+        <div>
+          <label className="pharma-doctor-label">Mobile number : </label>
+          <input
+            type="text"
+            className="pharma-head-mobilenumber-input"
+            value={mobilenumber}
+            onChange={(e) => setmobilenumber(e.target.value)}
+          />
         </div>
+        <div>
+          <label className="pharma-date-label">Date : </label>
+          <input
+            type="date"
+            className="pharma-bill-input-date-2"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+      </div>
         <table className="pharma-bill-table23">
           <thead className="pharma-bill-tablehead">
             <tr >
               <th className="class567">S No.</th>
               <th className="class567">Product</th>
-              <th>Quantity</th>
+              <th>quantity</th>
               <th>Product Price</th>
               <th>Manufacturer name</th>
               <th>Batch No</th>
               <th>Expiry Date</th>
               <th>GST (%)</th>
-             
               <th>Action</th>
             </tr>
           </thead>
@@ -431,86 +469,89 @@ useEffect(() => {
               <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td>
+                <select
+        value={item.product}
+        onChange={(e) => {
+          const selectedValue = e.target.value;
+          handleProductSelect(selectedValue, index);
+        }}
+      >
+        <option value=''>Select a product</option>
+        {medicines.map((medicine, medIndex) => (
+          <option key={medIndex} value={medicine}>
+            {medicine}
+          </option>
+        ))}
+      </select>
+                </td>
+                <td>
+                <input
+              type="number"
+              className="pharma-bill-input-quantity"
+              value={item.quantity}
+              onChange={(e) => handleQuantityChange(e, index)}
+            />
+                </td>
+                <td>
+                  <input
+                    className='price-input'
+                    value={item.price}
+                    onChange={(e) => {
+                      const updatedItems = [...items];
+                      updatedItems[index].price = e.target.value;
+                      setItems(updatedItems);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    className='manufacturer-input'
+                    value={item.manufacturer}
+                    onChange={(e) => {
+                      const updatedItems = [...items];
+                      updatedItems[index].manufacturer = e.target.value;
+                      setItems(updatedItems);
+                    }}
+                  />
+                </td>
+                <td>
+                <select
+        value={item.batch}
+        onChange={(e) => {
+          const selectedBatchValue = e.target.value;
+          handleBatchSelect(selectedBatchValue, index);
+        }}
+      >
+        <option value=''>Select a batch</option>
+        {batches && batches.map((batch, batchIndex) => (
+          <option key={batchIndex} value={batch}>
+            {batch}
+          </option>
+        ))}
+      </select>
+                </td>
+                <td>
                   <input
                     type="text"
-                    list={`medicineList${item.id}`}
-                    value={item.medicineInput}
-                    onChange={(e) =>
-                      handleInputChange(e, item.id, "medicineInput")
-                    }
-                    className="pharma-head-medicinename-input"
-                  />
-                  <datalist id={`medicineList${item.id}`}>
-                    {medicines &&
-                      medicines.length > 0 &&
-                      medicines.map((medicine, i) => (
-                        <option key={i} value={medicine} />
-                      ))}
-                  </datalist>
-                </td>
-                
-                <td>
-                  <input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(event) =>
-                      handleInpChange(event, item._id, "quantity")
-                    }
-                    className="pharma-bill-input-quantity"
+                    value={item.batchExpiry}
+                    onChange={(e) => {
+                      const updatedItems = [...items];
+                      updatedItems[index].batchExpiry = e.target.value;
+                      setItems(updatedItems);
+                    }}
                   />
                 </td>
                 <td>
                   <input
-                    type="number"
-                    value={item.amount}
-                    onChange={(event) =>
-                      handleInpChange(event, item._id, "amount")
-                    }
-                    className="pharma-bill-input-amount"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    value={item.manufactureDate}
-                    onChange={(event) =>
-                      handleInpChange(event, item._id, "manufactureDate")
-                    }
-                    className="pharma-bill-input-date-mfg"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    value={item.batch}
-                    onChange={(event) =>
-                      handleInpChange(event, item._id, "batch")
-                    }
-                    className="pharma-bill-input-batch"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="date"
-                    value={item.expiryDate}
-                    onChange={(event) =>
-                      handleInpChange(event, item._id, "expiryDate")
-                    }
-                    className="pharma-bill-input-date-exp"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
+                    className='gst-input'
                     value={item.gst}
-                    onChange={(event) =>
-                      handleInpChange(event, item._id, "gst")
-                    }
-                    className="pharma-bill-input-gst"
+                    onChange={(e) => {
+                      const updatedItems = [...items];
+                      updatedItems[index].gst = e.target.value;
+                      setItems(updatedItems);
+                    }}
                   />
                 </td>
-                {/* <td>{item.totalWithGST.toFixed(2)}</td>
-                <td>{item.totalWithoutGST.toFixed(2)}</td> */}
                 <td className="add-del">
                   <button
                     onClick={() => handleDeleteRow(item._id)}
@@ -527,23 +568,27 @@ useEffect(() => {
         <button onClick={handleAddRow} className="Add-btn">
           Add
         </button>
-        <div className="pharma-subtotal">
-          <p>Subtotal with GST: {subtotalWithGST}</p>
-          <p>Subtotal without GST: {subtotalWithoutGST}</p>
-        </div>
+         <div className="pharma-subtotal">
+        <p>Subtotal with GST: {subtotalWithGST}</p>
+        <p>Subtotal without GST: {subtotalWithoutGST}</p>
+      </div>
+        
         <div className="pharma-sign">
           <label>Sign : </label>
           <input
             type="textarea"
-            value={pharmaSign}
-            onChange={(event) => setPharmaSign(event.target.value)}
             className="sign-area"
           />
         </div>
 
-        <button onClick={handleSubmit} className="pharma-bill-submit-btn del-btn">
+        <button onClick={handleSubmit}  className="pharma-bill-submit-btn del-btn">
           Submit
         </button>
+
+        <button onClick={handlePrint} className="print-btn">
+          Print
+        </button>
+
       </div>
     </>
   );
