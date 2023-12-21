@@ -40,7 +40,6 @@ const [stockName, /* setStockName */] = useState("");
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
 
-
   const [isPopupVisible, setPopupVisible] = useState(false);
 
  
@@ -50,6 +49,9 @@ const [stockName, /* setStockName */] = useState("");
   // const [/*totalDiscountPercentage */, setTotalDiscountPercentage] = useState(0);
   const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
+
+
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   const data = [
     {
@@ -514,7 +516,6 @@ const [stockName, /* setStockName */] = useState("");
               <button className="BatchExpiryButton" onClick={openPopup}>
                 About To Expire
               </button>
-
               {isPopupVisible && (
                 <div className="BatchExpiryPage">
                   <button
@@ -547,6 +548,25 @@ const [stockName, /* setStockName */] = useState("");
                             </tr>
                           </thead>
                           <tbody>
+                            {data.map((item) => (
+                              <tr key={item.slno}>
+                                <td className="TableCellBatchExpiry">
+                                  {item.slno}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.invoiceNumber}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.stockName}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.expiryDate}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.daysToExpire}
+                                </td>
+                              </tr>
+                            ))}
                             {/* {data.map((item) => ( */}
                               <tr >
                                 <td className="TableCellBatchExpiry">

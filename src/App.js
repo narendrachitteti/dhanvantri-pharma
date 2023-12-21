@@ -19,6 +19,16 @@ import Pharmapurchase from "./components/Pharmacy/Pharmapurchase.jsx";
 import SalesReceipt from "./components/Pharmacy/SalesReceipt.jsx";
 import StockistInvoice from './components/Pharmacy/StockistInvoice.jsx';
 import Form3 from './components/Form3'
+import Form from './components/Form'
+import RetailLogin from './components/LoginForms/RetailLogin.js';
+import RetailWholecard from './components/LoginForms/RetailWholeCard.js';
+import WholesaleLogin from './components/LoginForms/WholesaleLogin.js';
+
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
+
+
 function App() {
   return (
     <div className="App">
@@ -46,7 +56,13 @@ function App() {
           <Route path="/SalesReceipt" element={<SalesReceipt/>}/>
           <Route path="/PharmaLab" element={<PharmaLab/>}/>
           <Route path="/Form3" element={<Form3/>}/>
-        </Routes>
+          <Route path='/Form' element={<Form/>}/>
+          <Route path="/RetailLogin" element={<RetailLogin/>}/>
+          <Route path="/" element={<RetailWholecard/>}/>
+          <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
+          <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
+          
+          </Routes>
       </Router>
     </div>
   );
