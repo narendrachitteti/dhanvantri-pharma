@@ -103,7 +103,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
     margin-right: 6px;
-    background-color: #86b2ef;
+    background-color: #86b2ef;   
   }
   .delete-button_5{
     color: white;
@@ -181,6 +181,10 @@
   .pagination{
     display: flex;
     align-items: right;
+    list-style: none;
+    /* display: grid; */
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjust column width */
+  gap: 15px;
   }
 
   

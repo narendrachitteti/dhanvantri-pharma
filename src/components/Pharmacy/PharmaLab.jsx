@@ -187,7 +187,7 @@ const PharmaLab = () => {
     firstPageText={<span className="custom-pagination-arrow"><KeyboardDoubleArrowLeft /></span>}
     lastPageText={<span className="custom-pagination-arrow"><KeyboardDoubleArrowRight /></span>}
   />
-</div>
+</div>  
         <Popup
           open={selectedService !== null || isAddPopupOpen}
           onClose={handleCancel}
