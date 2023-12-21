@@ -795,7 +795,7 @@ const [stockName, /* setStockName */] = useState("");
             />
           </div>
           &nbsp;&nbsp;
-          <div className="input-container-2">
+          {/* <div className="input-container-2">
             <label htmlFor="RackNo">Rack No</label>
             <input className="rack-input"
               type="text"
@@ -803,9 +803,9 @@ const [stockName, /* setStockName */] = useState("");
               value={RackNo}
               onChange={(e) => setRackNo(e.target.value)}
             />
-          </div>
+          </div> */}
           &nbsp;&nbsp;
-          <div className="input-container-2">
+          {/* <div className="input-container-2">
             <label htmlFor="BookNo">Book No</label>
             <input className="book-input"
               type="text"
@@ -813,7 +813,7 @@ const [stockName, /* setStockName */] = useState("");
               value={BookNo}
               onChange={(e) => setBookNo(e.target.value)}
             />
-          </div>
+          </div> */}
           &nbsp;&nbsp;
           <div className="input-container-2">
             <label htmlFor="NetPrice">Net Price</label>

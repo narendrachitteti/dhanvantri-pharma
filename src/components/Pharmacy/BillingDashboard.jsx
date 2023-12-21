@@ -255,25 +255,25 @@ const renderFastMovingMedicines = () => {
               <label>Total Manufacturers</label>
               <p>{totalManufacturers}</p>
             </div>
-            <div className="statistic">
+            {/* <div className="statistic">
               <label>Current Inventory cost</label>
               <p>₹&nbsp;{currentInventoryCost}</p>
-            </div>
-            <div className="statistic">
+            </div> */}
+            {/* <div className="statistic">
               <label>Current Inventory MRP</label>
               <p>₹&nbsp;{currentInventoryMRP}</p>
-            </div>
-            <div className="statistic">
+            </div> */}
+            {/* <div className="statistic">
               <label>In stock Inventory Quantity</label>
               <p>₹&nbsp;{inStockInventoryQuantity}</p>
-            </div>
+            </div> */}
             <div className="statistic">
               <label>Medicine out of stock</label>
               <p>{medicineOutOfStock}</p>
             </div>
           </div>
         </div>
-        <div className="card2">
+        {/* <div className="card2">
           <h4 className="card-heading">Latest Sales</h4>
           <div className="card-content">
          
@@ -296,18 +296,11 @@ const renderFastMovingMedicines = () => {
               See more...
             </Link>
           </div>
-        </div>
-        <div className="card2">
+        </div> */}
+        {/* <div className="card2">
   <h4 className="card-heading">Fast Moving product</h4>
   <div className="card-content">
-  {/* <div className="sales-pagination">
-            <input
-              type="text"
-              placeholder="Search"
-              value={fastMovingSearchQuery}
-              onChange={(e) => setFastMovingSearchQuery(e.target.value)}
-            />
-          </div> */}
+  
     <table className="sales-table">
       <thead>
         <tr>
@@ -322,7 +315,7 @@ const renderFastMovingMedicines = () => {
       <span>No data available in table</span>
     )}
   </div>
-</div>
+</div> */}
       </div>
     </>
   );
