@@ -775,26 +775,7 @@ const [stockName, /* setStockName */] = useState("");
             />
           </div>
           &nbsp;&nbsp;
-          <div className="input-container-2">
-            <label htmlFor="RackNo">Rack No</label>
-            <input className="rack-input"
-              type="text"
-              id="RackNo"
-              value={RackNo}
-              onChange={(e) => setRackNo(e.target.value)}
-            />
-          </div>
-          &nbsp;&nbsp;
-          <div className="input-container-2">
-            <label htmlFor="BookNo">Book No</label>
-            <input className="book-input"
-              type="text"
-              id="BookNo"
-              value={BookNo}
-              onChange={(e) => setBookNo(e.target.value)}
-            />
-          </div>
-          &nbsp;&nbsp;
+          
           <div className="input-container-2">
             <label htmlFor="NetPrice">Net Price</label>
             <input className="netp-input"
