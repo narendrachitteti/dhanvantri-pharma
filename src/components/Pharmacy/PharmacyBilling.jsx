@@ -175,7 +175,7 @@ const PatientBill = () => {
   
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:5001/api/patient-bill', {
+      const response = await axios.post('http://localhost:5000/api/patient-bill', {
         patientName,
         mobilenumber,
         date,
