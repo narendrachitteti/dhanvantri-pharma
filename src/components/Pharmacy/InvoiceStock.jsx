@@ -39,6 +39,9 @@ const [stockName, /* setStockName */] = useState("");
   const [stockistOptions, setStockistOptions] = useState([]);
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
+<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
+
+=======
   const [isPopupVisible, setPopupVisible] = useState(false);
 
   // const openPopup = () => {
@@ -52,7 +55,7 @@ const [stockName, /* setStockName */] = useState("");
   const [stockistValue, setStockistValue] = useState("");
 
 
-  // const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   const data = [
     {
@@ -512,11 +515,21 @@ const [stockName, /* setStockName */] = useState("");
               />
             </div>
 
+<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
+
             
+
+=======
+            
+>>>>>>> Stashed changes:src/components/Pharmacy/InvoiceStock.js
             <div className="BatchExpiryContainer">
               <button className="BatchExpiryButton" onClick={openPopup}>
                 About To Expire
               </button>
+<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
+=======
+
+>>>>>>> Stashed changes:src/components/Pharmacy/InvoiceStock.js
               {isPopupVisible && (
                 <div className="BatchExpiryPage">
                   <button
@@ -549,6 +562,27 @@ const [stockName, /* setStockName */] = useState("");
                             </tr>
                           </thead>
                           <tbody>
+<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
+                            {data.map((item) => (
+                              <tr key={item.slno}>
+                                <td className="TableCellBatchExpiry">
+                                  {item.slno}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.invoiceNumber}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.stockName}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.expiryDate}
+                                </td>
+                                <td className="TableCellBatchExpiry">
+                                  {item.daysToExpire}
+                                </td>
+                              </tr>
+                            ))}
+=======
                             {/* {data.map((item) => ( */}
                               <tr >
                                 <td className="TableCellBatchExpiry">
@@ -579,6 +613,10 @@ const [stockName, /* setStockName */] = useState("");
 
 
 
+<<<<<<< Updated upstream:src/components/Pharmacy/InvoiceStock.jsx
+
+
+=======
             </div>
           </div>
         </div>
@@ -777,26 +815,7 @@ const [stockName, /* setStockName */] = useState("");
             />
           </div>
           &nbsp;&nbsp;
-          <div className="input-container-2">
-            <label htmlFor="RackNo">Rack No</label>
-            <input className="rack-input"
-              type="text"
-              id="RackNo"
-              value={RackNo}
-              onChange={(e) => setRackNo(e.target.value)}
-            />
-          </div>
-          &nbsp;&nbsp;
-          <div className="input-container-2">
-            <label htmlFor="BookNo">Book No</label>
-            <input className="book-input"
-              type="text"
-              id="BookNo"
-              value={BookNo}
-              onChange={(e) => setBookNo(e.target.value)}
-            />
-          </div>
-          &nbsp;&nbsp;
+          
           <div className="input-container-2">
             <label htmlFor="NetPrice">Net Price</label>
             <input className="netp-input"
