@@ -1,34 +1,29 @@
 /* Add your own styling here */
 
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
+
   
   .container {
     max-width: 800px;
     margin: 50px auto;
   }
   
-  form {
+ .form-formsa {
     margin-bottom: 20px;
   }
   
-  label {
+ .form-formsa label {
     display: block;
     margin-bottom: 10px;
   }
   
-  input {
+ .form-formsa input {
     width: 20%;
     padding: 8px;
     margin-bottom: 15px;
     box-sizing: border-box;
   }
   
-  button {
+ .form-formsa button {
     background-color: #4caf50;
     color: white;
     padding: 10px 15px;
@@ -36,33 +31,33 @@ body {
     cursor: pointer;
   }
   
-  button:hover {
+ .form-formsa button:hover {
     background-color: #45a049;
   }
   
-  table {
+  .table-formsa {
     width: 50%;
     border-collapse: collapse;
     margin-top: 20px;
     margin-left: 25%;
   }
   
-  th, td {
+ .table-formsa th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
   }
   
-  th {
+.table-formsa  th {
     background-color: #4caf50;
     color: white;
   }
   
-  td {
+.table-formsa  td {
     background-color: #f9f9f9;
   }
   
-  button.edit, button.save {
+  .table-formsa button.edit,.table-formsa button.save {
     background-color: #2196f3;
     color: white;
     padding: 6px 10px;
@@ -71,10 +66,10 @@ body {
     cursor: pointer;
   }
   
-  button.save {
+  .table-formsa button.save {
     background-color: #4caf50;
   }
   
-  button.edit:hover, button.save:hover {
+  .table-formsa button.edit:hover,.table-formsa button.save:hover {
     background-color: #0b7dda;
   }
