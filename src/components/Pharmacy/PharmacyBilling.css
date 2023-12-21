@@ -193,6 +193,9 @@ font-weight: bold;
   border-radius: 1vh;
   margin-left: 3vw;
 }
+.pharma-bill-table23{
+  margin-left: 80px;
+}
 .invoiceNumber{
   margin-left: 54.9vw;
 }
@@ -252,6 +255,7 @@ font-weight: bold;
       height: auto;
       display: block;
       border: none;
+      margin-left: 80px;
     }
     .pharma-bill-table-body td {
       font-size: 0.6rem;
