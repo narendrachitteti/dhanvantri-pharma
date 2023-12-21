@@ -63,7 +63,6 @@ const Form = () => {
     const formordata = {
       company,
       hsncode,
-    //   input3,
     };
 
     try {
