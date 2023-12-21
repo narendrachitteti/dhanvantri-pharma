@@ -40,7 +40,7 @@ const [stockName, /* setStockName */] = useState("");
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
 
-  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isPopupVisible,setPopupVisible] = useState(false);
 
  
 
@@ -51,7 +51,7 @@ const [stockName, /* setStockName */] = useState("");
   const [stockistValue, setStockistValue] = useState("");
 
 
-  const [isPopupVisible, setPopupVisible] = useState(false);
+  // const [isPopupVisible, setPopupVisible] = useState(false);
 
   const data = [
     {
