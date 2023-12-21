@@ -119,7 +119,7 @@ const PharmacyNav = () => {
                 <Link to="/CreateOrder">Create Order</Link>
                 <Link to="/OrderList">Order list</Link>
                 <Link to="/Drugmaster">Drug Master</Link>
-                
+                <Link to="/Creditnote">Credit/Debit Note</Link>
                 
 
               </div>

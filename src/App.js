@@ -24,7 +24,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path='/' element={<PharmacyNav/>}/>
+          <Route path='/PharmacyNav' element={<PharmacyNav/>}/>
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
           <Route path='/invoicestock' element={<InvoiceStock/>}/>
           <Route path='/Drugmaster' element={<PharmaLab/>}/>
