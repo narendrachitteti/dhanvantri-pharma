@@ -102,7 +102,7 @@ const DataListPage = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch("http://localhost:5001/api/get-all-data");
+            const response = await fetch("http://localhost:5000/api/get-all-data");
             if (response.ok) {
                 const data = await response.json();
                 // Filter the data based on the search term
@@ -151,7 +151,7 @@ const DataListPage = () => {
     const handleEditItemDesSubmit = async (editedData) => {
         try {
             const response = await fetch(
-                `http:localhost:5001/api/edit-item/${selectedItemId}`,
+                `http:localhost:5000/api/edit-item/${selectedItemId}`,
                 {
                     method: "PUT",
                     headers: {
@@ -180,7 +180,7 @@ const DataListPage = () => {
         try {
             // Delete the item on the server
             const response = await fetch(
-                `http://localhost:5001/api/delete-item/${selectedItemId}`,
+                `http://localhost:5000/api/delete-item/${selectedItemId}`,
                 {
                     method: "DELETE",
                 }

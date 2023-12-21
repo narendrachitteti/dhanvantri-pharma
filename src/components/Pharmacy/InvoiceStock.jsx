@@ -593,11 +593,6 @@ const [stockName, /* setStockName */] = useState("");
                 </div>
               )}
             </div>
-
-
-
-
-
             </div>
           </div>
         </div>
