@@ -458,7 +458,83 @@ const [stockName, /* setStockName */] = useState("");
         alert("Error adding stockist. Please try again.");
       });
   };
+  const [productOptions, setProductOptions] = useState([]);
 
+  // useEffect(() => {
+  //   const fetchProductData = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:5000/api/products'); // Replace with your backend URL
+  //       if (response.ok) {
+  //         const products = await response.json();
+  //         const options = products.map((product) => ({ label: product.product, value: product.product }));
+  //         setProductOptions(options);
+  //       } else {
+  //         throw new Error('Failed to fetch products');
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       // Handle error state or display a message to the user
+  //     }
+  //   };
+
+  //   fetchProductData();
+  // }, []);
+
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/products'); 
+        // Replace with your backend URL
+        if (response.ok) {
+          const products = await response.json();
+          const options = products.map((product) => ({
+            label: product.product,
+            value: product.product,
+            // salesRate: product.salesRate, // Include salesRate field
+            // purchaseRate: product.purchaseRate, // Include purchaseRate field
+          }));
+          setProductOptions(options);
+        } else {
+          throw new Error('Failed to fetch products');
+        }
+      } catch (error) {
+        console.error(error);
+        // Handle error state or display a message to the user
+      }
+    };
+  
+    fetchProductData();
+  }, []);
+  const [salesRates, setSalesRates] = useState([]);
+
+  useEffect(() => {
+    const fetchSalesRates = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/salesRates');
+        setSalesRates(response.data.salesRates);
+      } catch (error) {
+        console.error('Error fetching salesRates:', error);
+      }
+    };
+
+    fetchSalesRates();
+  }, []);
+  
+  const [purchaseRates, setPurchaseRates] = useState([]);
+
+useEffect(() => {
+  const fetchPurchaseRates = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/purchaseRates');
+      setPurchaseRates(response.data.purchaseRates);
+    } catch (error) {
+      console.error('Error fetching purchaseRates:', error);
+    }
+  };
+
+  fetchPurchaseRates();
+}, []);
 
   return (
     <>
@@ -656,20 +732,18 @@ const [stockName, /* setStockName */] = useState("");
             </div>
           )}
 
-
-
-
       <div className="second-container-txj"style={{fontFamily:"Inria Serif"}} >
         <div className="input-boxes">
         <div className="input-row-1">
           <div className="input-container-1">
             <label htmlFor="Medicine">Product</label>
-            <input
-              type="text"
-              id="Medicine"
-              value={Medicine}
-              onChange={(e) => setMedicine(e.target.value)}
-            />
+            <Select
+        options={productOptions}
+        onChange={(selectedOption) => {
+          // Handle selected product
+          console.log('Selected product:', selectedOption);
+        }}
+      />
           </div>
           &nbsp;
           <div className="input-container-1">
@@ -756,21 +830,23 @@ const [stockName, /* setStockName */] = useState("");
           &nbsp;
           <div className="input-container-1">
             <label htmlFor="price">Price/Strip</label>
-            <input
-              type="number"
-              id="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
+            <Select
+        options={salesRates}
+        onChange={(selectedOption) => {
+          // Handle selected sales rate
+          console.log('Selected sales rate:', selectedOption);
+        }}
+      />
           </div>
           <div className="input-container-1">
             <label htmlFor="MRP">MRP/Strip</label>
-            <input
-              type="number"
-              id="MRP"
-              value={MRP}
-              onChange={(e) => setMRP(e.target.value)}
-            />
+            <Select
+  options={purchaseRates.map(rate => ({ value: rate, label: rate }))}
+  onChange={(selectedOption) => {
+    // Handle selected purchase rate
+    console.log('Selected purchase rate:', selectedOption);
+  }}
+/>
           </div>
           &nbsp;
           <div className="input-container-1">
@@ -795,25 +871,6 @@ const [stockName, /* setStockName */] = useState("");
             />
           </div>
           &nbsp;&nbsp;
-          {/* <div className="input-container-2">
-            <label htmlFor="RackNo">Rack No</label>
-            <input className="rack-input"
-              type="text"
-              id="RackNo"
-              value={RackNo}
-              onChange={(e) => setRackNo(e.target.value)}
-            />
-          </div> */}
-          &nbsp;&nbsp;
-          {/* <div className="input-container-2">
-            <label htmlFor="BookNo">Book No</label>
-            <input className="book-input"
-              type="text"
-              id="BookNo"
-              value={BookNo}
-              onChange={(e) => setBookNo(e.target.value)}
-            />
-          </div> */}
           &nbsp;&nbsp;
           <div className="input-container-2">
             <label htmlFor="NetPrice">Net Price</label>
