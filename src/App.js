@@ -28,7 +28,7 @@ import WholesaleLogin from './components/LoginForms/WholesaleLogin.js';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
-
+import Stockist from './components/Pharmacy/Stockist'
 
 function App() {
   return (
@@ -59,11 +59,12 @@ function App() {
           <Route path="/Form3" element={<Form3/>}/>
           <Route path='/Form' element={<Form/>}/>
           <Route path="/RetailLogin" element={<RetailLogin/>}/>
-          <Route path="/" element={<RetailWholecard/>}/>
+          <Route path="/RetailWholecard" element={<RetailWholecard/>}/>
           <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
           <Route path="/Creditnote" element={<Note/>}/>
-          </Routes>
+          <Route path='/Stockist' element={<Stockist/>}/>
+        </Routes>
       </Router>
     </div>
   );

@@ -439,7 +439,7 @@ const PatientBill = () => {
             type="date"
             className="pharma-bill-input-date-2"
             value={date}
-            onChange={(e) => setDate(e.target.value)}
+            onChange={(e) => setDate(e.target.value)}  
           />
         </div>
       </div>
