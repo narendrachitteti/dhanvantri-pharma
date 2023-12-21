@@ -156,12 +156,10 @@ const PatientBill = () => {
       const response = await axios.get(`http://localhost:5000/api/batchDetails/${batchNumber}`);
       const fullExpiryDate = response.data.BatchExpiry;
   
-      // Extract month and last two digits of the year
-      const dateObject = new Date(fullExpiryDate);
-      const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-      const year = dateObject.getFullYear().toString().slice(-2);
+      // Extract year, month, and date
+      const [  month,year,  day] = fullExpiryDate.split('-');
   
-      // Form the desired format
+      // Form the desired format (MM/YYYY)
       const formattedExpiry = `${month}/${year}`;
   
       const updatedItems = [...items];
@@ -175,6 +173,7 @@ const PatientBill = () => {
       console.error('Error fetching batch details:', error);
     }
   };
+  
   
   const handleSubmit = async () => {
     try {
