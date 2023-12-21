@@ -109,7 +109,7 @@ const Form = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form-formsa'>
         <label>
           Input 1:
           <input type="text" value={input1} onChange={handleInput1Change} />
@@ -130,8 +130,8 @@ const Form = () => {
 
       <div>
         <h2>Fetched Data:</h2>
-        <table>
-          <thead>
+        <table className='table-formsa'>
+          <thead >
             <tr>
               <th>Column 1</th>
               <th>Column 2</th>
