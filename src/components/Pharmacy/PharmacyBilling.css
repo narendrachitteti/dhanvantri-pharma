@@ -184,6 +184,14 @@ font-weight: bold;
   float: right;
   font-weight: bold;
 }
+.print-btn{
+  background-color: rgb(110, 110, 222);
+  margin-left: 40px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  box-shadow: none;
+  border: none;
+}
 .pharma-bill-submit-btn-del-btn{
   border: none;
   color: white;
@@ -194,7 +202,8 @@ font-weight: bold;
   margin-left: 3vw;
 }
 .pharma-bill-table23{
-  margin-left: 80px;
+  /* margin-left: 80px; */
+  width: 100%;
 }
 .invoiceNumber{
   margin-left: 54.9vw;
@@ -203,7 +212,8 @@ font-weight: bold;
   border: none;
   color: white;
   background-color: red;
-  height: 5vh;
+  height: 6vh;
+  width: auto;
   border-radius: 1vh;
 }
 

@@ -69,6 +69,7 @@ h1 {
 .table-container-177 {
   width: 100%;
   border-collapse: collapse;
+  /* border:wheat; */
 }
 
 .table-header-177 {
@@ -137,6 +138,7 @@ h1 {
     text-align: center;
     background-color: #9b8bf4;
     color: rgb(14, 13, 13);
+    
   }
   .table-row-177 {
     text-align: center;
