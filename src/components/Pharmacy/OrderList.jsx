@@ -237,7 +237,7 @@ function OrderList() {
             <tbody>{renderOrders()}</tbody>
           </table>
         </div>
-        <div className="pagination">
+        <div className="pagination01">
         <ReactJsPagination
             activePage={currentPage}
             itemsCountPerPage={itemsPerPage}

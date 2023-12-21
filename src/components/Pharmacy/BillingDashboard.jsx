@@ -256,73 +256,11 @@ const renderFastMovingMedicines = () => {
               <p>{totalManufacturers}</p>
             </div>
             <div className="statistic">
-              <label>Current Inventory cost</label>
-              <p>₹&nbsp;{currentInventoryCost}</p>
-            </div>
-            <div className="statistic">
-              <label>Current Inventory MRP</label>
-              <p>₹&nbsp;{currentInventoryMRP}</p>
-            </div>
-            <div className="statistic">
-              <label>In stock Inventory Quantity</label>
-              <p>₹&nbsp;{inStockInventoryQuantity}</p>
-            </div>
-            <div className="statistic">
               <label>Medicine out of stock</label>
               <p>{medicineOutOfStock}</p>
             </div>
           </div>
         </div>
-        <div className="card2">
-          <h4 className="card-heading">Latest Sales</h4>
-          <div className="card-content">
-         
-            <div className="table-container">
-              <table className="sales-table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Bill Number</th>
-                    <th>Amount</th>
-                    <th>Payment Mode</th>
-                  </tr>
-                </thead>
-                <tbody>{renderSalesData()}</tbody>
-              </table>
-            </div>
-            {salesData.length === 0 && <span>No data available in table</span>}
-            <Link to="/Dbdetails" className="see-more-link">
-              See more...
-            </Link>
-          </div>
-        </div>
-        <div className="card2">
-  <h4 className="card-heading">Fast Moving product</h4>
-  <div className="card-content">
-  {/* <div className="sales-pagination">
-            <input
-              type="text"
-              placeholder="Search"
-              value={fastMovingSearchQuery}
-              onChange={(e) => setFastMovingSearchQuery(e.target.value)}
-            />
-          </div> */}
-    <table className="sales-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Sold Qty</th>
-        </tr>
-      </thead>
-      <tbody>{renderFastMovingMedicines()}</tbody> 
-    </table>
-    <br />
-    {fastMovingProducts.length === 0 && (
-      <span>No data available in table</span>
-    )}
-  </div>
-</div>
       </div>
     </>
   );
