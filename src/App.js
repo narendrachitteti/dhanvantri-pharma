@@ -29,6 +29,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
 import Stockist from './components/Pharmacy/Stockist'
+import Form4 from './components/Form4.js';
 
 function App() {
   return (

@@ -3,119 +3,111 @@ import axios from 'axios';
 import './Form3.css'; // Import the CSS file
 
 const Form3 = () => {
-  const [employees, setEmployees] = useState([]);
+  const [taxes, setTaxes] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [newEmployee, setNewEmployee] = useState({
-    name: '',
-    position: '',
-    department: '',
-    salary: 0,
+  const [selectedTax, setSelectedTax] = useState(null);
+  const [newTax, setNewTax] = useState({
+    taxcode: '',
+    Group: '',
+    Schedule: '',
   });
 
   useEffect(() => {
     // Fetch data from the backend when the component mounts
-    fetchEmployees();
+    fetchTaxes();
   }, []);
 
-  const fetchEmployees = async () => {
+  const fetchTaxes = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/employees');
-      setEmployees(response.data);
+      const response = await axios.get('http://localhost:5000/api/taxes');
+      setTaxes(response.data);
     } catch (error) {
-      console.error('Error fetching employees:', error.message);
+      console.error('Error fetching taxes:', error.message);
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/employees/${id}`);
-      // After deleting, fetch the updated list of employees
-      fetchEmployees();
+      await axios.delete(`http://localhost:5000/api/taxes/${id}`);
+      // After deleting, fetch the updated list of taxes
+      fetchTaxes();
     } catch (error) {
-      console.error('Error deleting employee:', error.message);
+      console.error('Error deleting tax:', error.message);
     }
   };
 
-  const handleEdit = (employee) => {
-    // Set the selected employee and open the edit modal
-    setSelectedEmployee(employee);
+  const handleEdit = (tax) => {
+    // Set the selected tax and open the edit modal
+    setSelectedTax(tax);
     setShowEditForm(true);
   };
 
-  const handleAddEmployee = async () => {
+  const handleAddTax = async () => {
     try {
-      await axios.post('http://localhost:5000/api/employees', newEmployee);
-      // After adding, fetch the updated list of employees
-      fetchEmployees();
+      await axios.post('http://localhost:5000/api/taxes', newTax);
+      // After adding, fetch the updated list of taxes
+      fetchTaxes();
       // Close the form
       setShowAddForm(false);
       // Reset the form fields
-      setNewEmployee({
-        name: '',
-        position: '',
-        department: '',
-        salary: 0,
+      setNewTax({
+        taxcode: '',
+        Group: '',
+        Schedule: '',
       });
     } catch (error) {
-      console.error('Error adding employee:', error.message);
+      console.error('Error adding tax:', error.message);
     }
   };
 
-  const handleEditEmployee = async () => {
+  const handleEditTax = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/employees/${selectedEmployee._id}`, selectedEmployee);
-      // After editing, fetch the updated list of employees
-      fetchEmployees();
+      await axios.put(`http://localhost:5000/api/taxes/${selectedTax._id}`, selectedTax);
+      // After editing, fetch the updated list of taxes
+      fetchTaxes();
       // Close the form
       setShowEditForm(false);
-      // Reset the selected employee
-      setSelectedEmployee(null);
+      // Reset the selected tax
+      setSelectedTax(null);
     } catch (error) {
-      console.error('Error editing employee:', error.message);
+      console.error('Error editing tax:', error.message);
     }
   };
 
   return (
     <div className='Form3-vik'>
-      <h2>Employee List</h2>
-      <button onClick={() => setShowAddForm(true)}>Add Employee</button>
+      <h2>Tax List</h2>
+      <button onClick={() => setShowAddForm(true)}>Add Tax</button>
 
-      {/* Modal for adding a new employee */}
+      {/* Modal for adding a new tax */}
       {showAddForm && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={() => setShowAddForm(false)}>
               &times;
             </span>
-            <h3>Add Employee</h3>
+            <h3>Add Tax</h3>
             <form>
-              <label>Name:</label>
+              <label>Tax Code:</label>
               <input
                 type="text"
-                value={newEmployee.name}
-                onChange={(e) => setNewEmployee({ ...newEmployee, name: e.target.value })}
+                value={newTax.taxcode}
+                onChange={(e) => setNewTax({ ...newTax, taxcode: e.target.value })}
               />
-              <label>Position:</label>
+              <label>Group:</label>
               <input
                 type="text"
-                value={newEmployee.position}
-                onChange={(e) => setNewEmployee({ ...newEmployee, position: e.target.value })}
+                value={newTax.Group}
+                onChange={(e) => setNewTax({ ...newTax, Group: e.target.value })}
               />
-              <label>Department:</label>
+              <label>Schedule:</label>
               <input
                 type="text"
-                value={newEmployee.department}
-                onChange={(e) => setNewEmployee({ ...newEmployee, department: e.target.value })}
+                value={newTax.Schedule}
+                onChange={(e) => setNewTax({ ...newTax, Schedule: e.target.value })}
               />
-              <label>Salary:</label>
-              <input
-                type="number"
-                value={newEmployee.salary}
-                onChange={(e) => setNewEmployee({ ...newEmployee, salary: e.target.value })}
-              />
-              <button type="button" onClick={handleAddEmployee}>
+              <button type="button" onClick={handleAddTax}>
                 Add
               </button>
               <button type="button" onClick={() => setShowAddForm(false)}>
@@ -126,40 +118,34 @@ const Form3 = () => {
         </div>
       )}
 
-      {/* Modal for editing an employee */}
+      {/* Modal for editing a tax */}
       {showEditForm && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={() => setShowEditForm(false)}>
               &times;
             </span>
-            <h3>Edit Employee</h3>
+            <h3>Edit Tax</h3>
             <form>
-              <label>Name:</label>
+              <label>Tax Code:</label>
               <input
                 type="text"
-                value={selectedEmployee.name}
-                onChange={(e) => setSelectedEmployee({ ...selectedEmployee, name: e.target.value })}
+                value={selectedTax.taxcode}
+                onChange={(e) => setSelectedTax({ ...selectedTax, taxcode: e.target.value })}
               />
-              <label>Position:</label>
+              <label>Group:</label>
               <input
                 type="text"
-                value={selectedEmployee.position}
-                onChange={(e) => setSelectedEmployee({ ...selectedEmployee, position: e.target.value })}
+                value={selectedTax.Group}
+                onChange={(e) => setSelectedTax({ ...selectedTax, Group: e.target.value })}
               />
-              <label>Department:</label>
+              <label>Schedule:</label>
               <input
                 type="text"
-                value={selectedEmployee.department}
-                onChange={(e) => setSelectedEmployee({ ...selectedEmployee, department: e.target.value })}
+                value={selectedTax.Schedule}
+                onChange={(e) => setSelectedTax({ ...selectedTax, Schedule: e.target.value })}
               />
-              <label>Salary:</label>
-              <input
-                type="number"
-                value={selectedEmployee.salary}
-                onChange={(e) => setSelectedEmployee({ ...selectedEmployee, salary: e.target.value })}
-              />
-              <button type="button" onClick={handleEditEmployee}>
+              <button type="button" onClick={handleEditTax}>
                 Save
               </button>
               <button type="button" onClick={() => setShowEditForm(false)}>
@@ -173,24 +159,22 @@ const Form3 = () => {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Department</th>
-            <th>Salary</th>
+            <th>Tax Code</th>
+            <th>Group</th>
+            <th>Schedule</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
-            <tr key={employee._id}>
-              <td>{employee.name}</td>
-              <td>{employee.position}</td>
-              <td>{employee.department}</td>
-              <td>{employee.salary}</td>
-              <td style={{display:'flex',gap:'1rem'}}>
-                <button onClick={() => handleDelete(employee._id)}>Delete</button>
+          {taxes.map((tax) => (
+            <tr key={tax._id}>
+              <td>{tax.taxcode}</td>
+              <td>{tax.Group}</td>
+              <td>{tax.Schedule}</td>
+              <td style={{ display: 'flex', gap: '1rem' }}>
+                <button onClick={() => handleDelete(tax._id)}>Delete</button>
                 <div> </div>
-                <button onClick={() => handleEdit(employee)}>Edit</button>
+                <button onClick={() => handleEdit(tax)}>Edit</button>
               </td>
             </tr>
           ))}

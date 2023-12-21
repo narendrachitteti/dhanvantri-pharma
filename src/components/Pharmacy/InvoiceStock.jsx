@@ -14,7 +14,7 @@ const InvoiceStock = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [tableData, setTableData] = useState([]);
-const [stockName, /* setStockName */] = useState("");
+  const [stockName, /* setStockName */] = useState("");
   const [date, setDate] = useState("");
   const [Medicine, setMedicine] = useState("");
   const [Manufacturer, setManufacturer] = useState("");
@@ -53,27 +53,11 @@ const [stockName, /* setStockName */] = useState("");
 
   // const [isPopupVisible, setPopupVisible] = useState(false);
 
-  const data = [
-    {
-      slno: 1,
-      invoiceNumber: "INV001",
-      product: "Product A",
-      expiryDate: "2023-12-31",
-      daysToExpire: 15,
-    },
-    {
-      slno: 2,
-      invoiceNumber: "INV002",
-      product: "Product B",
-      expiryDate: "2023-12-20",
-      daysToExpire: 5,
-    },
-    // Add more data as needed
-  ];
   const openPopup = () => {
     console.log("Opening popup");
     setPopupVisible(true);
   };
+  
 
 
   const handleGSTChange = (e) => {
@@ -624,7 +608,7 @@ useEffect(() => {
                             </tr>
                           </thead>
                           <tbody>
-                            {data.map((item) => (
+                            {tableData.map((item) => (
                               <tr key={item.slno}>
                                 <td className="TableCellBatchExpiry">
                                   {item.slno}
@@ -642,26 +626,7 @@ useEffect(() => {
                                   {item.daysToExpire}
                                 </td>
                               </tr>
-                            ))}
-                            {/* {data.map((item) => ( */}
-                              <tr >
-                                <td className="TableCellBatchExpiry">
-                                  
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                 
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                 
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                 
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                 
-                                </td>
-                              </tr>
-                            
+                            ))}          
                           </tbody>
                         </table>
                       </div>
@@ -747,7 +712,7 @@ useEffect(() => {
           </div>
           &nbsp;
           <div className="input-container-1">
-            <label htmlFor="Manufacturer">Manufacturer</label>
+            <label htmlFor="Manufacturer">Mfr</label>
             <input
               type="text"
               id="Manufacturer"
@@ -908,7 +873,7 @@ useEffect(() => {
             <thead >
               <tr>
                 <th>Product</th>
-                <th>Manufacturer</th>
+                <th>Mfr</th>
                 <th>Category</th>
                 <th>Batch</th>
                 <th>Expiry</th>

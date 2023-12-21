@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
+import "./PatientBill.css";
+
 import PharmacyNav from "./PharmacyNav";
-import "./PharmacyBilling.css";
+
+
 const PatientBill = () => {
   const [quantity, setQuantity] = useState('');
   const [medicines, setMedicines] = useState([]);
@@ -153,12 +156,10 @@ const PatientBill = () => {
       const response = await axios.get(`http://localhost:5000/api/batchDetails/${batchNumber}`);
       const fullExpiryDate = response.data.BatchExpiry;
   
-      // Extract month and last two digits of the year
-      const dateObject = new Date(fullExpiryDate);
-      const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-      const year = dateObject.getFullYear().toString().slice(-2);
+      // Extract year, month, and date
+      const [  month,year,  day] = fullExpiryDate.split('-');
   
-      // Form the desired format
+      // Form the desired format (MM/YYYY)
       const formattedExpiry = `${month}/${year}`;
   
       const updatedItems = [...items];
@@ -173,9 +174,10 @@ const PatientBill = () => {
     }
   };
   
+  
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:5001/api/patient-bill', {
+      const response = await axios.post('http://localhost:5000/api/patient-bill', {
         patientName,
         mobilenumber,
         date,
@@ -183,32 +185,37 @@ const PatientBill = () => {
         subtotalWithGST,
         subtotalWithoutGST,
       });
-
-      console.log('PatientBill submitted successfully:', response.data);
-
-      // Reset the form or add other logic as needed
-      setPatientName('');
-      setmobilenumber('');
-      setDate('');
-      setItems([
-        {
-          _id: 1,
-          product: '',
-          quantity: '',
-          amount: '',
-          manufactureDate: '',
-          batch: '',
-          expiryDate: '',
-          gst: '',
-          totalWithGST: 0,
-          totalWithoutGST: 0,
-        },
-      ]);
-
-      // You can add additional logic here, such as redirecting the user.
+  
+      // Check if response is defined and has a 'data' property
+      if (response && response.data) {
+        console.log('PatientBill submitted successfully:', response.data);
+  
+        // Reset the form or add other logic as needed
+        setPatientName('');
+        setmobilenumber('');
+        setDate('');
+        setItems([
+          {
+            _id: 1,
+            product: '',
+            quantity: '',
+            amount: '',
+            manufactureDate: '',
+            batch: '',
+            expiryDate: '',
+            gst: '',
+            totalWithGST: 0,
+            totalWithoutGST: 0,
+          },
+        ]);
+  
+        // You can add additional logic here, such as redirecting the user.
+      } else {
+        console.error('Unexpected response format:', response);
+      }
     } catch (error) {
       console.error('Error submitting PatientBill:', error);
-      console.error('Server response:', error.response.data); // Log server response details
+      console.error('Server response:', error.response ? error.response.data : 'No response data'); // Log server response details
     }
   };
   
@@ -368,18 +375,21 @@ const PatientBill = () => {
     const printWindow = window.open("", "", "height=600");
     printWindow.document.open();
     printWindow.document.write(printContent);
-    printWindow.document.close();
 
+    // Trigger the print operation
     printWindow.print();
 
+    // Close the print window after printing
     printWindow.onafterprint = function () {
-        printWindow.close();
+      printWindow.close();
     };
-};}
+  };
+};
 
 
 
   
+ 
  
 
   return (
