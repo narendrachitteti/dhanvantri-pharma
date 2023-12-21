@@ -673,7 +673,7 @@ const [stockName, /* setStockName */] = useState("");
           </div>
           &nbsp;
           <div className="input-container-1">
-            <label htmlFor="Manufacturer">Manufacturer</label>
+            <label htmlFor="Manufacturer">Mfr</label>
             <input
               type="text"
               id="Manufacturer"
@@ -851,7 +851,7 @@ const [stockName, /* setStockName */] = useState("");
             <thead >
               <tr>
                 <th>Product</th>
-                <th>Manufacturer</th>
+                <th>Mfr</th>
                 <th>Category</th>
                 <th>Batch</th>
                 <th>Expiry</th>
