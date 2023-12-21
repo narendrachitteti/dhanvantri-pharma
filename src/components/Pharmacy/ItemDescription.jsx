@@ -22,7 +22,7 @@ const ItemDescription = () => {
     schedule: "",
     drugComposition: "",
     purchaseRate: "",
-    salesRate: "",
+    salesRate: "",   
     unit: "",
     box: "",
     unitPerBox: "",
@@ -35,6 +35,7 @@ const ItemDescription = () => {
     narration: "",
     distrrate: "",
   });
+  
   
 const handlePrint = () => {
     const printWindow = window.open("", "_blank");
@@ -539,7 +540,7 @@ const handlePrint = () => {
       <label className="item-narr-label">
         Distr. Rate:
         <input
-         className="item-narr-input"
+         className="item-narr-input"   
           type="number"
           name="distrrate"
           value={formData.distrrate}
