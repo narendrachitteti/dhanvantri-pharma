@@ -29,6 +29,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
 import Stockist from './components/Pharmacy/Stockist'
 import Form4 from './components/Form4';
+import WholesaleRegis from './components/LoginForms/WholsaleRegis.js';
 
 function App() {
   return (
@@ -64,6 +65,8 @@ function App() {
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
           <Route path="/Creditnote" element={<Note/>}/>
           <Route path='/Stockist' element={<Stockist/>}/>
+          <Route path='/WholesaleRegis' element={<WholesaleRegis/>}/>
+
         </Routes>
       </Router>
     </div>
