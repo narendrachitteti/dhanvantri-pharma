@@ -514,7 +514,7 @@ const handlePrintAndSubmit = async () => {
             <body>
             <div class="print-container">
             <div class="flex-change34">
-            <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 100px; height: 100px; margin-left: 237px;">
+            <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 113px; height: 113px; margin-left: 104px; margin-top:32px;">
     
             <div class='main-heading'>
             <h1>Dhanvantri Pharmacy </h1>
