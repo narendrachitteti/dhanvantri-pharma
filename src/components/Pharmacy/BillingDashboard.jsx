@@ -251,10 +251,10 @@ const renderFastMovingMedicines = () => {
               <label>Total Medicines</label>
               <p>{totalMedicines}</p>
             </div>
-            <div className="statistic">
+            {/* <div className="statistic">
               <label>Total Manufacturers</label>
               <p>{totalManufacturers}</p>
-            </div>
+            </div> */}
             <div className="statistic">
               <label>Medicine out of stock</label>
               <p>{medicineOutOfStock}</p>

@@ -1,13 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaPlusCircle } from "react-icons/fa";
 import "./PatientBill.css";
-import imageUrl from './PharmacyLogo (1).jpg'
-
 import PharmacyNav from "./PharmacyNav";
+import imageUrl from './PharmacyLogo.jpg';
 
-
-const PatientBill = () => {
+const PharmacyBilling = () => {
   const [quantity, setQuantity] = useState('');
   const [medicines, setMedicines] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
@@ -220,12 +217,24 @@ const PatientBill = () => {
   
   
   const handlePrint = () => {
-    const imagePath = 'PharmacyLogo.jpg';
-    const imageUrl = `${process.env.PUBLIC_URL}/${imagePath}`;
+    // const imagePath = 'PharmacyLogo.jpg';
+    // const imageUrl = require('../PharmacyLogo.jpg').default;
+
   
-    // Create an image element and set its source
-    const img = new Image();
-    img.src = imageUrl;
+    // // Create an image element and set its source
+    // console.log('Image URL:', imageUrl);
+    // const img = new Image();
+    // img.src = imageUrl;
+
+    const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
+
+
+
+// Create an image element and set its source
+console.log('Image URL:', imageUrl);
+const img = new Image();
+img.src = imageUrl;
+
   
     // Wait for the image to load before continuing with print
     img.onload = function () {
@@ -384,9 +393,12 @@ const PatientBill = () => {
       printWindow.close();
     };
   };
+
+  img.onerror = function (error) {
+    console.error('Error loading image for printing', error);
+  };
+  
 };
-
-
 
   
  
@@ -599,4 +611,4 @@ const PatientBill = () => {
   );
 };
 
-export default PatientBill;
+export default PharmacyBilling;

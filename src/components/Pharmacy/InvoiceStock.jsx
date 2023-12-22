@@ -546,6 +546,92 @@ const InvoiceStock = () => {
     fetchUnitPerBox();
   }, []);
 
+
+  const [hsnData, setHsnData] = useState([]);
+  const [formData, setFormData] = useState({ hsn: '' });
+  const [selectedHsn, setSelectedHsn] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/companiesAndHsncodes");
+        const data = await response.json();
+
+        if (data && typeof data === "object" && Array.isArray(data.hsn)) {
+          setHsnData(data.hsn);
+
+          setFormData(prevFormData => ({
+            ...prevFormData,
+            hsn: data.hsn.length > 0 ? data.hsn[0] : '' // Set the first HSN code as default
+          }));
+        } else {
+          console.error("Data received from the API is not in the expected format:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleSelectChange = (fieldName, selectedOption) => {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [fieldName]: selectedOption.value
+    }));
+  };
+
+  const handleHsnChange = (event) => {
+    setSelectedHsn(event.target.value);
+    // Perform actions based on the selected HSN code here
+  };
+
+
+  const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
+  const [groupsData, setGroupsData] = useState(/* initial value */);
+  const [schedulesData, setSchedulesData] = useState(/* initial value */);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/distincttaxcodes");
+        const data = await response.json();
+  
+        if (data && typeof data === "object") {
+          if (
+            // data.hasOwnProperty("taxCodes") &&
+            // Array.isArray(data.taxCodes) &&
+            // data.hasOwnProperty("group") &&
+            // Array.isArray(data.group) &&
+            data.hasOwnProperty("schedule") &&
+            Array.isArray(data.schedule)
+          ) {
+            // setTaxCodeData(data.taxCodes);
+            // setGroupsData(data.group);
+            setSchedulesData(data.schedule);
+  
+            setFormData({
+              ...formData,
+              // taxCode: data.taxCodes[0],
+              // group: data.group[0],
+              schedule: data.schedule[0],
+            });
+          } else {
+            console.error("Data received from the API is not in the expected format:", data);
+          }
+        } else {
+          console.error("Invalid data received from the API:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <PharmacyNav />
@@ -753,12 +839,19 @@ const InvoiceStock = () => {
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="Category">Category</label>
-              <input
-                type="text"
-                id="Category"
-                value={Category}
-                onChange={(e) => setCategory(e.target.value)}
+              <Select
+                // className="item-shedu-sele"
+                name="schedule"
+                value={{ label: formData.schedule, value: formData.schedule }}
+                options={schedulesData ? schedulesData.map((schedule) => ({
+                  label: schedule,
+                  value: schedule,
+                })) : []} 
+                onChange={(selectedOption) =>
+                  handleSelectChange("schedule", selectedOption)
+                }
               />
+
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -857,12 +950,18 @@ const InvoiceStock = () => {
           <div className="input-row-3">
             <div className="input-container-2">
               <label htmlFor="HSNCode">HSN Code</label>
-              <input className="hsn-input"
-                type="text"
-                id="HSNcode"
-                value={HSNcode}
-                onChange={(e) => setHSNcode(e.target.value)}
-              />
+              <select
+        // className="item-hsn-selec"
+        name="hsn"
+        value={formData.hsn}
+        onChange={(event) => handleSelectChange("hsn", event.target.value)}
+      >
+        {hsnData.map((hsn, index) => (
+          <option key={index} value={hsn}>
+            {hsn}
+          </option>
+        ))}
+      </select>
             </div>
             &nbsp;&nbsp;
             &nbsp;&nbsp;
