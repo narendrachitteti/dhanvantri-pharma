@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import './Itemdescription.css'
-
+import PharmacyNav from "./PharmacyNav";
 
 const ItemDescription = () => {
   const [companyData, setCompanyData] = useState([]);
@@ -269,7 +269,8 @@ const handlePrint = () => {
 
  
   return (
-
+    <>
+    <PharmacyNav />
     <div  className="item-description-total">
     <form className="item-form-container" onSubmit={handleSubmit}>
     <div className="item-content">
@@ -328,7 +329,7 @@ const handlePrint = () => {
         />
      
 
-      <label className="item-cat-label">Category:</label>
+      {/* <label className="item-cat-label">Category:</label>
         <Select
         className="item-cat-sele"
           name="category"
@@ -340,7 +341,7 @@ const handlePrint = () => {
           onChange={(selectedOption) =>
             handleSelectChange("category", selectedOption)
           }
-        />
+        /> */}
     
     </div>
 
@@ -456,7 +457,7 @@ const handlePrint = () => {
         </label>
       </fieldset>
 
-      <fieldset  className="filed-sets">
+      {/* <fieldset  className="filed-sets">
         <legend className="item-legends">Other Rates</legend>
         <label className="item-mrp-label ">
           M.R.P.:
@@ -488,7 +489,7 @@ const handlePrint = () => {
             onChange={handleInputChange}
           />
         </label>
-      </fieldset>
+      </fieldset> */}
        <div  className="item-hsn-div">
       <label className="label"> HSN Code:    </label>
         <Select
@@ -552,19 +553,20 @@ const handlePrint = () => {
       </button>
       </div>
       <div  className="item-form-right">
-             <button>Add</button>
-             <button>Edit</button>
-             <button>Cancel</button>
-             <button>Search</button>
-             <button>Delete</button>
+             {/* <button>Add</button> */}
+             {/* <button>Edit</button> */}
+             {/* <button>Cancel</button> */}
+             {/* <button>Search</button> */}
+             {/* <button>Delete</button> */}
              <button>Save</button>
              <button  onClick={handlePrint}>Print</button>
              
-             <button>Exit</button>
+             {/* <button>Exit</button> */}
       </div>
       </div>
     </form>
     </div>
+    </>
   );
 };
 

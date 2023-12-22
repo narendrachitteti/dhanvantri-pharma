@@ -94,7 +94,7 @@ const PharmacyNav = () => {
             <div className="dropdown">
               <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Select Inventory</h6>
               <div className="dropdown-content">
-                <Link to="/Inventory">Inventory Stock</Link>
+                {/* <Link to="/Inventory">Inventory Stock</Link> */}
                 <Link to="/MedicineList">Medicine List</Link>
                 <Link to="/Pharmacystock">Inventory</Link>
               </div>
