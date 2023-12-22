@@ -42,7 +42,7 @@ function WholesaleLogin() {
         
 
         <div>
-          <p className="mb-0">Don't have an account? <Link to="/WholeSellerSignUp" class=" fw-bold">Sign Up</Link></p>
+          <p className="mb-0">Don't have an account? <a href="/WholesaleRegis" class=" fw-bold">Sign In</a></p>
         </div>
       </MDBCardBody>
     </MDBCard>
