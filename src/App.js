@@ -30,12 +30,17 @@ import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
 import Stockist from './components/Pharmacy/Stockist'
 import Form4 from './components/Form4';
 import Invoice from './components/Pharmacy/invoice.js';
+import WholsaleRegis from './components/LoginForms/WholsaleRegis.js';
+import MedicineDataComponent from './components/Pharmacy/MedicineDataComponent.jsx';
+
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
+        <Route path='/WholesaleRegis' element={<WholsaleRegis/>}/>
+
           <Route path='/PharmacyNav' element={<PharmacyNav/>}/>
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
           <Route path='/invoicestock' element={<InvoiceStock/>}/>
@@ -65,7 +70,8 @@ function App() {
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
           <Route path="/Creditnote" element={<Note/>}/>
           <Route path='/Stockist' element={<Stockist/>}/>
-          <Route path='/invoice' element={<Invoice/>}/>
+          <Route path='/invoice' element={<Invoice/>}/>   
+          <Route path='/MedicineDataComponent' element={<MedicineDataComponent/>}/> 
         </Routes>
       </Router>
     </div>
