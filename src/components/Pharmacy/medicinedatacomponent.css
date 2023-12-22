@@ -1,0 +1,75 @@
+.mdc-total {
+    margin: 20px;
+  }
+  
+  .mdc-date {
+   
+    margin-left: 10%;
+    width: 60%;
+  }
+  .date-input{
+    width: 10vw;
+    
+  }
+  .date-text{
+    font-weight: bold;
+  }
+  
+  .mdc-table {
+    margin: auto;
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 5px;
+    border: 5px solid #ddd;
+  }
+  
+  .mdc-thead {
+    background-color: #9b8bf4;
+    color: white;
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+
+
+  }
+  .mdc-tddh,
+  .mdc-tdd,
+  .mdc-tddhs{
+    text-align: center;
+  }
+  
+  .mdc-thh,
+  .mdc-tdd {
+    padding: 10px;
+    text-align: left;
+    border-collapse: collapse;
+    border-left: 1px solid black;
+    
+  }
+  
+
+  
+  .mdc-tbody .mdc-trow:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .mdc-inputs {
+    width: 80px;
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media (max-width: 768px) {
+    .mdc-table {
+      font-size: 14px;
+    }
+  
+    .mdc-thh,
+    .mdc-tdd {
+      padding: 8px;
+    }
+  
+    .mdc-inputs {
+      width: 60px;
+    }
+  }
+  

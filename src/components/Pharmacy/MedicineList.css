@@ -73,15 +73,19 @@
   border-collapse: collapse;
 }
 
-.medicine-table-PO-11 th,
-.medicine-table-PO-11 td {
+.medicine-table-PO-11 th {
   border: 1px solid rgb(207, 204, 204);
   padding: 8px;
   width: 700px;
   text-align: center;
   background-color: #9b8bf4;
 }
-
+.medicine-table-PO-11 td {
+  border: 1px solid rgb(207, 204, 204);
+  padding: 8px;
+  width: 700px;
+  text-align: center;
+}
 /* Table row hover effect */
 .medicine-table-PO-11 tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.1);

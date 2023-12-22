@@ -31,6 +31,7 @@ import Stockist from './components/Pharmacy/Stockist'
 import Form4 from './components/Form4';
 import Invoice from './components/Pharmacy/invoice.js';
 import WholsaleRegis from './components/LoginForms/WholsaleRegis.js';
+import MedicineDataComponent from './components/Pharmacy/MedicineDataComponent.jsx';
 
 
 function App() {
@@ -69,7 +70,8 @@ function App() {
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
           <Route path="/Creditnote" element={<Note/>}/>
           <Route path='/Stockist' element={<Stockist/>}/>
-          <Route path='/invoice' element={<Invoice/>}/>
+          <Route path='/invoice' element={<Invoice/>}/>   
+          <Route path='/MedicineDataComponent' element={<MedicineDataComponent/>}/> 
         </Routes>
       </Router>
     </div>
