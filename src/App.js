@@ -35,6 +35,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/" element={<RetailWholecard/>}/>
           <Route path='/PharmacyNav' element={<PharmacyNav/>}/>
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
           <Route path='/invoicestock' element={<InvoiceStock/>}/>
@@ -59,7 +60,7 @@ function App() {
           <Route path="/Form3" element={<Form3/>}/>
           <Route path='/Form4' element={<Form4/>}/>
           <Route path="/RetailLogin" element={<RetailLogin/>}/>
-          <Route path="/RetailWholecard" element={<RetailWholecard/>}/>
+
           <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
           <Route path="/Creditnote" element={<Note/>}/>
