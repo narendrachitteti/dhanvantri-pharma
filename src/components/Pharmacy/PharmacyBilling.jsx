@@ -20,7 +20,7 @@ const PatientBill = () => {
   const [subtotalWithGST, setSubtotalWithGST] = useState(0);
   const [subtotalWithoutGST, setSubtotalWithoutGST] = useState(0);
   const [mobilenumber, setmobilenumber] = useState('');
-  
+  const [sign , setSign]=useState('');
   const [patientName, setPatientName] = useState('');
   const [date, setDate] = useState('');
   const [items, setItems] = useState([
@@ -181,6 +181,7 @@ const PatientBill = () => {
         items,
         subtotalWithGST,
         subtotalWithoutGST,
+        sign
       });
   
       // Check if response is defined and has a 'data' property
@@ -190,6 +191,7 @@ const PatientBill = () => {
         // Reset the form or add other logic as needed
         setPatientName('');
         setmobilenumber('');
+        setSign('');
         setDate('');
         setItems([
           {
@@ -572,11 +574,14 @@ const PatientBill = () => {
         <p>Subtotal without GST: {subtotalWithoutGST}</p>
       </div>
         
+     
         <div className="pharma-sign">
           <label>Sign : </label>
           <input
             type="textarea"
             className="sign-area"
+            value={sign}
+            onChange={(e) => setSign(e.target.value)}
           />
         </div>
 
