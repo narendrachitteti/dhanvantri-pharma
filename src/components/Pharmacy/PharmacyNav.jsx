@@ -140,19 +140,7 @@ const PharmacyNav = () => {
            
             </div>
             </div>
-              
-        </div>
-        <div className="add-pbill-dropdown">
-          <Link to="/PharmacyBilling" className="add-pbill-icon-link">
-            {/* <BiReceipt className="add-pbill-icon" style={{ marginRight:"25px"}}  /> */}
-          </Link>
-        </div>
-        <div
-          
-          onMouseEnter={toggleProfileDropdown}
-          onMouseLeave={toggleProfileDropdown}
-        >
-          <div className="right-doc">
+            <div className="right-doc">
             <div
               className="profile-icon-container"
               onClick={toggleProfileDropdown}
@@ -161,6 +149,25 @@ const PharmacyNav = () => {
                 {renderProfileIcon()}
               </span>
             </div>
+        </div>
+        <div className="add-pbill-dropdown">
+          <Link to="/PharmacyBilling" className="add-pbill-icon-link">
+          </Link>
+        </div>
+        <div
+          
+          onMouseEnter={toggleProfileDropdown}
+          onMouseLeave={toggleProfileDropdown}
+        >
+          {/* <div className="right-doc">
+            <div
+              className="profile-icon-container"
+              onClick={toggleProfileDropdown}
+            >
+              <span className="icon-profile rounded-icon">
+                {renderProfileIcon()}
+              </span>
+            </div> */}
 
             {showProfileDropdown && (
               <div className="profile-dropdown-logout">
