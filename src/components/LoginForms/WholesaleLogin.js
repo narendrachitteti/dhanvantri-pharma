@@ -69,7 +69,7 @@ const handleLogin = async () => {
 
     <MDBCard id='whlogincon-vik' className='bg  my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '400px'}}>
     <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100">
-                <h2>Retailer Login</h2>
+                <h2>Wholesailer Login</h2>
                 <br />
                 <p>Please enter your login and password!</p>
 
@@ -118,6 +118,9 @@ const handleLogin = async () => {
                     </MDBBtn>
                   </MDBTypography>
                 )}
+
+                
+          <p className="mb-0">Don't have an account? <a href="/WholesaleRegis" class=" fw-bold">Sign Up</a></p>
               </MDBCardBody>
     </MDBCard>
 
