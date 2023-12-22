@@ -104,11 +104,30 @@ body {
     border: none;
     padding: 8px 16px;
     cursor: pointer;
-    border-radius: 5px; /* Add border radius for a rounded button */
+    border-radius: 5px; 
+  }
+  .popup-content{
+    width: 90%;
+    margin-left: 3%;
+  }
+  .edit-button{
+    background-color: skyblue;
+    width: 50px;
+    height: 25px;
+
+  }
+.addclose-button{
+    margin-left: 45%;
+    margin-top: 5%;
+    width: 25%;
+    height: 30px;
+}
+  .nameclass-label{
+    width: 40%;
   }
   .popup {
     position: relative;
-    top: 50%;
+    margin-top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
