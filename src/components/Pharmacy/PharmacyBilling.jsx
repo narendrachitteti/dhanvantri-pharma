@@ -60,7 +60,7 @@ const PharmacyBilling = () => {
       batch: "",
    
       gst: "",
-  
+
     };
     // Updating the state by adding the new item to the existing items array
     setItems([...items, newItem]);
@@ -151,11 +151,11 @@ const PharmacyBilling = () => {
       const response = await axios.get(`http://localhost:5000/api/batchDetails/${batchNumber}`);
       const fullExpiryDate = response.data.BatchExpiry;
   
-      // Extract year, month, and date
-      const [  month,year,  day] = fullExpiryDate.split('-');
+ 
+      const [year, month, day] = fullExpiryDate.split('-');
   
-      // Form the desired format (MM/YYYY)
-      const formattedExpiry = `${month}/${year}`;
+
+      const formattedExpiry = `${month}/${year.slice(-2)}`;
   
       const updatedItems = [...items];
       updatedItems[index] = {
@@ -170,239 +170,441 @@ const PharmacyBilling = () => {
   };
   
   
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.post('http://localhost:5000/api/patient-bill', {
-        patientName,
-        mobilenumber,
-        date,
-        items,
-        subtotalWithGST,
-        subtotalWithoutGST,
-        sign
-      });
   
-      // Check if response is defined and has a 'data' property
-      if (response && response.data) {
-        console.log('PatientBill submitted successfully:', response.data);
+//   const handleSubmit = async () => {
+//     try {
+//       const response = await axios.post('http://localhost:5000/api/patient-bill', {
+//         patientName,
+//         mobilenumber,
+//         date,
+//         items,
+//         subtotalWithGST,
+//         subtotalWithoutGST,
+//         sign
+//       });
   
-        // Reset the form or add other logic as needed
-        setPatientName('');
-        setmobilenumber('');
-        setSign('');
-        setDate('');
-        setItems([
-          {
-            _id: 1,
-            product: '',
-            quantity: '',
+
+//       if (response && response.data) {
+//         console.log('PatientBill submitted successfully:', response.data);
+
+//         setPatientName('');
+//         setmobilenumber('');
+//         setSign('');
+//         setDate('');
+//         setItems([
+//           {
+//             _id: 1,
+//             product: '',
+//             quantity: '',
+//             batch: '',
+//             gst: '',
+//           },
+//         ]);
+
+//       } else {
+//         console.error('Unexpected response format:', response);
+//       }
+//     } catch (error) {
+//       console.error('Error submitting PatientBill:', error);
+//       console.error('Server response:', error.response ? error.response.data : 'No response data'); 
+//     }
+//   };
+  
+  
+//   const handlePrint = () => {
    
-         
-            batch: '',
-       
-            gst: '',
-          
-          },
-        ]);
+//     const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
+
+// console.log('Image URL:', imageUrl);
+// const img = new Image();
+// img.src = imageUrl;
+
+//     img.onload = function () {
+   
+//     const printContent = `
+//       <!DOCTYPE html>
+//       <html>
+//         <head>
+//           <!-- Include any necessary stylesheets or styling here -->
+//           <style>
+//           body {
+//             font-family: 'Arial', sans-serif;
+//           }
+//           .billing-table {
+//             width: 100%;
+//             border-collapse: collapse;
+//             margin-bottom: 20px;
+//           }
+//           .billing-table th, .billing-table td {
+//             border: 1px solid #ddd;
+//             padding: 12px;
+//             text-align: left;
+//           }
+//           .print-container {
+//             max-height: 100%;
+//             overflow-y: auto;
+//             padding: 20px;
+//             border-radius: 5px;
+           
+//             background: #fff;
+           
+//             position: relative;
+//           }
+//           .print-title {
+//             font-size: 24px;
+//             margin-bottom: 20px;
+//             text-align: center;
+//           }
+//           .main-heading{
+//               width:70%;
+//               text-align: center;
+//             }
+//             .flex-change34{
+//               display:flex;
+//               justify-content: space-between;
+//               border: 2px solid black;
+//            }
+//            .image45{
+//             width:30%;
+//            }
+           
+//           .dl-info {
+//             display: flex;
+//             flex-direction: column;
+//             margin-bottom: 20px;
+//           }
+//           .contact-info {
+//               display: flex;
+//               flex-direction: column;
+//               margin-bottom: 20px;
+//               margin-right: 0px;
+
+//             }
+//             .flex-column {
+//               margin-top: 30px;
+//               display: flex;
+//               justify-content: space-between;
+//             }
+           
+//           .dl-text, .contact-text {
+//             margin-right: 20px;
+//           }
+//           .print-details2{
+//               display: flex;
+//               flex-direction: column;
+//           }
+//         </style>
+//         </head>
+//         <body>
+//         <div class="print-container">
+//         <div class="flex-change34">
+//         <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 100px; height: 100px; margin-left: 237px;">
+
+//         <div class='main-heading'>
+//         <h1>Dhanvantri Pharmacy </h1>
+//         <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
+//         Hampinagara , Bengaluru-560104</h3>
+//         <h3>Mob:+91 9916351311</h3>
+//         </div>
+//         </div>
+//         <div class="borderbox"></div>
+//         <h3 class="print-title">Billing Details</h3>
+//         <div class="flex-column">
+//         <div class="dl-info">
+//           <span class="dl-text">DL:20 KA-B41-180306</span>
+//           <span class="dl-text">DL:20 KA-B41-180307</span>
+//         </div>
+//         <div class="contact-info">
+//           <span class="gst-text">GSTIN:29BFNPM5181H1ZX</span>
+//           <span class="phone-text">PHONE:+91 9886819877</span>
+//         </div>
+//       </div>
+//           <!-- Include your billing details in the HTML content -->
+//           <div>
+//             <p class="print-details">Patient Name: ${patientName}</p>
+//             <p class="print-details">Mobile number: ${mobilenumber}</p>
+//             <p class="print-details">Date: ${date}</p>
+//             <table class="billing-table">
+//               <thead>
+//                 <tr>
+//                   <th>Product</th>
+//                   <th>Quantity</th>
+//                   <th>Product Price</th>
+//                   <th>Manufacturer</th>
+//                   <th>Batch No</th>
+//                   <th>Expiry Date</th>
+//                   <th>GST (%)</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+              
+//                 ${items
+//                   .map(
+//                     (item, index) => `
+//                       <tr>
+//                         <td>${item.product}</td>
+//                         <td>${item.quantity}</td>
+//                         <td>${item.price}</td>
+//                         <td>${item.manufacturer}</td>
+//                         <td>${item.batch}</td>
+//                         <td>${item.batchExpiry}</td>
+//                         <td>${item.gst}</td>
+//                       </tr>
+//                     `
+//                   )
+//                   .join("")}
+//               </tbody>
+//             </table>
+//             <strong class="print-details2">Subtotal with GST: ${subtotalWithGST}</strong>
+//             <strong class="print-details2">Subtotal without GST: ${subtotalWithoutGST}</strong>
+//           </div>
+//         </body>
+//       </html>
+//     `;
+
+//     const printWindow = window.open("", "", "height=600");
+//     printWindow.document.open();
+//     printWindow.document.write(printContent);
+//     printWindow.document.close();
+
+ 
+//     printWindow.print();
+
+   
+//     printWindow.onafterprint = function () {
+//       printWindow.close();
+      
+//     };
+//   };
+
+//   img.onerror = function (error) {
+//     console.error('Error loading image for printing', error);
+//   };
   
-        // You can add additional logic here, such as redirecting the user.
-      } else {
-        console.error('Unexpected response format:', response);
-      }
-    } catch (error) {
-      console.error('Error submitting PatientBill:', error);
-      console.error('Server response:', error.response ? error.response.data : 'No response data'); // Log server response details
+// };
+
+  
+ 
+
+
+
+
+const handlePrintAndSubmit = async () => {
+  try {
+    // Submit data to the server
+    const response = await axios.post('http://localhost:5000/api/patient-bill', {
+      patientName,
+      mobilenumber,
+      date,
+      items,
+      subtotalWithGST,
+      subtotalWithoutGST,
+      sign
+    });
+
+    // Check if response is defined and has a 'data' property
+    if (response && response.data) {
+      console.log('PatientBill submitted successfully:', response.data);
+
+      // Reset the form or add other logic as needed
+      setPatientName('');
+      setmobilenumber('');
+      setSign('');
+      setDate('');
+      setItems([
+        {
+          _id: 1,
+          product: '',
+          quantity: '',
+          batch: '',
+          gst: '',
+        },
+      ]);
+
+      // You can add additional logic here, such as redirecting the user.
+    } else {
+      console.error('Unexpected response format:', response);
     }
-  };
-  
-  
-  const handlePrint = () => {
-    // const imagePath = 'PharmacyLogo.jpg';
-    // const imageUrl = require('../PharmacyLogo.jpg').default;
 
   
-    // // Create an image element and set its source
-    // console.log('Image URL:', imageUrl);
-    // const img = new Image();
-    // img.src = imageUrl;
-
     const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
 
-
-
-// Create an image element and set its source
-console.log('Image URL:', imageUrl);
-const img = new Image();
-img.src = imageUrl;
-
-  
-    // Wait for the image to load before continuing with print
-    img.onload = function () {
-    // Generate HTML content for printing
-    const printContent = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <!-- Include any necessary stylesheets or styling here -->
-          <style>
-          body {
-            font-family: 'Arial', sans-serif;
-          }
-          .billing-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-          }
-          .billing-table th, .billing-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-          }
-          .print-container {
-            max-height: 100%;
-            overflow-y: auto;
-            padding: 20px;
-            border-radius: 5px;
-           
-            background: #fff;
-           
-            position: relative;
-          }
-          .print-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-          }
-          .main-heading{
-              width:70%;
-              text-align: center;
-            }
-            .flex-change34{
-              display:flex;
-              justify-content: space-between;
-              border: 2px solid black;
-           }
-           .image45{
-            width:30%;
-           }
-           
-          .dl-info {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-          }
-          .contact-info {
-              display: flex;
-              flex-direction: column;
-              margin-bottom: 20px;
-              margin-right: 0px;
-
-            }
-            .flex-column {
-              margin-top: 30px;
-              display: flex;
-              justify-content: space-between;
-            }
-           
-          .dl-text, .contact-text {
-            margin-right: 20px;
-          }
-          .print-details2{
-              display: flex;
-              flex-direction: column;
-          }
-        </style>
-        </head>
-        <body>
-        <div class="print-container">
-        <div class="flex-change34">
-        <img class="image45" src="${imageUrl}">
-
-        <div class='main-heading'>
-        <h1>Dhanvantri Pharmacy </h1>
-        <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
-        Hampinagara , Bengaluru-560104</h3>
-        <h3>Mob:+91 9916351311</h3>
-        </div>
-        </div>
-        <div class="borderbox"></div>
-        <h3 class="print-title">Billing Details</h3>
-        <div class="flex-column">
-        <div class="dl-info">
-          <span class="dl-text">DL:20 KA-B41-180306</span>
-          <span class="dl-text">DL:20 KA-B41-180307</span>
-        </div>
-        <div class="contact-info">
-          <span class="gst-text">GSTIN:29BFNPM5181H1ZX</span>
-          <span class="phone-text">PHONE:+91 9886819877</span>
-        </div>
-      </div>
-          <!-- Include your billing details in the HTML content -->
-          <div>
-            <p class="print-details">Patient Name: ${patientName}</p>
-            <p class="print-details">Mobile number: ${mobilenumber}</p>
-            <p class="print-details">Date: ${date}</p>
-            <table class="billing-table">
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Quantity</th>
-                  <th>Product Price</th>
-                  <th>Manufacturer</th>
-                  <th>Batch No</th>
-                  <th>Expiry Date</th>
-                  <th>GST (%)</th>
-                </tr>
-              </thead>
-              <tbody>
-              
-                ${items
-                  .map(
-                    (item, index) => `
-                      <tr>
-                        <td>${item.product}</td>
-                        <td>${item.quantity}</td>
-                        <td>${item.price}</td>
-                        <td>${item.manufacturer}</td>
-                        <td>${item.batch}</td>
-                        <td>${item.batchExpiry}</td>
-                        <td>${item.gst}</td>
-                      </tr>
-                    `
-                  )
-                  .join("")}
-              </tbody>
-            </table>
-            <strong class="print-details2">Subtotal with GST: ${subtotalWithGST}</strong>
-            <strong class="print-details2">Subtotal without GST: ${subtotalWithoutGST}</strong>
+    console.log('Image URL:', imageUrl);
+    const img = new Image();
+    img.src = imageUrl;
+    
+      
+        // Wait for the image to load before continuing with print
+        img.onload = function () {
+        // Generate HTML content for printing
+        const printContent = `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <!-- Include any necessary stylesheets or styling here -->
+              <style>
+              body {
+                font-family: 'Arial', sans-serif;
+              }
+              .billing-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+              }
+              .billing-table th, .billing-table td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+              }
+              .print-container {
+                max-height: 100%;
+                overflow-y: auto;
+                padding: 20px;
+                border-radius: 5px;
+               
+                background: #fff;
+               
+                position: relative;
+              }
+              .print-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+                text-align: center;
+              }
+              .main-heading{
+                  width:70%;
+                  text-align: center;
+                }
+                .flex-change34{
+                  display:flex;
+                  justify-content: space-between;
+                  border: 2px solid black;
+               }
+               .image45{
+                width:30%;
+               }
+               
+              .dl-info {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 20px;
+              }
+              .contact-info {
+                  display: flex;
+                  flex-direction: column;
+                  margin-bottom: 20px;
+                  margin-right: 0px;
+    
+                }
+                .flex-column {
+                  margin-top: 30px;
+                  display: flex;
+                  justify-content: space-between;
+                }
+               
+              .dl-text, .contact-text {
+                margin-right: 20px;
+              }
+              .print-details2{
+                  display: flex;
+                  flex-direction: column;
+              }
+            </style>
+            </head>
+            <body>
+            <div class="print-container">
+            <div class="flex-change34">
+            <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 100px; height: 100px; margin-left: 237px;">
+    
+            <div class='main-heading'>
+            <h1>Dhanvantri Pharmacy </h1>
+            <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
+            Hampinagara , Bengaluru-560104</h3>
+            <h3>Mob:+91 9916351311</h3>
+            </div>
+            </div>
+            <div class="borderbox"></div>
+            <h3 class="print-title">Billing Details</h3>
+            <div class="flex-column">
+            <div class="dl-info">
+              <span class="dl-text">DL:20 KA-B41-180306</span>
+              <span class="dl-text">DL:20 KA-B41-180307</span>
+            </div>
+            <div class="contact-info">
+              <span class="gst-text">GSTIN:29BFNPM5181H1ZX</span>
+              <span class="phone-text">PHONE:+91 9886819877</span>
+            </div>
           </div>
-        </body>
-      </html>
-    `;
+              <!-- Include your billing details in the HTML content -->
+              <div>
+                <p class="print-details">Patient Name: ${patientName}</p>
+                <p class="print-details">Mobile number: ${mobilenumber}</p>
+                <p class="print-details">Date: ${date}</p>
+                <table class="billing-table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Product Price</th>
+                      <th>Manufacturer</th>
+                      <th>Batch No</th>
+                      <th>Expiry Date</th>
+                      <th>GST (%)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                    ${items
+                      .map(
+                        (item, index) => `
+                          <tr>
+                            <td>${item.product}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.price}</td>
+                            <td>${item.manufacturer}</td>
+                            <td>${item.batch}</td>
+                            <td>${item.batchExpiry}</td>
+                            <td>${item.gst}</td>
+                          </tr>
+                        `
+                      )
+                      .join("")}
+                  </tbody>
+                </table>
+                <strong class="print-details2">Subtotal with GST: ${subtotalWithGST}</strong>
+                <strong class="print-details2">Subtotal without GST: ${subtotalWithoutGST}</strong>
+              </div>
+            </body>
+          </html>
+        `;
+    
+        const printWindow = window.open("", "", "height=600");
+        printWindow.document.open();
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+    
+        // Trigger the print operation
+        printWindow.print();
+    
+        // Close the print window after printing
+        printWindow.onafterprint = function () {
+          printWindow.close();
+          
+        };
+      };
+    
+      img.onerror = function (error) {
+        console.error('Error loading image for printing', error);
+      };
 
-    const printWindow = window.open("", "", "height=600");
-    printWindow.document.open();
-    printWindow.document.write(printContent);
-    printWindow.document.close();
 
-    // Trigger the print operation
-    printWindow.print();
 
-    // Close the print window after printing
-    printWindow.onafterprint = function () {
-      printWindow.close();
-    };
-  };
 
-  img.onerror = function (error) {
-    console.error('Error loading image for printing', error);
-  };
-  
+  } catch (error) {
+    console.error('Error submitting PatientBill:', error);
+    console.error('Server response:', error.response ? error.response.data : 'No response data'); // Log server response details
+  }
 };
-
-  
- 
- 
 
   return (
     <>
@@ -598,11 +800,11 @@ img.src = imageUrl;
           />
         </div>
 
-        <button onClick={handleSubmit}  className="pharma-bill-submit-btn del-btn">
+        {/* <button onClick={handleSubmit}  className="pharma-bill-submit-btn del-btn">
           Submit
-        </button>
+        </button> */}
 
-        <button onClick={handlePrint} className="print-btn">
+        <button onClick={handlePrintAndSubmit} className="print-btn">
           Print
         </button>
 
