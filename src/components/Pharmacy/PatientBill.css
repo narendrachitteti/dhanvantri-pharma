@@ -5,6 +5,21 @@
     padding: 10px;
     border: 2px solid grey;
   }
+  .main-heading{
+    width:72%;
+    text-align: center;
+   
+  }
+  .flex-change34{
+    display:flex;
+    /* justify-content: space-between; */
+    /* border: 2px solid black; */
+ }
+ .image45 {
+  width: 12%;
+  height: 0%;
+  margin-left: 3%;
+}
   
   .gst-ph-header{
     display: flex;
@@ -131,6 +146,7 @@
     font-size: 0.6rem;
   }
   .pharma-bill-details{
+    margin-top: 3%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 1%;

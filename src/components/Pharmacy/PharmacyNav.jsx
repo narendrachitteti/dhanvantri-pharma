@@ -52,7 +52,6 @@ const PharmacyNav = () => {
   const handleLogOut = () => {
     localStorage.removeItem("staffid");
     localStorage.removeItem("hasPageReloaded");
-   
   };
 
   const renderProfileIcon = () => {
@@ -126,8 +125,21 @@ const PharmacyNav = () => {
 
               </div>
             </div>
+           
           </div>
-          
+          <div className="nav-item">
+          <div className="dropdown">
+
+          <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Details</h6>
+           
+  <div className="dropdown-content">
+           <Link to='/invoice'> Invoice Details  </Link>
+           <Link to='/'> Product Details  </Link>
+
+            </div>
+           
+            </div>
+            </div>
               
         </div>
         <div className="add-pbill-dropdown">

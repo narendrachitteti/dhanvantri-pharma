@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import "./PatientBill.css";
+import imageUrl from './PharmacyLogo (1).jpg'
 
 import PharmacyNav from "./PharmacyNav";
 
@@ -20,6 +21,7 @@ const PatientBill = () => {
   const [subtotalWithGST, setSubtotalWithGST] = useState(0);
   const [subtotalWithoutGST, setSubtotalWithoutGST] = useState(0);
   const [mobilenumber, setmobilenumber] = useState('');
+  const [sign , setSign]=useState('');
   const [patientName, setPatientName] = useState('');
   const [date, setDate] = useState('');
   const [items, setItems] = useState([
@@ -27,13 +29,11 @@ const PatientBill = () => {
       _id: 1,
       product: "",
       quantity: "",
-      amount: "",
-      manufactureDate: "",
+    
       batch: "",
-      expiryDate: "",
+    
       gst: "",
-      totalWithGST: "",
-      totalWithoutGST: "",
+     
     },
   ]);
   const handleQuantityChange = (e, index) => {
@@ -59,13 +59,11 @@ const PatientBill = () => {
       _id: items.length + 1,
       product: "",
       quantity: "",
-      amount: "",
-      manufactureDate: "",
+    
       batch: "",
-      expiryDate: "",
+   
       gst: "",
-      totalWithGST: 0,
-      totalWithoutGST: 0,
+  
     };
     // Updating the state by adding the new item to the existing items array
     setItems([...items, newItem]);
@@ -184,6 +182,7 @@ const PatientBill = () => {
         items,
         subtotalWithGST,
         subtotalWithoutGST,
+        sign
       });
   
       // Check if response is defined and has a 'data' property
@@ -193,19 +192,19 @@ const PatientBill = () => {
         // Reset the form or add other logic as needed
         setPatientName('');
         setmobilenumber('');
+        setSign('');
         setDate('');
         setItems([
           {
             _id: 1,
             product: '',
             quantity: '',
-            amount: '',
-            manufactureDate: '',
+   
+         
             batch: '',
-            expiryDate: '',
+       
             gst: '',
-            totalWithGST: 0,
-            totalWithoutGST: 0,
+          
           },
         ]);
   
@@ -375,6 +374,7 @@ const PatientBill = () => {
     const printWindow = window.open("", "", "height=600");
     printWindow.document.open();
     printWindow.document.write(printContent);
+    printWindow.document.close();
 
     // Trigger the print operation
     printWindow.print();
@@ -410,16 +410,15 @@ const PatientBill = () => {
         </div>
         <h3 className="tax-title">TAX INVOICE</h3>
 
-        <div className="title-row">
-          <FaPlusCircle className="plus-icon" />
-          <span className="pharma-title">Dhanvantri Pharmacy</span>
-          <FaPlusCircle className="plus-icon" />
+        <div className="flex-change34">
+        <img className='image45' src={imageUrl} alt="Example" />
+
+        <div className='main-heading'>
+        <h1>Dhanvantri Pharmacy </h1>
+        <h4> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h4>
+        <h4>Hampinagara , Bengaluru-560104</h4>
+       
         </div>
-        <div className="tax-title-header">
-          <p className="paharma-head-para">
-            #16, Ground Floor, 1st Main Road, 2nd stage, Vijayanagara club road,
-            Vijayanagara, Bengaluru -560104.
-          </p>
         </div>
 
         <div className="pharma-bill-details">
@@ -576,11 +575,14 @@ const PatientBill = () => {
         <p>Subtotal without GST: {subtotalWithoutGST}</p>
       </div>
         
+     
         <div className="pharma-sign">
           <label>Sign : </label>
           <input
             type="textarea"
             className="sign-area"
+            value={sign}
+            onChange={(e) => setSign(e.target.value)}
           />
         </div>
 
