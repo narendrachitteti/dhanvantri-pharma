@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Form3.css'; // Import your CSS file
+import PharmacyNav from './Pharmacy/PharmacyNav';
 
 const Form4 = () => {
   const [documents, setDocuments] = useState([]);
@@ -71,6 +72,8 @@ const Form4 = () => {
   };
 
   return (
+    <>
+    <PharmacyNav/>
     <div className='Form3-vik'>
       <h2>Document List</h2>
       <button onClick={() => setShowAddForm(true)}>Add Document</button>
@@ -162,6 +165,7 @@ const Form4 = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 
