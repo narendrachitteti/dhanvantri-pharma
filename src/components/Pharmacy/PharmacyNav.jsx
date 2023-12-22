@@ -126,8 +126,13 @@ const PharmacyNav = () => {
 
               </div>
             </div>
+           
           </div>
-          
+          <div className="nav-item">
+          <div className="dropdown">
+           <Link to='/invoice'> <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Invoice Details</h6></Link>
+            </div>
+            </div>
               
         </div>
         <div className="add-pbill-dropdown">
