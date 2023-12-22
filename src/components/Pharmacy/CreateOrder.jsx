@@ -32,6 +32,61 @@ const CreatePurchaseOrder = () => {
     unitstrips: "",
     NoOfStrips: "",
   });
+  const [stockistNames, setStockistNames] = useState([]);
+  const [selectedStockist, setSelectedStockist] = useState('');
+  const [products, setProducts] = useState([]);
+  const [unitPerBoxes, setUnitPerBoxes] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState('');
+  const [selectedUnitPerBox, setSelectedUnitPerBox] = useState('');
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    const fetchUnitPerBoxes = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/unitPerBoxes');
+        setUnitPerBoxes(response.data);
+      } catch (error) {
+        console.error('Error fetching unit per boxes:', error);
+      }
+    };
+
+    fetchProducts();
+    fetchUnitPerBoxes();
+  }, []);
+
+  const handleProductChange = (e) => {
+    setSelectedProduct(e.target.value);
+  };
+
+  
+  const handleUnitPerBoxChange = (e) => {
+    setSelectedUnitPerBox(e.target.value);
+  };
+
+  useEffect(() => {
+    const fetchStockistNames = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/get-stockist-names'); // Replace with your API URL
+        setStockistNames(response.data);
+      } catch (error) {
+        console.error('Error fetching stockist names:', error);
+      }
+    };
+
+    fetchStockistNames();
+  }, []);
+
+  const handleSelectChange = (e) => {
+    setSelectedStockist(e.target.value);
+  };
 
   const handlePrint = () => {
     window.print();
@@ -77,77 +132,76 @@ const CreatePurchaseOrder = () => {
     };
   
 
-  const handleSave = () => {
-    if (UnitStrip && NoOfStrips && Manufacturer) {
-      const orderedQuantity = UnitStrip * NoOfStrips;
-      const newItem = {
-        Medicine: Medicine || "",
-        Manufacturer: Manufacturer,
-        unitstrips: UnitStrip,
-        NoOfStrips: NoOfStrips,
-        orderedQuantity: orderedQuantity,
-      };
-
-      // Add the new item to tableData
-      setTableData((prevData) => [...prevData, newItem]);
-
-      // Clear the input fields
+    const handleSave = () => {
+      if (Medicine && Manufacturer && UnitStrip && NoOfStrips) {
+        const orderedQuantity = UnitStrip * NoOfStrips;
+        const newItem = {
+          Medicine,
+          Manufacturer,
+          unitstrips: UnitStrip,
+          NoOfStrips,
+          orderedQuantity,
+        };
+    
+        // Add the new item to tableData
+        setTableData((prevData) => [...prevData, newItem]);
+    
+        // Clear the input fields
+        setMedicine("");
+        setManufacturer("");
+        setUnitStrip("");
+        setNoOfStrips("");
+      } else {
+        window.alert("Please fill in all the required fields.");
+      }
+    };
+    
+    const handleClearInputs = () => {
       setMedicine("");
       setManufacturer("");
       setUnitStrip("");
       setNoOfStrips("");
-    } else {
-      window.alert("Please fill in all the required fields.");
-    }
-  };
-
-  const handleClearInputs = () => {
-    setMedicine("");
-    setManufacturer("");
-    setUnitStrip("");
-    setNoOfStrips("");
-  };
-
-  const handleSaveOrder = async (e) => {
-    e.preventDefault();
-    if (tableData.length === 0) {
-      window.alert("Please add items to the order before saving.");
-      return;
-    }
-
-    try {
-      const newOrder = {
-        stockistName: stockistValue,
-        date,
-        items: tableData,
-        status: "ongoing",
-      };
-
-      const response = await axios.post(
-        "http://localhost:5000/api/addCreatePurchaseOrder",
-        newOrder
-      );
-
-      if (response.status === 201) {
-        // Retrieve the custom order ID from the response
-        const generatedCustomOrderId = response.data.customOrderId;
-        setCustomOrderId(generatedCustomOrderId); // Set the custom order ID in state
-
-        window.alert("Order saved successfully");
-        fetchCreateOrder();
-        setStockistValue("");
-        setdate("");
-      } else {
-        console.error("Failed to save order:", response.statusText);
-        window.alert("Failed to save order. Please try again later.");
+    };
+    
+    const handleSaveOrder = async (e) => {
+      e.preventDefault();
+      if (tableData.length === 0) {
+        window.alert("Please add items to the order before saving.");
+        return;
       }
-    } catch (error) {
-      console.error("Error saving order:", error);
-      window.alert(
-        "An error occurred while saving the order. Please try again later."
-      );
-    }
-  };
+    
+      try {
+        const newOrder = {
+          stockistName: stockistValue,
+          date,
+          items: tableData,
+          status: "ongoing",
+        };
+    
+        const response = await axios.post(
+          "http://localhost:5000/api/createPurchaseOrder",
+          newOrder
+        );
+    
+        if (response.status === 201) {
+          const generatedCustomOrderId = response.data.customOrderId;
+          setCustomOrderId(generatedCustomOrderId);
+          window.alert("Order saved successfully");
+          fetchCreateOrder();
+          setStockistValue("");
+          setdate("");
+        } else {
+          console.error("Failed to save order:", response.statusText);
+          window.alert("Failed to save order. Please try again later.");
+        }
+      } catch (error) {
+        console.error("Error saving order:", error);
+        window.alert(
+          "An error occurred while saving the order. Please try again later."
+        );
+      }
+    };
+    
 
   const fetchCreateOrder = async () => {
     try {
@@ -260,21 +314,31 @@ const CreatePurchaseOrder = () => {
         <div className="stocklist-cpo">
           <div className="stocklist-cpo1">
             <label className="cr-order-l" htmlFor="stockName">Stockist Name</label>
-            <Select
-              options={stockistOptions}
-              value={stockistOptions.find((option) => option.value === stockistValue)}
-              onChange={(selectedOption) => setStockistValue(selectedOption.value)}
-              styles={customStyles}
-            />
+            <select value={selectedStockist} onChange={handleSelectChange}>
+        <option value="">Select a stockist</option>
+        {stockistNames.map((stockist, index) => (
+          <option key={index} value={stockist._id}> 
+            {stockist.name} 
+          </option>
+        ))}
+      </select>
           </div>
           <div className="stocklist-cpo1">
             <label className="cr-order-l" htmlFor="Medicine">Medicine Name</label>
-            <input className="createOrderInput"
-              type="text"
-              id="Medicine"
-              value={Medicine}
-              onChange={(e) => setMedicine(e.target.value)}
-            />
+            <select
+        id="productSelect"
+        className="createOrderInput"
+        value={selectedProduct}
+        onChange={handleProductChange}
+      >
+        <option value="">Select a product</option>
+        {products.map((product) => (
+          <option key={product._id} value={product.product}>
+            {product.product}
+          </option>
+        ))}
+      </select>
+            
           </div>
           <div className="stocklist-cpo1">
             <label className="cr-order-l" htmlFor="Manufacturer">Manufacturer Name</label>
@@ -295,15 +359,24 @@ const CreatePurchaseOrder = () => {
             />
           </div>
         </div>
+      
+
         <div className="stocklist-cposecond">
           <div className="stocklist-cpo2">
             <label className="cr-order-l" htmlFor="UnitStrip">Unit / Strip</label>
-            <input className="createOrderInput"
-              type="text"
-              id="UnitStrip"
-              value={UnitStrip}
-              onChange={(e) => setUnitStrip(e.target.value)}
-            />
+             <select
+          id="unitPerBoxSelect"
+          className="createOrderInput"
+          value={selectedUnitPerBox}
+          onChange={handleUnitPerBoxChange} 
+        >
+          <option value="">Select an option</option>
+          {unitPerBoxes.map((item) => (
+            <option key={item._id} value={item.unitPerBox}>
+              {item.unitPerBox}
+            </option>
+          ))}
+        </select>
           </div>
           <div className="stocklist-cpo2">
             <label className="cr-order-l" htmlFor="NoOfStrips">No Of Strips</label>
@@ -333,7 +406,7 @@ const CreatePurchaseOrder = () => {
               <thead style={{backgroundColor:'#9b8bf4'}}>
                 <tr>
                   <th>Medicine</th>
-                  <th>Manufacturer</th>
+                  <th>Stockist Name</th>
                   <th>Units per Strips</th>
                   <th>No Of Strips</th>
                   <th>Ordered Quantity</th>
@@ -341,29 +414,31 @@ const CreatePurchaseOrder = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((row, index) => (
-                  <tr key={index}>
-                    <td>{row.Medicine}</td>
-                    <td>{row.Manufacturer}</td>
-                    <td>{row.unitstrips}</td>
-                    <td>{row.NoOfStrips}</td>
-                    <td>{row.orderedQuantity}</td>
-                    <td>
-                      <button className="edit-po-button"
-                        style={{ border: "1px solid white" }}
-                        onClick={() => openEditForm(row)}
-                      >
-                        <BiEdit size={25} />
-                      </button>
-                      <button className="delete-po-button"
-                        style={{ color: "red", border: "1px solid white" }}
-                        onClick={() => handleDeleteRow(index)}
-                      >
-                        <MdDelete size={25} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+              {tableData.map((row, index) => (
+  <tr key={index}>
+    <td>{selectedProduct}</td>
+    <td>{row.stockistName}</td> {/* Display the stockistName from the row */}
+    <td>{selectedUnitPerBox}</td>
+    <td>{row.NoOfStrips}</td>
+    <td>{row.orderedQuantity}</td>
+    <td>
+      <button
+        className="edit-po-button"
+        style={{ border: "1px solid white" }}
+        onClick={() => openEditForm(row)}
+      >
+        <BiEdit size={25} />
+      </button>
+      <button
+        className="delete-po-button"
+        style={{ color: "red", border: "1px solid white" }}
+        onClick={() => handleDeleteRow(index)}
+      >
+        <MdDelete size={25} />
+      </button>
+    </td>
+  </tr>
+))}
               </tbody>
             </table>
           </div>
