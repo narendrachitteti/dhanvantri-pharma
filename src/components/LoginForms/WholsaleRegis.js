@@ -72,7 +72,7 @@ function  WholsaleRegis() {
       <div className='mask gradient-custom-3'></div>
       <MDBCard className='m-5' style={{maxWidth: '600px'}}>
         <MDBCardBody className='px-5'>
-          <h2 className="text-uppercase text-center mb-5">Create an account</h2>
+          <h2 className="text-center mb-5">Create an account</h2>
 
 
           <form  onSubmit={handleSubmit} className='wholsaleregis'>
@@ -97,7 +97,7 @@ function  WholsaleRegis() {
 
             <br/>
           <div>
-          <p className="mb-0">Already have an account? <a href="/WholesaleLogin" class=" fw-bold">Sign Up</a></p>
+          <p className="mb-0">Already have an account? <a href="/WholesaleLogin" class=" fw-bold">Sign In</a></p>
         </div>
         </MDBCardBody>
       </MDBCard>
