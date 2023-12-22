@@ -588,6 +588,50 @@ const InvoiceStock = () => {
   };
 
 
+  const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
+  const [groupsData, setGroupsData] = useState(/* initial value */);
+  const [schedulesData, setSchedulesData] = useState(/* initial value */);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/distincttaxcodes");
+        const data = await response.json();
+  
+        if (data && typeof data === "object") {
+          if (
+            // data.hasOwnProperty("taxCodes") &&
+            // Array.isArray(data.taxCodes) &&
+            // data.hasOwnProperty("group") &&
+            // Array.isArray(data.group) &&
+            data.hasOwnProperty("schedule") &&
+            Array.isArray(data.schedule)
+          ) {
+            // setTaxCodeData(data.taxCodes);
+            // setGroupsData(data.group);
+            setSchedulesData(data.schedule);
+  
+            setFormData({
+              ...formData,
+              // taxCode: data.taxCodes[0],
+              // group: data.group[0],
+              schedule: data.schedule[0],
+            });
+          } else {
+            console.error("Data received from the API is not in the expected format:", data);
+          }
+        } else {
+          console.error("Invalid data received from the API:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <PharmacyNav />
@@ -795,12 +839,19 @@ const InvoiceStock = () => {
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="Category">Category</label>
-              <input
-                type="text"
-                id="Category"
-                value={Category}
-                onChange={(e) => setCategory(e.target.value)}
+              <Select
+                // className="item-shedu-sele"
+                name="schedule"
+                value={{ label: formData.schedule, value: formData.schedule }}
+                options={schedulesData ? schedulesData.map((schedule) => ({
+                  label: schedule,
+                  value: schedule,
+                })) : []} 
+                onChange={(selectedOption) =>
+                  handleSelectChange("schedule", selectedOption)
+                }
               />
+
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -900,7 +951,7 @@ const InvoiceStock = () => {
             <div className="input-container-2">
               <label htmlFor="HSNCode">HSN Code</label>
               <select
-        className="item-hsn-selec"
+        // className="item-hsn-selec"
         name="hsn"
         value={formData.hsn}
         onChange={(event) => handleSelectChange("hsn", event.target.value)}
