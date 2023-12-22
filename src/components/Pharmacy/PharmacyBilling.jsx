@@ -27,13 +27,11 @@ const PatientBill = () => {
       _id: 1,
       product: "",
       quantity: "",
-      amount: "",
-      manufactureDate: "",
+    
       batch: "",
-      expiryDate: "",
+    
       gst: "",
-      totalWithGST: "",
-      totalWithoutGST: "",
+     
     },
   ]);
   const handleQuantityChange = (e, index) => {
@@ -59,13 +57,11 @@ const PatientBill = () => {
       _id: items.length + 1,
       product: "",
       quantity: "",
-      amount: "",
-      manufactureDate: "",
+    
       batch: "",
-      expiryDate: "",
+   
       gst: "",
-      totalWithGST: 0,
-      totalWithoutGST: 0,
+  
     };
     // Updating the state by adding the new item to the existing items array
     setItems([...items, newItem]);
@@ -199,13 +195,12 @@ const PatientBill = () => {
             _id: 1,
             product: '',
             quantity: '',
-            amount: '',
-            manufactureDate: '',
+   
+         
             batch: '',
-            expiryDate: '',
+       
             gst: '',
-            totalWithGST: 0,
-            totalWithoutGST: 0,
+          
           },
         ]);
   
