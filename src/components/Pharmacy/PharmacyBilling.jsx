@@ -20,6 +20,7 @@ const PatientBill = () => {
   const [subtotalWithGST, setSubtotalWithGST] = useState(0);
   const [subtotalWithoutGST, setSubtotalWithoutGST] = useState(0);
   const [mobilenumber, setmobilenumber] = useState('');
+  
   const [patientName, setPatientName] = useState('');
   const [date, setDate] = useState('');
   const [items, setItems] = useState([
