@@ -23,7 +23,7 @@ import Note from './components/Pharmacy/Creditnote.js';
 import RetailLogin from './components/LoginForms/RetailLogin.js';
 import RetailWholecard from './components/LoginForms/RetailWholeCard.js';
 import WholesaleLogin from './components/LoginForms/WholesaleLogin.js';
-
+import WholesaleRegis from './components/LoginForms/WholsaleRegis.js';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
@@ -36,6 +36,8 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+        <Route path='/WholesaleRegis' element={<WholesaleRegis/>}/>
+
           <Route path='/PharmacyNav' element={<PharmacyNav/>}/>
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
           <Route path='/invoicestock' element={<InvoiceStock/>}/>
