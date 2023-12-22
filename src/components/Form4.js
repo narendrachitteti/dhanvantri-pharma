@@ -75,10 +75,10 @@ const Form4 = () => {
     <>
     <PharmacyNav/>
     <div className='Form3-vik'>
-      <h2>Document List</h2>
-      <button onClick={() => setShowAddForm(true)}>Add Document</button>
+      <h2 className='company-list'>Company List</h2>
+      <button onClick={() => setShowAddForm(true)} className='add-document'>Add Document</button>
 
-      {/* Modal for adding a new document */}
+      {/* Modal for adding a new document */} 
       {showAddForm && (
         <div className="modal">
           <div className="modal-content">
