@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import './Itemdescription.css'
-import PharmacyNav from "./PharmacyNav";
 
 
 const ItemDescription = () => {
@@ -270,8 +269,7 @@ const handlePrint = () => {
 
  
   return (
-    <>
-    <PharmacyNav/>
+
     <div  className="item-description-total">
     <form className="item-form-container" onSubmit={handleSubmit}>
     <div className="item-content">
@@ -567,7 +565,6 @@ const handlePrint = () => {
       </div>
     </form>
     </div>
-    </>
   );
 };
 
