@@ -4,7 +4,7 @@ import "./PatientBill.css";
 import PharmacyNav from "./PharmacyNav";
 import imageUrl from './PharmacyLogo.jpg';
 
-const PatientBill = () => {
+const PharmacyBilling = () => {
   const [quantity, setQuantity] = useState('');
   const [medicines, setMedicines] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
@@ -611,4 +611,4 @@ img.src = imageUrl;
   );
 };
 
-export default PatientBill;
+export default PharmacyBilling;
