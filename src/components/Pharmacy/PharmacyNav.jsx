@@ -52,7 +52,6 @@ const PharmacyNav = () => {
   const handleLogOut = () => {
     localStorage.removeItem("staffid");
     localStorage.removeItem("hasPageReloaded");
-   
   };
 
   const renderProfileIcon = () => {
