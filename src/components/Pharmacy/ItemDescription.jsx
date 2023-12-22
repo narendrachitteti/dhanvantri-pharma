@@ -551,6 +551,7 @@ const handlePrint = () => {
       <button type="submit" className="item-submit-button">
         Submit
       </button>
+      <button  onClick={handlePrint} className="item-submit-button">Print</button>
       </div>
       <div  className="item-form-right">
              {/* <button>Add</button> */}
@@ -558,8 +559,8 @@ const handlePrint = () => {
              {/* <button>Cancel</button> */}
              {/* <button>Search</button> */}
              {/* <button>Delete</button> */}
-             <button>Save</button>
-             <button  onClick={handlePrint}>Print</button>
+             {/* <button>Save</button> */}
+             
              
              {/* <button>Exit</button> */}
       </div>

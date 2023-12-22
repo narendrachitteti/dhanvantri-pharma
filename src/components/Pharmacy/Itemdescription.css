@@ -8,6 +8,9 @@
    .item-form-container{
        padding: 15px;
    }
+   .item-submit-button{
+    margin-left: 3%;
+   }
    .item-content{
        display: flex;
    }
