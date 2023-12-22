@@ -1,192 +1,164 @@
-.field{
-    width: 50%;
-  }
-  .rows{
-    display: flex;
-  }
-  .columm{
-    display: flex;
-    flex-direction: column;
-    margin-top: -3vh;
-  }
-  .hr{
-    height: 55vh;
-    width: 0.01vw;
-    margin-top: -8.5vh;
-    margin-bottom: -4.4vh;
-    margin-left: 1vw;
-  }
-  .DrNo,.DrDt{
-    margin-left: 2vw;
-    margin-top: 1vh;
-  }
-  .changees{
-    margin-left: 2.5vw;
-  }
-  .dates{
-  margin-left: 2.5vw;
+/* note.css */
+
+.field {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 20px;
+}
+
+.shyam label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.shyam input[type="radio"] {
+  display: none; /* Hide the actual radio buttons */
+}
+
+.shyam label {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.shyam label:hover {
+  background-color: #2980b9;
+}
+
+.shyam input[type="radio"]:checked + label {
+  background-color: #2c3e50;
+}
+
+
+
+.hello,
+.prabha {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rows,
+.rows1 {
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.dates,
+.dates1,
+.dates2,
+.dates3,
+.dates4,
+.dates5,
+.Head,
+.Head1,
+.Head2,
+.Head3,
+.Head4,
+.Head5 {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.numbers1{
+  width: 15%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-left: 10%;
+}
+.numberss{
+  width: 15%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-left: 6%;
+}
+.manual{
+  width: 15%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-left: 5%;
+}
+.manual1{
+  width: 15%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-left: 7%;
+}
+.textareas{
+  width: 15%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-left: 6%;
+}
+.numberss {
+  width: 15%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-left: 7%;
+}
+
+.columm {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.P {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 40%;
+}
+.Prints,
+.Prints1{
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 35%;
   
-  }
-  .url{
-    width: 31vw;
-    margin-left: 7.5vw;
-    margin-top: 1vh;
-  }
-  .numberss{
-    width: 8vw;
-  }
-  
-  
-  .ur{
-    width: 31vw;
-  }
-  
-  .Head{
-    margin-left: 9.9vw;
-  }
-  .forest{
-    margin-left: 4.5vw;
-    margin-top: 1vh;
-  }
-  .manual{
-    width: 8.05vw;
-    
-  }
-  .paid{
-    margin-left: 1vw;
-  }
-  .paids{
-    
-    margin-left: 6.7vw;
-  }
-  .textareas{
-    height: 10vh;
-    width: 31.2vw;
-  }
-  .Navigations{
-    margin-left: 1.3vw;
-    margin-top: 1vh;
-  }
-  .Prints{
-    margin-top: 2vh;
-    width: 7vw;
-    height: 5vh;
-    margin-left: 1.5vw;
-  }
-  .note{
-    margin-left: 1.2vw;
-    margin-top: 1vh;
-  }
-  
-  
-  /* .submittts{
-    height: 5vh;
-    width: 10vw;
-    margin-left: -3.5vw;
-    margin-top: 3vh;
-  }
-  .u{
-   margin-left: 15vw;
-  }
-  .con{
-    margin-left: 2vw;
-  }
-  .rad{
-    margin-left: 2vw;
-  }
-  .nos{
-    margin-left: 1vw;
-    width: 9.3vw;
-  }
-  .nose{
-    margin-left: 1vw;
-    width: 7vw;
-  }
-  .crdt{
-    margin-left: 10vw;
-    margin-top: 2vh;
-  
-  }
-  .crno{
-    margin-top: 2vh;
-    margin-left: 2vw;
-  }
-  .nodes{
-    margin-left: 1vw;
-    width: 30.9vw;
-  }
-  .custmer{
-    margin-top: 2vh;
-  }
-  .amou{
-    margin-left: 0.9vw;
-    margin-top: 2vh;
-  }
-  .amounts{
-    margin-left: 1vw;
-    width: 8vw;
-  }
-  .manus{
-    margin-left: 7.3vw;
-  }
-  .manual{
-    margin-top: 2vh;
-  }
-  .changess{
-    margin-left: 1vw;
-    width: 8vw;
-  }
-  .narration{
-    margin-top: 1vh;
-    margin-left: 1vw;
-    height:15vh;
-    width: 31vw;
-  }
-  .lab{
-    margin-top: 2vh;
-    
-  }
-  .inputs1{
-    width: 31vw;
-    margin-top: 2vh;
-  }
-  .input1{
-    margin-left: 6.2vw;
-  }
-  .tomy{
-    margin-left: 1vw;
-    width: 31vw;
-  }
-  .town{
-    margin-left: 2.2vw;
-    margin-top: 2vh;
-  }
-  .amountsdebit{
-    margin-left: 0.8vw;
-    margin-top: 2vh;
-  }
-  .nature{
-    margin-left: 6.5vw;
-    margin-top: 2vh;
-  }
-  .natural{
-    margin-left: 1vw;
-    width: 8.8vw;
-  }
-  .drdt{
-    margin-left: 9.7vw;
-  }
-  .demonstrate{
-    margin-left: 1vw;
-    width: 8.5vw;
-  }
-  .drno{
-    margin-left: 2vw;
-  }
-  .deforest{
-    margin-left: 1vw;
-    width: 8vw;
-  }
-  
-  */
-  
+}
+
+.P:hover {
+  background-color: #45a049;
+}
+
+.hr {
+  margin: 20px 0;
+}
+
+.heee {
+  margin-top: 20px;
+}
+
+.CrNo{
+  display: flex;
+  margin-left: 40%;
+}
+.CrDate{
+  display: flex;
+  margin-left: 40%;
+}
+.customers{
+  display: flex;
+  margin-left: 40%;
+}
+.Amount{
+  display: flex;
+  margin-left: 40%;
+}
+.ManualNo{
+  display: flex;
+  margin-left: 40%;
+}
+.Narration{
+  display: flex;
+  margin-left:40%;
+}
