@@ -1,30 +1,37 @@
 .left-1{
   display: flex;
-  padding: 2px 10px;
-  justify-content: space-around;
+  /* padding: 2px 10px; */
+  /* justify-content: space-around; */
 }
 .navbar-doctor1 .nav-item{
-  padding: 0 0.4rem;
+  /* padding: 0 0.4rem; */
+  margin-left: 4%;
+  /* width: 100%; */
 }
 
-
+.profile-icon-container{
+  font-size: 30px;
+  /* margin-right: 5%; */
+}
 /* Navbar styling */
 .navbar-doctor1 {
   width: 100%;
-  margin-top: -11px;
-  display: flex;
+  height: 55px;
+  /* margin-top: -11px; */
+  /* display: flex; */
   background-color: #9b8bf4;
-  top: 0;
-  position: relative;
-  z-index: 99;
-  padding-left: 1rem;
-  justify-content: space-between;
+  /* top: 0; */
+  /* position: relative; */
+  /* z-index: 99; */
+  /* padding-left: 1rem; */
+  /* justify-content: space-between; */
   padding-top: 5px;
 }
 
 .right-doc {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
+  margin-left: 13%;
 }
 
 .profile-dropdown-logout {
