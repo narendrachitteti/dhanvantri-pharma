@@ -11,6 +11,9 @@ import {
 
 from 'mdb-react-ui-kit';
 import './Loginvi.css';
+import {Link} from 'react-router-dom';
+
+
 function WholesaleLogin() {
   return (
     <div>

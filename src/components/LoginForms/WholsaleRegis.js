@@ -10,7 +10,7 @@ import {
 }
 from 'mdb-react-ui-kit';
 import './WhlosaleRegis.css'
-function  WholesaleRegis() {
+function  WholsaleRegis() {
 
     const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -105,4 +105,4 @@ function  WholesaleRegis() {
   );
 }
 
-export default WholesaleRegis;
+export default WholsaleRegis;
