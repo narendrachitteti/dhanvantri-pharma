@@ -88,6 +88,7 @@ const handlePrint = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     console.log("Form data submitted:", formData);
 
     try {
@@ -100,6 +101,7 @@ const handlePrint = () => {
       });
       if (response.ok) {
         console.log("Form data submitted successfully");
+        setFormData({ });
       } else {
         console.error("Failed to submit form data. Server returned:", response.status, response.statusText);
       }
