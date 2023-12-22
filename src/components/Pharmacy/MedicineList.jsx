@@ -152,7 +152,7 @@ function MedicineList() {
                     Medname <AiOutlineAlignLeft />
                   </th>
                   <th>
-                    Manufacturer <AiOutlineAlignLeft />
+                    Mfr <AiOutlineAlignLeft />
                   </th>
                   <th>
                     Category <AiOutlineAlignLeft />

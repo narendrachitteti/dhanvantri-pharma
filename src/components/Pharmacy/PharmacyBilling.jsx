@@ -20,6 +20,7 @@ const PatientBill = () => {
   const [subtotalWithGST, setSubtotalWithGST] = useState(0);
   const [subtotalWithoutGST, setSubtotalWithoutGST] = useState(0);
   const [mobilenumber, setmobilenumber] = useState('');
+  const [sign , setSign]=useState('');
   const [patientName, setPatientName] = useState('');
   const [date, setDate] = useState('');
   const [items, setItems] = useState([
@@ -27,13 +28,11 @@ const PatientBill = () => {
       _id: 1,
       product: "",
       quantity: "",
-      amount: "",
-      manufactureDate: "",
+    
       batch: "",
-      expiryDate: "",
+    
       gst: "",
-      totalWithGST: "",
-      totalWithoutGST: "",
+     
     },
   ]);
   const handleQuantityChange = (e, index) => {
@@ -59,13 +58,11 @@ const PatientBill = () => {
       _id: items.length + 1,
       product: "",
       quantity: "",
-      amount: "",
-      manufactureDate: "",
+    
       batch: "",
-      expiryDate: "",
+   
       gst: "",
-      totalWithGST: 0,
-      totalWithoutGST: 0,
+  
     };
     // Updating the state by adding the new item to the existing items array
     setItems([...items, newItem]);
@@ -184,6 +181,7 @@ const PatientBill = () => {
         items,
         subtotalWithGST,
         subtotalWithoutGST,
+        sign
       });
   
       // Check if response is defined and has a 'data' property
@@ -193,19 +191,19 @@ const PatientBill = () => {
         // Reset the form or add other logic as needed
         setPatientName('');
         setmobilenumber('');
+        setSign('');
         setDate('');
         setItems([
           {
             _id: 1,
             product: '',
             quantity: '',
-            amount: '',
-            manufactureDate: '',
+   
+         
             batch: '',
-            expiryDate: '',
+       
             gst: '',
-            totalWithGST: 0,
-            totalWithoutGST: 0,
+          
           },
         ]);
   
@@ -576,11 +574,14 @@ const PatientBill = () => {
         <p>Subtotal without GST: {subtotalWithoutGST}</p>
       </div>
         
+     
         <div className="pharma-sign">
           <label>Sign : </label>
           <input
             type="textarea"
             className="sign-area"
+            value={sign}
+            onChange={(e) => setSign(e.target.value)}
           />
         </div>
 
