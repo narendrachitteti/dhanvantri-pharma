@@ -137,22 +137,6 @@
     max-width: 336px;
 
 
-
-    /* .popup {
-      position: fixed; 
-      top: 50px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      z-index: 1000;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      max-width: 400px;
-    }
-     */
-
-
-
   }
   .popup-1{
     position: relative;
