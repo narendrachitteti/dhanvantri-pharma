@@ -546,6 +546,48 @@ const InvoiceStock = () => {
     fetchUnitPerBox();
   }, []);
 
+
+  const [hsnData, setHsnData] = useState([]);
+  const [formData, setFormData] = useState({ hsn: '' });
+  const [selectedHsn, setSelectedHsn] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/companiesAndHsncodes");
+        const data = await response.json();
+
+        if (data && typeof data === "object" && Array.isArray(data.hsn)) {
+          setHsnData(data.hsn);
+
+          setFormData(prevFormData => ({
+            ...prevFormData,
+            hsn: data.hsn.length > 0 ? data.hsn[0] : '' // Set the first HSN code as default
+          }));
+        } else {
+          console.error("Data received from the API is not in the expected format:", data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleSelectChange = (fieldName, selectedOption) => {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [fieldName]: selectedOption.value
+    }));
+  };
+
+  const handleHsnChange = (event) => {
+    setSelectedHsn(event.target.value);
+    // Perform actions based on the selected HSN code here
+  };
+
+
   return (
     <>
       <PharmacyNav />
@@ -857,12 +899,18 @@ const InvoiceStock = () => {
           <div className="input-row-3">
             <div className="input-container-2">
               <label htmlFor="HSNCode">HSN Code</label>
-              <input className="hsn-input"
-                type="text"
-                id="HSNcode"
-                value={HSNcode}
-                onChange={(e) => setHSNcode(e.target.value)}
-              />
+              <select
+        className="item-hsn-selec"
+        name="hsn"
+        value={formData.hsn}
+        onChange={(event) => handleSelectChange("hsn", event.target.value)}
+      >
+        {hsnData.map((hsn, index) => (
+          <option key={index} value={hsn}>
+            {hsn}
+          </option>
+        ))}
+      </select>
             </div>
             &nbsp;&nbsp;
             &nbsp;&nbsp;
