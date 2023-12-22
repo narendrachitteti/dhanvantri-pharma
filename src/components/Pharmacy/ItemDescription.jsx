@@ -251,6 +251,7 @@ const handlePrint = () => {
               drugComposition: data.drugComposition[0],
             });
           } else {
+            
             console.error("Data received from the API is not in the expected format:", data);
           }
         } else {
