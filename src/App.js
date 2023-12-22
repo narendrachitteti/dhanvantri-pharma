@@ -30,6 +30,7 @@ import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
 import Stockist from './components/Pharmacy/Stockist'
 import Form4 from './components/Form4';
 import Invoice from './components/Pharmacy/invoice.js';
+import WholsaleRegis from './components/LoginForms/WholsaleRegis.js';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-        <Route path='/WholesaleRegis' element={<WholesaleLogin/>}/>
+        <Route path='/WholesaleRegis' element={<WholsaleRegis/>}/>
 
           <Route path='/PharmacyNav' element={<PharmacyNav/>}/>
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
