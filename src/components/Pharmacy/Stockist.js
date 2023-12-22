@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactJsPagination from 'react-js-pagination';
 import axios from 'axios';
 import './Stockist.css';
+import PharmacyNav from './PharmacyNav';
 
 const Stockist = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -137,6 +138,7 @@ const Stockist = () => {
 
   return (
     <div>
+      <PharmacyNav />
       <div className="searchtopheader">
         <div className="search-bar">
           <input
@@ -169,14 +171,14 @@ const Stockist = () => {
           <hr />
           <div className="popup-content">
             <form>
-              <label>Name:</label>
+              <label className='nameclass-label'>Name:</label>
               <input
                 type="text"
                 placeholder="Name"
                 value={newStockistData.name}
                 onChange={(e) => setNewStockistData({ ...newStockistData, name: e.target.value })}
               />
-              <label>GST Number:</label>
+              <label className='nameclass-label'>GST Number:</label>
               <input
                 type="text"
                 placeholder="GST Number"
@@ -185,14 +187,14 @@ const Stockist = () => {
                   setNewStockistData({ ...newStockistData, gstNumber: e.target.value })
                 }
               />
-              <label>Email:</label>
+              <label className='nameclass-label'>Email:</label>
               <input
                 type="text"
                 placeholder="Email"
                 value={newStockistData.email}
                 onChange={(e) => setNewStockistData({ ...newStockistData, email: e.target.value })}
               />
-              <label>PhoneNumber:</label>
+              <label className='nameclass-label'>PhoneNumber:</label>
               <input
                 type="text"
                 placeholder="PhoneNumber"
@@ -201,7 +203,7 @@ const Stockist = () => {
                   setNewStockistData({ ...newStockistData, phoneNumber: e.target.value })
                 }
               />
-              <label>Added Date:</label>
+              <label className='nameclass-label'>Added Date:</label>
               <input
                 type="date"
                 placeholder="Added Date"

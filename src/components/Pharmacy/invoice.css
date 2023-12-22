@@ -1,0 +1,133 @@
+.loading-sk143 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .invoice-container-sk143 {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+  }
+  
+  .invoice-heading-sk143 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .search-container {
+    margin-bottom: 20px;
+    margin-top: 4%;
+  }
+  
+  .labelsk143 {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .search-input-sk143 {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    width: 25%;
+  }
+  
+  .invoice-list-sk143 {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .invoice-item-sk143 {
+    margin-bottom: 20px;
+  }
+  
+  .patient-name-sk143,
+  .doctor-name-sk143,
+  .date-sk143,
+  .items-heading-sk143,
+  .total-with-gst-sk143,
+  .total-without-gst-sk143 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .items-table-sk143 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .product-th-sk143,
+  .quantity-th-sk143,
+  .price-th-sk143,
+  .manufacturer-th-sk143,
+  .batch-no-th-sk143,
+  .expiry-date-th-sk143,
+  .gst-th-sk143 {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .product-td-sk143,
+  .quantity-td-sk143,
+  .price-td-sk143,
+  .manufacturer-td-sk143,
+  .batch-no-td-sk143,
+  .expiry-date-td-sk143,
+  .gst-td-sk143 {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .item-row-sk143:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+@media only screen and (max-width: 430px) {
+  .product-th-sk143,
+  .quantity-th-sk143,
+  .price-th-sk143,
+  .manufacturer-th-sk143,
+  .batch-no-th-sk143,
+  .expiry-date-th-sk143,
+  .gst-th-sk143,
+  .product-td-sk143,
+  .quantity-td-sk143,
+  .price-td-sk143,
+  .manufacturer-td-sk143,
+  .batch-no-td-sk143,
+  .expiry-date-td-sk143,
+  .gst-td-sk143 {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .items-table-sk143 thead {
+    display: none;
+  }
+
+  .items-table-sk143 tbody {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .items-table-sk143 tr {
+    margin-bottom: 10px;
+  }
+
+  .items-table-sk143 td {
+    display: block;
+    text-align: left;
+  }
+
+  .item-row-sk143:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+}
