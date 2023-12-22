@@ -20,6 +20,8 @@ const Stockists = () => {
     gstno: "",
     email: "",
   });
+
+  
   const [selectedStockist, setSelectedStockist] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;

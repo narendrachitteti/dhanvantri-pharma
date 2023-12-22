@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import './Itemdescription.css'
 import PharmacyNav from "./PharmacyNav";
+import { Refresh } from "@mui/icons-material";
 
 const ItemDescription = () => {
   const [companyData, setCompanyData] = useState([]);
