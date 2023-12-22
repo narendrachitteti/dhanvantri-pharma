@@ -129,7 +129,15 @@ const PharmacyNav = () => {
           </div>
           <div className="nav-item">
           <div className="dropdown">
-           <Link to='/invoice'> <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Invoice Details</h6></Link>
+
+          <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Details</h6>
+           
+  <div className="dropdown-content">
+           <Link to='/invoice'> Invoice Details  </Link>
+           <Link to='/'> Product Details  </Link>
+
+            </div>
+           
             </div>
             </div>
               

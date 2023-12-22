@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactJsPagination from 'react-js-pagination';
 import axios from 'axios';
 import './Stockist.css';
+import PharmacyNav from './PharmacyNav';
 
 const Stockist = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -137,6 +138,7 @@ const Stockist = () => {
 
   return (
     <div>
+      <PharmacyNav />
       <div className="searchtopheader">
         <div className="search-bar">
           <input
