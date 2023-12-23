@@ -30,6 +30,9 @@ const InvoiceStock = () => {
   const [, /*SGst */ setSGst] = useState("");
   const [price, setPrice] = useState("");
   const [MRP, setMRP] = useState("");
+  const [ ,setProducts] = useState("");
+  const [ ,setSelectedUnitPerBox] = useState("");
+  const [ ,setUnitPerBoxes] = useState("");
   const [Discount, setDiscount] = useState("");
   const [Total, setTotal] = useState("");
   const [HSNcode, setHSNcode] = useState("");
@@ -40,14 +43,15 @@ const InvoiceStock = () => {
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
   const [isPopupVisible, setPopupVisible] = useState(false);
-
-
+  const [selectedSalesRate, setSelectedSalesRate] = useState('');
+const [productOptions, setProductOptions] = useState([]);
+const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
 
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
-  // const [/*totalDiscountPercentage */, setTotalDiscountPercentage] = useState(0);
   const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
+
 
   // const [isPopupVisible, setPopupVisible] = useState(false);
 
@@ -56,22 +60,50 @@ const InvoiceStock = () => {
     setPopupVisible(true);
   };
 
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+  
+    const fetchUnitPerBoxes = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/unitPerBox');
+        setUnitPerBoxes(response.data);
+      } catch (error) {
+        console.error('Error fetching unit per boxes:', error);
+      }
+    };
+  
+    fetchProducts();
+    fetchUnitPerBoxes();
+  }, []);
+  
+  // Handling product and unit per box changes
+  const handleProductChange = (e) => {
+    setSelectedProduct(e.target.value);
+  };
+  
+  const handleUnitPerBoxChange = (e) => {
+    setSelectedUnitPerBox(e.target.value);
+  };
+  
   const handleGSTChange = (e) => {
     const newGST = parseFloat(e.target.value);
-
-    // Calculate CGST and SGST based on GST value
     const newCGST = newGST / 2;
     const newSGST = newGST / 2;
-
-    // Store the total GST value for this invoice
     setTotalGST(newGST);
-    setIsGSTSet(true); // Flag that GST has been set for this invoice
-
-    // Update state with new values
+    setIsGSTSet(true); // Flag that GST has been set for this invoiceUpdate state with new values
     setGst(newGST);
     setCGst(newCGST);
     setSGst(newSGST);
   };
+
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -79,7 +111,6 @@ const InvoiceStock = () => {
 
   const calculateNetPrice = () => {
     // Calculate Net Price based on the formula
-
     const noOfStrips = parseFloat(strips);
     const gstPercentage = parseFloat(Gst);
     const pricePerStrip = parseFloat(price);
@@ -89,16 +120,12 @@ const InvoiceStock = () => {
       const totalPriceBeforeDiscount =
         pricePerStrip * noOfStrips +
         pricePerStrip * noOfStrips * (gstPercentage / 100);
-
       // Calculate the discount amount
       const discountAmount =
         (totalPriceBeforeDiscount * discountPercentage) / 100;
-
       // Calculate Net Price by deducting the discount amount
       const netPrice = totalPriceBeforeDiscount - discountAmount;
-
       setNetPrice(netPrice.toFixed(2)); // Round to 2 decimal places and set in state
-
       // Calculate the quantity
       const quantity = pricePerStrip * noOfStrips + parseFloat(Freestrips);
       setQuantity(quantity);
@@ -153,20 +180,16 @@ const InvoiceStock = () => {
       // Create a new medicine object with the current state values
       const newMedicine = {
         MedId: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
-        Medicine,
+        Medicine: selectedProduct,
         Manufacturer,
         Category,
         Batch,
-        BatchExpiry: selectedDate
-          ? `${String(selectedDate.getMonth() + 1).padStart(2, "0")}-${String(
-              selectedDate.getFullYear()
-            ).slice(-2)}`
-          : "", // Fetch month and year as MM-YY
+        BatchExpiry: selectedDate ? `${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getFullYear()).slice(-2)}` : "", // Fetch month and year as MM-YY
         Unit,
         strips,
         Freestrips,
         Gst,
-        price,
+        price: selectedSalesRate,
         MRP,
         Discount,
         Total,
@@ -187,9 +210,7 @@ const InvoiceStock = () => {
       );
       // Update the state with the new total discount amount
       setTotalDiscountAmount(totalDiscountAmount);
-
-
-      // Log the unique ID of the newly added medicine
+// Log the unique ID of the newly added medicine
       console.log(
         "Unique ID of the newly added medicine:",
         newMedicine.customId
@@ -306,7 +327,7 @@ const InvoiceStock = () => {
     const totalPriceBeforeTax = calculateTotalPriceBeforeTax();
     setTotalAmountBeforeTax(totalPriceBeforeTax); // Update the state
   }, [tableData][calculateTotalPriceBeforeTax]);
-   // Update the Total calculation to consider the discount
+  // Update the Total calculation to consider the discount
   const calculateAmounts = () => {
     // Calculate the total amount before tax and total discount amount
     let totalAmountBeforeTax = 0;
@@ -363,7 +384,7 @@ const InvoiceStock = () => {
     setShowPopup(!showPopup);
   };
   const handleAddStockist = () => {
-
+    // Make sure all fields are filled
     if (
       !newStockistData.name ||
       !newStockistData.gstno ||
@@ -372,21 +393,18 @@ const InvoiceStock = () => {
       alert("Please fill in all fields.");
       return;
     }
-
     // Prepare the data for the POST request
     const postData = {
       name: newStockistData.name,
       gstNumber: newStockistData.gstno,
       email: newStockistData.email,
     };
-
     // Send a POST request to add a new stockist
     axios
       .post("http://localhost:5000/api/stockists", postData)
       .then((response) => {
         // Handle the success case
         alert("Stockist added successfully.");
-
         // Clear the newStockistData state and close the popup
         setNewStockistData({
           name: "",
@@ -394,7 +412,6 @@ const InvoiceStock = () => {
           email: "",
         });
         setShowPopup(false);
-
         // Fetch the updated stockists data here
         axios
           .get("http://localhost:5000/api/stockists")
@@ -412,7 +429,9 @@ const InvoiceStock = () => {
         alert("Error adding stockist. Please try again.");
       });
   };
-  const [productOptions, setProductOptions] = useState([]);
+
+
+  const [selectedProduct, setSelectedProduct] = useState('');
 
   // useEffect(() => {
   //   const fetchProductData = async () => {
@@ -434,11 +453,12 @@ const InvoiceStock = () => {
   //   fetchProductData();
   // }, []);
 
+
   // const [productOptions, setProductOptions] = useState([]);
   useEffect(() => {
-    const fetchProductData = async () => {
+    const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch('http://localhost:5000/api/products');
         if (response.ok) {
           const products = await response.json();
           const options = products.map((product) => ({
@@ -447,40 +467,41 @@ const InvoiceStock = () => {
           }));
           setProductOptions(options);
         } else {
-          throw new Error("Failed to fetch products");
+          throw new Error('Failed to fetch products');
         }
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching unit per boxes:', error);
       }
     };
 
-    fetchProductData();
+    fetchProducts();
   }, []);
-  
-
-
   const [salesRates, setSalesRates] = useState([]);
+
+  
 
   useEffect(() => {
     const fetchSalesRates = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/salesRates"
-        );
+        const response = await axios.get('http://localhost:5000/api/salesRates');
         const fetchedSalesRates = response.data || [];
 
+      
         const options = fetchedSalesRates.map((rate) => ({
-          label: (rate.salesRate && rate.salesRate.toString()) || "",
-          value: rate._id || "",
+          label: (rate.salesRate && rate.salesRate.toString()) || '', 
+          value: rate._id || '',
         }));
         setSalesRates(options);
       } catch (error) {
         console.error("Error fetching salesRates:", error);
       }
     };
+    
 
-    fetchSalesRates();
+
+      fetchSalesRates();
   }, []);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -508,28 +529,20 @@ const InvoiceStock = () => {
     fetchPurchaseRates();
   }, []);
 
-  const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
+  // const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
 
   useEffect(() => {
     const fetchUnitPerBox = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/unitPerBox"
-        );
-        setUnitPerBoxOptions(
-          response.data.map((item) => ({
-            value: item.unitPerBox,
-            label: item.unitPerBox,
-          }))
-        );
+        const response = await axios.get('http://localhost:5000/api/unitPerBox');
+        setUnitPerBoxOptions(response.data.map(item => ({ value: item.unitPerBox, label: item.unitPerBox })));
       } catch (error) {
-        console.error("Error fetching unitPerBox:", error);
+        console.error('Error fetching unitPerBox:', error);
       }
     };
     fetchUnitPerBox();
   }, []);
-
-
+  
   const [hsnData, setHsnData] = useState([]);
   const [formData, setFormData] = useState({ hsn: '' });
   const [selectedHsn, setSelectedHsn] = useState('');
@@ -570,9 +583,8 @@ const InvoiceStock = () => {
   };
   const handleHsnChange = (event) => {
     setSelectedHsn(event.target.value);
+    // Perform actions based on the selected HSN code here
   };
-
-
   const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
   const [groupsData, setGroupsData] = useState(/* initial value */);
   const [schedulesData, setSchedulesData] = useState(/* initial value */);
@@ -588,21 +600,13 @@ const InvoiceStock = () => {
 
         if (data && typeof data === "object") {
           if (
-            // data.hasOwnProperty("taxCodes") &&
-            // Array.isArray(data.taxCodes) &&
-            // data.hasOwnProperty("group") &&
-            // Array.isArray(data.group) &&
             data.hasOwnProperty("schedule") &&
             Array.isArray(data.schedule)
           ) {
-            // setTaxCodeData(data.taxCodes);
-            // setGroupsData(data.group);
             setSchedulesData(data.schedule);
 
             setFormData({
               ...formData,
-              // taxCode: data.taxCodes[0],
-              // group: data.group[0],
               schedule: data.schedule[0],
             });
           } else {
@@ -649,6 +653,7 @@ const InvoiceStock = () => {
                   }
                   styles={customStyles}
                 />
+                {/* <button className="plus"   onClick={togglePopup}>+</button>  */}
               </div>
             </div>
             <div className="input-container">
@@ -815,7 +820,6 @@ const InvoiceStock = () => {
               <Select
                 options={productOptions}
                 onChange={(selectedOption) => {
-                  // Handle selected product
                   console.log('Selected product:', selectedOption);
                 }}
               />
@@ -834,16 +838,13 @@ const InvoiceStock = () => {
             <div className="input-container-1">
               <label htmlFor="Category">Category</label>
               <Select
+                // className="item-shedu-sele"
                 name="schedule"
                 value={{ label: formData.schedule, value: formData.schedule }}
-                options={
-                  schedulesData
-                    ? schedulesData.map((schedule) => ({
-                        label: schedule,
-                        value: schedule,
-                      }))
-                    : []
-                }
+                options={schedulesData ? schedulesData.map((schedule) => ({
+                  label: schedule,
+                  value: schedule,
+                })) : []} 
                 onChange={(selectedOption) =>
                   handleSelectChange("schedule", selectedOption)
                 }
@@ -875,11 +876,11 @@ const InvoiceStock = () => {
             <div className="input-container-1">
               <label htmlFor="Unit">Packing</label>
               <Select
-                options={unitPerBoxOptions}
-                onChange={(selectedOption) => {
-                  console.log("Selected unit per box:", selectedOption);
-                }}
-              />
+        options={unitPerBoxOptions}
+        onChange={(selectedOption) => {
+          console.log('Selected unit per box:', selectedOption);
+        }}
+      />
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -918,10 +919,8 @@ const InvoiceStock = () => {
         options={salesRates}
         onChange={(selectedOption) => {
           console.log('Selected sales rate:', selectedOption);
-          // Perform other actions based on the selected option
         }}
-      />
-            </div>
+      /></div>
             <div className="input-container-1">
               <label htmlFor="MRP">MRP/Strip</label>
               <Select
@@ -929,8 +928,7 @@ const InvoiceStock = () => {
         onChange={(selectedOption) => {
           console.log('Selected purchase rate:', selectedOption);
         }}
-      />
-            </div>
+      />  </div>
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="DiscountInput">Discount</label>
@@ -947,7 +945,6 @@ const InvoiceStock = () => {
             <div className="input-container-2">
               <label htmlFor="HSNCode">HSN Code</label>
               <select
-        // className="item-hsn-selec"
         name="hsn"
         value={formData.hsn}
         onChange={(event) => handleSelectChange("hsn", event.target.value)}
