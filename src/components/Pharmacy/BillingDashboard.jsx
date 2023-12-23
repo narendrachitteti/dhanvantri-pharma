@@ -187,7 +187,15 @@ const renderFastMovingMedicines = () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getIn");
       let totalCollection = response.data.length;
+      // const totalSubtotalWithGST = response.data.reduce(
+      //         (accumulator, response) => {
+      //           response.PatientBills.forEach((PatientBills) => {
+      //             accumulator += PatientBills.subtotalWithGST || 0;
+      //           });
+      //           return accumulator;
+      //         },0);
       setTotalCollection(totalCollection);
+      // setTotalbills(totalSubtotalWithGST);
     } catch (error) {
       console.error("API Error:", error); 
     }
