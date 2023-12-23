@@ -36,20 +36,17 @@ const handleLogin = async () => {
       return;
     }
 
-    // Make a POST request to the backend login route
-    const response = await fetch('http://localhost:5000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    // Make a GET request to the backend login route
+    const response = await fetch(`http://localhost:5000/api/user?email=${email}&password=${password}`);
 
     const data = await response.json();
 
-    if (response.ok) {
-      // If the login is successful, navigate to the desired route
-      navigate('/pharmacynav');
+    // Inside the if (response.ok) block in handleLogin function
+      if (response.ok) {
+        // Save user details in local storage
+        localStorage.setItem("staffid", data.staffid);
+        // Navigate to the pharmacynav route
+        navigate('/pharmabilling');
     } else {
       // If the login fails, display an error message
       setShowAlert(true);
@@ -60,6 +57,7 @@ const handleLogin = async () => {
     console.error('Error during login:', error);
   }
 };
+
 
 
 
