@@ -80,7 +80,7 @@ const Form3 = () => {
     <>
     <PharmacyNav/>
     <div className='Form3-vik'>
-      <h2>Tax List</h2>
+      <h2 className='company-list'>Tax List</h2>
       <button onClick={() => setShowAddForm(true)}>Add Tax</button>
 
       {/* Modal for adding a new tax */}

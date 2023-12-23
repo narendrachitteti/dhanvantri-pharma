@@ -62,7 +62,7 @@
 .data-table-OP th {
   background-color: #9b8bf4;
   color: rgb(10, 9, 9);
-  position: sticky;
+  position:sticky;
   top: 0; /* Make the header sticky at the top */
   /* z-index: 1; */
 }
