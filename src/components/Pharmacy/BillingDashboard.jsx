@@ -74,6 +74,7 @@ function BillingDashboard() {
     // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
+  
 
   const fetchData = async () => {
     try {
