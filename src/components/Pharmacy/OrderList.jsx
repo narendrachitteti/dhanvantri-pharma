@@ -214,12 +214,12 @@ function OrderList() {
         className="OrderList-main"
         style={{  fontFamily: "Inria Serif" }}
       ><br/>
-        <h2>
+        <h1 style={{margin:'.5rem'}}>
           <Link to="/PharmacyHome" style={{color: "#9b8bf4" }}>
             <FaArrowCircleLeft />
-          </Link>{" "}
-         &nbsp;Purchase Order
-        </h2>
+          </Link>{" "} 
+        <span>Purchase Order</span>
+        </h1>
         <hr style={{ backgroundColor: "black", padding: "1px" }} />
         <Search filterText={filterText} onFilterTextChange={setFilterText} />
         <div className="dropdown-table">

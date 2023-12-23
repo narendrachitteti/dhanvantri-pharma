@@ -71,19 +71,19 @@ function Pharmacystock() {
       <div className="page-container-177">
         <div className="content-container-177">
           <div className="left-side-177">
-            <h1>
+            <h1 style={{fontFamily:'roboto'}}>
               <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
                 <FaArrowCircleLeft />
               </Link>{" "}
-              &nbsp;Pharmacy Stocks
+             Pharmacy Stocks
             </h1>
           </div>
         </div>
         <div className="red-container-177">
-          <div className="search-bar-container-177">
+          <div className="">
             <input
               type="text"
-              className="search-bar-177"
+              style={{width:'300px',padding:'.5rem',margin:'.3rem'}}
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
