@@ -10,6 +10,11 @@
     text-align: center;
    
   }
+  .print-btn{
+    width: 5%;
+    height: 40px;
+    margin-left: 2%;
+  }
   .flex-change34{
     display:flex;
     /* justify-content: space-between; */
