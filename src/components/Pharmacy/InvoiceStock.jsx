@@ -14,7 +14,7 @@ const InvoiceStock = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [tableData, setTableData] = useState([]);
-  const [stockName, /* setStockName */] = useState("");
+  const [stockName /* setStockName */] = useState("");
   const [date, setDate] = useState("");
   const [Medicine, setMedicine] = useState("");
   const [Manufacturer, setManufacturer] = useState("");
@@ -26,8 +26,8 @@ const InvoiceStock = () => {
   const [Freestrips, setFreestrips] = useState("");
   const [Gst, setGst] = useState("");
   const [supplieddate, setSupplieddate] = useState("");
-  const [ /*CGst */, setCGst] = useState("");
-  const [/*SGst */, setSGst] = useState("");
+  const [, /*CGst */ setCGst] = useState("");
+  const [, /*SGst */ setSGst] = useState("");
   const [price, setPrice] = useState("");
   const [MRP, setMRP] = useState("");
   const [Discount, setDiscount] = useState("");
@@ -42,14 +42,11 @@ const InvoiceStock = () => {
 
   const [isPopupVisible, setPopupVisible] = useState(false);
 
-
-
-  const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
-  const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
+  const [, /*totalAmountBeforeTax */ setTotalAmountBeforeTax] = useState(0);
+  const [, /*totalDiscountAmount */ setTotalDiscountAmount] = useState(0);
   // const [/*totalDiscountPercentage */, setTotalDiscountPercentage] = useState(0);
   const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
-
 
   // const [isPopupVisible, setPopupVisible] = useState(false);
 
@@ -57,8 +54,6 @@ const InvoiceStock = () => {
     console.log("Opening popup");
     setPopupVisible(true);
   };
-
-
 
   const handleGSTChange = (e) => {
     const newGST = parseFloat(e.target.value);
@@ -77,7 +72,6 @@ const InvoiceStock = () => {
     setSGst(newSGST);
   };
 
-
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -90,11 +84,7 @@ const InvoiceStock = () => {
     const pricePerStrip = parseFloat(price);
     const discountPercentage = parseFloat(Discount) || 0; // Get the discount percentage
 
-    if (
-      !isNaN(noOfStrips) &&
-      !isNaN(gstPercentage) &&
-      !isNaN(pricePerStrip)
-    ) {
+    if (!isNaN(noOfStrips) && !isNaN(gstPercentage) && !isNaN(pricePerStrip)) {
       const totalPriceBeforeDiscount =
         pricePerStrip * noOfStrips +
         pricePerStrip * noOfStrips * (gstPercentage / 100);
@@ -114,6 +104,7 @@ const InvoiceStock = () => {
     }
   };
 
+  
   useEffect(() => {
     // Calculate Net Price whenever any of the dependent values change
     calculateNetPrice();
@@ -169,7 +160,11 @@ const InvoiceStock = () => {
         Manufacturer,
         Category,
         Batch,
-        BatchExpiry: selectedDate ? `${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getFullYear()).slice(-2)}` : "", // Fetch month and year as MM-YY
+        BatchExpiry: selectedDate
+          ? `${String(selectedDate.getMonth() + 1).padStart(2, "0")}-${String(
+              selectedDate.getFullYear()
+            ).slice(-2)}`
+          : "", // Fetch month and year as MM-YY
         Unit,
         strips,
         Freestrips,
@@ -199,7 +194,6 @@ const InvoiceStock = () => {
 
       // Update the state with the new total discount amount
       setTotalDiscountAmount(totalDiscountAmount);
-
 
       // Log the unique ID of the newly added medicine
       console.log(
@@ -313,7 +307,6 @@ const InvoiceStock = () => {
       console.error(error);
       // Handle error if the request fails
     }
-
   };
 
   const calculateTotalPriceBeforeTax = () => {
@@ -374,11 +367,8 @@ const InvoiceStock = () => {
     };
   };
 
-
   const amounts = calculateAmounts();
   const totalDiscount = calculateTotalDiscount();
-
-
 
   const [stockists, setStockists] = useState([]);
   const [newStockistData, setNewStockistData] = useState({
@@ -464,12 +454,11 @@ const InvoiceStock = () => {
   //   fetchProductData();
   // }, []);
 
-
   // const [productOptions, setProductOptions] = useState([]);
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products');
+        const response = await fetch("http://localhost:5000/api/products");
         if (response.ok) {
           const products = await response.json();
           const options = products.map((product) => ({
@@ -478,7 +467,7 @@ const InvoiceStock = () => {
           }));
           setProductOptions(options);
         } else {
-          throw new Error('Failed to fetch products');
+          throw new Error("Failed to fetch products");
         }
       } catch (error) {
         console.error(error);
@@ -488,43 +477,46 @@ const InvoiceStock = () => {
 
     fetchProductData();
   }, []);
-  
-
 
   const [salesRates, setSalesRates] = useState([]);
-
-  
 
   useEffect(() => {
     const fetchSalesRates = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/salesRates');
+        const response = await axios.get(
+          "http://localhost:5000/api/salesRates"
+        );
         const fetchedSalesRates = response.data || [];
 
-      
         const options = fetchedSalesRates.map((rate) => ({
-          label: (rate.salesRate && rate.salesRate.toString()) || '', 
-          value: rate._id || '',
+          label: (rate.salesRate && rate.salesRate.toString()) || "",
+          value: rate._id || "",
         }));
         setSalesRates(options);
       } catch (error) {
-        console.error('Error fetching salesRates:', error);
+        console.error("Error fetching salesRates:", error);
       }
     };
 
     fetchSalesRates();
   }, []);
 
-
   const [purchaseRates, setPurchaseRates] = useState([]);
 
   useEffect(() => {
     const fetchPurchaseRates = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/purchaseRates');
-        setPurchaseRates(response.data.map(rate => ({ value: rate.purchaseRate, label: rate.purchaseRate })));
+        const response = await axios.get(
+          "http://localhost:5000/api/purchaseRates"
+        );
+        setPurchaseRates(
+          response.data.map((rate) => ({
+            value: rate.purchaseRate,
+            label: rate.purchaseRate,
+          }))
+        );
       } catch (error) {
-        console.error('Error fetching purchaseRates:', error);
+        console.error("Error fetching purchaseRates:", error);
       }
     };
 
@@ -536,36 +528,47 @@ const InvoiceStock = () => {
   useEffect(() => {
     const fetchUnitPerBox = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/unitPerBox');
-        setUnitPerBoxOptions(response.data.map(item => ({ value: item.unitPerBox, label: item.unitPerBox })));
+        const response = await axios.get(
+          "http://localhost:5000/api/unitPerBox"
+        );
+        setUnitPerBoxOptions(
+          response.data.map((item) => ({
+            value: item.unitPerBox,
+            label: item.unitPerBox,
+          }))
+        );
       } catch (error) {
-        console.error('Error fetching unitPerBox:', error);
+        console.error("Error fetching unitPerBox:", error);
       }
     };
 
     fetchUnitPerBox();
   }, []);
 
-
   const [hsnData, setHsnData] = useState([]);
-  const [formData, setFormData] = useState({ hsn: '' });
-  const [selectedHsn, setSelectedHsn] = useState('');
+  const [formData, setFormData] = useState({ hsn: "" });
+  const [selectedHsn, setSelectedHsn] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/companiesAndHsncodes");
+        const response = await fetch(
+          "http://localhost:5000/api/companiesAndHsncodes"
+        );
         const data = await response.json();
 
         if (data && typeof data === "object" && Array.isArray(data.hsn)) {
           setHsnData(data.hsn);
 
-          setFormData(prevFormData => ({
+          setFormData((prevFormData) => ({
             ...prevFormData,
-            hsn: data.hsn.length > 0 ? data.hsn[0] : '' // Set the first HSN code as default
+            hsn: data.hsn.length > 0 ? data.hsn[0] : "", // Set the first HSN code as default
           }));
         } else {
-          console.error("Data received from the API is not in the expected format:", data);
+          console.error(
+            "Data received from the API is not in the expected format:",
+            data
+          );
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -576,9 +579,9 @@ const InvoiceStock = () => {
   }, []);
 
   const handleSelectChange = (fieldName, selectedOption) => {
-    setFormData(prevFormData => ({
+    setFormData((prevFormData) => ({
       ...prevFormData,
-      [fieldName]: selectedOption.value
+      [fieldName]: selectedOption.value,
     }));
   };
 
@@ -587,18 +590,18 @@ const InvoiceStock = () => {
     // Perform actions based on the selected HSN code here
   };
 
-
   const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
   const [groupsData, setGroupsData] = useState(/* initial value */);
   const [schedulesData, setSchedulesData] = useState(/* initial value */);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/distincttaxcodes");
+        const response = await fetch(
+          "http://localhost:5000/api/distincttaxcodes"
+        );
         const data = await response.json();
-  
+
         if (data && typeof data === "object") {
           if (
             // data.hasOwnProperty("taxCodes") &&
@@ -611,7 +614,7 @@ const InvoiceStock = () => {
             // setTaxCodeData(data.taxCodes);
             // setGroupsData(data.group);
             setSchedulesData(data.schedule);
-  
+
             setFormData({
               ...formData,
               // taxCode: data.taxCodes[0],
@@ -619,7 +622,10 @@ const InvoiceStock = () => {
               schedule: data.schedule[0],
             });
           } else {
-            console.error("Data received from the API is not in the expected format:", data);
+            console.error(
+              "Data received from the API is not in the expected format:",
+              data
+            );
           }
         } else {
           console.error("Invalid data received from the API:", data);
@@ -632,24 +638,34 @@ const InvoiceStock = () => {
   }, []);
 
 
+
+  
+
   return (
     <>
       <PharmacyNav />
       <div className="container-txj" style={{ fontFamily: "Inria Serif" }}>
         <div className="main-container-tjx1">
-          <h3> <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
-            <FaArrowCircleLeft />
-          </Link> &nbsp;Add invoice</h3>
+          <h3>
+            {" "}
+            <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
+              <FaArrowCircleLeft />
+            </Link>{" "}
+            &nbsp;Add invoice
+          </h3>
           <hr />
           <div className="input-row">
             <div className="input-container">
-
               <label htmlFor="stockName">Stockist Name</label>
               <div className="stockist-merge-plus">
                 <Select
                   options={stockistOptions}
-                  value={stockistOptions.find((option) => option.value === stockistValue)}
-                  onChange={(selectedOption) => setStockistValue(selectedOption.value)}
+                  value={stockistOptions.find(
+                    (option) => option.value === stockistValue
+                  )}
+                  onChange={(selectedOption) =>
+                    setStockistValue(selectedOption.value)
+                  }
                   styles={customStyles}
                 />
                 {/* <button className="plus"   onClick={togglePopup}>+</button>  */}
@@ -683,7 +699,6 @@ const InvoiceStock = () => {
               />
             </div>
 
-
             <div className="BatchExpiryContainer">
               <button className="BatchExpiryButton" onClick={openPopup}>
                 About To Expire
@@ -697,7 +712,6 @@ const InvoiceStock = () => {
                     X
                   </button>
                   <hr />
-
                   <div className="popupv-content-batchexpiry">
                     <div className="popup-container-batch">
                       <div className="TableContainerBatchExpiry">
@@ -709,7 +723,7 @@ const InvoiceStock = () => {
                                 Invoice Number
                               </th>
                               <th className="TableHeaderBatchExpiry">
-                                StockName
+                                Stock Name
                               </th>
                               <th className="TableHeaderBatchExpiry">
                                 Expiry Date
@@ -721,43 +735,42 @@ const InvoiceStock = () => {
                           </thead>
                           <tbody>
                             {tableData && tableData.length > 0 ? (
-                            tableData.map((item) => (
-                              <tr key={item.slno}>
-                                <td className="TableCellBatchExpiry">
-                                  {item.slno}
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                  {item.invoiceNumber}
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                  {item.stockName}
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                  {item.expiryDate}
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                  {item.daysToExpire}
-                                </td>
-                              </tr>
-                            ))
+                              tableData.map((item) => (
+                                <tr key={item.slno}>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.slno}
+                                  </td>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.invoiceNumber}
+                                  </td>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.stockName}
+                                  </td>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.expiryDate}
+                                  </td>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.daysToExpire}
+                                  </td>
+                                </tr>
+                              ))
                             ) : (
-                              <p>No data available</p>
+                              <tr>
+                                <td colSpan="5">No data available</td>
+                              </tr>
                             )}
                           </tbody>
                         </table>
                       </div>
                     </div>
                   </div>
+                  ); };
                 </div>
               )}
             </div>
-
-
-
           </div>
         </div>
       </div>
-
 
       {showPopup && (
         <div className="popupf">
@@ -791,7 +804,6 @@ const InvoiceStock = () => {
                   gstno: e.target.value,
                 })
               }
-
             />
             &nbsp;&nbsp;
             <input
@@ -813,7 +825,10 @@ const InvoiceStock = () => {
         </div>
       )}
 
-      <div className="second-container-txj" style={{ fontFamily: "Inria Serif" }} >
+      <div
+        className="second-container-txj"
+        style={{ fontFamily: "Inria Serif" }}
+      >
         <div className="input-boxes">
           <div className="input-row-1">
             <div className="input-container-1">
@@ -822,7 +837,7 @@ const InvoiceStock = () => {
                 options={productOptions}
                 onChange={(selectedOption) => {
                   // Handle selected product
-                  console.log('Selected product:', selectedOption);
+                  console.log("Selected product:", selectedOption);
                 }}
               />
             </div>
@@ -843,15 +858,18 @@ const InvoiceStock = () => {
                 // className="item-shedu-sele"
                 name="schedule"
                 value={{ label: formData.schedule, value: formData.schedule }}
-                options={schedulesData ? schedulesData.map((schedule) => ({
-                  label: schedule,
-                  value: schedule,
-                })) : []} 
+                options={
+                  schedulesData
+                    ? schedulesData.map((schedule) => ({
+                        label: schedule,
+                        value: schedule,
+                      }))
+                    : []
+                }
                 onChange={(selectedOption) =>
                   handleSelectChange("schedule", selectedOption)
                 }
               />
-
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -879,11 +897,11 @@ const InvoiceStock = () => {
             <div className="input-container-1">
               <label htmlFor="Unit">Packing</label>
               <Select
-        options={unitPerBoxOptions}
-        onChange={(selectedOption) => {
-          console.log('Selected unit per box:', selectedOption);
-        }}
-      />
+                options={unitPerBoxOptions}
+                onChange={(selectedOption) => {
+                  console.log("Selected unit per box:", selectedOption);
+                }}
+              />
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -919,21 +937,21 @@ const InvoiceStock = () => {
             <div className="input-container-1">
               <label htmlFor="price">Price/Strip</label>
               <Select
-        options={salesRates}
-        onChange={(selectedOption) => {
-          console.log('Selected sales rate:', selectedOption);
-          // Perform other actions based on the selected option
-        }}
-      />
+                options={salesRates}
+                onChange={(selectedOption) => {
+                  console.log("Selected sales rate:", selectedOption);
+                  // Perform other actions based on the selected option
+                }}
+              />
             </div>
             <div className="input-container-1">
               <label htmlFor="MRP">MRP/Strip</label>
               <Select
-        options={purchaseRates}
-        onChange={(selectedOption) => {
-          console.log('Selected purchase rate:', selectedOption);
-        }}
-      />
+                options={purchaseRates}
+                onChange={(selectedOption) => {
+                  console.log("Selected purchase rate:", selectedOption);
+                }}
+              />
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -951,23 +969,25 @@ const InvoiceStock = () => {
             <div className="input-container-2">
               <label htmlFor="HSNCode">HSN Code</label>
               <select
-        // className="item-hsn-selec"
-        name="hsn"
-        value={formData.hsn}
-        onChange={(event) => handleSelectChange("hsn", event.target.value)}
-      >
-        {hsnData.map((hsn, index) => (
-          <option key={index} value={hsn}>
-            {hsn}
-          </option>
-        ))}
-      </select>
+                // className="item-hsn-selec"
+                name="hsn"
+                value={formData.hsn}
+                onChange={(event) =>
+                  handleSelectChange("hsn", event.target.value)
+                }
+              >
+                {hsnData.map((hsn, index) => (
+                  <option key={index} value={hsn}>
+                    {hsn}
+                  </option>
+                ))}
+              </select>
             </div>
-            &nbsp;&nbsp;
-            &nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;
             <div className="input-container-2">
               <label htmlFor="NetPrice">Net Price</label>
-              <input className="netp-input"
+              <input
+                className="netp-input"
                 type="text"
                 id="NetPrice"
                 value={NetPrice}
@@ -996,9 +1016,9 @@ const InvoiceStock = () => {
             </div>
           </div>
         </div>
-        <div className="container-table-tnx" >
+        <div className="container-table-tnx">
           <table className="invoice-table">
-            <thead >
+            <thead>
               <tr>
                 <th>Product</th>
                 <th>Mfr</th>
@@ -1104,7 +1124,11 @@ const InvoiceStock = () => {
         </table>
       </div>
       <div className="save-tnx">
-        <button className="save-tnx1" onClick={handleSaveInvoice} style={{ backgroundColor: "#9b8bf4", fontFamily: "Inria Serif" }}>
+        <button
+          className="save-tnx1"
+          onClick={handleSaveInvoice}
+          style={{ backgroundColor: "#9b8bf4", fontFamily: "Inria Serif" }}
+        >
           Save Invoice
         </button>
       </div>
