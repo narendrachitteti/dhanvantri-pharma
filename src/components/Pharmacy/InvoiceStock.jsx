@@ -42,45 +42,28 @@ const InvoiceStock = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
-  // const [/*totalDiscountPercentage */, setTotalDiscountPercentage] = useState(0);
   const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
-
-
-  // const [isPopupVisible, setPopupVisible] = useState(false);
-
   const openPopup = () => {
     console.log("Opening popup");
     setPopupVisible(true);
   };
-
-
-
   const handleGSTChange = (e) => {
     const newGST = parseFloat(e.target.value);
-
-    // Calculate CGST and SGST based on GST value
     const newCGST = newGST / 2;
     const newSGST = newGST / 2;
-
-    // Store the total GST value for this invoice
     setTotalGST(newGST);
-    setIsGSTSet(true); // Flag that GST has been set for this invoice
-
-    // Update state with new values
+    setIsGSTSet(true); // Flag that GST has been set for this invoiceUpdate state with new values
     setGst(newGST);
     setCGst(newCGST);
     setSGst(newSGST);
   };
-
-
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   const calculateNetPrice = () => {
     // Calculate Net Price based on the formula
-
     const noOfStrips = parseFloat(strips);
     const gstPercentage = parseFloat(Gst);
     const pricePerStrip = parseFloat(price);
@@ -94,16 +77,12 @@ const InvoiceStock = () => {
       const totalPriceBeforeDiscount =
         pricePerStrip * noOfStrips +
         pricePerStrip * noOfStrips * (gstPercentage / 100);
-
       // Calculate the discount amount
       const discountAmount =
         (totalPriceBeforeDiscount * discountPercentage) / 100;
-
       // Calculate Net Price by deducting the discount amount
       const netPrice = totalPriceBeforeDiscount - discountAmount;
-
       setNetPrice(netPrice.toFixed(2)); // Round to 2 decimal places and set in state
-
       // Calculate the quantity
       const quantity = pricePerStrip * noOfStrips + parseFloat(Freestrips);
       setQuantity(quantity);
@@ -157,16 +136,16 @@ const InvoiceStock = () => {
       // Create a new medicine object with the current state values
       const newMedicine = {
         MedId: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
-        Medicine,
+        Medicine: selectedProduct,
         Manufacturer,
         Category,
         Batch,
         BatchExpiry: selectedDate ? `${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getFullYear()).slice(-2)}` : "", // Fetch month and year as MM-YY
-        Unit,
+        Unit: selectedUnitPerBox,
         strips,
         Freestrips,
         Gst,
-        price,
+        price: selectedSalesRate,
         MRP,
         Discount,
         Total,
@@ -187,7 +166,7 @@ const InvoiceStock = () => {
       );
       // Update the state with the new total discount amount
       setTotalDiscountAmount(totalDiscountAmount);
-// Log the unique ID of the newly added medicine
+      // Log the unique ID of the newly added medicine
       console.log(
         "Unique ID of the newly added medicine:",
         newMedicine.customId
@@ -304,7 +283,7 @@ const InvoiceStock = () => {
     const totalPriceBeforeTax = calculateTotalPriceBeforeTax();
     setTotalAmountBeforeTax(totalPriceBeforeTax); // Update the state
   }, [tableData][calculateTotalPriceBeforeTax]);
-   // Update the Total calculation to consider the discount
+  // Update the Total calculation to consider the discount
   const calculateAmounts = () => {
     // Calculate the total amount before tax and total discount amount
     let totalAmountBeforeTax = 0;
@@ -356,7 +335,7 @@ const InvoiceStock = () => {
     setShowPopup(!showPopup);
   };
   const handleAddStockist = () => {
-
+    // Make sure all fields are filled
     if (
       !newStockistData.name ||
       !newStockistData.gstno ||
@@ -365,21 +344,18 @@ const InvoiceStock = () => {
       alert("Please fill in all fields.");
       return;
     }
-
     // Prepare the data for the POST request
     const postData = {
       name: newStockistData.name,
       gstNumber: newStockistData.gstno,
       email: newStockistData.email,
     };
-
     // Send a POST request to add a new stockist
     axios
       .post("http://localhost:5000/api/stockists", postData)
       .then((response) => {
         // Handle the success case
         alert("Stockist added successfully.");
-
         // Clear the newStockistData state and close the popup
         setNewStockistData({
           name: "",
@@ -387,7 +363,6 @@ const InvoiceStock = () => {
           email: "",
         });
         setShowPopup(false);
-
         // Fetch the updated stockists data here
         axios
           .get("http://localhost:5000/api/stockists")
@@ -405,80 +380,90 @@ const InvoiceStock = () => {
         alert("Error adding stockist. Please try again.");
       });
   };
+
+
+  const [selectedProduct, setSelectedProduct] = useState('');
+
+  // ... other state variables
   const [productOptions, setProductOptions] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchProductData = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:5000/api/products'); // Replace with your backend URL
-  //       if (response.ok) {
-  //         const products = await response.json();
-  //         const options = products.map((product) => ({ label: product.product, value: product.product }));
-  //         setProductOptions(options);
-  //       } else {
-  //         throw new Error('Failed to fetch products');
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //       // Handle error state or display a message to the user
-  //     }
-  //   };
-
-  //   fetchProductData();
-  // }, []);
+  const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [unitPerBoxes, setUnitPerBoxes] = useState([]);
+  // const [selectedProduct, setSelectedProduct] = useState('');
+  const [selectedUnitPerBox, setSelectedUnitPerBox] = useState('');
 
 
-  // const [productOptions, setProductOptions] = useState([]);
   useEffect(() => {
-    const fetchProductData = async () => {
+    const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products');
-        if (response.ok) {
-          const products = await response.json();
-          const options = products.map((product) => ({
-            label: product.product,
-            value: product.product,
-          }));
-          setProductOptions(options);
-        } else {
-          throw new Error('Failed to fetch products');
-        }
+        const response = await axios.get('http://localhost:5000/api/products');
+        setProducts(response.data);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching products:', error);
       }
     };
 
-    fetchProductData();
-  }, []);
-  const [salesRates, setSalesRates] = useState([]);
+    const fetchUnitPerBoxes = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/unitPerBox');
+        setUnitPerBoxes(response.data);
+      } catch (error) {
+        console.error('Error fetching unit per boxes:', error);
+      }
+    };
 
-  
-
-  useEffect(() => {
     const fetchSalesRates = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/salesRates');
-        const fetchedSalesRates = response.data || [];
-
-      
-        const options = fetchedSalesRates.map((rate) => ({
-          label: (rate.salesRate && rate.salesRate.toString()) || '', 
-          value: rate._id || '',
-        }));
-        setSalesRates(options);
+        // Use the setter function to update the state
+        setSalesRates(response.data);
       } catch (error) {
         console.error('Error fetching salesRates:', error);
       }
     };
+    
 
-    fetchSalesRates();
+
+      fetchSalesRates();
+    fetchProducts();
+    fetchUnitPerBoxes();
   }, []);
 
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleProductChange = (e) => {
+    setSelectedProduct(e.target.value);
   };
+  const handleUnitPerBoxChange = (e) => {
+    setSelectedUnitPerBox(e.target.value);
+  };
+
+  const handleSalesRateChange = (e) => {
+    setSelectedSalesRate(e.target.value);
+  };
+  const [selectedSalesRate, setSelectedSalesRate] = useState('');
+  const [salesRates, setSalesRates] = useState([]);
+
+
+  // useEffect(() => {
+  //   const fetchSalesRates = async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:5000/api/salesRates');
+  //       const fetchedSalesRates = response.data || [];
+
+
+  //       const options = fetchedSalesRates.map((rate) => ({
+  //         label: (rate.salesRate && rate.salesRate.toString()) || '', 
+  //         value: rate._id || '',
+  //       }));
+  //       setSalesRates(options);
+  //     } catch (error) {
+  //       console.error('Error fetching salesRates:', error);
+  //     }
+  //   };
+
+  //   fetchSalesRates();
+  // }, []);
+
+  const [units, setUnits] = useState([]);
 
   const [purchaseRates, setPurchaseRates] = useState([]);
   useEffect(() => {
@@ -494,20 +479,20 @@ const InvoiceStock = () => {
     fetchPurchaseRates();
   }, []);
 
-  const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
+  // const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
 
-  useEffect(() => {
-    const fetchUnitPerBox = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/unitPerBox');
-        setUnitPerBoxOptions(response.data.map(item => ({ value: item.unitPerBox, label: item.unitPerBox })));
-      } catch (error) {
-        console.error('Error fetching unitPerBox:', error);
-      }
-    };
-    fetchUnitPerBox();
-  }, []);
-  
+  // useEffect(() => {
+  //   const fetchUnitPerBox = async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:5000/api/unitPerBox');
+  //       setUnitPerBoxOptions(response.data.map(item => ({ value: item.unitPerBox, label: item.unitPerBox })));
+  //     } catch (error) {
+  //       console.error('Error fetching unitPerBox:', error);
+  //     }
+  //   };
+  //   fetchUnitPerBox();
+  // }, []);
+
   const [hsnData, setHsnData] = useState([]);
   const [formData, setFormData] = useState({ hsn: '' });
   const [selectedHsn, setSelectedHsn] = useState('');
@@ -542,33 +527,26 @@ const InvoiceStock = () => {
   };
   const handleHsnChange = (event) => {
     setSelectedHsn(event.target.value);
+    // Perform actions based on the selected HSN code here
   };
-  const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
-  const [groupsData, setGroupsData] = useState(/* initial value */);
+  // const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
+  // const [groupsData, setGroupsData] = useState(/* initial value */);
   const [schedulesData, setSchedulesData] = useState(/* initial value */);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:5000/api/distincttaxcodes");
         const data = await response.json();
-  
+
         if (data && typeof data === "object") {
           if (
-            // data.hasOwnProperty("taxCodes") &&
-            // Array.isArray(data.taxCodes) &&
-            // data.hasOwnProperty("group") &&
-            // Array.isArray(data.group) &&
             data.hasOwnProperty("schedule") &&
             Array.isArray(data.schedule)
           ) {
-            // setTaxCodeData(data.taxCodes);
-            // setGroupsData(data.group);
             setSchedulesData(data.schedule);
-  
+
             setFormData({
               ...formData,
-              // taxCode: data.taxCodes[0],
-              // group: data.group[0],
               schedule: data.schedule[0],
             });
           } else {
@@ -602,6 +580,7 @@ const InvoiceStock = () => {
                   onChange={(selectedOption) => setStockistValue(selectedOption.value)}
                   styles={customStyles}
                 />
+                {/* <button className="plus"   onClick={togglePopup}>+</button>  */}
               </div>
             </div>
             <div className="input-container">
@@ -667,25 +646,25 @@ const InvoiceStock = () => {
                           </thead>
                           <tbody>
                             {tableData && tableData.length > 0 ? (
-                            tableData.map((item) => (
-                              <tr key={item.slno}>
-                                <td className="TableCellBatchExpiry">
-                                  {item.slno}
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                  {item.invoiceNumber}
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                  {item.stockName}
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                  {item.expiryDate}
-                                </td>
-                                <td className="TableCellBatchExpiry">
-                                  {item.daysToExpire}
-                                </td>
-                              </tr>
-                            ))
+                              tableData.map((item) => (
+                                <tr key={item.slno}>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.slno}
+                                  </td>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.invoiceNumber}
+                                  </td>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.stockName}
+                                  </td>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.expiryDate}
+                                  </td>
+                                  <td className="TableCellBatchExpiry">
+                                    {item.daysToExpire}
+                                  </td>
+                                </tr>
+                              ))
                             ) : (
                               <p>No data available</p>
                             )}
@@ -757,12 +736,19 @@ const InvoiceStock = () => {
           <div className="input-row-1">
             <div className="input-container-1">
               <label htmlFor="Medicine">Product</label>
-              <Select
-                options={productOptions}
-                onChange={(selectedOption) => {
-                  console.log('Selected product:', selectedOption);
-                }}
-              />
+              <select
+                id="productSelect"
+                // className="createOrderInput"
+                value={selectedProduct}
+                onChange={handleProductChange}
+              >
+                <option value="">Select a product</option>
+                {products.map((product) => (
+                  <option key={product._id} value={product.product}>
+                    {product.product}
+                  </option>
+                ))}
+              </select>
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -778,12 +764,13 @@ const InvoiceStock = () => {
             <div className="input-container-1">
               <label htmlFor="Category">Category</label>
               <Select
+                // className="item-shedu-sele"
                 name="schedule"
                 value={{ label: formData.schedule, value: formData.schedule }}
                 options={schedulesData ? schedulesData.map((schedule) => ({
                   label: schedule,
                   value: schedule,
-                })) : []} 
+                })) : []}
                 onChange={(selectedOption) =>
                   handleSelectChange("schedule", selectedOption)
                 }
@@ -814,12 +801,18 @@ const InvoiceStock = () => {
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="Unit">Packing</label>
-              <Select
-        options={unitPerBoxOptions}
-        onChange={(selectedOption) => {
-          console.log('Selected unit per box:', selectedOption);
-        }}
-      />
+              <select
+                id="unitPerBoxSelect"
+                value={selectedUnitPerBox}
+                onChange={handleUnitPerBoxChange}
+              >
+                <option value="">Select an option</option>
+                {unitPerBoxes.map((item) => (
+                  <option key={item._id} value={item.unitPerBox}>
+                    {item.unitPerBox}
+                  </option>
+                ))}
+              </select>
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -853,21 +846,35 @@ const InvoiceStock = () => {
             </div>
             &nbsp;
             <div className="input-container-1">
-              <label htmlFor="price">Price/Strip</label>
-              <Select
-        options={salesRates}
-        onChange={(selectedOption) => {
-          console.log('Selected sales rate:', selectedOption);
-        }}
-      /></div>
+  <label htmlFor="price">Price/Strip</label>
+  <select
+    id="saleRateSelect"
+    value={selectedSalesRate}
+    onChange={handleSalesRateChange}
+  >
+    <option value="">Select a sale rate</option>
+    {salesRates && salesRates.length > 0 ? (
+      salesRates.map((rate) => (
+        <option key={rate.value} value={rate.value}>
+          {rate.label}
+        </option>
+      ))
+    ) : (
+      <option value="" disabled>
+        Loading...
+      </option>
+    )}
+  </select>
+</div>
+
             <div className="input-container-1">
               <label htmlFor="MRP">MRP/Strip</label>
               <Select
-        options={purchaseRates}
-        onChange={(selectedOption) => {
-          console.log('Selected purchase rate:', selectedOption);
-        }}
-      />  </div>
+                options={purchaseRates}
+                onChange={(selectedOption) => {
+                  console.log('Selected purchase rate:', selectedOption);
+                }}
+              />  </div>
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="DiscountInput">Discount</label>
@@ -884,16 +891,16 @@ const InvoiceStock = () => {
             <div className="input-container-2">
               <label htmlFor="HSNCode">HSN Code</label>
               <select
-        name="hsn"
-        value={formData.hsn}
-        onChange={(event) => handleSelectChange("hsn", event.target.value)}
-      >
-        {hsnData.map((hsn, index) => (
-          <option key={index} value={hsn}>
-            {hsn}
-          </option>
-        ))}
-      </select>
+                name="hsn"
+                value={formData.hsn}
+                onChange={(event) => handleSelectChange("hsn", event.target.value)}
+              >
+                {hsnData.map((hsn, index) => (
+                  <option key={index} value={hsn}>
+                    {hsn}
+                  </option>
+                ))}
+              </select>
             </div>
             &nbsp;&nbsp;
             &nbsp;&nbsp;
