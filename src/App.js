@@ -32,6 +32,8 @@ import Form4 from './components/Form4';
 import Invoice from './components/Pharmacy/invoice.js';
 import WholsaleRegis from './components/LoginForms/WholsaleRegis.js';
 import MedicineDataComponent from './components/Pharmacy/MedicineDataComponent.jsx';
+import PageNotFound from './PageNotFound.js';
+import PrivateRoute from './components/Pharmacy/PrivateRoute.js';
 
 
 function App() {
@@ -39,7 +41,10 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+        <Route path="/" element={<RetailWholecard/>}/>
+        <Route path="*" element={<PageNotFound/>} />
         <Route path='/WholesaleRegis' element={<WholsaleRegis/>}/>
+        {/* <Route element={<PrivateRoute/>}> */}
 
           <Route path='/PharmacyNav' element={<PharmacyNav/>}/>
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
@@ -65,13 +70,14 @@ function App() {
           <Route path="/Form3" element={<Form3/>}/>
           <Route path='/Form4' element={<Form4/>}/>
           <Route path="/RetailLogin" element={<RetailLogin/>}/>
-          <Route path="/" element={<RetailWholecard/>}/>
           <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>
           <Route path="/Creditnote" element={<Note/>}/>
           <Route path='/Stockist' element={<Stockist/>}/>
           <Route path='/invoice' element={<Invoice/>}/>   
           <Route path='/MedicineDataComponent' element={<MedicineDataComponent/>}/> 
+          {/* </Route> */}
+        
         </Routes>
       </Router>
     </div>

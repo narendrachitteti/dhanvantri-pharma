@@ -36,9 +36,12 @@ const handleLogin = async () => {
 
     const data = await response.json();
 
-    if (response.ok) {
-      // If the login is successful, navigate to the pharmacynav route
-      navigate('/pharmacynav');
+    // Inside the if (response.ok) block in handleLogin function
+      if (response.ok) {
+        // Save user details in local storage
+        localStorage.setItem("staffid", data.staffid);
+        // Navigate to the pharmacynav route
+        navigate('/pharmabilling');
     } else {
       // If the login fails, display an error message
       setShowAlert(true);
@@ -54,17 +57,22 @@ const handleLogin = async () => {
 
   return (
     <div>
-      <MDBContainer fluid>
-        <MDBRow className="d-flex justify-content-center align-items-center h-100  Rloginrow">
-          <MDBCol col="12" className="Rloginccol">
+      <MDBContainer fluid 
+      className='d-flex align-items-center justify-content-center bg-image-vik'
+      style={{backgroundImage: 'url(https://img.freepik.com/free-photo/medicines-medical-supplies-placed-blue_1150-19139.jpg?size=626&ext=jpg&ga=GA1.1.1108439072.1703323631&semt=sph)'}}
+
+
+      >
+        <MDBRow className="d-flex justify-content-center align-items-center h-100  ">
+          <MDBCol col="12" >
             <MDBCard
               id="logincon-vik"
 
-              className="bg my-5 mx-auto Rlogincard"
+              className="bg my-5 mx-auto "
 
               style={{ borderRadius: "1rem", maxWidth: "400px" }}
             >
-              <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100  Rlogincardbody"
+              <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100  "
               
 
               >
@@ -79,7 +87,7 @@ const handleLogin = async () => {
                   size="lg"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="Rlogininput"
+                 
                 />
                 <MDBInput
                   wrapperClass="mb-4 mx-5 w-100"
@@ -88,7 +96,7 @@ const handleLogin = async () => {
                   size="lg"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="Rlogininput"
+                 
                 />
 
                 <p>
@@ -96,7 +104,7 @@ const handleLogin = async () => {
                 </p>
                 <MDBBtn
                   outline
-                  className="Rloginbutton"
+                
                   size="lg"
                   onClick={handleLogin}
                 >
@@ -111,7 +119,7 @@ const handleLogin = async () => {
                   >
                     {alertMessage}
                     <MDBBtn
-                      className="Rloginbuttonclose"
+                    
                       onClick={() => setShowAlert(false)}
                       size="sm"
                     >

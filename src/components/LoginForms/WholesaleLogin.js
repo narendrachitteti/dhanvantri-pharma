@@ -25,8 +25,8 @@ function WholesaleLogin() {
   const navigate = useNavigate();
 
 // Update the handleLogin function
+// Update the handleLogin function
 const handleLogin = async () => {
-
   try {
     // Validate email and password
     if (!email || !password) {
@@ -41,9 +41,12 @@ const handleLogin = async () => {
 
     const data = await response.json();
 
-    if (response.ok) {
-      // If the login is successful, navigate to the pharmacynav route
-      navigate('/pharmacynav');
+    // Inside the if (response.ok) block in handleLogin function
+      if (response.ok) {
+        // Save user details in local storage
+        localStorage.setItem("staffid", data.staffid);
+        // Navigate to the pharmacynav route
+        navigate('/pharmabilling');
     } else {
       // If the login fails, display an error message
       setShowAlert(true);
@@ -58,16 +61,32 @@ const handleLogin = async () => {
 
 
 
+
   return (
     <div>
 
 
-<MDBContainer fluid   >
+<MDBContainer fluid  
+className='d-flex align-items-center justify-content-center bg-image-vik'
+style={{backgroundImage: 'url(https://img.freepik.com/free-photo/some-pills-spray-pill-bottle-needles-light-cyan-background-top-view-space-text_176474-1747.jpg?size=626&ext=jpg&ga=GA1.1.1108439072.1703323631&semt=ais)'}}
+
+// style={{backgroundImage: 'url(https://img.freepik.com/free-photo/medicines-medical-supplies-placed-blue_1150-19136.jpg?size=626&ext=jpg&ga=GA1.1.1108439072.1703323631&semt=ais)'}}
+
+
+
+
+ >
 
 <MDBRow  className='d-flex justify-content-center align-items-center h-100'>
   <MDBCol col='12'>
 
-    <MDBCard id='whlogincon-vik' className='bg  my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '400px'}}>
+    <MDBCard id='whlogincon-vik' 
+    
+    
+    className='bg  my-5 mx-auto' 
+    
+    
+    style={{borderRadius: '1rem', maxWidth: '400px'}}>
     <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100">
                 <h2>Wholesailer Login</h2>
                 <br />

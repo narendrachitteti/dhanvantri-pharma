@@ -62,10 +62,11 @@ function  WholsaleRegis() {
 
 
   return (
-    <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image'
+    <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image-vik'
     
     
-     style={{backgroundImage: 'url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)'}}
+     style={{backgroundImage: 'url(https://img.freepik.com/free-photo/medicine-capsules-global-health-with-geometric-pattern-digital-remix_53876-126742.jpg?size=626&ext=jpg)'}}
+    //  style={{backgroundImage: 'url(https://img.freepik.com/free-photo/some-pills-spray-pill-bottle-needles-light-cyan-background-top-view-space-text_176474-1747.jpg?size=626&ext=jpg&ga=GA1.1.1108439072.1703323631&semt=ais)'}}
 
 
     >
