@@ -39,41 +39,48 @@ const InvoiceStock = () => {
   const [stockistOptions, setStockistOptions] = useState([]);
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
-
   const [isPopupVisible, setPopupVisible] = useState(false);
-
-
-
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
-
+  // const [/*totalDiscountPercentage */, setTotalDiscountPercentage] = useState(0);
   const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
+
+
+  // const [isPopupVisible, setPopupVisible] = useState(false);
 
   const openPopup = () => {
     console.log("Opening popup");
     setPopupVisible(true);
   };
 
+
+
   const handleGSTChange = (e) => {
     const newGST = parseFloat(e.target.value);
 
+    // Calculate CGST and SGST based on GST value
     const newCGST = newGST / 2;
     const newSGST = newGST / 2;
 
+    // Store the total GST value for this invoice
     setTotalGST(newGST);
-    setIsGSTSet(true); 
+    setIsGSTSet(true); // Flag that GST has been set for this invoice
 
+    // Update state with new values
     setGst(newGST);
     setCGst(newCGST);
     setSGst(newSGST);
   };
+
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   const calculateNetPrice = () => {
+    // Calculate Net Price based on the formula
+
     const noOfStrips = parseFloat(strips);
     const gstPercentage = parseFloat(Gst);
     const pricePerStrip = parseFloat(price);
@@ -87,15 +94,21 @@ const InvoiceStock = () => {
       const totalPriceBeforeDiscount =
         pricePerStrip * noOfStrips +
         pricePerStrip * noOfStrips * (gstPercentage / 100);
+
+      // Calculate the discount amount
       const discountAmount =
         (totalPriceBeforeDiscount * discountPercentage) / 100;
+
+      // Calculate Net Price by deducting the discount amount
       const netPrice = totalPriceBeforeDiscount - discountAmount;
-      setNetPrice(netPrice.toFixed(2));
+
+      setNetPrice(netPrice.toFixed(2)); // Round to 2 decimal places and set in state
+
+      // Calculate the quantity
       const quantity = pricePerStrip * noOfStrips + parseFloat(Freestrips);
       setQuantity(quantity);
     }
   };
-
   useEffect(() => {
     // Calculate Net Price whenever any of the dependent values change
     calculateNetPrice();
@@ -112,10 +125,8 @@ const InvoiceStock = () => {
       const inTaxRs = (netPrice * gstPercentage) / 100;
       return inTaxRs.toFixed(2); // Round to 2 decimal places
     }
-
     return "0.00"; // Default value if values are invalid
   };
-
   useEffect(() => {
     // Fetch stockist options from the backend
     const fetchStockistOptions = async () => {
@@ -141,7 +152,6 @@ const InvoiceStock = () => {
       width: "100px",
     }),
   };
-
   const handleActionButton = (action) => {
     if (action === "add") {
       // Create a new medicine object with the current state values
@@ -166,24 +176,18 @@ const InvoiceStock = () => {
         NetPrice,
         Quantity,
       };
-
       // Add the new medicine object to the tableData state
       setTableData((prevTableData) => [...prevTableData, newMedicine]);
-
       // Clear the input fields by resetting the state
       clearInputFields();
-
       // Calculate the total discount amount for the entire table
       const totalDiscountAmount = tableData.reduce(
         (acc, medicine) => acc + (parseFloat(medicine.Discount) || 0),
         parseFloat(newMedicine.Discount) || 0
       );
-
       // Update the state with the new total discount amount
       setTotalDiscountAmount(totalDiscountAmount);
-
-
-      // Log the unique ID of the newly added medicine
+// Log the unique ID of the newly added medicine
       console.log(
         "Unique ID of the newly added medicine:",
         newMedicine.customId
@@ -193,7 +197,6 @@ const InvoiceStock = () => {
       clearInputFields();
     }
   };
-
   const calculateTotalDiscount = () => {
     const totalDiscount = tableData.reduce(
       (acc, row) => acc + (parseFloat(row.Discount) || 0),
@@ -201,7 +204,6 @@ const InvoiceStock = () => {
     );
     return totalDiscount.toFixed(2);
   };
-
   const clearInputFields = () => {
     setMedicine("");
     setManufacturer("");
@@ -224,16 +226,13 @@ const InvoiceStock = () => {
     setNetPrice("");
     setQuantity("");
   };
-
   const handleDelete = (customId) => {
     // Update the tableData state by removing the medicine with the specified customId
     setTableData((prevTableData) =>
       prevTableData.filter((medicine) => medicine.customId !== customId)
     );
-
     window.alert("Medicine deleted successfully");
   };
-
   const handleSaveInvoice = async () => {
     try {
       // Create an array of medicines using the tableData state
@@ -280,14 +279,11 @@ const InvoiceStock = () => {
         RoundOff: calculatedAmounts.roundoff,
         StocksReturned: calculatedAmounts.stocksReturned,
         PurchaseAmount: calculatedAmounts.purchaseAmount,
-      };
-
-      // Send a POST request to save the invoice details to the server
+      }; // Send a POST request to save the invoice details to the server
       const response = await axios.post(
         "http://localhost:5000/api/addInvoice",
         newInvoice
       );
-
       console.log(response.data);
       window.alert("Invoice added successfully");
       window.location.reload(); // Reloading the page might not be the best user experience, consider other UI updates instead
@@ -295,9 +291,7 @@ const InvoiceStock = () => {
       console.error(error);
       // Handle error if the request fails
     }
-
   };
-
   const calculateTotalPriceBeforeTax = () => {
     const totalPriceBeforeTax = tableData.reduce(
       (acc, row) => acc + (parseFloat(row.Total) || 0),
@@ -305,14 +299,12 @@ const InvoiceStock = () => {
     );
     return totalPriceBeforeTax.toFixed(2);
   };
-
   useEffect(() => {
     calculateTotalPriceBeforeTax();
     const totalPriceBeforeTax = calculateTotalPriceBeforeTax();
     setTotalAmountBeforeTax(totalPriceBeforeTax); // Update the state
   }, [tableData][calculateTotalPriceBeforeTax]);
-
-  // Update the Total calculation to consider the discount
+   // Update the Total calculation to consider the discount
   const calculateAmounts = () => {
     // Calculate the total amount before tax and total discount amount
     let totalAmountBeforeTax = 0;
@@ -326,7 +318,6 @@ const InvoiceStock = () => {
       totalAmountBeforeTax += netPrice;
       totalDiscountAmount += discountAmount;
     });
-
     const total = totalAmountBeforeTax - totalDiscountAmount; // Exclude discount
     const gst = isGSTSet
       ? totalGST
@@ -337,12 +328,9 @@ const InvoiceStock = () => {
     const sgst = isGSTSet
       ? totalGST / 2
       : tableData.reduce((acc, row) => acc + (parseFloat(row.Gst) / 2 || 0), 0);
-
     const grossAmount = totalAmountBeforeTax + gst;
-
     const purchaseAmount = Math.floor(grossAmount * 100) / 100; // Round down to 2 decimal places
     const roundoff = (grossAmount - purchaseAmount).toFixed(2); // Round to 2 decimal places
-
     return {
       total: total.toFixed(2),
       discount: totalDiscountAmount.toFixed(2),
@@ -367,7 +355,6 @@ const InvoiceStock = () => {
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
-
   const handleAddStockist = () => {
 
     if (
@@ -379,19 +366,21 @@ const InvoiceStock = () => {
       return;
     }
 
+    // Prepare the data for the POST request
     const postData = {
       name: newStockistData.name,
       gstNumber: newStockistData.gstno,
       email: newStockistData.email,
     };
 
+    // Send a POST request to add a new stockist
     axios
       .post("http://localhost:5000/api/stockists", postData)
-
       .then((response) => {
         // Handle the success case
         alert("Stockist added successfully.");
 
+        // Clear the newStockistData state and close the popup
         setNewStockistData({
           name: "",
           gstno: "",
@@ -399,6 +388,7 @@ const InvoiceStock = () => {
         });
         setShowPopup(false);
 
+        // Fetch the updated stockists data here
         axios
           .get("http://localhost:5000/api/stockists")
           .then((response) => {
@@ -417,7 +407,28 @@ const InvoiceStock = () => {
   };
   const [productOptions, setProductOptions] = useState([]);
 
- 
+  // useEffect(() => {
+  //   const fetchProductData = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:5000/api/products'); // Replace with your backend URL
+  //       if (response.ok) {
+  //         const products = await response.json();
+  //         const options = products.map((product) => ({ label: product.product, value: product.product }));
+  //         setProductOptions(options);
+  //       } else {
+  //         throw new Error('Failed to fetch products');
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       // Handle error state or display a message to the user
+  //     }
+  //   };
+
+  //   fetchProductData();
+  // }, []);
+
+
+  // const [productOptions, setProductOptions] = useState([]);
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -441,6 +452,8 @@ const InvoiceStock = () => {
   }, []);
   const [salesRates, setSalesRates] = useState([]);
 
+  
+
   useEffect(() => {
     const fetchSalesRates = async () => {
       try {
@@ -462,8 +475,12 @@ const InvoiceStock = () => {
   }, []);
 
 
-  const [purchaseRates, setPurchaseRates] = useState([]);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
+  const [purchaseRates, setPurchaseRates] = useState([]);
   useEffect(() => {
     const fetchPurchaseRates = async () => {
       try {
@@ -488,15 +505,12 @@ const InvoiceStock = () => {
         console.error('Error fetching unitPerBox:', error);
       }
     };
-
     fetchUnitPerBox();
   }, []);
-
-
+  
   const [hsnData, setHsnData] = useState([]);
   const [formData, setFormData] = useState({ hsn: '' });
   const [selectedHsn, setSelectedHsn] = useState('');
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -517,7 +531,6 @@ const InvoiceStock = () => {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -527,17 +540,12 @@ const InvoiceStock = () => {
       [fieldName]: selectedOption.value
     }));
   };
-
   const handleHsnChange = (event) => {
     setSelectedHsn(event.target.value);
   };
-
-
   const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
   const [groupsData, setGroupsData] = useState(/* initial value */);
   const [schedulesData, setSchedulesData] = useState(/* initial value */);
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -546,16 +554,21 @@ const InvoiceStock = () => {
   
         if (data && typeof data === "object") {
           if (
-     
+            // data.hasOwnProperty("taxCodes") &&
+            // Array.isArray(data.taxCodes) &&
+            // data.hasOwnProperty("group") &&
+            // Array.isArray(data.group) &&
             data.hasOwnProperty("schedule") &&
             Array.isArray(data.schedule)
           ) {
-     
+            // setTaxCodeData(data.taxCodes);
+            // setGroupsData(data.group);
             setSchedulesData(data.schedule);
   
             setFormData({
               ...formData,
-       
+              // taxCode: data.taxCodes[0],
+              // group: data.group[0],
               schedule: data.schedule[0],
             });
           } else {
@@ -570,8 +583,6 @@ const InvoiceStock = () => {
     };
     fetchData();
   }, []);
-
-
   return (
     <>
       <PharmacyNav />
@@ -583,7 +594,6 @@ const InvoiceStock = () => {
           <hr />
           <div className="input-row">
             <div className="input-container">
-
               <label htmlFor="stockName">Stockist Name</label>
               <div className="stockist-merge-plus">
                 <Select
@@ -722,7 +732,6 @@ const InvoiceStock = () => {
                   gstno: e.target.value,
                 })
               }
-
             />
             &nbsp;&nbsp;
             <input
@@ -743,7 +752,6 @@ const InvoiceStock = () => {
           </div>
         </div>
       )}
-
       <div className="second-container-txj" style={{ fontFamily: "Inria Serif" }} >
         <div className="input-boxes">
           <div className="input-row-1">
@@ -780,7 +788,6 @@ const InvoiceStock = () => {
                   handleSelectChange("schedule", selectedOption)
                 }
               />
-
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -852,8 +859,7 @@ const InvoiceStock = () => {
         onChange={(selectedOption) => {
           console.log('Selected sales rate:', selectedOption);
         }}
-      />
-            </div>
+      /></div>
             <div className="input-container-1">
               <label htmlFor="MRP">MRP/Strip</label>
               <Select
@@ -861,8 +867,7 @@ const InvoiceStock = () => {
         onChange={(selectedOption) => {
           console.log('Selected purchase rate:', selectedOption);
         }}
-      />
-            </div>
+      />  </div>
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="DiscountInput">Discount</label>
@@ -980,8 +985,6 @@ const InvoiceStock = () => {
         </div>
         <div className="end-page-tnx">
           <div className="Remarks-page-tnx">
-            {/* <h5 className="heading-remarks-tnx">Remarks</h5>
-        <input type="text" className='box'/> */}
           </div>
         </div>
         <table className="Amount-table-table">
