@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './creditcard.css';
-
+import PharmacyNav from "./PharmacyNav";
 
 const Note = () => {
   
@@ -81,6 +81,8 @@ const Note = () => {
   };
 
   return (
+    <>
+      <PharmacyNav />
     <div>
        <h2 className='see'>{selectedHeading}</h2>
       <fieldset className='field'>
@@ -329,6 +331,7 @@ const Note = () => {
     )}
     </fieldset>
   </div>
+  </>
 );
 };
 
