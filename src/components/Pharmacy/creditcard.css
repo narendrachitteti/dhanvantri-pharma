@@ -21,9 +21,9 @@
   background-color: white;
   color: #180a0a;
   margin-left: 45%;
-  margin-top: -3.5%;
+  margin-top: -4.5%;
   display: block;
-  width: 10%;
+  width: 11%;
   max-width: 100%;
   margin-bottom: 0rem;
   font: bold;
@@ -80,17 +80,20 @@
 .dates5,
 .Head {
   width: 65px;
+  margin-top: .7rem;
 }
 
 /* debit input fields */
 .DrNo {
   display: flex;
-  margin-left: 40%;
+  margin-left: 28%;
+  margin-top: .7rem;
 }
 
 .DrDate {
   display: flex;
-  margin-left: 40%;
+  margin-left: 28%;
+  margin-top: .7rem;
 }
 
 .numberss,
@@ -101,8 +104,8 @@
 .numberss6,
 .textareas1 {
   margin-left: 7%;
-  margin-top: -1%;
-  width: 20%;
+ 
+  width: 40%;
 }
 
 .textareas1 {
@@ -116,10 +119,10 @@
 .manual1,
 .textareas1,
 .numberss0 {
-  width: 20%;
+  width: 40%;
   box-sizing: border-box;
   margin-left: 7%;
-  margin-top: -1%;
+ 
 }
 
 .columm1,
@@ -179,5 +182,6 @@
 .ManualNo,
 .Narration {
   display: flex;
-  margin-left: 40%;
+  margin-left: 28%;
+  margin-top: .7rem;
 }

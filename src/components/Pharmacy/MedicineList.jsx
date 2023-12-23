@@ -122,19 +122,19 @@ function MedicineList() {
       <PharmacyNav />
       <div className="main-cont-PO-11">
         <p className="Listheading-PO-11">
-          <strong>
+          <h1 style={{fontFamily:'roboto'}}>
             <Link to="/PharmacyHome"  style={{ color: "#9b8bf4" }}>
               <FaArrowCircleLeft className="med-list-arrow" />
             </Link>{" "}
-            &nbsp;List Medicines
-          </strong>
+          <span >List Medicines</span>
+          </h1>
         </p>
 
-        <div className="search-contain-PO-11">
+        <div className="">
           <input
             type="text"
             placeholder="Search Medicines"
-            className="search-bar-PO-11"
+            style={{width:'300px',padding:'.5rem',margin:'.3rem'}}
             value={searchQuery}
             onChange={handleSearchInputChange}
           />

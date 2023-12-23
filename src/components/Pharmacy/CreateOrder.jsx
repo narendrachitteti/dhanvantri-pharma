@@ -329,7 +329,10 @@ const CreatePurchaseOrder = () => {
             <label className="cr-order-l" htmlFor="stockName">
               Stockist Name
             </label>
-            <select value={selectedStockist} onChange={handleSelectChange}>
+            <select
+            id="productSelect"
+             value={selectedStockist} 
+             onChange={handleSelectChange}>
               <option value="">Select a stockist</option>
               {stockistNames.map((stockist, index) => (
                 <option key={index} value={stockist.stockistName}>
@@ -384,9 +387,9 @@ const CreatePurchaseOrder = () => {
 
         <div className="stocklist-cposecond">
           <div className="stocklist-cpo2">
-            <label className="cr-order-l" htmlFor="UnitStrip">
-              Unit / Strip
-            </label>
+            <label className="cr-order-l " htmlFor="UnitStrip">
+               Unit / Strip
+            </label>&nbsp;
             <select
               id="unitPerBoxSelect"
               className="createOrderInput"
@@ -404,7 +407,7 @@ const CreatePurchaseOrder = () => {
           <div className="stocklist-cpo2">
             <label className="cr-order-l" htmlFor="NoOfStrips">
               No Of Strips
-            </label>
+            </label>&nbsp;
             <input
               className="createOrderInput"
               type="text"

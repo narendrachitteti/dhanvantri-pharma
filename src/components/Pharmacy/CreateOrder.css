@@ -7,21 +7,32 @@
 }
 .stocklist-cpo{
   justify-content: space-evenly;
-  /* margin-right: 800px; */
   display: flex;
   flex-wrap: wrap;
   background-color: white;
 }
 .stocklist-cpo1{
-  display: inline-block;
-  justify-content: space-between;
-   /* margin: 10px; */
+  display: flex; /* Change to flex container */
+  margin-top: 5px;
+  margin: 10px;
+
 }
+#productSelect{
+  margin-top: 5px;
+}
+
+
+.createOrderInput, select {
+  width: 100%;
+  height: 30px; /* Adjust the height as needed */
+  box-sizing: border-box;
+}
+
 .stocklist-cposecond{
   justify-content: space-between;
   background-color: white;
   /* margin-left: -700px; */
- 
+  
 }
 .stocklist-cpo2{
   display: inline-block;
@@ -45,7 +56,7 @@ text-align: center;
 .stocklist-cpo1 {
 display: flex;
 flex-direction: column;
-margin: 10px;
+
 }
 
 .stocklist-cpo1 button {
