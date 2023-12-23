@@ -44,7 +44,7 @@ function App() {
         <Route path="/" element={<RetailWholecard/>}/>
         <Route path="*" element={<PageNotFound/>} />
         <Route path='/WholesaleRegis' element={<WholsaleRegis/>}/>
-        <Route element={<PrivateRoute/>}>
+        {/* <Route element={<PrivateRoute/>}> */}
 
           <Route path='/PharmacyNav' element={<PharmacyNav/>}/>
           <Route path='/ItemDescription' element={<ItemDescription/>}/>
@@ -76,7 +76,7 @@ function App() {
           <Route path='/Stockist' element={<Stockist/>}/>
           <Route path='/invoice' element={<Invoice/>}/>   
           <Route path='/MedicineDataComponent' element={<MedicineDataComponent/>}/> 
-          </Route>
+          {/* </Route> */}
         
         </Routes>
       </Router>
