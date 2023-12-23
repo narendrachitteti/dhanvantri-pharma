@@ -51,7 +51,7 @@ function BillingDashboard() {
         setBillingData(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching filtered data:', error);
       });
   };
 
@@ -186,23 +186,37 @@ const renderFastMovingMedicines = () => {
   const fetchCollectionData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getIn");
+      console.log("API Response:", response.data);
       let totalCollection = response.data.length;
-      // const totalSubtotalWithGST = response.data.reduce(
-      //         (accumulator, response) => {
-      //           response.PatientBills.forEach((PatientBills) => {
-      //             accumulator += PatientBills.subtotalWithGST || 0;
-      //           });
-      //           return accumulator;
-      //         },0);
+      let totalSubtotalWithGST = 0;
+  
+      // Iterate through each entry in response.data and calculate totalSubtotalWithGST
+      response.data.forEach((entry) => {
+        entry.PatientBills.forEach((PatientBills) => {
+          totalSubtotalWithGST += PatientBills.subtotalWithGST || 0;
+        });
+      });
+  
       setTotalCollection(totalCollection);
-      // setTotalbills(totalSubtotalWithGST);
+      setTotalbills(totalSubtotalWithGST);
     } catch (error) {
-      console.error("API Error:", error); 
+      console.error("API Error:", error);
     }
   };
-  useEffect(()=> {
-    fetchCollectionData();
-  },);
+  
+  useEffect(() => {
+  const fetchData = async () => {
+    try {
+      await fetchCollectionData();
+    } catch (error) {
+      console.error("Error in fetchData:", error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+  
 
 // const fetchCollection = async () => {
 //   try {
@@ -267,10 +281,13 @@ const renderFastMovingMedicines = () => {
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
-            <div className="dbcard">
+          <div className="statistic">
               <label>Total Collection</label>
-              {/* <p>₹&nbsp;{billingData.Collection}</p> */}
-              <p>{totalbills}</p>
+              {totalbills !== undefined ? (
+                <p>{totalbills}</p>
+              ) : (
+                <p>Loading...</p>
+              )}
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
