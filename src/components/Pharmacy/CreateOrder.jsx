@@ -14,8 +14,6 @@ import { FaArrowCircleLeft , FaSave  } from "react-icons/fa";
 
 const CreatePurchaseOrder = () => {
 
-
-  
   const [stockistValue, setStockistValue] = useState("");
   const [date, setdate] = useState("");
   const [Medicine, setMedicine] = useState("");
@@ -65,12 +63,9 @@ const CreatePurchaseOrder = () => {
   const handleProductChange = (e) => {
     setSelectedProduct(e.target.value);
   };
-
-  
   const handleUnitPerBoxChange = (e) => {
     setSelectedUnitPerBox(e.target.value);
   };
-
   useEffect(() => {
     const fetchStockistNames = async () => {
       try {
@@ -80,14 +75,12 @@ const CreatePurchaseOrder = () => {
         console.error('Error fetching stockist names:', error);
       }
     };
-
     fetchStockistNames();
   }, []);
 
   const handleSelectChange = (e) => {
     setSelectedStockist(e.target.value);
   };
-
   const handlePrint = () => {
     window.print();
   };
@@ -106,55 +99,60 @@ const CreatePurchaseOrder = () => {
       console.error("Error downloading orders:", error);
     }
   };
-
-  // Update your handleDeleteRow function to handle the delete operation
   const handleDeleteRow = (rowIndex) => {
-    // Filter out the row at the specified index from the tableData
     const updatedTableData = [...tableData];
     updatedTableData.splice(rowIndex, 1);
     setTableData(updatedTableData);
     window.alert("Order deleted successfully");
   };
-
-    // Function to open the edit form
     const openEditForm = (rowData) => {
       setIsEditFormOpen(true);
       setEditData({
         id: rowData._id,
+
         unitstrips: rowData.unitstrips,
         NoOfStrips: rowData.NoOfStrips,
       });
     };
-  
-    // Function to close the edit form
     const closeEditForm = () => {
       setIsEditFormOpen(false);
     };
-  
-
     const handleSave = () => {
-      if (Medicine && Manufacturer && UnitStrip && NoOfStrips) {
-        const orderedQuantity = UnitStrip * NoOfStrips;
+      try {
+        // Check if all required fields are filled
+        if (!selectedProduct || !Manufacturer || !selectedUnitPerBox || !NoOfStrips) {
+          window.alert("Please fill in all the required fields.");
+          return;
+        }
+    
+        // Calculate ordered quantity
+        const orderedQuantity = selectedUnitPerBox * NoOfStrips;
+    
+        // Prepare the new item
         const newItem = {
-          Medicine,
-          Manufacturer,
-          unitstrips: UnitStrip,
+          Medicine: selectedProduct,
+          stockistName: selectedStockist,
+          unitstrips: selectedUnitPerBox,
           NoOfStrips,
           orderedQuantity,
         };
     
-        // Add the new item to tableData
+        // Update the tableData state
         setTableData((prevData) => [...prevData, newItem]);
     
-        // Clear the input fields
+        // Clear input fields
         setMedicine("");
         setManufacturer("");
         setUnitStrip("");
         setNoOfStrips("");
-      } else {
-        window.alert("Please fill in all the required fields.");
+    
+        window.alert("Data saved successfully");
+      } catch (error) {
+        console.error("Error saving data:", error);
+        window.alert("An error occurred while saving data. Please try again later.");
       }
     };
+    
     
     const handleClearInputs = () => {
       setMedicine("");
@@ -169,7 +167,6 @@ const CreatePurchaseOrder = () => {
         window.alert("Please add items to the order before saving.");
         return;
       }
-    
       try {
         const newOrder = {
           stockistName: stockistValue,
@@ -179,7 +176,7 @@ const CreatePurchaseOrder = () => {
         };
     
         const response = await axios.post(
-          "http://localhost:5000/api/createPurchaseOrder",
+          "http://localhost:5000/api/createPurOrder",
           newOrder
         );
     
@@ -201,8 +198,6 @@ const CreatePurchaseOrder = () => {
         );
       }
     };
-    
-
   const fetchCreateOrder = async () => {
     try {
       const response = await axios.get(
@@ -228,27 +223,11 @@ const CreatePurchaseOrder = () => {
       console.error(error);
     }
   };
-
-  // // Update your handleEdit function to set the editData state and open the edit form
-  // const handleEdit = (rowData) => {
-  //   setIsEditing(true);
-  //   setEditData({
-  //     id: rowData._id, // Assuming _id is the unique identifier for your items
-  //     itemId: rowData._id, // Replace 'item_id' with the actual property name in your data
-  //     unitstrips: rowData.unitstrips,
-  //     NoOfStrips: rowData.NoOfStrips,
-  //   });
-  // };
-
   const handleEditSubmit = () => {
-    // Calculate the new orderedQuantity based on the updated unitstrips and NoOfStrips
     const newOrderedQuantity = editData.unitstrips * editData.NoOfStrips;
-
-    // Find the index of the edited item in tableData
     const itemIndex = tableData.findIndex((item) => item._id === editData.id);
 
     if (itemIndex !== -1) {
-      // Update the item in tableData with the new data
       const updatedTableData = [...tableData];
       updatedTableData[itemIndex] = {
         ...updatedTableData[itemIndex],
@@ -256,11 +235,7 @@ const CreatePurchaseOrder = () => {
         NoOfStrips: editData.NoOfStrips,
         orderedQuantity: newOrderedQuantity,
       };
-
-      // Update the state with the updated tableData
       setTableData(updatedTableData);
-
-      // Reset the edit state
       setIsEditing(false);
     } else {
       window.alert("Item not found for editing. Please try again.");
@@ -268,7 +243,6 @@ const CreatePurchaseOrder = () => {
   };
 
   useEffect(() => {
-    // Fetch stockist options from the backend
     const fetchStockistOptions = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/stockists");
@@ -293,9 +267,26 @@ const CreatePurchaseOrder = () => {
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      width: "100px", // Adjust the width as needed
+      width: "100px", 
     }),
   };
+
+const [units, setUnits] = useState([]);
+const [selectedUnit, setSelectedUnit] = useState('');
+ 
+  
+  useEffect(() => {
+    const fetchUnits = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/unitPerBox'); 
+        setUnits(response.data);
+      } catch (error) {
+        console.error('Error fetching units:', error);
+      }
+    };
+    fetchUnits();
+  }, []);
+
 
   return (
     <>
@@ -317,7 +308,7 @@ const CreatePurchaseOrder = () => {
             <select value={selectedStockist} onChange={handleSelectChange}>
         <option value="">Select a stockist</option>
         {stockistNames.map((stockist, index) => (
-          <option key={index} value={stockist._id}> 
+          <option key={index} value={stockist.stockistName}> 
             {stockist.name} 
           </option>
         ))}
@@ -362,22 +353,24 @@ const CreatePurchaseOrder = () => {
       
 
         <div className="stocklist-cposecond">
-          <div className="stocklist-cpo2">
-            <label className="cr-order-l" htmlFor="UnitStrip">Unit / Strip</label>
-             <select
+        <div className="stocklist-cpo2">
+        <label className="cr-order-l" htmlFor="UnitStrip">
+          Unit / Strip
+        </label>
+        <select
           id="unitPerBoxSelect"
           className="createOrderInput"
           value={selectedUnitPerBox}
-          onChange={handleUnitPerBoxChange} 
+          onChange={handleUnitPerBoxChange}
         >
           <option value="">Select an option</option>
-          {unitPerBoxes.map((item) => (
+          {units.map((item) => (
             <option key={item._id} value={item.unitPerBox}>
               {item.unitPerBox}
             </option>
           ))}
         </select>
-          </div>
+      </div>
           <div className="stocklist-cpo2">
             <label className="cr-order-l" htmlFor="NoOfStrips">No Of Strips</label>
             <input className="createOrderInput"
@@ -416,9 +409,9 @@ const CreatePurchaseOrder = () => {
               <tbody>
               {tableData.map((row, index) => (
   <tr key={index}>
-    <td>{selectedProduct}</td>
-    <td>{row.stockistName}</td> {/* Display the stockistName from the row */}
-    <td>{selectedUnitPerBox}</td>
+    <td>{row.Medicine}</td>
+    <td>{row.stockistName}</td>
+    <td>{row.unitstrips}</td>
     <td>{row.NoOfStrips}</td>
     <td>{row.orderedQuantity}</td>
     <td>
@@ -439,6 +432,7 @@ const CreatePurchaseOrder = () => {
     </td>
   </tr>
 ))}
+
               </tbody>
             </table>
           </div>
