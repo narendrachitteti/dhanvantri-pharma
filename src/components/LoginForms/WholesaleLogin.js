@@ -25,8 +25,8 @@ function WholesaleLogin() {
   const navigate = useNavigate();
 
 // Update the handleLogin function
+// Update the handleLogin function
 const handleLogin = async () => {
-
   try {
     // Validate email and password
     if (!email || !password) {
@@ -36,13 +36,19 @@ const handleLogin = async () => {
       return;
     }
 
-    // Make a GET request to the backend login route
-    const response = await fetch(`http://localhost:5000/api/user?email=${email}&password=${password}`);
+    // Make a POST request to the backend login route
+    const response = await fetch('http://localhost:5000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
     const data = await response.json();
 
     if (response.ok) {
-      // If the login is successful, navigate to the pharmacynav route
+      // If the login is successful, navigate to the desired route
       navigate('/pharmacynav');
     } else {
       // If the login fails, display an error message

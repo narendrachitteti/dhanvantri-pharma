@@ -23,27 +23,25 @@ const PharmacyNav = () => {
  
 
   useEffect(() => {
-    fetchStaffList();
+    fetchStaffDetails();
   }, []);
 
-  const fetchStaffList = async () => {
+  const fetchStaffDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/GetAllStaff");
-      if (Array.isArray(response.data.data)) {
-        setStaffList(response.data.data);
-        const foundStaff = response.data.data.find(
-          (staff) => staff.staffid === logstaffid
-        );
-        if (foundStaff) {
-          setMatchingStaff(foundStaff); 
-        }
+      const response = await axios.get(`http://localhost:5000/api/GetStaffDetails/${logstaffid}`);
+      console.log("Response:", response);
+  
+      if (response.data.success) {
+        console.log("Matching Staff:", response.data.data);
+        setMatchingStaff(response.data.data);
       } else {
-        console.error("Invalid data received from the server:", response.data);
+        console.error("Error fetching staff details:", response.data.message);
       }
     } catch (error) {
-      console.error("Error fetching staff list:", error);
+      console.error("Error fetching staff details:", error);
     }
   };
+  
 
   const toggleProfileDropdown = () => {
     setShowProfileDropdown(!showProfileDropdown);
@@ -76,7 +74,7 @@ const PharmacyNav = () => {
       <div className="navbar-doctor1" >
         <div className="left-1">
           <div className="nav-item">
-            <Link to="/PharmacyHome" style={{textDecoration:'none', color:'white',fontWeight:'bolder',fontSize:'2rem'}} >
+            <Link to="/pharmabilling" style={{textDecoration:'none', color:'white',fontWeight:'bolder',fontSize:'2rem'}} >
              
             DP
             </Link>
