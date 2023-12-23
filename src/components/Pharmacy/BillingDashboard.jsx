@@ -20,6 +20,9 @@ function BillingDashboard() {
   const [medicineOutOfStock, setMedicineOutOfStock] = useState(0);
   const [salesSearchQuery, setSalesSearchQuery] = useState("");
   const [fastMovingSearchQuery, setFastMovingSearchQuery] = useState("");
+  const [totalCollection, setTotalCollection] = useState(0);
+  const [totalbills, setTotalbills] = useState(0);
+
 
   const initialData = {
     Billed: 0,
@@ -175,11 +178,56 @@ const renderFastMovingMedicines = () => {
       setInStockInventoryQuantity(inStockInventoryQuantity);
       setMedicineOutOfStock(medicineOutOfStock);
     } catch (error) {
-      console.error("API Error:", error); // Log any API request errors
+      console.error("API Error:", error); 
     }
   };
-  // Function to filter sales data based on the search query
-  // Function to filter fast-moving products based on the search query
+
+
+  const fetchCollectionData = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/getIn");
+      let totalCollection = response.data.length;
+      // const totalSubtotalWithGST = response.data.reduce(
+      //         (accumulator, response) => {
+      //           response.PatientBills.forEach((PatientBills) => {
+      //             accumulator += PatientBills.subtotalWithGST || 0;
+      //           });
+      //           return accumulator;
+      //         },0);
+      setTotalCollection(totalCollection);
+      // setTotalbills(totalSubtotalWithGST);
+    } catch (error) {
+      console.error("API Error:", error); 
+    }
+  };
+  useEffect(()=> {
+    fetchCollectionData();
+  },);
+
+// const fetchCollection = async () => {
+//   try {
+//     const response = await axios.get("http://localhost:5000/api/getIn");
+//     // const totalCollection = response.data.length;
+//     const totalSubtotalWithGST = response.data.reduce(
+//       (accumulator, response) => {
+//         response.PatientBills.forEach((PatientBills) => {
+//           accumulator += PatientBills.subtotalWithGST || 0;
+//         });
+//         return accumulator;
+//       },
+//       0
+//     );
+
+    // setTotalCollection(totalCollection);
+//     setTotalbills(totalSubtotalWithGST);
+//   } catch (error) {
+//     console.error("API Error:", error);
+//   }
+// };
+
+//   useEffect(() => {
+//     fetchCollection();
+//   },);
   
   return (
     <>
@@ -214,13 +262,15 @@ const renderFastMovingMedicines = () => {
           <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Total Bills</label>
-              <p>{billingData.Billed}</p>
+              {/* <p>{billingData.Billed}</p> */}
+              <p>{totalCollection}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Total Collection</label>
-              <p>₹&nbsp;{billingData.Collection}</p>
+              {/* <p>₹&nbsp;{billingData.Collection}</p> */}
+              <p>{totalbills}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">

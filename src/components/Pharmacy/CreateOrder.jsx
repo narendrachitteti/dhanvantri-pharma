@@ -248,7 +248,7 @@ const CreatePurchaseOrder = () => {
         orderedQuantity: newOrderedQuantity,
       };
       setTableData(updatedTableData);
-      setIsEditing(false);
+      setIsEditing(false);   
     } else {
       window.alert("Item not found for editing. Please try again.");
     }
