@@ -65,42 +65,42 @@ function  WholsaleRegis() {
     <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image'
     
     
-    // style={{backgroundImage: 'url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)'}}
+     style={{backgroundImage: 'url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)'}}
 
 
     >
-      <div className='mask gradient-custom-3'></div>
-      <MDBCard className='m-5' style={{maxWidth: '600px'}}>
-        <MDBCardBody className='px-5'>
-          <h2 className="text-center mb-5">Create an account</h2>
+     <div>
+
+      
+     <h2 className="text-center mb-5">Create an account</h2>
 
 
-          <form  onSubmit={handleSubmit} className='wholsaleregis'>
-          <label>
-          Username:
-          <input type="text" name="username" value={formData.username} onChange={handleChange} />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" name="password" value={formData.password} onChange={handleChange} />
-        </label>
-        <br />
-        <button type="submit">Register</button>
+<form  onSubmit={handleSubmit} className='wholsaleregis'>
+<label>
+Username:
+<input type="text" name="username" value={formData.username} onChange={handleChange} />
+</label>
+<br />
+<label>
+Email:
+<input type="email" name="email" value={formData.email} onChange={handleChange} />
+</label>
+<br />
+<label>
+Password:
+<input type="password" name="password" value={formData.password} onChange={handleChange} />
+</label>
+<br />
+<button type="submit">Register</button>
 
-          </form>
+</form>
 
-            <br/>
-          <div>
-          <p className="mb-0">Already have an account? <a href="/WholesaleLogin" class=" fw-bold">Sign In</a></p>
-        </div>
-        </MDBCardBody>
-      </MDBCard>
+  <br/>
+<div>
+<p className="mb-0">Already have an account? <a href="/WholesaleLogin" class=" fw-bold">Sign In</a></p>
+</div>
+     </div>
+      
     </MDBContainer>
   );
 }
