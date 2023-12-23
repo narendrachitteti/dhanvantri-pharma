@@ -560,7 +560,7 @@ const Note = () => {
   const handleSubmit = async () => {
     try {
       // Assuming you have a server endpoint for handling debit note data
-      await axios.post('http://localhost:5001/api/submitDebitNote', formData);
+      await axios.post('http://localhost:5000/api/submitDebitNote', formData);
       console.log('Debit Note data submitted successfully');
       setFormData({
         DrNo: '',
@@ -578,7 +578,7 @@ const Note = () => {
   const handleSubmits = async () => {
     try {
       // Assuming you have a server endpoint for handling credit note data
-      await axios.post('http://localhost:5001/api/submitCreditNote', formDatas);
+      await axios.post('http://localhost:5000/api/submitCreditNote', formDatas);
       console.log('Credit Note data submitted successfully');
       setFormDatas({
         CrNo: '',
