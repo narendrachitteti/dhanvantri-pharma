@@ -36,9 +36,12 @@ const handleLogin = async () => {
 
     const data = await response.json();
 
-    if (response.ok) {
-      // If the login is successful, navigate to the pharmacynav route
-      navigate('/pharmacynav');
+    // Inside the if (response.ok) block in handleLogin function
+      if (response.ok) {
+        // Save user details in local storage
+        localStorage.setItem("staffid", data.staffid);
+        // Navigate to the pharmacynav route
+        navigate('/pharmabilling');
     } else {
       // If the login fails, display an error message
       setShowAlert(true);
