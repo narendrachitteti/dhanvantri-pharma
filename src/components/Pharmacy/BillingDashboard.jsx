@@ -51,7 +51,7 @@ function BillingDashboard() {
         setBillingData(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching filtered data:', error);
+        console.error('Error fetching data:', error);
       });
   };
 
@@ -74,7 +74,6 @@ function BillingDashboard() {
     // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
-  
 
   const fetchData = async () => {
     try {
@@ -187,37 +186,23 @@ const renderFastMovingMedicines = () => {
   const fetchCollectionData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getIn");
-      console.log("API Response:", response.data);
       let totalCollection = response.data.length;
-      let totalSubtotalWithGST = 0;
-  
-      // Iterate through each entry in response.data and calculate totalSubtotalWithGST
-      response.data.forEach((entry) => {
-        entry.PatientBills.forEach((PatientBills) => {
-          totalSubtotalWithGST += PatientBills.subtotalWithGST || 0;
-        });
-      });
-  
+      // const totalSubtotalWithGST = response.data.reduce(
+      //         (accumulator, response) => {
+      //           response.PatientBills.forEach((PatientBills) => {
+      //             accumulator += PatientBills.subtotalWithGST || 0;
+      //           });
+      //           return accumulator;
+      //         },0);
       setTotalCollection(totalCollection);
-      setTotalbills(totalSubtotalWithGST);
+      // setTotalbills(totalSubtotalWithGST);
     } catch (error) {
-      console.error("API Error:", error);
+      console.error("API Error:", error); 
     }
   };
-  
-  useEffect(() => {
-  const fetchData = async () => {
-    try {
-      await fetchCollectionData();
-    } catch (error) {
-      console.error("Error in fetchData:", error);
-    }
-  };
-
-  fetchData();
-}, []);
-
-  
+  useEffect(()=> {
+    fetchCollectionData();
+  },);
 
 // const fetchCollection = async () => {
 //   try {
@@ -282,13 +267,10 @@ const renderFastMovingMedicines = () => {
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
-          <div className="statistic">
+            <div className="dbcard">
               <label>Total Collection</label>
-              {totalbills !== undefined ? (
-                <p>{totalbills}</p>
-              ) : (
-                <p>Loading...</p>
-              )}
+              {/* <p>₹&nbsp;{billingData.Collection}</p> */}
+              <p>{totalbills}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
