@@ -106,7 +106,6 @@
 // }
 
 // export default WholsaleRegis;
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -206,47 +205,6 @@ function WholsaleRegis() {
           </div>
         </MDBCardBody>
       </MDBCard>
-=======
-    <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image'
-    
-    
-     style={{backgroundImage: 'url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)'}}
-
-
-    >
-     <div>
-
-      
-     <h2 className="text-center mb-5">Create an account</h2>
-
-
-<form  onSubmit={handleSubmit} className='wholsaleregis'>
-<label>
-Username:
-<input type="text" name="username" value={formData.username} onChange={handleChange} />
-</label>
-<br />
-<label>
-Email:
-<input type="email" name="email" value={formData.email} onChange={handleChange} />
-</label>
-<br />
-<label>
-Password:
-<input type="password" name="password" value={formData.password} onChange={handleChange} />
-</label>
-<br />
-<button type="submit">Register</button>
-
-</form>
-
-  <br/>
-<div>
-<p className="mb-0">Already have an account? <a href="/WholesaleLogin" class=" fw-bold">Sign In</a></p>
-</div>
-     </div>
-      
->>>>>>> a6348ba52e072714f0d0529c2aa4a136934769a9
     </MDBContainer>
   );
 }
