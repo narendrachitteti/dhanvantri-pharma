@@ -30,6 +30,9 @@ const InvoiceStock = () => {
   const [, /*SGst */ setSGst] = useState("");
   const [price, setPrice] = useState("");
   const [MRP, setMRP] = useState("");
+  const [ ,setProducts] = useState("");
+  const [ ,setSelectedUnitPerBox] = useState("");
+  const [ ,setUnitPerBoxes] = useState("");
   const [Discount, setDiscount] = useState("");
   const [Total, setTotal] = useState("");
   const [HSNcode, setHSNcode] = useState("");
@@ -40,8 +43,9 @@ const InvoiceStock = () => {
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
   const [isPopupVisible, setPopupVisible] = useState(false);
-
-
+  const [selectedSalesRate, setSelectedSalesRate] = useState('');
+const [productOptions, setProductOptions] = useState([]);
+const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
 
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
@@ -57,7 +61,38 @@ const InvoiceStock = () => {
   };
 
 
-
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+  
+    const fetchUnitPerBoxes = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/unitPerBox');
+        setUnitPerBoxes(response.data);
+      } catch (error) {
+        console.error('Error fetching unit per boxes:', error);
+      }
+    };
+  
+    fetchProducts();
+    fetchUnitPerBoxes();
+  }, []);
+  
+  // Handling product and unit per box changes
+  const handleProductChange = (e) => {
+    setSelectedProduct(e.target.value);
+  };
+  
+  const handleUnitPerBoxChange = (e) => {
+    setSelectedUnitPerBox(e.target.value);
+  };
+  
   const handleGSTChange = (e) => {
     const newGST = parseFloat(e.target.value);
     const newCGST = newGST / 2;
@@ -439,7 +474,7 @@ const InvoiceStock = () => {
       }
     };
 
-    fetchProductData();
+    fetchProducts();
   }, []);
   const [salesRates, setSalesRates] = useState([]);
 
@@ -465,8 +500,6 @@ const InvoiceStock = () => {
 
 
       fetchSalesRates();
-    fetchProducts();
-    fetchUnitPerBoxes();
   }, []);
 
 
