@@ -182,38 +182,13 @@ const renderFastMovingMedicines = () => {
     }
   };
 
-
-  // const fetchTotalBilldata = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:5000/api/getIn");
-  //     const data = response.data;
-  
-  //     // Calculate the total count of patientBills
-  //     const totalBillsCount = data.reduce((count, item) => {
-  //       // Assuming each item has a property named 'patientBills'
-  //       return count + (item.patientBills ? item.patientBills.length : 0);
-  //     }, 0);
-  
-  //     setTotalbills(totalBillsCount);
-  //   } catch (error) {
-  //     console.error("API Error:", error);
-  //   }
-  // };
-  
-
   const fetchCollectionData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getIn");
       const data = response.data;
-  
-      // Calculate the sum of subtotalWithGST values
       const subtotalWithGSTSum = data.reduce((sum, item) => {
-        // Assuming each item has a property named 'subtotalWithGST'
         return sum + (item.subtotalWithGST || 0); // Use 0 if subtotalWithGST is undefined or null
       }, 0);
-      
-      
-  
       setTotalCollection(subtotalWithGSTSum);
       
     } catch (error) {
@@ -230,23 +205,12 @@ const fetchTotalBilldata = async () => {
   try {
     const response = await axios.get("http://localhost:5000/api/getIn");
     const totalbills = response.data.length;
-    // const totalSubtotalWithGST = response.data.reduce(
-    //   (accumulator, response) => {
-    //     response.PatientBills.forEach((PatientBills) => {
-    //       accumulator += PatientBills.subtotalWithGST || 0;
-    //     });
-    //     return accumulator;
-    //   },
-    //   0
-    // );
-
     setTotalbills(totalbills);
     
   } catch (error) {
     console.error("API Error:", error);
   }
 };
-
   useEffect(() => {
     fetchTotalBilldata();
   },);
