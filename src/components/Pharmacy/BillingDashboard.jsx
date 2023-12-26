@@ -187,15 +187,7 @@ const renderFastMovingMedicines = () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getIn");
       let totalCollection = response.data.length;
-      // const totalSubtotalWithGST = response.data.reduce(
-      //         (accumulator, response) => {
-      //           response.PatientBills.forEach((PatientBills) => {
-      //             accumulator += PatientBills.subtotalWithGST || 0;
-      //           });
-      //           return accumulator;
-      //         },0);
       setTotalCollection(totalCollection);
-      // setTotalbills(totalSubtotalWithGST);
     } catch (error) {
       console.error("API Error:", error); 
     }
@@ -279,18 +271,18 @@ const renderFastMovingMedicines = () => {
               <p>₹&nbsp;{billingData.Cash}</p>
             </div>
           </Link>
-          <Link to="/Dbdetails" className="dbcard-container">
+          {/* <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by Card</label>
               <p>₹&nbsp;{billingData.Card}</p>
             </div>
-          </Link>
-          <Link to="/Dbdetails" className="dbcard-container">
+          </Link> */}
+          {/* <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by UPI</label>
               <p>₹&nbsp;{billingData.UPI}</p>
             </div>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="card-container2" style={{fontFamily: "Inria Serif"}}>
