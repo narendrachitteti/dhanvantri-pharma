@@ -10,7 +10,7 @@ function Pharmacystock() {
   const [medicines, setMedicines] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 6;
 
   const fetchMedicines = async () => {
     try {
