@@ -279,7 +279,7 @@ const handlePrint = () => {
     <div className="item-content">
     <div className="item-form-left">
     
-      <label className="label">
+      <label className="label-product">
         Product:
         <input
         className="item-pro-in"
@@ -351,7 +351,7 @@ const handlePrint = () => {
     <div  className="item-company-name">
       <label className="label">Group:</label>
         <Select
-        className="item-group-selc"
+        className="item-group-selc-group"
           name="group"
           value={{ label: formData.group, value: formData.group }}
           options={groupsData.map((group) => ({ label: group, value: group }))}
@@ -361,9 +361,9 @@ const handlePrint = () => {
         />
    
      
-      <label className="item-schedu-label">Schedule:</label>
+      <label className="item-schedu-label1">Schedule:</label>
         <Select
-        className="item-shedu-sele"
+        className="item-shedu-sele1"
           name="schedule"
           value={{ label: formData.schedule, value: formData.schedule }}
           options={schedulesData.map((schedule) => ({
@@ -376,6 +376,7 @@ const handlePrint = () => {
         />
    
 </div>
+    <div className="merge-product-sale">
       <fieldset  className="filed-sets">
         <legend className="item-legends" >Purchase</legend>
         <label className="label"> Rate:
@@ -401,9 +402,10 @@ const handlePrint = () => {
           />
         </label>
       </fieldset>
-
+      </div>
       <fieldset className="filed-sets">
         <legend  className="item-legends">Packing</legend>
+        <div className="lot-merge">
         <label className="label">
           Unit:
           <input
@@ -434,10 +436,12 @@ const handlePrint = () => {
             onChange={handleInputChange}
           />
         </label>
+        </div>
       </fieldset>
 
       <fieldset  className="filed-sets">
         <legend  className="item-legends">Lot</legend>
+        <div className="lot-merge">
         <label className="label">
           Lot Qty:
           <input
@@ -458,6 +462,7 @@ const handlePrint = () => {
             onChange={handleInputChange}
           />
         </label>
+        </div>
       </fieldset>
 
       {/* <fieldset  className="filed-sets">
@@ -506,7 +511,7 @@ const handlePrint = () => {
         />
  
 
-              <button  className="item-hsn-button">Hsn</button>
+              {/* <button  className="item-hsn-button">Hsn</button> */}
      
       </div>
 
