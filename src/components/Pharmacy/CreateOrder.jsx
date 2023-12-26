@@ -343,7 +343,7 @@ const CreatePurchaseOrder = () => {
           </div>
           <div className="stocklist-cpo1">
             <label className="cr-order-l" htmlFor="Medicine">
-              Medicine Name
+              Product Name
             </label>
             <select
               id="productSelect"
