@@ -41,7 +41,7 @@ function BillingDashboard() {
 
   const handleFilter = () => {
     axios
-      .get('http://localhost:5000/api/pharmacy-billing/filter', {
+      .get('http://localhost:5000/api/pharmacybilling/filter', {
         params: {
           fromDate,
           toDate,
