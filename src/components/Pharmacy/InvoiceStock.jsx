@@ -794,7 +794,7 @@ const InvoiceStock = () => {
             </div>
             &nbsp;
             <div className="input-container-1">
-              <label htmlFor="Category">Category</label>
+              <label htmlFor="Category">Schedules</label>
               <Select
                 // className="item-shedu-sele"
                 name="schedule"
