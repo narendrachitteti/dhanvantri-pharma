@@ -7,6 +7,7 @@ const PatientBill = () => {
   const [quantity, setQuantity] = useState('');
   const [medicines, setMedicines] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
+  
   const [HSNCode, setHSNCode] = useState('');
   const [price, setPrice] = useState('');
   const [manufacturer, setManufacturer] = useState('');

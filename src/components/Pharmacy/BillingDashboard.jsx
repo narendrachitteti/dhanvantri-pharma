@@ -156,6 +156,16 @@ function BillingDashboard() {
 
 
   useEffect(() => {
+  const fetchCollectionData = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/getIn");
+      let totalCollection = response.data.length;
+      setTotalCollection(totalCollection);
+    } catch (error) {
+      console.error("API Error:", error); 
+    }
+  };
+  useEffect(()=> {
     fetchCollectionData();
  }, []);
 
@@ -248,18 +258,18 @@ function BillingDashboard() {
               <p>₹&nbsp;{billingData.Cash}</p>
             </div>
           </Link>
-          <Link to="/Dbdetails" className="dbcard-container">
+          {/* <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by Card</label>
               <p>₹&nbsp;{billingData.Card}</p>
             </div>
-          </Link>
-          <Link to="/Dbdetails" className="dbcard-container">
+          </Link> */}
+          {/* <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by UPI</label>
               <p>₹&nbsp;{billingData.UPI}</p>
             </div>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="card-container2" style={{ fontFamily: "Inria Serif" }}>

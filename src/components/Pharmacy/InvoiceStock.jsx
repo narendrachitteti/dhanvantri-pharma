@@ -30,9 +30,9 @@ const InvoiceStock = () => {
   const [, /*SGst */ setSGst] = useState("");
   const [price, setPrice] = useState("");
   const [MRP, setMRP] = useState("");
-  const [ ,setProducts] = useState("");
-  const [ ,setSelectedUnitPerBox] = useState("");
-  const [ ,setUnitPerBoxes] = useState("");
+  const [, setProducts] = useState("");
+  // const [ ,setSelectedUnitPerBox] = useState("");
+  // const [ ,setUnitPerBoxes] = useState("");
   const [Discount, setDiscount] = useState("");
   const [Total, setTotal] = useState("");
   const [HSNcode, setHSNcode] = useState("");
@@ -44,8 +44,8 @@ const InvoiceStock = () => {
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [selectedSalesRate, setSelectedSalesRate] = useState('');
-const [productOptions, setProductOptions] = useState([]);
-const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
+  const [productOptions, setProductOptions] = useState([]);
+  const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
 
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
@@ -62,37 +62,29 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
 
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
-        setProducts(response.data);
+        const productResponse = await axios.get('http://localhost:5000/api/products');
+        setProducts(productResponse.data);
       } catch (error) {
         console.error('Error fetching products:', error);
+        // Handle the error as needed, like setting a default value for products or showing an error message
       }
-    };
-  
-    const fetchUnitPerBoxes = async () => {
+
       try {
-        const response = await axios.get('http://localhost:5000/api/unitPerBox');
-        setUnitPerBoxes(response.data);
+        const unitPerBoxResponse = await axios.get('http://localhost:5000/api/unitPerBox');
+        setUnitPerBoxes(unitPerBoxResponse.data);
       } catch (error) {
         console.error('Error fetching unit per boxes:', error);
+        // Handle the error as needed, like setting a default value for unitPerBoxes or showing an error message
       }
     };
-  
-    fetchProducts();
-    fetchUnitPerBoxes();
+
+    fetchData(); // Call the function to fetch data when the component mounts
   }, []);
-  
+
   // Handling product and unit per box changes
-  const handleProductChange = (e) => {
-    setSelectedProduct(e.target.value);
-  };
-  
-  const handleUnitPerBoxChange = (e) => {
-    setSelectedUnitPerBox(e.target.value);
-  };
-  
+
   const handleGSTChange = (e) => {
     const newGST = parseFloat(e.target.value);
     const newCGST = newGST / 2;
@@ -182,15 +174,15 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
         MedId: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
         Medicine: selectedProduct,
         Manufacturer,
-        Category,
+        Category: formData.schedule,
         Batch,
         BatchExpiry: selectedDate ? `${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getFullYear()).slice(-2)}` : "", // Fetch month and year as MM-YY
-        Unit,
+        Unit: selectedUnitPerBox,
         strips,
         Freestrips,
         Gst,
         price: selectedSalesRate,
-        MRP,
+        MRP: selectedPurchaseRate,
         Discount,
         Total,
         HSNcode,
@@ -210,7 +202,7 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
       );
       // Update the state with the new total discount amount
       setTotalDiscountAmount(totalDiscountAmount);
-// Log the unique ID of the newly added medicine
+      // Log the unique ID of the newly added medicine
       console.log(
         "Unique ID of the newly added medicine:",
         newMedicine.customId
@@ -433,74 +425,69 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
 
   const [selectedProduct, setSelectedProduct] = useState('');
 
-  // useEffect(() => {
-  //   const fetchProductData = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:5000/api/products'); // Replace with your backend URL
-  //       if (response.ok) {
-  //         const products = await response.json();
-  //         const options = products.map((product) => ({ label: product.product, value: product.product }));
-  //         setProductOptions(options);
-  //       } else {
-  //         throw new Error('Failed to fetch products');
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //       // Handle error state or display a message to the user
-  //     }
-  //   };
-
-  //   fetchProductData();
-  // }, []);
+  const [selectedUnitPerBox, setSelectedUnitPerBox] = useState('');
+  const [unitPerBoxes, setUnitPerBoxes] = useState([]);
+  const [selectedPurchaseRate, setSelectedPurchaseRate] = useState('');
 
 
-  // const [productOptions, setProductOptions] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products');
-        if (response.ok) {
-          const products = await response.json();
-          const options = products.map((product) => ({
-            label: product.product,
-            value: product.product,
-          }));
-          setProductOptions(options);
-        } else {
-          throw new Error('Failed to fetch products');
-        }
+        const response = await axios.get('http://localhost:5000/api/products');
+        setProductss(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+
+    const fetchUnitPerBoxes = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/unitPerBox');
+        setUnitPerBoxes(response.data);
       } catch (error) {
         console.error('Error fetching unit per boxes:', error);
       }
     };
-
-    fetchProducts();
-  }, []);
-  const [salesRates, setSalesRates] = useState([]);
-
-  
-
-  useEffect(() => {
     const fetchSalesRates = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/salesRates');
-        const fetchedSalesRates = response.data || [];
-
-      
-        const options = fetchedSalesRates.map((rate) => ({
-          label: (rate.salesRate && rate.salesRate.toString()) || '', 
-          value: rate._id || '',
-        }));
-        setSalesRates(options);
+        setSalesRates(response.data);
       } catch (error) {
         console.error("Error fetching salesRates:", error);
       }
     };
-    
+    const fetchPurchaseRates = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/purchaseRates");
+        setPurchaseRates(response.data);
 
+      } catch (error) {
+        console.error("Error fetching purchaseRates:", error);
+      }
+    };
 
-      fetchSalesRates();
+    fetchPurchaseRates();
+    fetchProducts();
+    fetchUnitPerBoxes();
+    fetchSalesRates();
   }, []);
+
+  // Handling product and unit per box changes
+  const handleProductChange = (e) => {
+    setSelectedProduct(e.target.value);
+  };
+
+  const handleUnitPerBoxChange = (e) => {
+    setSelectedUnitPerBox(e.target.value);
+  };
+  const handleSalesRateChange = (e) => {
+    setSelectedSalesRate(e.target.value);
+    // Perform actions based on the selected sales rate here
+  };
+
+
+  const [salesRates, setSalesRates] = useState([]);
 
 
   const handleInputChange = (e) => {
@@ -509,40 +496,6 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
   };
 
   const [purchaseRates, setPurchaseRates] = useState([]);
-  useEffect(() => {
-    const fetchPurchaseRates = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/purchaseRates"
-        );
-        setPurchaseRates(
-          response.data.map((rate) => ({
-            value: rate.purchaseRate,
-            label: rate.purchaseRate,
-          }))
-        );
-      } catch (error) {
-        console.error("Error fetching purchaseRates:", error);
-      }
-    };
-
-    fetchPurchaseRates();
-  }, []);
-
-  // const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
-
-  useEffect(() => {
-    const fetchUnitPerBox = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/unitPerBox');
-        setUnitPerBoxOptions(response.data.map(item => ({ value: item.unitPerBox, label: item.unitPerBox })));
-      } catch (error) {
-        console.error('Error fetching unitPerBox:', error);
-      }
-    };
-    fetchUnitPerBox();
-  }, []);
-  
   const [hsnData, setHsnData] = useState([]);
   const [formData, setFormData] = useState({ hsn: '' });
   const [selectedHsn, setSelectedHsn] = useState('');
@@ -588,14 +541,13 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
   const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
   const [groupsData, setGroupsData] = useState(/* initial value */);
   const [schedulesData, setSchedulesData] = useState(/* initial value */);
+  const [products, setProductss] = useState([]);
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/distincttaxcodes"
-        );
+        const response = await fetch("http://localhost:5000/api/distincttaxcodes");
         const data = await response.json();
 
         if (data && typeof data === "object") {
@@ -750,7 +702,7 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
                       </div>
                     </div>
                   </div>
-                  ); 
+
                 </div>
               )}
             </div>
@@ -817,12 +769,18 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
           <div className="input-row-1">
             <div className="input-container-1">
               <label htmlFor="Medicine">Product</label>
-              <Select
-                options={productOptions}
-                onChange={(selectedOption) => {
-                  console.log('Selected product:', selectedOption);
-                }}
-              />
+              <select
+                id="productSelect"
+                value={selectedProduct}
+                onChange={handleProductChange}
+              >
+                <option value="">Select a product</option>
+                {products.map((product) => (
+                  <option key={product._id} value={product.product}>
+                    {product.product}
+                  </option>
+                ))}
+              </select>
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -844,7 +802,7 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
                 options={schedulesData ? schedulesData.map((schedule) => ({
                   label: schedule,
                   value: schedule,
-                })) : []} 
+                })) : []}
                 onChange={(selectedOption) =>
                   handleSelectChange("schedule", selectedOption)
                 }
@@ -875,12 +833,18 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="Unit">Packing</label>
-              <Select
-        options={unitPerBoxOptions}
-        onChange={(selectedOption) => {
-          console.log('Selected unit per box:', selectedOption);
-        }}
-      />
+              <select
+                id="unitPerBoxSelect"
+                value={selectedUnitPerBox}
+                onChange={handleUnitPerBoxChange}
+              >
+                <option value="">Select a unit per box</option>
+                {unitPerBoxes.map((unit) => (
+                  <option key={unit.id} value={unit.id}>
+                    {unit.unitPerBox}
+                  </option>
+                ))}
+              </select>
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -915,20 +879,34 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="price">Price/Strip</label>
-              <Select
-        options={salesRates}
-        onChange={(selectedOption) => {
-          console.log('Selected sales rate:', selectedOption);
-        }}
-      /></div>
+              <select
+                id="salesRateSelect"
+                value={selectedSalesRate}
+                onChange={handleSalesRateChange}
+              >
+                <option value="">Select a sales rate</option>
+                {salesRates.map((rate) => (
+                  <option key={rate.id} value={rate.id}>
+                    {rate.salesRate} {/* Replace 'valueToDisplay' with the actual value you want to show */}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="input-container-1">
               <label htmlFor="MRP">MRP/Strip</label>
-              <Select
-        options={purchaseRates}
-        onChange={(selectedOption) => {
-          console.log('Selected purchase rate:', selectedOption);
-        }}
-      />  </div>
+              <select
+                id="purchaseRateSelect"
+                value={selectedPurchaseRate}
+                onChange={(e) => setSelectedPurchaseRate(e.target.value)}
+              >
+                <option value="">Select a purchase rate</option>
+                {purchaseRates.map((rate) => (
+                  <option key={rate.value} value={rate.value}>
+                    {rate.purchaseRate}
+                  </option>
+                ))}
+              </select>
+            </div>
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="DiscountInput">Discount</label>
@@ -945,16 +923,16 @@ const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
             <div className="input-container-2">
               <label htmlFor="HSNCode">HSN Code</label>
               <select
-        name="hsn"
-        value={formData.hsn}
-        onChange={(event) => handleSelectChange("hsn", event.target.value)}
-      >
-        {hsnData.map((hsn, index) => (
-          <option key={index} value={hsn}>
-            {hsn}
-          </option>
-        ))}
-      </select>
+                name="hsn"
+                value={formData.hsn}
+                onChange={(event) => handleSelectChange("hsn", event.target.value)}
+              >
+                {hsnData.map((hsn, index) => (
+                  <option key={index} value={hsn}>
+                    {hsn}
+                  </option>
+                ))}
+              </select>
             </div>
             &nbsp;&nbsp; &nbsp;&nbsp;
             <div className="input-container-2">

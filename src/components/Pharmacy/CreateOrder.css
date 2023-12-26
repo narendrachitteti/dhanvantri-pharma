@@ -214,6 +214,97 @@ border-radius: 4px;
   background-color: #007bff;
 }
 
+
+
+
+
+
+
+/* Add a subtle box shadow to text fields on focus */
+.createOrderInput:focus,
+select:focus,
+input[type="text"]:focus,
+input[type="date"]:focus {
+  box-shadow: 0 0 5px #9b8bf4; /* Adjust color as needed */
+  outline: none; /* Remove default outline */
+}
+
+/* Add a smooth transition for text fields */
+.createOrderInput,
+select,
+input[type="text"],
+input[type="date"] {
+  transition: box-shadow 0.3s ease;
+}
+
+/* Style for buttons */
+.button48,
+.button-cpos,
+.button-cpoc,
+.button-save-po,
+.button-cancel-po,
+.print-co,
+.download-co {
+  padding: 7px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.button48:hover,
+.button-cpos:hover,
+.button-cpoc:hover,
+.button-save-po:hover,
+.button-cancel-po:hover,
+.print-co:hover,
+.download-co:hover {
+  filter: brightness(90%); /* Adjust brightness as needed */
+}
+/* Glow effect for buttons */
+.button48,
+.button-cpos,
+.button-cpoc,
+.button-save-po,
+.button-cancel-po,
+.print-co,
+.download-co,
+.edit-form button {
+ 
+  border-radius: 5px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Glow effect on hover for buttons */
+.button48:hover,
+.button-cpos:hover,
+.button-cpoc:hover,
+.button-save-po:hover,
+.button-cancel-po:hover,
+.print-co:hover,
+.download-co:hover,
+.edit-form button:hover {
+  box-shadow: 0 0 10px #9b8bf4; /* Adjust color as needed */
+}
+
+
+/* Style for the cancel button in the edit form */
+.edit-form .button-cancel-po {
+  background-color: #dc3545; /* Your desired cancel button background color */
+}
+
+/* Additional styles for the save button in the edit form */
+.edit-form .button-save-po {
+  background-color: #28a745; /* Your desired save button background color */
+}
+
+/* Hover effect for the save button in the edit form */
+.edit-form .button-save-po:hover {
+  filter: brightness(90%); /* Adjust brightness as needed */
+}
+
+
 @media print {
 body * {
   visibility: hidden;
