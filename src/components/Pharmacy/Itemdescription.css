@@ -15,14 +15,23 @@
        display: flex;
    }
    .item-form-left{
-       width: 55vw;
+       width: 100%;
+   }
+   .label-product{
+    display: flex;
+   }
+   .item-shedu-sele1{
+    width: 20%;
+    height: 5vh;
+    margin-left: 1%;
    }
    .item-pro-in{
        height: 5vh;
        border-radius: 4px;
        border: 1px solid gray;
-       margin-left: 1.9%;
-       width: 45vw;
+       margin-left: 1%;
+       width: 35%;
+       margin-top: -0.5%;
    }
    .item-company-name{
        display: flex;
@@ -43,6 +52,17 @@
    .tax-code-selec{
        margin-left: 0.5%;
        width: 15vw;
+   }
+   .item-group-selc-group{
+     margin-left: 2.2%;
+     height: 8vh;
+     width: 19%;
+   }
+   .item-schedu-label1{
+    margin-left: 9.5%;
+   }
+   .merge-product-sale{
+    display: flex;
    }
    .item-cat-label{
        margin-left: 9.3%;
@@ -72,8 +92,8 @@
    }
    
    .item-or-mrp, .item-lot-mrp, .item-pack-mrp{
-       height: 3vh;
-       width: 8vw;
+       height: 5vh;
+       width: 10vw;
        border: 1px solid gray;
        border-radius: 3px;
    }
@@ -84,7 +104,7 @@
        margin-left: 10%;
    }
    .item-sales-mrp{
-       height: 3vh;
+       height: 5vh;
        width: 12vw;
        border: 1px solid gray;
        border-radius: 3px;

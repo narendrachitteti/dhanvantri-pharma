@@ -116,7 +116,6 @@ const PharmacyBilling = () => {
     setDate(currentDate);
   }, []);
   
-
   useEffect(() => {
     const fetchMedicineNames = async () => {
       try {
