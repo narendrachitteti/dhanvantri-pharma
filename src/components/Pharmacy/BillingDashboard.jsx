@@ -13,16 +13,13 @@ function BillingDashboard() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const [totalMedicines, setTotalMedicines] = useState(0);
-  const [totalManufacturers, setTotalManufacturers] = useState(0);
   const [currentInventoryCost, setCurrentInventoryCost] = useState(0);
   const [currentInventoryMRP, setCurrentInventoryMRP] = useState(0);
   const [inStockInventoryQuantity, setInStockInventoryQuantity] = useState(0);
   const [medicineOutOfStock, setMedicineOutOfStock] = useState(0);
   const [salesSearchQuery, setSalesSearchQuery] = useState("");
-  const [fastMovingSearchQuery, setFastMovingSearchQuery] = useState("");
   const [totalCollection, setTotalCollection] = useState(0);
   const [totalbills, setTotalbills] = useState(0);
-
 
   const initialData = {
     Billed: 0,
@@ -41,7 +38,7 @@ function BillingDashboard() {
 
   const handleFilter = () => {
     axios
-      .get('http://localhost:5000/api/pharmacy-billing/filter', {
+      .get('http://localhost:5000/api/pharmacybilling/filter', {
         params: {
           fromDate,
           toDate,
@@ -56,29 +53,24 @@ function BillingDashboard() {
   };
 
   useEffect(() => {
-    handleFilter();
-  },);
-
-  useEffect(() => {
     fetchData();
     fetchFastMovingMedicines();
     fetchInventoryData();
-  }, []);
+    fetchCollectionData();
+  }, [fromDate, toDate]);
 
   useEffect(() => {
-    // Update the current date and time every second
     const intervalId = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
 
-    // Clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:5000/api/pharmacy-billing"
+        "http://localhost:5000/api/pharmacybilling"
       );
       setSalesData(response.data.reverse());
     } catch (error) {
@@ -89,7 +81,6 @@ function BillingDashboard() {
   const renderSalesData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-
     const slicedData = salesData.slice(startIndex, endIndex);
 
     return slicedData.map((data, index) => (
@@ -103,174 +94,152 @@ function BillingDashboard() {
     ));
   };
 
-  // Function to fetch fast-moving medicines
-const fetchFastMovingMedicines = async () => {
-  try {
-    const response = await axios.get("http://localhost:5000/api/pharmacy-billing");
-    const fastMovingMedicinesData = response.data
-      .map((item) => item.pharmacyTable) // Extract the pharmacyTable from each item
-      .flat() // Flatten the array
-      .filter((medicine) => medicine.quantity >= 100);
-    setFastMovingProducts(fastMovingMedicinesData);
-  } catch (error) {
-    console.error(error);
-  }
-};
+  const fetchFastMovingMedicines = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/fastMovingMedicines");
+      const fastMovingMedicinesData = response.data
+        .map((item) => item.pharmacyTable)
+        .flat()
+        .filter((medicine) => medicine.quantity >= 100);
+      setFastMovingProducts(fastMovingMedicinesData);
+    } catch (error) {
+      console.error("Error fetching fast-moving medicines:", error);
+    }
+  };
 
-// Function to render fast-moving medicines
-const renderFastMovingMedicines = () => {
-  return fastMovingProducts.map((medicine, index) => (
-    <tr key={index}>
-      <td>{medicine.medicineName}</td>
-      <td>{medicine.quantity}</td>
-    </tr>
-  ));
-};
-
+  const renderFastMovingMedicines = () => {
+    return fastMovingProducts.map((medicine, index) => (
+      <tr key={index}>
+        <td>{medicine.medicineName}</td>
+        <td>{medicine.quantity}</td>
+      </tr>
+    ));
+  };
 
   const fetchInventoryData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getInvoices");
-      
-      // Initialize variables to store calculated values
       let totalMedicines = 0;
-      let totalManufacturers = new Set(); // Use a Set to keep track of unique manufacturers
       let currentInventoryCost = 0;
       let currentInventoryMRP = 0;
       let inStockInventoryQuantity = 0;
       let medicineOutOfStock = 0;
-  
-      // Loop through each invoice in the API response
+
       response.data.forEach((invoice) => {
-        // Calculate the total number of medicines
         totalMedicines += invoice.medicines.length;
-  
-        // Collect unique manufacturers in this invoice
+
         invoice.medicines.forEach((medicine) => {
-          totalManufacturers.add(medicine.Manufacturer);
-  
-          // Ensure that you're parsing quantity, price, and MRP as floats to avoid NaN
           const quantity = parseFloat(medicine.Quantity);
           const price = parseFloat(medicine.price);
           const mrp = parseFloat(medicine.MRP);
-  
-          // Check if the medicine is in stock or out of stock
+
           if (quantity === 0) {
             medicineOutOfStock++;
           } else {
             inStockInventoryQuantity += quantity;
           }
-  
-          // Calculate the current inventory cost and MRP
+
           currentInventoryCost += price * quantity;
           currentInventoryMRP += mrp * quantity;
         });
       });
-  
-      // Calculate the actual total manufacturers count
-      totalManufacturers = totalManufacturers.size;
-  
-      // Set the calculated values to state
+
       setTotalMedicines(totalMedicines);
-      setTotalManufacturers(totalManufacturers);
       setCurrentInventoryCost(currentInventoryCost);
       setCurrentInventoryMRP(currentInventoryMRP);
       setInStockInventoryQuantity(inStockInventoryQuantity);
       setMedicineOutOfStock(medicineOutOfStock);
     } catch (error) {
-      console.error("API Error:", error); 
+      console.error("API Error:", error);
     }
   };
 
 
-  const fetchCollectionData = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/api/getIn");
-      let totalCollection = response.data.length;
-      // const totalSubtotalWithGST = response.data.reduce(
-      //         (accumulator, response) => {
-      //           response.PatientBills.forEach((PatientBills) => {
-      //             accumulator += PatientBills.subtotalWithGST || 0;
-      //           });
-      //           return accumulator;
-      //         },0);
-      setTotalCollection(totalCollection);
-      // setTotalbills(totalSubtotalWithGST);
-    } catch (error) {
-      console.error("API Error:", error); 
-    }
-  };
-  useEffect(()=> {
+  useEffect(() => {
     fetchCollectionData();
-  },);
+ }, []);
 
-// const fetchCollection = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:5000/api/getIn");
-//     // const totalCollection = response.data.length;
-//     const totalSubtotalWithGST = response.data.reduce(
-//       (accumulator, response) => {
-//         response.PatientBills.forEach((PatientBills) => {
-//           accumulator += PatientBills.subtotalWithGST || 0;
-//         });
-//         return accumulator;
-//       },
-//       0
-//     );
+ const fetchCollectionData = async () => {
+  try {
+    const response = await axios.get("http://localhost:5000/api/getIn");
+    console.log("Response Data:", response.data);
 
-    // setTotalCollection(totalCollection);
-//     setTotalbills(totalSubtotalWithGST);
-//   } catch (error) {
-//     console.error("API Error:", error);
-//   }
-// };
+    // Check if the response data has the expected structure
+    if (response.data && typeof response.data === 'object') {
+      // Extract relevant properties from the response
+      const { totalSubtotalWithGST, totalBills, PatientBills } = response.data;
 
-//   useEffect(() => {
-//     fetchCollection();
-//   },);
+      // Log the structure of PatientBills
+      console.log("PatientBills:", PatientBills);
+
+      // Check if PatientBills is an array
+      if (PatientBills && Array.isArray(PatientBills)) {
+        // Iterate over the array of invoices
+        PatientBills.forEach((invoice) => {
+          // Log each invoice for further inspection
+          console.log("Invoice:", invoice);
+
+          // ... existing logic ...
+        });
+
+        // Set the calculated values to state
+        setTotalCollection(totalSubtotalWithGST);
+        setTotalbills(totalBills);
+      } else {
+        console.error("Invalid response format. 'PatientBills' is not an array.");
+      }
+    } else {
+      console.error("Invalid response format. Expected an object.");
+    }
+  } catch (error) {
+    console.error("API Error:", error);
+  }
+};
+
+
   
+  
+
   return (
     <>
       <PharmacyNav />
       <div className="Appbilldb">
         <div className="date-head-container">
-        <h1 className="date2" >
-       Billing Dashboard
-        </h1>
-        <div className="date-container">
-          <label className="la-bill-dash" >From: </label>
-          <input className="billing-data-sel"
-            type="date"
-            id={fromDateId}
-            value={fromDate}
-            name="fromDate"
-            onChange={(e) => setFromDate(e.target.value)}
-          />
-          <label className="la-bill-dash" >To:</label>
-          <input className="billing-data-sel"
-            type="date"
-            id={toDateId}
+          <h1 className="date2" >
+            Billing Dashboard
+          </h1>
+          <div className="date-container">
+            <label className="la-bill-dash" >From: </label>
+            <input className="billing-data-sel"
+              type="date"
+              id={fromDateId}
+              value={fromDate}
+              name="fromDate"
+              onChange={(e) => setFromDate(e.target.value)}
+            />
+            <label className="la-bill-dash" >To:</label>
+            <input className="billing-data-sel"
+              type="date"
+              id={toDateId}
               name="toDate"
-            value={toDate}
-            onChange={(e) => setToDate(e.target.value)}
-          />
-          <button className="billing-dash-go" onClick={handleFilter}>Go</button>
-        </div>
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
+            />
+            <button className="billing-dash-go" onClick={handleFilter}>Go</button>
+          </div>
         </div>
         <hr />
         <div className="dbicon-box">
           <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Total Bills</label>
-              {/* <p>{billingData.Billed}</p> */}
-              <p>{totalCollection}</p>
+              <p>{totalbills}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Total Collection</label>
-              {/* <p>₹&nbsp;{billingData.Collection}</p> */}
-              <p>{totalbills}</p>
+              <p>{totalCollection}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
@@ -293,7 +262,7 @@ const renderFastMovingMedicines = () => {
           </Link>
         </div>
       </div>
-      <div className="card-container2" style={{fontFamily: "Inria Serif"}}>
+      <div className="card-container2" style={{ fontFamily: "Inria Serif" }}>
         <div className="card2">
           <h4 className="card-heading">Statistics</h4>
           <div className="card-content">
@@ -301,10 +270,6 @@ const renderFastMovingMedicines = () => {
               <label>Total Medicines</label>
               <p>{totalMedicines}</p>
             </div>
-            {/* <div className="statistic">
-              <label>Total Manufacturers</label>
-              <p>{totalManufacturers}</p>
-            </div> */}
             <div className="statistic">
               <label>Medicine out of stock</label>
               <p>{medicineOutOfStock}</p>
