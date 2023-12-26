@@ -41,7 +41,7 @@ function BillingDashboard() {
 
   const handleFilter = () => {
     axios
-      .get('http://localhost:5000/api/pharmacybilling/filter', {
+      .get('http://localhost:5000/api/pharmacy-billing/filter', {
         params: {
           fromDate,
           toDate,
@@ -183,43 +183,73 @@ const renderFastMovingMedicines = () => {
   };
 
 
+  // const fetchTotalBilldata = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:5000/api/getIn");
+  //     const data = response.data;
+  
+  //     // Calculate the total count of patientBills
+  //     const totalBillsCount = data.reduce((count, item) => {
+  //       // Assuming each item has a property named 'patientBills'
+  //       return count + (item.patientBills ? item.patientBills.length : 0);
+  //     }, 0);
+  
+  //     setTotalbills(totalBillsCount);
+  //   } catch (error) {
+  //     console.error("API Error:", error);
+  //   }
+  // };
+  
+
   const fetchCollectionData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getIn");
-      let totalCollection = response.data.length;
-      setTotalCollection(totalCollection);
+      const data = response.data;
+  
+      // Calculate the sum of subtotalWithGST values
+      const subtotalWithGSTSum = data.reduce((sum, item) => {
+        // Assuming each item has a property named 'subtotalWithGST'
+        return sum + (item.subtotalWithGST || 0); // Use 0 if subtotalWithGST is undefined or null
+      }, 0);
+      
+      
+  
+      setTotalCollection(subtotalWithGSTSum);
+      
     } catch (error) {
-      console.error("API Error:", error); 
+      console.error("API Error:", error);
     }
   };
+  
   useEffect(()=> {
     fetchCollectionData();
+    
   },);
 
-// const fetchCollection = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:5000/api/getIn");
-//     // const totalCollection = response.data.length;
-//     const totalSubtotalWithGST = response.data.reduce(
-//       (accumulator, response) => {
-//         response.PatientBills.forEach((PatientBills) => {
-//           accumulator += PatientBills.subtotalWithGST || 0;
-//         });
-//         return accumulator;
-//       },
-//       0
-//     );
+const fetchTotalBilldata = async () => {
+  try {
+    const response = await axios.get("http://localhost:5000/api/getIn");
+    const totalbills = response.data.length;
+    // const totalSubtotalWithGST = response.data.reduce(
+    //   (accumulator, response) => {
+    //     response.PatientBills.forEach((PatientBills) => {
+    //       accumulator += PatientBills.subtotalWithGST || 0;
+    //     });
+    //     return accumulator;
+    //   },
+    //   0
+    // );
 
-    // setTotalCollection(totalCollection);
-//     setTotalbills(totalSubtotalWithGST);
-//   } catch (error) {
-//     console.error("API Error:", error);
-//   }
-// };
+    setTotalbills(totalbills);
+    
+  } catch (error) {
+    console.error("API Error:", error);
+  }
+};
 
-//   useEffect(() => {
-//     fetchCollection();
-//   },);
+  useEffect(() => {
+    fetchTotalBilldata();
+  },);
   
   return (
     <>
@@ -255,14 +285,14 @@ const renderFastMovingMedicines = () => {
             <div className="dbcard">
               <label>Total Bills</label>
               {/* <p>{billingData.Billed}</p> */}
-              <p>{totalCollection}</p>
+              <p>{totalbills}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Total Collection</label>
               {/* <p>₹&nbsp;{billingData.Collection}</p> */}
-              <p>{totalbills}</p>
+              <p>{totalCollection}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
@@ -271,18 +301,18 @@ const renderFastMovingMedicines = () => {
               <p>₹&nbsp;{billingData.Cash}</p>
             </div>
           </Link>
-          {/* <Link to="/Dbdetails" className="dbcard-container">
+          <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by Card</label>
               <p>₹&nbsp;{billingData.Card}</p>
             </div>
-          </Link> */}
-          {/* <Link to="/Dbdetails" className="dbcard-container">
+          </Link>
+          <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by UPI</label>
               <p>₹&nbsp;{billingData.UPI}</p>
             </div>
-          </Link> */}
+          </Link>
         </div>
       </div>
       <div className="card-container2" style={{fontFamily: "Inria Serif"}}>
