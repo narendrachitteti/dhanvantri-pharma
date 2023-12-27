@@ -48,14 +48,14 @@ const Note = () => {
     fetchCompanies();
   }, []);
 
-  const handleChanges = (e) => {
-    const { name, value } = e.target;
-    setFormDatas((prevData) => ({ ...prevData, [name]: value }));
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+   
+  const handleChanges = (e) => {
+    const { name, value } = e.target;
+    setFormDatas((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleCompanySelect = (selectedOption) => {
