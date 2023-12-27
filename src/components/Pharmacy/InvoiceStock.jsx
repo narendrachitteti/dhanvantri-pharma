@@ -279,7 +279,7 @@ const InvoiceStock = () => {
       const calculatedAmounts = calculateAmounts();
       const newInvoice = {
         invoiceNumber,
-        stockName,
+        stockName:selectedStockist,
         date,
         supplieddate,
         medicines, // Assign the array of medicines
