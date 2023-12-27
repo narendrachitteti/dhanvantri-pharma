@@ -11,7 +11,7 @@ const Note = () => {
   const [formDatas, setFormDatas] = useState({
     CrNo: '',
     CrDate: '', // Format date as 'YYYY-MM-DD'
-    company: '',
+    Company: '',
     Amount: '',
     ManualNo: '',
     Narration: '',
@@ -21,7 +21,7 @@ const Note = () => {
   const [formData, setFormData] = useState({
     DrNo: '',
     DrDate: '', // Format date as 'YYYY-MM-DD'
-    company: '',
+    Company: '',
     Amount: '',
     ManualNo: '',
     Narration: '',
