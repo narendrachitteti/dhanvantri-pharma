@@ -119,7 +119,7 @@
 .manual1,
 .textareas1,
 .numberss0 {
-  width: 40%;
+  width: 40% !important;
   box-sizing: border-box;
   margin-left: 7%;
  
@@ -180,8 +180,13 @@
 .customers,
 .Amount,
 .ManualNo,
-.Narration {
+.Narration,
+.Condition {
   display: flex;
   margin-left: 28%;
   margin-top: .7rem;
+}
+
+.customers select{
+  width: 40%;
 }
