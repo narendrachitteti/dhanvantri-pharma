@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './creditcard.css';
 import PharmacyNav from "./PharmacyNav";
+import axios from 'axios';
+
 
 const Note = () => {
   
@@ -10,7 +11,7 @@ const Note = () => {
   const [formDatas, setFormDatas] = useState({
     CrNo: '',
     CrDate: '', // Format date as 'YYYY-MM-DD'
-    Company: '',
+    company: '',
     Amount: '',
     ManualNo: '',
     Narration: '',
@@ -20,7 +21,7 @@ const Note = () => {
   const [formData, setFormData] = useState({
     DrNo: '',
     DrDate: '', // Format date as 'YYYY-MM-DD'
-    Company: '',
+    company: '',
     Amount: '',
     ManualNo: '',
     Narration: '',
@@ -183,7 +184,6 @@ const Note = () => {
                         options={conditions.map((condition) => ({ value: condition, label: condition }))}
                         className='manual1'
                       />
-
                     </div>
 
             
@@ -297,7 +297,6 @@ const Note = () => {
                         onChange={(selectedOption) => setFormData((prevData) => ({ ...prevData, company: selectedOption }))}
                         options={companies.map((Company) => ({ value: Company, label: Company }))}
                         className='manual1'
-                        
                       />
                     </div>
 
@@ -308,6 +307,7 @@ const Note = () => {
                         onChange={(selectedOption) => setFormData((prevData) => ({ ...prevData, Condition: selectedOption }))}
                         options={conditions.map((condition) => ({ value: condition, label: condition }))}
                         className='manual1'
+
                       />
                     </div>
 
