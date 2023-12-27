@@ -538,11 +538,32 @@ const InvoiceStock = () => {
     setSelectedHsn(event.target.value);
     // Perform actions based on the selected HSN code here
   };
+
+  const [stockistNames, setStockistNames] = useState([]);
+
+  const [selectedStockist, setSelectedStockist] = useState("");
   const [taxCodeData, setTaxCodeData] = useState(/* initial value */);
   const [groupsData, setGroupsData] = useState(/* initial value */);
   const [schedulesData, setSchedulesData] = useState(/* initial value */);
   const [products, setProductss] = useState([]);
 
+  useEffect(() => {
+    const fetchStockistNames = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/get-stockist-names"
+        );
+        setStockistNames(response.data);
+      } catch (error) {
+        console.error("Error fetching stockist names:", error);
+      }
+    };
+    fetchStockistNames();
+  }, []);
+
+  const handleSelectChangea = (e) => {
+    setSelectedStockist(e.target.value);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -595,7 +616,7 @@ const InvoiceStock = () => {
             <div className="input-container">
               <label htmlFor="stockName">Stockist Name</label>
               <div className="stockist-merge-plus">
-                <Select
+                {/* <Select
                   options={stockistOptions}
                   value={stockistOptions.find(
                     (option) => option.value === stockistValue
@@ -604,7 +625,24 @@ const InvoiceStock = () => {
                     setStockistValue(selectedOption.value)
                   }
                   styles={customStyles}
-                />
+                /> */}
+ <select
+ 
+ value={selectedStockist} 
+ onChange={handleSelectChangea}
+ >
+             
+              {stockistNames.map((stockist, index) => (
+                <option key={index} value={stockist.stockistName}>
+                  {stockist.name}
+                </option>
+              ))}
+            </select>
+
+
+
+
+
                 {/* <button className="plus"   onClick={togglePopup}>+</button>  */}
               </div>
             </div>

@@ -28,17 +28,20 @@ const PharmacyNav = () => {
 
   const fetchStaffDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/GetStaffDetails/${logstaffid}`);
-      console.log("Response:", response);
-  
-      if (response.data.success) {
-        console.log("Matching Staff:", response.data.data);
-        setMatchingStaff(response.data.data);
+      const response = await axios.get("http://localhost:5000/api/user");
+      if (Array.isArray(response.data.data)) {
+        setStaffList(response.data.data);
+        const foundStaff = response.data.data.find(
+          (staff) => staff.staffid === logstaffid
+        );
+        if (foundStaff) {
+          setMatchingStaff(foundStaff); 
+        }
       } else {
-        console.error("Error fetching staff details:", response.data.message);
+        console.error("Invalid data received from the server:", response.data);
       }
     } catch (error) {
-      console.error("Error fetching staff details:", error);
+      console.error("Error fetching staff list:", error);
     }
   };
   
@@ -138,34 +141,31 @@ const PharmacyNav = () => {
            
             </div>
             </div>
-            <div className="right-doc">
+
+
+
+
+
+
+
+
+
             <div
-              className="profile-icon-container"
-              onClick={toggleProfileDropdown}
-            >
-              <span className="icon-profile rounded-icon">
-                {renderProfileIcon()}
-              </span>
-            </div>
-        </div>
-        <div className="add-pbill-dropdown">
-          <Link to="/PharmacyBilling" className="add-pbill-icon-link">
-          </Link>
-        </div>
-        <div
           
           onMouseEnter={toggleProfileDropdown}
           onMouseLeave={toggleProfileDropdown}
         >
-          {/* <div className="right-doc">
+          <div className="right-doc">
+            <div className="drop-icon">
             <div
               className="profile-icon-container"
               onClick={toggleProfileDropdown}
             >
-              <span className="icon-profile rounded-icon">
+              <span className="icon-profile-rounded-icon">
                 {renderProfileIcon()}
               </span>
-            </div> */}
+            </div>
+            </div>
 
             {showProfileDropdown && (
               <div className="profile-dropdown-logout">
@@ -183,13 +183,18 @@ const PharmacyNav = () => {
                     </div>
                   </div>
                 )}
-
+              
+                <div className="linkedin">
                 <Link to="/" onClick={handleLogOut} className="profile-link">
                   Sign Out
                 </Link>
+                </div>
               </div>
             )}
           </div>
+        </div>
+       
+        
         </div>
       </div>
     </>
