@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './creditcard.css';
 import PharmacyNav from "./PharmacyNav";
+import axios from 'axios';
+
 
 const Note = () => {
   
@@ -183,7 +184,6 @@ const Note = () => {
                         options={conditions.map((condition) => ({ value: condition, label: condition }))}
                         className='manual1'
                       />
-
                     </div>
 
             
@@ -297,7 +297,6 @@ const Note = () => {
                         onChange={(selectedOption) => setFormData((prevData) => ({ ...prevData, company: selectedOption }))}
                         options={companies.map((Company) => ({ value: Company, label: Company }))}
                         className='manual1'
-                        
                       />
                     </div>
 
@@ -308,6 +307,7 @@ const Note = () => {
                         onChange={(selectedOption) => setFormData((prevData) => ({ ...prevData, Condition: selectedOption }))}
                         options={conditions.map((condition) => ({ value: condition, label: condition }))}
                         className='manual1'
+
                       />
                     </div>
 
