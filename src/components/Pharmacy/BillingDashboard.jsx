@@ -285,12 +285,12 @@ const renderFastMovingMedicines = () => {
               <p>₹&nbsp;{billingData.Card}</p>
             </div>
           </Link>
-          <Link to="/Dbdetails" className="dbcard-container">
+          {/* <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by UPI</label>
               <p>₹&nbsp;{billingData.UPI}</p>
             </div>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className="card-container2" style={{fontFamily: "Inria Serif"}}>

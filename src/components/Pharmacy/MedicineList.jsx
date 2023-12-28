@@ -45,13 +45,11 @@ function MedicineList() {
   
       if (Medicine !== null && Manufacturer !== null && Category !== null) {
         try {
-          // Make a PUT request to update the medicine quantity
           await axios.put(
             `http://localhost:5000/api/updateMedicineQuantity/${MedId}`,
             { Quantity }
           );
   
-          // Update the medicine in the medicines array
           const updatedMedicines = medicines.map((medicine) =>
             medicine.MedId === MedId ? editedMedicine : medicine
           );
@@ -62,14 +60,12 @@ function MedicineList() {
             autoClose: 2000,
           });
   
-          // Fetch the latest data from the server
           fetchMedicines();
         } catch (error) {
           console.error("Error updating medicine:", error);
           toast.error("Error updating medicine");
         }
       } else {
-        // Handle the case where the properties are null
         toast.error("Please fill out all required fields.");
       }
     } else {
@@ -80,7 +76,7 @@ function MedicineList() {
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); // Reset to the first page when the search query changes
+    setCurrentPage(1); 
   };
 
   const handlePageChange = (newPage) => {
