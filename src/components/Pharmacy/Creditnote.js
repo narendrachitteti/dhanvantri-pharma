@@ -68,9 +68,13 @@ const Note = () => {
 
   const handleSubmit = async () => {
     try {
-      // Assuming you have a server endpoint for handling debit note data
-      await axios.post("http://localhost:5000/api/submitDebitNote", formData);
+      console.log('Submitting debit note data:', formData);
+  
+      const response = await axios.post("http://localhost:5000/api/submitDebitNote", formData);
+  
+      console.log('Server response:', response.data);
       console.log("Debit Note data submitted successfully");
+  
       setFormData({
         DrNo: "",
         DrDate: "",
@@ -84,11 +88,14 @@ const Note = () => {
       console.error("Error submitting debit note data:", error);
     }
   };
+  
 
   const handleSubmits = async () => {
     try {
+      console.log('Submitting credit note data:', formDatas);
       // Assuming you have a server endpoint for handling credit note data
-      await axios.post("http://localhost:5000/api/submitCreditNote", formDatas);
+      const response = await axios.post("http://localhost:5000/api/submitCreditNote", formDatas);
+      console.log('Server response:', response.data);
       console.log("Credit Note data submitted successfully");
       setFormDatas({
         CrNo: "",
@@ -103,6 +110,7 @@ const Note = () => {
       console.error("Error submitting credit note data:", error);
     }
   };
+  
 
   const [selectedOption, setSelectedOption] = useState("option1");
   const [selectedHeading, setSelectedHeading] = useState("Credit Note");
