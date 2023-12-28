@@ -673,9 +673,9 @@ const handlePrintAndSubmit = async () => {
             <tr >
               <th className="class567">S No.</th>
               <th className="class567">Product</th>
-              <th>quantity</th>
+              <th>Qty</th>
               <th>Product Price</th>
-              <th>Manufacturer name</th>
+              <th>Mfr name</th>
               <th>Batch No</th>
               <th>Expiry Date</th>
               <th>GST (%)</th>
@@ -787,8 +787,8 @@ const handlePrintAndSubmit = async () => {
           Add
         </button>
          <div className="pharma-subtotal">
-        <p>Subtotal with GST: {subtotalWithGST}</p>
-        <p>Subtotal without GST: {subtotalWithoutGST}</p>
+        <p>Total with GST: {subtotalWithGST}</p>
+        <p>Total without GST: {subtotalWithoutGST}</p>
       </div>
         
      

@@ -88,14 +88,14 @@ style={{backgroundImage: 'url(https://img.freepik.com/free-photo/some-pills-spra
     
     style={{borderRadius: '1rem', maxWidth: '400px'}}>
     <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100">
-                <h2>Wholesailer Login</h2>
+                <h2>Wholesaler Login</h2>
                 <br />
-                <p>Please enter your login and password!</p>
+                <p>Please enter your Id and password!</p>
 
                 <MDBInput
                   wrapperClass="mb-4 mx-5 w-100"
-                  label="Email address"
-                  type="email"
+                  label="User Id"
+                  type="text"
                   size="lg"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

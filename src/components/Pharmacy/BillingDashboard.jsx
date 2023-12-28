@@ -262,7 +262,7 @@ const fetchTotalBilldata = async () => {
           <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by Cash</label>
-              <p>₹&nbsp;{billingData.Cash}</p>
+              <p>₹&nbsp;{totalCollection}</p>
             </div>
           </Link>
           {/* <Link to="/Dbdetails" className="dbcard-container">

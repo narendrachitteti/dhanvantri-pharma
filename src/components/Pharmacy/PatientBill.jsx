@@ -456,10 +456,10 @@ const PatientBill = () => {
             <tr >
               <th className="class567">S No.</th>
               <th className="class567">Product</th>
-              <th>quantity</th>
+              <th>Qty</th>
               <th>Product Price</th>
-              <th>Manufacturer name</th>
-              <th>Batch No</th>
+              <th>Mfr name</th>
+              <th>B.No</th>
               <th>Expiry Date</th>
               <th>GST (%)</th>
               <th>Action</th>

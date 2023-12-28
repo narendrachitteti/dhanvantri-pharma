@@ -379,7 +379,7 @@ const handlePrint = () => {
     <div className="merge-product-sale">
       <fieldset  className="filed-sets">
         <legend className="item-legends" >Purchase</legend>
-        <label className="label"> Rate:
+        <label className="label"> PTR:
           <input
            className="item-sales-mrp"
             type="number"
@@ -407,7 +407,7 @@ const handlePrint = () => {
         <legend  className="item-legends">Packing</legend>
         <div className="lot-merge">
         <label className="label">
-          Unit:
+          PerStrip:
           <input
            className="item-pack-mrp"
             type="number"
@@ -416,7 +416,7 @@ const handlePrint = () => {
             onChange={handleInputChange}
           />
         </label>
-        <label className="item-pack-trel-label">
+        {/* <label className="item-pack-trel-label">
           Box:
           <input
            className="item-pack-mrp"
@@ -435,7 +435,7 @@ const handlePrint = () => {
             value={formData.unitPerBox}
             onChange={handleInputChange}
           />
-        </label>
+        </label> */}
         </div>
       </fieldset>
 
@@ -559,15 +559,15 @@ const handlePrint = () => {
       <button type="submit" className="item-submit-button">
         Submit
       </button>
-      <button  onClick={handlePrint} className="item-submit-button">Print</button>
+      {/* <button  onClick={handlePrint} className="item-submit-button">Print</button> */}
       </div>
       <div  className="item-form-right">
-             {/* <button>Add</button> */}
-             {/* <button>Edit</button> */}
-             {/* <button>Cancel</button> */}
-             {/* <button>Search</button> */}
-             {/* <button>Delete</button> */}
-             {/* <button>Save</button> */}
+             <button>Add</button>
+             <button>Edit</button>
+             <button>Cancel</button>
+             <button>Search</button>
+             <button>Delete</button>
+             <button>Save</button>
              
              
              {/* <button>Exit</button> */}

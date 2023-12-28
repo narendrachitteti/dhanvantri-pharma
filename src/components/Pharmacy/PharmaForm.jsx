@@ -41,7 +41,7 @@ const PharmaForm = ({ selectedService, onSubmit, onCancel }) => {
                 <div className="popup-input_5">
                         <label> Product Composition:</label>
                         <input
-                            type="number"
+                            type="text"
                             name="DrugCompoId"
                             value={formData.DrugCompoId}
                             onChange={handleChange}

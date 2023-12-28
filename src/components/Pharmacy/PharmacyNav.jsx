@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import './PharmacyNav.css';
+import img from './dp-logo.png';
 const logstaffid = localStorage.getItem("staffid");
 
 
@@ -19,7 +20,16 @@ const PharmacyNav = () => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [, setStaffList] = useState([]);
   const [matchingStaff, setMatchingStaff] = useState(null);
-
+  const colorFilter = `
+  <filter id="white-out">
+  <feColorMatrix type="matrix" values="
+    1 0 0 0 1 0
+    0 1 0 0 1 0
+    0 0 1 0 1 0
+    0 0 0 1 0 0
+  " />
+</filter>
+  `;
  
 
   useEffect(() => {
@@ -79,25 +89,25 @@ const PharmacyNav = () => {
           <div className="nav-item">
             <Link to="/pharmabilling" style={{textDecoration:'none', color:'white',fontWeight:'bolder',fontSize:'2rem'}} >
              
-            DP
+            <img  src={img}alt='logo'  style={{ width: '50px', height: '50px',marginTop:'-25px'}} filter={colorFilter} />
             </Link>
           </div>
           <div className="nav-item">
             <div className="dropdown">
-           <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Select Billing</h6>
+           <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Billing</h6>
               <div className="dropdown-content">
-                <Link to="/pharmabilling">Pharma Billing</Link>
-                <Link to="/BillingDashboard">Billing Dashboard</Link>
+                <Link to="/pharmabilling">Bill</Link>
+                <Link to="/BillingDashboard">Dashboard</Link>
               </div>
             </div>
           </div>
           <div className="nav-item">
             <div className="dropdown">
-              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Select Inventory</h6>
+              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Inventory</h6>
               <div className="dropdown-content">
                 {/* <Link to="/Inventory">Inventory Stock</Link> */}
-                <Link to="/MedicineList">Medicine List</Link>
-                <Link to="/Pharmacystock">Inventory</Link>
+                <Link to="/MedicineList">Product</Link>
+                <Link to="/Pharmacystock">Stocks</Link>
               </div>
             </div>
           </div>
@@ -108,15 +118,15 @@ const PharmacyNav = () => {
               <div className="dropdown-content">
                 <Link to="/ItemDescription">Item Description</Link>
                 <Link to="/Stockist">Stockists</Link>
-                <Link to="/invoicestock">Stockists Invoices</Link>
-                <Link to="/Form3">Tax List</Link>
-                <Link to="/Form4">Company List</Link>
+                <Link to="/invoicestock">Invoices</Link>
+                <Link to="/Form3">Tax Code</Link>
+                <Link to="/Form4">HSN Code</Link>
               </div>
             </div>
           </div>
           <div className="nav-item">
             <div className="dropdown">
-              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Select Purchase Order</h6>
+              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Purchase Order</h6>
               <div className="dropdown-content">
                 <Link to="/CreateOrder">Create Order</Link>
                 <Link to="/OrderList">Order list</Link>
@@ -131,7 +141,7 @@ const PharmacyNav = () => {
           <div className="nav-item">
           <div className="dropdown">
 
-          <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Details</h6>
+          <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Patient Details</h6>
            
   <div className="dropdown-content">
            <Link to='/invoice'> Invoice Details  </Link>

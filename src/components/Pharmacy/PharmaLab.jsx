@@ -14,7 +14,7 @@ import KeyboardDoubleArrowRight from '@mui/icons-material/KeyboardDoubleArrowRig
 
 const PharmaLab = () => {
 
-//   console.log("hi" + BASE_URL)
+  //   console.log("hi" + BASE_URL)
   const [labServices, setLabServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [isAddPopupOpen, setAddPopupOpen] = useState(false);
@@ -55,7 +55,7 @@ const PharmaLab = () => {
           formData
         );
 
-        
+
       } else {
         await axios.post('http://localhost:5000/api/Drug-composition/', formData);
       }
@@ -108,8 +108,8 @@ const PharmaLab = () => {
 
   return (
     <>
-    <PharmacyNav/>
-    
+      <PharmacyNav />
+
       <div className="lab-service-table-container_5">
         <h2 className="lab-ser-headding-arun5">Drug Master</h2><br></br>
         <h4 className="lab-ser-subheadding-arun5">Drug Composition Management</h4>
@@ -127,25 +127,25 @@ const PharmaLab = () => {
             </div>
           </div>
 
-           <button className="add-button_5" onClick={handleAdd}>
+          <button className="add-button_5" onClick={handleAdd}>
             Add New Composition
-          </button> 
+          </button>
         </div>
         <table className="lab-service-table_5">
-          <thead style={{backgroundColor:'#3d50ae'}}>
+          <thead style={{ backgroundColor: '#3d50ae' }}>
             <tr>
               <th> Product Composition</th>
               <th>Product Name</th>
-               <th>Actions</th> 
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-          {currentItems.map((service) => (
-  <tr key={service._id} >
+            {currentItems.map((service) => (
+              <tr key={service._id} >
                 <td>{service.DrugCompoId}</td>
                 <td>{service.testName}</td>
 
-                 <td>
+                <td>
                   <div className="asd_dsfet005">
                     <button
                       className="edit-button_5"
@@ -169,25 +169,25 @@ const PharmaLab = () => {
                       </div>
                     )}
                   </div>
-                </td> 
+                </td>
 
               </tr>
             ))}
           </tbody>
         </table>
         <div className="pagination-container">
-  <ReactJsPagination
-    activePage={activePage}
-    itemsCountPerPage={itemsPerPage}
-    totalItemsCount={labServices.length}
-    pageRangeDisplayed={5}
-    onChange={handlePageChange}
-    prevPageText={<span className="custom-pagination-arrow"><KeyboardArrowLeft /></span>}
-    nextPageText={<span className="custom-pagination-arrow"><KeyboardArrowRight /></span>}
-    firstPageText={<span className="custom-pagination-arrow"><KeyboardDoubleArrowLeft /></span>}
-    lastPageText={<span className="custom-pagination-arrow"><KeyboardDoubleArrowRight /></span>}
-  />
-</div>  
+          <ReactJsPagination
+            activePage={activePage}
+            itemsCountPerPage={itemsPerPage}
+            totalItemsCount={labServices.length}
+            pageRangeDisplayed={5}
+            onChange={handlePageChange}
+            prevPageText={<span className="custom-pagination-arrow"><KeyboardArrowLeft /></span>}
+            nextPageText={<span className="custom-pagination-arrow"><KeyboardArrowRight /></span>}
+            firstPageText={<span className="custom-pagination-arrow"><KeyboardDoubleArrowLeft /></span>}
+            lastPageText={<span className="custom-pagination-arrow"><KeyboardDoubleArrowRight /></span>}
+          />
+        </div>
         <Popup
           open={selectedService !== null || isAddPopupOpen}
           onClose={handleCancel}
