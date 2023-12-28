@@ -145,10 +145,14 @@ const PharmacyBilling = () => {
 
   const handleProductSelect = async (productName, index) => {
     try {
+      // Make a request to fetch details for the selected product
       const response = await axios.get(`http://localhost:5000/api/medicineDetails/${productName}`);
       const productDetails = response.data;
   
+      // Create a copy of the items array
       const updatedItems = [...items];
+  
+      // Update the item at the specified index with the fetched details
       updatedItems[index] = {
         ...updatedItems[index],
         product: productName,
@@ -156,8 +160,11 @@ const PharmacyBilling = () => {
         manufacturer: productDetails.Manufacturer || '',
         gst: productDetails.Gst || '',
       };
+  
+      // Update the state with the modified items array
       setItems(updatedItems);
     } catch (error) {
+      // Handle errors, such as logging them to the console
       console.error('Error fetching medicine details:', error);
     }
   };
@@ -491,16 +498,16 @@ const handlePrintAndSubmit = async () => {
                 </td>
                 <td>
                 <select
-  value={item.product}
-  onChange={(e) => handleProductSelect(e.target.value, index)}
->
-  <option value=''>Select a product</option>
-  {products.map((product) => (
-    <option key={product._id} value={product.product}>
-      {product.product}
-    </option>
-  ))}
-</select>
+                  value={item.product}
+                  onChange={(e) => handleProductSelect(e.target.value, index)}
+                >
+                  <option value=''>Select a product</option>
+                  {products.map((product) => (
+                    <option key={product._id} value={product.product}>
+                      {product.product}
+                    </option>
+                  ))}
+                </select>
                 </td>
                 <td>
                   <input
