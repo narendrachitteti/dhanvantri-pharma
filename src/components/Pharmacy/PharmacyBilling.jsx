@@ -26,11 +26,8 @@ const PharmacyBilling = () => {
       _id: 1,
       product: "",
       quantity: "",
-    
-      batch: "",
-    
+      batch: "",  
       gst: "",
-     
     },
   ]);
   const handleQuantityChange = (e, index) => {
@@ -114,6 +111,11 @@ const PharmacyBilling = () => {
     fetchBatches();
   }, []);
 
+  useEffect(() => {
+    const currentDate = new Date().toISOString().split('T')[0];
+    setDate(currentDate);
+  }, []);
+  
   useEffect(() => {
     const fetchMedicineNames = async () => {
       try {

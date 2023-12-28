@@ -182,52 +182,38 @@ const renderFastMovingMedicines = () => {
     }
   };
 
-
   const fetchCollectionData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getIn");
-      let totalCollection = response.data.length;
-      // const totalSubtotalWithGST = response.data.reduce(
-      //         (accumulator, response) => {
-      //           response.PatientBills.forEach((PatientBills) => {
-      //             accumulator += PatientBills.subtotalWithGST || 0;
-      //           });
-      //           return accumulator;
-      //         },0);
-      setTotalCollection(totalCollection);
-      // setTotalbills(totalSubtotalWithGST);
+      const data = response.data;
+      const subtotalWithGSTSum = data.reduce((sum, item) => {
+        return sum + (item.subtotalWithGST || 0); // Use 0 if subtotalWithGST is undefined or null
+      }, 0);
+      setTotalCollection(subtotalWithGSTSum);
+      
     } catch (error) {
-      console.error("API Error:", error); 
+      console.error("API Error:", error);
     }
   };
+  
   useEffect(()=> {
     fetchCollectionData();
+    
   },);
 
-// const fetchCollection = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:5000/api/getIn");
-//     // const totalCollection = response.data.length;
-//     const totalSubtotalWithGST = response.data.reduce(
-//       (accumulator, response) => {
-//         response.PatientBills.forEach((PatientBills) => {
-//           accumulator += PatientBills.subtotalWithGST || 0;
-//         });
-//         return accumulator;
-//       },
-//       0
-//     );
-
-    // setTotalCollection(totalCollection);
-//     setTotalbills(totalSubtotalWithGST);
-//   } catch (error) {
-//     console.error("API Error:", error);
-//   }
-// };
-
-//   useEffect(() => {
-//     fetchCollection();
-//   },);
+const fetchTotalBilldata = async () => {
+  try {
+    const response = await axios.get("http://localhost:5000/api/getIn");
+    const totalbills = response.data.length;
+    setTotalbills(totalbills);
+    
+  } catch (error) {
+    console.error("API Error:", error);
+  }
+};
+  useEffect(() => {
+    fetchTotalBilldata();
+  },);
   
   return (
     <>
@@ -263,14 +249,14 @@ const renderFastMovingMedicines = () => {
             <div className="dbcard">
               <label>Total Bills</label>
               {/* <p>{billingData.Billed}</p> */}
-              <p>{totalCollection}</p>
+              <p>{totalbills}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Total Collection</label>
               {/* <p>₹&nbsp;{billingData.Collection}</p> */}
-              <p>{totalbills}</p>
+              <p>{totalCollection}</p>
             </div>
           </Link>
           <Link to="/Dbdetails" className="dbcard-container">
@@ -279,12 +265,12 @@ const renderFastMovingMedicines = () => {
               <p>₹&nbsp;{billingData.Cash}</p>
             </div>
           </Link>
-          <Link to="/Dbdetails" className="dbcard-container">
+          {/* <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by Card</label>
               <p>₹&nbsp;{billingData.Card}</p>
             </div>
-          </Link>
+          </Link> */}
           {/* <Link to="/Dbdetails" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by UPI</label>

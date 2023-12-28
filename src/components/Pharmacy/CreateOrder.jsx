@@ -61,9 +61,29 @@ const CreatePurchaseOrder = () => {
     fetchUnitPerBoxes();
   }, []);
 
-  const handleProductChange = (e) => {
+  const handleProductChange = async (e) => {
     setSelectedProduct(e.target.value);
+
+    try {
+      // Fetch product information, including the company name
+      const response = await axios.get(`http://localhost:5000/api/getCompanyByProduct/${e.target.value}`);
+      const responseData = response.data;
+
+      // Check if the response contains the company
+      if (responseData.company) {
+        // Update the Manufacturer and other relevant states with the fetched data
+        setManufacturer(responseData.company);
+        // ... (update other relevant states if needed)
+      } else {
+        console.error("Company not found for the selected product");
+        // Handle the case where the company is not found for the selected product
+      }
+    } catch (error) {
+      console.error("Error fetching product information:", error);
+      // Handle the error appropriately (e.g., show an error message)
+    }
   };
+
   const handleUnitPerBoxChange = (e) => {
     setSelectedUnitPerBox(e.target.value);
   };
@@ -343,7 +363,7 @@ const CreatePurchaseOrder = () => {
           </div>
           <div className="stocklist-cpo1">
             <label className="cr-order-l" htmlFor="Medicine">
-              Medicine Name
+              Product Name
             </label>
             <select
               id="productSelect"

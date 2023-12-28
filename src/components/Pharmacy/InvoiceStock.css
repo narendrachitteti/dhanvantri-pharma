@@ -252,6 +252,9 @@ hr {
   border-radius: 4px;
   cursor: pointer;
 }
+.button-nhy:hover{
+  background-color: #6460e3;
+}
 .button-nhy1 {
   color: white;
   background-color: #f44336;
@@ -260,6 +263,9 @@ hr {
   border-radius: 4px;
   cursor: pointer;
   margin-left: -16px;
+}
+.button-nhy1:hover{
+  background-color:#ee655c ;
 }
 .input-row-3 {
   color: black;
