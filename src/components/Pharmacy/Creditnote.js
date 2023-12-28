@@ -8,109 +8,109 @@ const Note = () => {
   const [formDatas, setFormDatas] = useState({
     CrNo: "",
     CrDate: "", // Format date as 'YYYY-MM-DD'
-    Company: "",
+    // Company: "",
     Amount: "",
-    ManualNo: "",
+    // ManualNo: "",
     Narration: "",
-    Condition: "",
+    // Condition: "",
   });
 
   const [formData, setFormData] = useState({
     DrNo: "",
     DrDate: "", // Format date as 'YYYY-MM-DD'
-    Company: "",
+    // Company: "",
     Amount: "",
-    ManualNo: "",
+    // ManualNo: "",
     Narration: "",
-    Condition: "",
+    // Condition: "",
   });
 
-  const [companies, setCompanies] = useState([]); // Options for the company dropdown
-  const [conditions, setConditions] = useState([
-    "Others",
-    "Expired",
-    "Damaged",
-  ]);
-
-  // Fetch companies from the backend
   useEffect(() => {
-    const fetchCompanies = async () => {
+    const fetchNewCrNo = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/getCompanies"
-        );
-        setCompanies(response.data);
+        const response = await axios.get("http://localhost:5000/api/credit-notes/new-id");
+        const nextCrNo = response.data.CrNo;
+  
+        setFormDatas((prevData) => ({ ...prevData, CrNo: nextCrNo }));
       } catch (error) {
-        console.error("Error fetching companies:", error);
+        console.error("Error fetching new CrNo:", error);
+      }
+    };  
+    fetchNewCrNo();
+  }, []);
+  useEffect(() => {
+    const fetchNewDrNo = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/Debit-notes/new-id");
+        const nextDrNo = response.data.DrNo;
+  
+        setFormData((prevData) => ({ ...prevData, DrNo: nextDrNo }));
+      } catch (error) {
+        console.error("Error fetching new CrNo:", error);
       }
     };
-
-    fetchCompanies();
+  
+    fetchNewDrNo();
   }, []);
-
+  
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-   
   const handleChanges = (e) => {
     const { name, value } = e.target;
     setFormDatas((prevData) => ({ ...prevData, [name]: value }));
   };
-
-  const handleCompanySelect = (selectedOption) => {
-    setFormDatas((prevData) => ({ ...prevData, Company: selectedOption }));
-  };
-
-  const handleConditionSelect = (selectedOption) => {
-    setFormDatas((prevData) => ({ ...prevData, Condition: selectedOption }));
-  };
-
+  
+  
   const handleSubmit = async () => {
     try {
-      console.log('Submitting debit note data:', formData);
-  
-      const response = await axios.post("http://localhost:5000/api/submitDebitNote", formData);
-  
-      console.log('Server response:', response.data);
+      const response = await axios.post(
+        "http://localhost:5000/api/submitDebitNote",
+        formData
+      );
+
+      console.log("Server response:", response.data);
       console.log("Debit Note data submitted successfully");
-  
+
       setFormData({
         DrNo: "",
         DrDate: "",
-        Company: "",
+        // Company: "",
         Amount: "",
-        ManualNo: "",
+        // ManualNo: "",
         Narration: "",
-        Condition: "",
+        // Condition: "",
       });
     } catch (error) {
       console.error("Error submitting debit note data:", error);
     }
   };
-  
 
   const handleSubmits = async () => {
     try {
-      console.log('Submitting credit note data:', formDatas);
-      // Assuming you have a server endpoint for handling credit note data
-      const response = await axios.post("http://localhost:5000/api/submitCreditNote", formDatas);
-      console.log('Server response:', response.data);
+      const submitResponse = await axios.post(
+        "http://localhost:5000/api/submitCreditNote",
+        formDatas
+      );
+      console.log("Server response:", submitResponse.data);
       console.log("Credit Note data submitted successfully");
+
+      // Reset the form after submission
       setFormDatas({
         CrNo: "",
-        CrDate: "", // Format date as 'YYYY-MM-DD'
-        Company: "",
+        CrDate: "",
+        // Company: "",
         Amount: "",
-        ManualNo: "",
+        // ManualNo: "",
         Narration: "",
-        Condition: "",
+        // Condition: "",
       });
     } catch (error) {
       console.error("Error submitting credit note data:", error);
     }
   };
-  
 
   const [selectedOption, setSelectedOption] = useState("option1");
   const [selectedHeading, setSelectedHeading] = useState("Credit Note");
@@ -159,12 +159,14 @@ const Note = () => {
                       <div className="CrNo">
                         <label className="Head">CrNo:</label>
                         <input
-                          type="text"
-                          name="CrNo"
-                          value={formDatas.CrNo}
-                          onChange={handleChanges}
-                          className="numbers1"
-                        />
+                            type="text"
+                            name="CrNo"
+                            value={formDatas.CrNo}
+                            onChange={handleChanges}
+                            className="numbers1"
+                            disabled
+                          />
+
                       </div>
 
                       <div className="CrDate">
@@ -179,32 +181,7 @@ const Note = () => {
                         />
                       </div>
 
-                      <div className="customers">
-                        <label className="Head">Company:</label>
-                        <Select
-                          value={formDatas.Company}
-                          onChange={handleCompanySelect}
-                          options={companies.map((Company) => ({
-                            value: Company,
-                            label: Company,
-                          }))}
-                          className="manual1"
-                        />
-                      </div>
-
-                      <div className="Condition">
-                        <label className="Head">Condition:</label>
-                        <Select
-                          value={formDatas.Condition}
-                          onChange={handleConditionSelect}
-                          options={conditions.map((condition) => ({
-                            value: condition,
-                            label: condition,
-                          }))}
-                          className="manual1"
-                        />
-                      </div>
-
+                      
                       <div className="Amount">
                         <label className="Head">Amount:</label>
 
@@ -217,17 +194,6 @@ const Note = () => {
                         />
                       </div>
 
-                      <div className="ManualNo">
-                        <label className="Head">ManualNo:</label>
-
-                        <input
-                          type="text"
-                          name="ManualNo"
-                          value={formDatas.ManualNo}
-                          onChange={handleChanges}
-                          className="manual"
-                        />
-                      </div>
 
                       <div className="Narration">
                         <label className="Head">Narration:</label>
@@ -275,6 +241,7 @@ const Note = () => {
                           value={formData.DrNo}
                           onChange={handleChange}
                           className="numberss"
+                          disabled
                         />
                       </div>
 
@@ -290,43 +257,7 @@ const Note = () => {
                         />
                       </div>
 
-                      <div className="customers">
-                        <label className="Head">Company:</label>
-                        <Select
-                          value={formData.Company}
-                          onChange={(selectedOption) =>
-                            setFormData((prevData) => ({
-                              ...prevData,
-                              Company: selectedOption,
-                            }))
-                          }
-                          options={companies.map((Company) => ({
-                            value: Company,
-                            label: Company,
-                          }))}
-                          className="manual1"
-                        />
-                      </div>
-
-                      <div className="Condition">
-                        <label className="Head">Condition:</label>
-                        <Select
-                          value={formData.Condition}
-                          onChange={(selectedOption) =>
-                            setFormData((prevData) => ({
-                              ...prevData,
-                              Condition: selectedOption,
-                            }))
-                          }
-                          options={conditions.map((condition) => ({
-                            value: condition,
-                            label: condition,
-                          }))}
-                          className="manual1"
-                        />
-                      </div>
-
-                      <div className="Amount">
+                                            <div className="Amount">
                         <label className="Head">Amount:</label>
 
                         <input
@@ -335,18 +266,6 @@ const Note = () => {
                           value={formData.Amount}
                           onChange={handleChange}
                           className="numberss3"
-                        />
-                      </div>
-
-                      <div className="ManualNo">
-                        <label className="Head">ManualNo:</label>
-
-                        <input
-                          type="text"
-                          name="ManualNo"
-                          value={formData.ManualNo}
-                          onChange={handleChange}
-                          className="numberss5"
                         />
                       </div>
 
