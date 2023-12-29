@@ -34,6 +34,8 @@ import WholsaleRegis from './components/LoginForms/WholsaleRegis.js';
 import MedicineDataComponent from './components/Pharmacy/MedicineDataComponent.jsx';
 import PageNotFound from './PageNotFound.js';
 import PrivateRoute from './components/Pharmacy/PrivateRoute.js';
+import ItemDescription1 from './components/Pharmacy/ItemDescription1.jsx';
+import ItemEditPage from './components/Pharmacy/ItemEditPage.jsx';
 
 
 function App() {
@@ -47,7 +49,7 @@ function App() {
         {/* <Route element={<PrivateRoute/>}> */}
 
           <Route path='/PharmacyNav' element={<PharmacyNav/>}/>
-          <Route path='/ItemDescription' element={<ItemDescription/>}/>
+          <Route path='/ItemDescription' element={<ItemDescription1/>}/>
           <Route path='/invoicestock' element={<InvoiceStock/>}/>
           <Route path='/Drugmaster' element={<PharmaLab/>}/>
           <Route path='/pharmabilling' element={<PatientBill/>}/>
@@ -76,6 +78,7 @@ function App() {
           <Route path='/Stockist' element={<Stockist/>}/>
           <Route path='/invoice' element={<Invoice/>}/>   
           <Route path='/MedicineDataComponent' element={<MedicineDataComponent/>}/> 
+          <Route path="/itemedit" element={<ItemEditPage/>} />
           {/* </Route> */}
         
         </Routes>

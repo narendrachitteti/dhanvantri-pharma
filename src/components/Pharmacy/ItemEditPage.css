@@ -1,0 +1,108 @@
+
+.container-vikeditpage {
+  
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+ .container-vikeditpage h2 {
+    color: #333;
+  }
+  
+ .container-vikeditpage table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+ .container-vikeditpage th,.container-vikeditpage td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+ .container-vikeditpage th {
+    background-color:rgb(0, 153, 255) ;
+    color: white;
+  }
+  
+ .container-vikeditpage tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+ .container-vikeditpage Link {
+    text-decoration: none;
+    color: #3498db;
+  }
+  
+ .container-vikeditpage Link:hover {
+    text-decoration: underline;
+    color: #2561a8;
+  }
+
+
+.container-vikeditpage button{
+    background-color:rgb(0, 153, 255) ;
+    padding: .3rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+
+}
+
+
+
+
+
+
+
+  
+.modal-overlay-itemeditvik {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+  }
+  
+  .modal-itemeditvik {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 45rem;
+  }
+  
+  .modal-itemeditvik h3 {
+    margin-bottom: 10px;
+  }
+  
+  .modal-itemeditvik form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modal-itemeditvik input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .modal-itemeditvik button {
+    padding: 8px;
+    cursor: pointer;
+    background-color:rgb(0, 153, 255) ;
+    color: white;
+    border: none;
+    border-radius: 3px;
+  }
+  
+  .modal-itemeditvik button.cancel {
+    background-color:rgb(132, 9, 9);
+   
+  }
