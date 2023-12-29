@@ -85,6 +85,9 @@ const Invoice = () => {
         price:'',
         manufacturer:'',
         batch:'',
+        batchExpiry: '',
+        gst: '',
+
 
         // Add other fields as needed
     });
@@ -95,12 +98,13 @@ const Invoice = () => {
             patientName: invoice.patientName,
             mobilenumber: invoice.mobilenumber,
             date: invoice.date,
-            product: invoice.items[0].product, // Assuming there's at least one item
+            product: invoice.items[0].product, 
             quantity: invoice.items[0].quantity,
             price: invoice.items[0].price,
             manufacturer: invoice.items[0].manufacturer,
             batch: invoice.items[0].batch,
-            // Add other fields as needed
+            batchExpiry: invoice.items[0].batchExpiry,
+            gst: invoice.items[0].gst,
         });
     };
 
@@ -118,7 +122,8 @@ const Invoice = () => {
                         price: editedData.price,
                         manufacturer: editedData.manufacturer,
                         batch: editedData.batch,
-                        
+                        batchExpiry: editedData.batchExpiry,
+                        gst:editedData.gst,
                     },
                 ],
             });
@@ -258,11 +263,36 @@ const Invoice = () => {
                                                 onChange={(e) => setEditedData({ ...editedData, manufacturer: e.target.value })}
                                             />
                                         </div>
-                                        <button onClick={handleSave}>Save</button>
+                                        <div>
+                                            <label>Batch</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.batch}
+                                                onChange={(e) => setEditedData({ ...editedData, batch: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Batch Expiry</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.batchExpiry}
+                                                onChange={(e) => setEditedData({ ...editedData, batchExpiry: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Gst</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.gst}
+                                                onChange={(e) => setEditedData({ ...editedData, gst: e.target.value })}
+                                            />
+                                        </div>
+                                        <button onClick={handleSave}>Update</button>
                                     </>
                                 ) : (
-                                    // Display patient information
+                                    
                                     <span onClick={() => handleEdit(invoice)}>{item.edit}<FaEdit /></span>
+                                    
                                 )}
                             </td>
                                     </tr>
