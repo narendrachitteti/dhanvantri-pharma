@@ -27,7 +27,11 @@ const PharmacyBilling = () => {
       _id: 1,
       product: "",
       quantity: "",
-      batch: "",  
+      taxCode: "",
+      group: "",
+      category: "",
+      purchaseRate: "",
+      batch: "",
       gst: "",
     },
   ]);
@@ -106,7 +110,6 @@ const PharmacyBilling = () => {
         console.error('Error fetching batches:', error);
       }
     };
-
     fetchBatches();
   }, []);
 // currentdate
@@ -116,70 +119,40 @@ const PharmacyBilling = () => {
   }, []);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProducts = async (product,index) => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await axios.get('http://localhost:5000/api/getProductDetails');
         setProductss(response.data);
+      const updatedItems = [...items];
+      updatedItems[index] = {
+        ...updatedItems[index],
+        product: product,
+        taxCode: response.data.taxCode,
+        group: updatedItems.group,  
+        category: updatedItems.category,
+        purchaseRate: updatedItems.purchaseRate,
+      };
+      setItems(updatedItems);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
     };
-    fetchProducts();
-  },[]);
+    items.forEach((item, index) => {
+      fetchProducts(item.product, index);
+    });
+  }, [items]);
+  //   fetchProducts();
+  // },[]);
   const handleProductChange = (e) => {
     setSelectedProduct(e.target.value);
-  };
-  
-  useEffect(() => {
-    const fetchMedicineNames = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/medicines');
-        setMedicines(response.data.medicines);
-      } catch (error) {
-        console.error('Error fetching medicines:', error);
-      }
-    };
-
-    fetchMedicineNames();
-  }, []);
-
-  const handleProductSelect = async (productName, index) => {
-    try {
-      // Make a request to fetch details for the selected product
-      const response = await axios.get(`http://localhost:5000/api/medicineDetails/${productName}`);
-      const productDetails = response.data;
-  
-      // Create a copy of the items array
-      const updatedItems = [...items];
-  
-      // Update the item at the specified index with the fetched details
-      updatedItems[index] = {
-        ...updatedItems[index],
-        product: productName,
-        price: productDetails.price || '',
-        manufacturer: productDetails.Manufacturer || '',
-        gst: productDetails.Gst || '',
       };
-  
-      // Update the state with the modified items array
-      setItems(updatedItems);
-    } catch (error) {
-      // Handle errors, such as logging them to the console
-      console.error('Error fetching medicine details:', error);
-    }
-  };
   
   const handleBatchSelect = async (batchNumber, index) => {
     try {
       const response = await axios.get(`http://localhost:5000/api/batchDetails/${batchNumber}`);
       const fullExpiryDate = response.data.BatchExpiry;
-  
- 
       const [year, month, day] = fullExpiryDate.split('-');
-  
-
       const formattedExpiry = `${month}/${year.slice(-2)}`;
-  
       const updatedItems = [...items];
       updatedItems[index] = {
         ...updatedItems[index],
@@ -498,26 +471,29 @@ const handlePrintAndSubmit = async () => {
                 </td>
                 <td>
                 <select
-                  value={item.product}
-                  onChange={(e) => handleProductSelect(e.target.value, index)}
-                >
-                  <option value=''>Select a product</option>
-                  {products.map((product) => (
-                    <option key={product._id} value={product.product}>
-                      {product.product}
-                    </option>
-                  ))}
-                </select>
+                id="productSelect"
+                value={selectedProduct}
+                onChange={handleProductChange}
+              >
+                <option value="">Select a product</option>
+                {products.map((product) => (
+                  <option key={product._id} value={product.product}>
+                    {product.product}
+                  </option>
+                ))}
+              </select>
                 </td>
                 <td>
                   <input
                     className='price-input'
-                    value={item.price}
+                    value={price}
                     onChange={(e) => {
                       const updatedItems = [...items];
                       updatedItems[index].price = e.target.value;
                       setItems(updatedItems);
                     }}
+                    
+                // onChange={handleProductChange}
                   />
                 </td>
                 <td>
@@ -561,10 +537,10 @@ const handlePrintAndSubmit = async () => {
                 <td>
                   <input
                     className='gst-input'
-                    value={item.gst}
+                    value={item.taxCode}
                     onChange={(e) => {
                       const updatedItems = [...items];
-                      updatedItems[index].gst = e.target.value;
+                      updatedItems[index].taxCode = e.target.value;
                       setItems(updatedItems);
                     }}
                   />
@@ -572,10 +548,10 @@ const handlePrintAndSubmit = async () => {
                 <td>
                   <input
                     className='gst-input'
-                    value={item.gst}
+                    value={item.taxCode}
                     onChange={(e) => {
                       const updatedItems = [...items];
-                      updatedItems[index].gst = e.target.value;
+                      updatedItems[index].taxCode = e.target.value;
                       setItems(updatedItems);
                     }}
                   />
@@ -600,8 +576,6 @@ const handlePrintAndSubmit = async () => {
         <p>Total with GST: {subtotalWithGST}</p>
         <p>Total without GST: {subtotalWithoutGST}</p>
       </div>
-        
-     
         <div className="pharma-sign">
           <label>Sign : </label>
           <input
