@@ -21,12 +21,17 @@ const PharmacyBilling = () => {
   const [sign , setSign]=useState('');
   const [patientName, setPatientName] = useState('');
   const [date, setDate] = useState('');
+  const [products, setProductss] = useState([]);
   const [items, setItems] = useState([
     {
       _id: 1,
       product: "",
       quantity: "",
-      batch: "",  
+      taxCode: "",
+      group: "",
+      category: "",
+      purchaseRate: "",
+      batch: "",
       gst: "",
     },
   ]);
@@ -96,8 +101,6 @@ const PharmacyBilling = () => {
     calculateTotals();
   }, [items]);
 
- 
-
   useEffect(() => {
     const fetchBatches = async () => {
       try {
@@ -107,58 +110,49 @@ const PharmacyBilling = () => {
         console.error('Error fetching batches:', error);
       }
     };
-
     fetchBatches();
   }, []);
-
+// currentdate
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
     setDate(currentDate);
   }, []);
-  
+
   useEffect(() => {
-    const fetchMedicineNames = async () => {
+    const fetchProducts = async (product,index) => {
       try {
-        const response = await axios.get('http://localhost:5000/api/medicines');
-        setMedicines(response.data.medicines);
-      } catch (error) {
-        console.error('Error fetching medicines:', error);
-      }
-    };
-
-    fetchMedicineNames();
-  }, []);
-
-  const handleProductSelect = async (medicineName, index) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/api/medicineDetails/${medicineName}`);
-      const medicineDetails = response.data;
-  
+        const response = await axios.get('http://localhost:5000/api/getProductDetails');
+        setProductss(response.data);
       const updatedItems = [...items];
       updatedItems[index] = {
         ...updatedItems[index],
-        product: medicineName,
-        price: medicineDetails.price || '',
-        manufacturer: medicineDetails.Manufacturer || '',
-        gst: medicineDetails.Gst || '',
+        product: product,
+        taxCode: response.data.taxCode,
+        group: updatedItems.group,  
+        category: updatedItems.category,
+        purchaseRate: updatedItems.purchaseRate,
       };
       setItems(updatedItems);
-    } catch (error) {
-      console.error('Error fetching medicine details:', error);
-    }
-  };
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    items.forEach((item, index) => {
+      fetchProducts(item.product, index);
+    });
+  }, [items]);
+  //   fetchProducts();
+  // },[]);
+  const handleProductChange = (e) => {
+    setSelectedProduct(e.target.value);
+      };
   
   const handleBatchSelect = async (batchNumber, index) => {
     try {
       const response = await axios.get(`http://localhost:5000/api/batchDetails/${batchNumber}`);
       const fullExpiryDate = response.data.BatchExpiry;
-  
- 
       const [year, month, day] = fullExpiryDate.split('-');
-  
-
       const formattedExpiry = `${month}/${year.slice(-2)}`;
-  
       const updatedItems = [...items];
       updatedItems[index] = {
         ...updatedItems[index],
@@ -171,226 +165,6 @@ const PharmacyBilling = () => {
     }
   };
   
-  
-  
-//   const handleSubmit = async () => {
-//     try {
-//       const response = await axios.post('http://localhost:5000/api/patient-bill', {
-//         patientName,
-//         mobilenumber,
-//         date,
-//         items,
-//         subtotalWithGST,
-//         subtotalWithoutGST,
-//         sign
-//       });
-  
-
-//       if (response && response.data) {
-//         console.log('PatientBill submitted successfully:', response.data);
-
-//         setPatientName('');
-//         setmobilenumber('');
-//         setSign('');
-//         setDate('');
-//         setItems([
-//           {
-//             _id: 1,
-//             product: '',
-//             quantity: '',
-//             batch: '',
-//             gst: '',
-//           },
-//         ]);
-
-//       } else {
-//         console.error('Unexpected response format:', response);
-//       }
-//     } catch (error) {
-//       console.error('Error submitting PatientBill:', error);
-//       console.error('Server response:', error.response ? error.response.data : 'No response data'); 
-//     }
-//   };
-  
-  
-//   const handlePrint = () => {
-   
-//     const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
-
-// console.log('Image URL:', imageUrl);
-// const img = new Image();
-// img.src = imageUrl;
-
-//     img.onload = function () {
-   
-//     const printContent = `
-//       <!DOCTYPE html>
-//       <html>
-//         <head>
-//           <!-- Include any necessary stylesheets or styling here -->
-//           <style>
-//           body {
-//             font-family: 'Arial', sans-serif;
-//           }
-//           .billing-table {
-//             width: 100%;
-//             border-collapse: collapse;
-//             margin-bottom: 20px;
-//           }
-//           .billing-table th, .billing-table td {
-//             border: 1px solid #ddd;
-//             padding: 12px;
-//             text-align: left;
-//           }
-//           .print-container {
-//             max-height: 100%;
-//             overflow-y: auto;
-//             padding: 20px;
-//             border-radius: 5px;
-           
-//             background: #fff;
-           
-//             position: relative;
-//           }
-//           .print-title {
-//             font-size: 24px;
-//             margin-bottom: 20px;
-//             text-align: center;
-//           }
-//           .main-heading{
-//               width:70%;
-//               text-align: center;
-//             }
-//             .flex-change34{
-//               display:flex;
-//               justify-content: space-between;
-//               border: 2px solid black;
-//            }
-//            .image45{
-//             width:30%;
-//            }
-           
-//           .dl-info {
-//             display: flex;
-//             flex-direction: column;
-//             margin-bottom: 20px;
-//           }
-//           .contact-info {
-//               display: flex;
-//               flex-direction: column;
-//               margin-bottom: 20px;
-//               margin-right: 0px;
-
-//             }
-//             .flex-column {
-//               margin-top: 30px;
-//               display: flex;
-//               justify-content: space-between;
-//             }
-           
-//           .dl-text, .contact-text {
-//             margin-right: 20px;
-//           }
-//           .print-details2{
-//               display: flex;
-//               flex-direction: column;
-//           }
-//         </style>
-//         </head>
-//         <body>
-//         <div class="print-container">
-//         <div class="flex-change34">
-//         <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 100px; height: 100px; margin-left: 237px;">
-
-//         <div class='main-heading'>
-//         <h1>Dhanvantri Pharmacy </h1>
-//         <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
-//         Hampinagara , Bengaluru-560104</h3>
-//         <h3>Mob:+91 9916351311</h3>
-//         </div>
-//         </div>
-//         <div class="borderbox"></div>
-//         <h3 class="print-title">Billing Details</h3>
-//         <div class="flex-column">
-//         <div class="dl-info">
-//           <span class="dl-text">DL:20 KA-B41-180306</span>
-//           <span class="dl-text">DL:20 KA-B41-180307</span>
-//         </div>
-//         <div class="contact-info">
-//           <span class="gst-text">GSTIN:29BFNPM5181H1ZX</span>
-//           <span class="phone-text">PHONE:+91 9886819877</span>
-//         </div>
-//       </div>
-//           <!-- Include your billing details in the HTML content -->
-//           <div>
-//             <p class="print-details">Patient Name: ${patientName}</p>
-//             <p class="print-details">Mobile number: ${mobilenumber}</p>
-//             <p class="print-details">Date: ${date}</p>
-//             <table class="billing-table">
-//               <thead>
-//                 <tr>
-//                   <th>Product</th>
-//                   <th>Quantity</th>
-//                   <th>Product Price</th>
-//                   <th>Manufacturer</th>
-//                   <th>Batch No</th>
-//                   <th>Expiry Date</th>
-//                   <th>GST (%)</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-              
-//                 ${items
-//                   .map(
-//                     (item, index) => `
-//                       <tr>
-//                         <td>${item.product}</td>
-//                         <td>${item.quantity}</td>
-//                         <td>${item.price}</td>
-//                         <td>${item.manufacturer}</td>
-//                         <td>${item.batch}</td>
-//                         <td>${item.batchExpiry}</td>
-//                         <td>${item.gst}</td>
-//                       </tr>
-//                     `
-//                   )
-//                   .join("")}
-//               </tbody>
-//             </table>
-//             <strong class="print-details2">Subtotal with GST: ${subtotalWithGST}</strong>
-//             <strong class="print-details2">Subtotal without GST: ${subtotalWithoutGST}</strong>
-//           </div>
-//         </body>
-//       </html>
-//     `;
-
-//     const printWindow = window.open("", "", "height=600");
-//     printWindow.document.open();
-//     printWindow.document.write(printContent);
-//     printWindow.document.close();
-
- 
-//     printWindow.print();
-
-   
-//     printWindow.onafterprint = function () {
-//       printWindow.close();
-      
-//     };
-//   };
-
-//   img.onerror = function (error) {
-//     console.error('Error loading image for printing', error);
-//   };
-  
-// };
-
-  
- 
-
-
-
-
 const handlePrintAndSubmit = async () => {
   try {
     // Submit data to the server
@@ -671,37 +445,22 @@ const handlePrintAndSubmit = async () => {
         <table className="pharma-bill-table23">
           <thead className="pharma-bill-tablehead">
             <tr >
-              <th className="class567">S No.</th>
-              <th className="class567">Product</th>
+              {/* <th className="class567">S No.</th> */}
               <th>Qty</th>
+              <th className="class567">Product</th>
               <th>Product Price</th>
               <th>Mfr name</th>
               <th>Batch No</th>
-              <th>Expiry Date</th>
+              <th>Taxable Value</th>
               <th>GST (%)</th>
+              <th>Value</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody className="pharma-bill-table-body">
             {items.map((item, index) => (
               <tr key={item._id}>
-                <td>{index + 1}</td>
-                <td>
-                <select
-        value={item.product}
-        onChange={(e) => {
-          const selectedValue = e.target.value;
-          handleProductSelect(selectedValue, index);
-        }}
-      >
-        <option value=''>Select a product</option>
-        {medicines.map((medicine, medIndex) => (
-          <option key={medIndex} value={medicine}>
-            {medicine}
-          </option>
-        ))}
-      </select>
-                </td>
+                {/* <td>{index + 1}</td> */}
                 <td>
                 <input
               type="number"
@@ -711,14 +470,30 @@ const handlePrintAndSubmit = async () => {
             />
                 </td>
                 <td>
+                <select
+                id="productSelect"
+                value={selectedProduct}
+                onChange={handleProductChange}
+              >
+                <option value="">Select a product</option>
+                {products.map((product) => (
+                  <option key={product._id} value={product.product}>
+                    {product.product}
+                  </option>
+                ))}
+              </select>
+                </td>
+                <td>
                   <input
                     className='price-input'
-                    value={item.price}
+                    value={price}
                     onChange={(e) => {
                       const updatedItems = [...items];
                       updatedItems[index].price = e.target.value;
                       setItems(updatedItems);
                     }}
+                    
+                // onChange={handleProductChange}
                   />
                 </td>
                 <td>
@@ -762,10 +537,21 @@ const handlePrintAndSubmit = async () => {
                 <td>
                   <input
                     className='gst-input'
-                    value={item.gst}
+                    value={item.taxCode}
                     onChange={(e) => {
                       const updatedItems = [...items];
-                      updatedItems[index].gst = e.target.value;
+                      updatedItems[index].taxCode = e.target.value;
+                      setItems(updatedItems);
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    className='gst-input'
+                    value={item.taxCode}
+                    onChange={(e) => {
+                      const updatedItems = [...items];
+                      updatedItems[index].taxCode = e.target.value;
                       setItems(updatedItems);
                     }}
                   />
@@ -790,8 +576,6 @@ const handlePrintAndSubmit = async () => {
         <p>Total with GST: {subtotalWithGST}</p>
         <p>Total without GST: {subtotalWithoutGST}</p>
       </div>
-        
-     
         <div className="pharma-sign">
           <label>Sign : </label>
           <input
