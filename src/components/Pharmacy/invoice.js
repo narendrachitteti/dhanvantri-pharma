@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './invoice.css';
 import PharmacyNav from './PharmacyNav';
+import { BsPrinter } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const Invoice = () => {
     const [invoices, setInvoices] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-
+    const [editingInvoice, setEditingInvoice] = useState(null);
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
@@ -19,6 +22,123 @@ const Invoice = () => {
 
         fetchInvoices();
     }, []);
+    
+    const handlePrint = (invoice) => {
+        const printContent = `
+            <html>
+                <head>
+                    <title>${invoice.patientName} Invoice</title>
+                    <!-- Include any additional styles for printing if needed -->
+                </head>
+                <body>
+                    <h1>Patient Information</h1>
+                    <p>Patient Name: ${invoice.patientName}</p>
+                    <p>Mobile Number: ${invoice.mobilenumber}</p>
+                    <p>Date: ${invoice.date}</p>
+                    
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Manufacturer</th>
+                                <th>Batch No</th>
+                                <th>Expiry Date</th>
+                                <th>GST</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${invoice.items.map(item => `
+                                <tr>
+                                    <td>${item.product}</td>
+                                    <td>${item.quantity}</td>
+                                    <td>${item.price}</td>
+                                    <td>${item.manufacturer}</td>
+                                    <td>${item.batch}</td>
+                                    <td>${item.batchExpiry}</td>
+                                    <td>${item.gst}%</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+
+                    <script type="text/javascript">
+                        window.onload = function() {
+                            window.print();
+                        }
+                    </script>
+                </body>
+            </html>
+        `;
+
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+    };  
+    const [editedData, setEditedData] = useState({
+        patientName: '',
+        mobilenumber: '',
+        date: '',
+        product:'',
+        quantity:'',
+        price:'',
+        manufacturer:'',
+        batch:'',
+        batchExpiry: '',
+        gst: '',
+
+
+        // Add other fields as needed
+    });
+    const handleEdit = (invoice) => {
+        setEditingInvoice(invoice);
+        // Set initial values for the form fields
+        setEditedData({
+            patientName: invoice.patientName,
+            mobilenumber: invoice.mobilenumber,
+            date: invoice.date,
+            product: invoice.items[0].product, 
+            quantity: invoice.items[0].quantity,
+            price: invoice.items[0].price,
+            manufacturer: invoice.items[0].manufacturer,
+            batch: invoice.items[0].batch,
+            batchExpiry: invoice.items[0].batchExpiry,
+            gst: invoice.items[0].gst,
+        });
+    };
+
+    const handleSave = async () => {
+        try {
+            // Assuming you have an API endpoint for updating patient data
+            await axios.put(`http://localhost:5000/api/update-patient/${editingInvoice._id}`, {
+                patientName: editedData.patientName,
+                mobilenumber: editedData.mobilenumber,
+                date: editedData.date,
+                items: [
+                    {
+                        product: editedData.product,
+                        quantity: editedData.quantity,
+                        price: editedData.price,
+                        manufacturer: editedData.manufacturer,
+                        batch: editedData.batch,
+                        batchExpiry: editedData.batchExpiry,
+                        gst:editedData.gst,
+                    },
+                ],
+            });
+
+            setInvoices((prevInvoices) =>
+                prevInvoices.map((invoice) =>
+                    invoice._id === editingInvoice._id ? { ...invoice, ...editedData } : invoice
+                )
+            );
+
+            setEditingInvoice(null);
+        } catch (error) {
+            console.error('Error saving changes:', error);
+        }
+    };
 
     const filteredInvoices = invoices
         ? invoices.filter(
@@ -65,6 +185,10 @@ const Invoice = () => {
                                     <th className="batch-no-th-sk143">Batch No</th>
                                     <th className="expiry-date-th-sk143">Expiry Date</th>
                                     <th className="gst-th-sk143">GST</th>
+                                    <th className="gst-th-sk143">Print</th>
+                                    <th className="gst-th-sk143">Action</th>
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,6 +201,100 @@ const Invoice = () => {
                                         <td className="batch-no-td-sk143">{item.batch}</td>
                                         <td className="expiry-date-td-sk143">{item.batchExpiry}</td>
                                         <td className="gst-td-sk143">{item.gst}%</td>
+                                        <td className="gst-td-sk143" onClick={() => handlePrint(invoice)}>{item.print}<BsPrinter /></td>
+                                        {/* <td className="gst-td-sk143" onClick={handlePrint}>{item.print}<BsPrinter /></td> */}
+                                        <td className="gst-td-sk143">
+                                {editingInvoice === invoice ? (
+                                    <>
+                                        {/* Editable form */}
+                                        <div>
+                                            <label>Patient Name:</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.patientName}
+                                                onChange={(e) => setEditedData({ ...editedData, patientName: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Mobile Number:</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.mobilenumber}
+                                                onChange={(e) => setEditedData({ ...editedData, mobilenumber: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Date:</label>
+                                            <input
+                                                type="date"
+                                                value={editedData.date}
+                                                onChange={(e) => setEditedData({ ...editedData, date: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Product:</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.product}
+                                                onChange={(e) => setEditedData({ ...editedData, product: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>quantity:</label>
+                                            <input
+                                                type="number"
+                                                value={editedData.quantity}
+                                                onChange={(e) => setEditedData({ ...editedData, quantity: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Price</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.price}
+                                                onChange={(e) => setEditedData({ ...editedData, price: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>manufacturer:</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.manufacturer}
+                                                onChange={(e) => setEditedData({ ...editedData, manufacturer: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Batch</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.batch}
+                                                onChange={(e) => setEditedData({ ...editedData, batch: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Batch Expiry</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.batchExpiry}
+                                                onChange={(e) => setEditedData({ ...editedData, batchExpiry: e.target.value })}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label>Gst</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.gst}
+                                                onChange={(e) => setEditedData({ ...editedData, gst: e.target.value })}
+                                            />
+                                        </div>
+                                        <button onClick={handleSave}>Update</button>
+                                    </>
+                                ) : (
+                                    
+                                    <span onClick={() => handleEdit(invoice)}>{item.edit}<FaEdit /></span>
+                                    
+                                )}
+                            </td>
                                     </tr>
                                 ))}
                             </tbody>
