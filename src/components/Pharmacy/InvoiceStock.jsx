@@ -616,16 +616,7 @@ const InvoiceStock = () => {
             <div className="input-container">
               <label htmlFor="stockName">Stockist Name</label>
               <div className="stockist-merge-plus">
-                {/* <Select
-                  options={stockistOptions}
-                  value={stockistOptions.find(
-                    (option) => option.value === stockistValue
-                  )}
-                  onChange={(selectedOption) =>
-                    setStockistValue(selectedOption.value)
-                  }
-                  styles={customStyles}
-                /> */}
+              
  <select
  
  value={selectedStockist} 
@@ -640,10 +631,6 @@ const InvoiceStock = () => {
             </select>
 
 
-
-
-
-                {/* <button className="plus"   onClick={togglePopup}>+</button>  */}
               </div>
             </div>
             <div className="input-container">
@@ -675,7 +662,7 @@ const InvoiceStock = () => {
             </div>
 
 
-            <div className="BatchExpiryContainer">
+            {/* <div className="BatchExpiryContainer">
               <button className="BatchExpiryButton" onClick={openPopup}>
                 About To Expire
               </button>
@@ -743,12 +730,10 @@ const InvoiceStock = () => {
 
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
-
-
       {showPopup && (
         <div className="popupf">
           <div className="popupv-header">
@@ -973,7 +958,7 @@ const InvoiceStock = () => {
               </select>
             </div>
             &nbsp;&nbsp; &nbsp;&nbsp;
-            <div className="input-container-2">
+            {/* <div className="input-container-2">
               <label htmlFor="NetPrice">Net Price</label>
               <input
                 className="netp-input"
@@ -982,7 +967,7 @@ const InvoiceStock = () => {
                 value={NetPrice}
                 onChange={(e) => setNetPrice(e.target.value)}
               />
-            </div>
+            </div> */}
             &nbsp;&nbsp;
             <div className="input-container-2">
               {" "}
@@ -1011,20 +996,23 @@ const InvoiceStock = () => {
               <tr>
                 <th>Product</th>
                 <th>Mfr</th>
-                <th>Category</th>
-                <th>Batch</th>
+                <th>Batch No</th>
+                <th>Packing</th>
                 <th>Expiry</th>
+                <th>Quantity</th>
+                <th> PTR ..</th>
+                <th>Discount</th>
+                <th>Taxable Value </th>
                 <th>GST%</th>
                 <th>SGST%</th>
                 <th>CGST%</th>
-                <th>Packing</th>
+                <th>MRP/Strip</th>
+
+                {/* <th>Category</th>
                 <th>No of Strips</th>
                 <th>Price/Strip</th>
-                <th>MRP/Strip</th>
-                <th>Discount</th>
                 <th>In Tax(Rs)</th>
-                <th>Total price</th>
-                <th>Quantity</th>
+                <th>Total price</th> */}
                 <th>Delete</th>
               </tr>
             </thead>
@@ -1033,20 +1021,27 @@ const InvoiceStock = () => {
                 <tr key={row._id}>
                   <td>{row.Medicine}</td>
                   <td>{row.Manufacturer}</td>
-                  <td>{row.Category}</td>
                   <td>{row.Batch}</td>
+                  <td>{row.Unit}</td>
                   <td>{row.BatchExpiry}</td>
+                  <td>{row.Quantity}</td>
+                  <td></td>
+                  <td>{row.Discount}</td>
+                  <td></td>
                   <td>{row.Gst}</td>
                   <td>{(row.Gst / 2).toFixed(2)}</td>
                   <td>{(row.Gst / 2).toFixed(2)}</td>
-                  <td>{row.Unit}</td>
+                  <td>{row.MRP}</td>
+
+
+
+                  {/* <td>{row.Category}</td>
+                  <td>{row.BatchExpiry}</td>
                   <td>{row.strips}</td>
                   <td>{row.price}</td>
-                  <td>{row.MRP}</td>
-                  <td>{row.Discount}</td>
                   <td>{calculateInTax(row)}</td>
                   <td>{row.NetPrice}</td>
-                  <td>{row.Quantity}</td>
+                  <td>{row.Quantity}</td> */}
                   <td>
                     <button
                       style={{ color: "red" }}
