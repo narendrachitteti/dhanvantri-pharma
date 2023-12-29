@@ -7,22 +7,16 @@ import axios from "axios";
 const Note = () => {
   const [formDatas, setFormDatas] = useState({
     CrNo: "",
-    CrDate: "", // Format date as 'YYYY-MM-DD'
-    // Company: "",
+    CrDate: "", 
     Amount: "",
-    // ManualNo: "",
     Narration: "",
-    // Condition: "",
   });
 
   const [formData, setFormData] = useState({
     DrNo: "",
-    DrDate: "", // Format date as 'YYYY-MM-DD'
-    // Company: "",
+    DrDate: "",
     Amount: "",
-    // ManualNo: "",
     Narration: "",
-    // Condition: "",
   });
 
   useEffect(() => {
@@ -219,9 +213,9 @@ const Note = () => {
                           >
                             Submit
                           </button>
-                          <button className="Prints" type="button">
+                          {/* <button className="Prints" type="button">
                             Register
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>
@@ -293,10 +287,10 @@ const Note = () => {
                           >
                             Submit
                           </button>
-
+{/* 
                           <button className="Prints1" type="button">
                             Register
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>
