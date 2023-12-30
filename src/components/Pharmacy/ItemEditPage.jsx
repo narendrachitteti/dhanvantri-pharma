@@ -6,8 +6,6 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import PharmacyNav from "./PharmacyNav";
 
-import { Form } from "react-bootstrap";
-
 const ItemEditPage = () => {
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -308,43 +306,15 @@ const ItemEditPage = () => {
                   />
                 </label>
 
-                {/* <label>
+                <label>
                   Expiry Date:
-                 <p>
-                  
-                  
-                  
-                   <DatePicker
+                 <p> <DatePicker
                     selected={expiryDate}
                     onChange={(date) => setExpiryDate(date)}
                     dateFormat="MM/yyyy"
                     showMonthYearPicker
-                  />
-
-
-
-
-                  
-                  
-                  
-                  
-                  
-                  </p>
-                </label> */}
-                 <Form.Group controlId="expiryDate">
-        <Form.Label>Expiry Date:</Form.Label>
-        <Form.Control
-          type="date"
-          name="expiryDate"
-          value={selectedItem.expiryDate}
-          onChange={(e) =>
-            setSelectedItem({
-              ...selectedItem,
-              expiryDate: e.target.value,
-            })
-          }
-        />
-      </Form.Group>
+                  /></p>
+                </label>
 
               </form>
 
