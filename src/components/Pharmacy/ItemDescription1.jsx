@@ -66,19 +66,19 @@ const ItemDescription1 = () => {
                 />
               </label>
 
-              <div className="item-company-name">
+              {/* <div className="item-company-name">
                 <label className="label">Company:</label>
                 <input
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
                 >
-                  {/* Options for company */}
+                 
                 </input>
-              </div>
+              </div> */}
 
               <div className="item-company-name">
-                <label className="tax-c-label">Tax Code:</label>
+                <label className="tax-c-label">GST %:</label>
                 <input
                   name="taxCode"
                   value={formData.taxCode}
@@ -109,13 +109,21 @@ const ItemDescription1 = () => {
                 </input>
 
                 <label className="item-schedu-label1">Schedule:</label>
-                <input
-                  name="schedule"
-                  value={formData.schedule}
-                  onChange={handleChange}
-                >
-                  {/* Options for schedule */}
-                </input>
+<select
+  name="schedule"
+  value={formData.schedule}
+  onChange={handleChange}
+  className="item-shedu-sele1"
+>
+  <option value="">Select Schedule</option>
+  <option value="C">C</option>
+  <option value="C1">C1</option>
+  <option value="X">X</option>
+  <option value="X1">X1</option>
+
+  {/* Add more options as needed */}
+</select>
+
               </div>
 
               <div className="merge-product-sale">
