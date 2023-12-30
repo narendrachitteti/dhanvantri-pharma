@@ -27,7 +27,7 @@ const ItemDescription1 = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/items", {
+      const response = await fetch("http://localhost:5000/api/itemdec", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

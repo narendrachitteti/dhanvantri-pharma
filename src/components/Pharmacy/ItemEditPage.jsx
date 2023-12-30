@@ -10,7 +10,7 @@ const ItemEditPage = () => {
     // Fetch data from the server when the component mounts
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/items");
+        const response = await fetch("http://localhost:5000/api/itemdec");
         const data = await response.json();
         setData(data);
       } catch (error) {
@@ -32,7 +32,7 @@ const ItemEditPage = () => {
   const handleDeleteClick = async (itemId) => {
     alert("please Conform to delete")
     try {
-      const response = await fetch(`http://localhost:5000/api/items/${itemId}`, {
+      const response = await fetch(`http://localhost:5000/api/itemdec/${itemId}`, {
         method: "DELETE",
       });
 
@@ -53,7 +53,7 @@ const ItemEditPage = () => {
   // Function to handle the save button click in the modal
   const handleSaveClick = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/items/${selectedItem._id}`, {
+      const response = await fetch(`http://localhost:5000/api/itemdec/${selectedItem._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
