@@ -149,7 +149,7 @@ const Stockist = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{ fontFamily: 'Inria Serif' }}
           />
-          <i className="fa fa-search"></i>
+          {/* <i className="fa fa-search"></i> */}
         </div>
         <button
           className="add-stockists-button"
