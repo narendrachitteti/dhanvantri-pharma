@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import './Itemdescription.css';
 import { Link } from "react-router-dom";
 import PharmacyNav from "./PharmacyNav";
+
+import { Form, Button } from "react-bootstrap";
 
 const ItemDescription1 = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +21,12 @@ const ItemDescription1 = () => {
     hsnCode: "",
     narration: "",
     drugComposition: "",
+    expiryDate: new Date(),
   });
+
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, expiryDate: date });
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -76,6 +85,19 @@ const ItemDescription1 = () => {
                  
                 </input>
               </div> */}
+
+
+<div className="item-expiry-date">
+            <Form.Group controlId="expiryDate">
+              <Form.Label>Expiry Date:</Form.Label>
+              <Form.Control
+                type="date"
+                name="expiryDate"
+                value={formData.expiryDate}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </div>
 
               <div className="item-company-name">
                 <label className="tax-c-label">GST %:</label>
