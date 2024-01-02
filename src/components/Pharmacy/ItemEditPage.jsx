@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./ItemEditPage.css";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import PharmacyNav from "./PharmacyNav";
@@ -9,7 +7,6 @@ import PharmacyNav from "./PharmacyNav";
 const ItemEditPage = () => {
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [expiryDate, setExpiryDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -28,7 +25,6 @@ const ItemEditPage = () => {
 
   const handleEditClick = (item) => {
     setSelectedItem(item);
-    setExpiryDate(item.expiryDate ? new Date(item.expiryDate) : new Date());
     setIsModalOpen(true);
   };
 
@@ -53,11 +49,6 @@ const ItemEditPage = () => {
 
   const handleSaveClick = async () => {
     try {
-      const updatedItem = {
-        ...selectedItem,
-        expiryDate: expiryDate.toISOString(),
-      };
-
       const response = await fetch(
         `http://localhost:5000/api/itemdec/${selectedItem._id}`,
         {
@@ -65,7 +56,7 @@ const ItemEditPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(updatedItem),
+          body: JSON.stringify(selectedItem),
         }
       );
 
@@ -100,7 +91,6 @@ const ItemEditPage = () => {
           <thead>
             <tr>
               <th>Product</th>
-              <th>Expire Date</th>
               <th>GST %</th>
               <th>Manufacturer</th>
               <th>Batch No</th>
@@ -111,6 +101,7 @@ const ItemEditPage = () => {
               <th>HSN Code</th>
               <th>Narration</th>
               <th>Drug Composition</th>
+              <th>Expiry Date</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -118,9 +109,7 @@ const ItemEditPage = () => {
             {data.map((item) => (
               <tr key={item._id}>
                 <td>{item.product}</td>
-                <td>{item.expiryDate}</td>
                 <td>{item.taxCode}</td>
-
                 <td>{item.manufacturer}</td>
                 <td>{item.batchno}</td>
                 <td>{item.schedule}</td>
@@ -130,7 +119,7 @@ const ItemEditPage = () => {
                 <td>{item.hsnCode}</td>
                 <td>{item.narration}</td>
                 <td>{item.drugComposition}</td>
-              
+                <td>{item.expiryDate}</td>
                 <td style={{ display: 'flex', gap: '.2rem' }}>
                   <button onClick={() => handleEditClick(item)}>Edit</button>
                   <button onClick={() => handleDeleteClick(item._id)} style={{ backgroundColor: 'red' }}>Delete</button>
@@ -308,12 +297,16 @@ const ItemEditPage = () => {
 
                 <label>
                   Expiry Date:
-                 <p> <DatePicker
-                    selected={expiryDate}
-                    onChange={(date) => setExpiryDate(date)}
-                    dateFormat="MM/yyyy"
-                    showMonthYearPicker
-                  /></p>
+                  <input
+                    type="date"
+                    value={selectedItem.expiryDate}
+                    onChange={(e) =>
+                      setSelectedItem({
+                        ...selectedItem,
+                        expiryDate: e.target.value,
+                      })
+                    }
+                  />
                 </label>
 
               </form>

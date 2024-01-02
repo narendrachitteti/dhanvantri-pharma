@@ -310,7 +310,7 @@ const PatientBill = () => {
         <img class="image45" src="${imageUrl}">
 
         <div class='main-heading'>
-        <h1>Dhanvantri Pharmacy </h1>
+        <h1>Dhanvantri Pharma</h1>
         <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
         Hampinagara , Bengaluru-560104</h3>
         <h3>Mob:+91 9916351311</h3>
