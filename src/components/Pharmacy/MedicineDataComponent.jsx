@@ -122,20 +122,15 @@ const MedicineDataComponent = () => {
   }, [items]);
 
 
-  const calculateRatio = (medicineName, product) => {
-    const matchedMedicine = medicineData.find((medicine) => medicine.Medicine === medicineName);
-    if (matchedMedicine && aggregatedItems[product]) {
-      const medicineStrips = matchedMedicine.strips + matchedMedicine.freeStrips;
-      const quantity = aggregatedItems[product].quantity;
-  
-      if (quantity !== 0) {
-        const ratioString = `${medicineStrips}:${quantity}`;
-        return ratioString;
-      }
-      return 'N/A';
-    }
-    return 'N/A';
+  const calculateRemainingStrips = (totalStrips, quantity) => {
+    const total = parseInt(totalStrips) || 0;
+    const used = parseInt(quantity) || 0;
+    const remaining = total - used;
+    return remaining >= 0 ? remaining : 'N/A';
   };
+
+
+ 
   const fetchItemsByDate = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/api/items-by-date?date=${selectedDate}`);
@@ -190,8 +185,8 @@ const MedicineDataComponent = () => {
           <tr  className='mdc-trow'>
             <th  className='mdc-thhss'>Medicine / Product</th>
             <th className='mdc-thhss'>Total Strips</th>
-            <th className='mdc-thh'>Quantity</th>
-            <th className='mdc-thhss'>Ratio</th>
+            <th className='mdc-thh'>Billed</th>
+            <th className='mdc-thhss'>Remaining Strips</th>
           </tr>
         </thead>
         <tbody className='mdc-tbody'>
@@ -212,10 +207,12 @@ const MedicineDataComponent = () => {
                   }
                 
               </td>
-              <td className='mdc-tddhs'>
-               {calculateRatio(medicine.Medicine, medicine.Medicine)}
-                
-              </td>
+              <td className="mdc-tddhs">
+                  {calculateRemainingStrips(
+                    calculateTotalStrips(medicine.strips, medicine.freeStrips),
+                    aggregatedItems[medicine.Medicine] ? aggregatedItems[medicine.Medicine].quantity : 0
+                  )}
+                </td>
             </tr>
           ))}
         </tbody>
