@@ -17,7 +17,6 @@ const InvoiceStock = () => {
   const [stockName /* setStockName */] = useState("");
   const [date, setDate] = useState("");
   const [Medicine, setMedicine] = useState("");
-
   const [Category, setCategory] = useState("");
 
   const [Unit, setUnit] = useState("");
@@ -568,7 +567,7 @@ useEffect(() => {
               <input
                 id="BatchExpiry"
                 value={batchExpiry}
-              
+
               
               />
             </div>
@@ -636,8 +635,6 @@ useEffect(() => {
               />
             </div>
             &nbsp;   
-
-            
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="Freestrips">Free strips</label>
