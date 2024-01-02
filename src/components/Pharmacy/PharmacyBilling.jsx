@@ -278,8 +278,8 @@ const handlePrintAndSubmit = async () => {
                   justify-content: space-between;
                 }
                
-              .dl-text, .contact-text {
-                margin-right: 20px;
+              .dl-text {
+                margin-left: 20px;
               }
               .print-details2{
                   display: flex;
@@ -289,32 +289,35 @@ const handlePrintAndSubmit = async () => {
             </head>
             <body>
             <div class="print-container">
+            <div class="dl-info">
+            <span class="dl-text">DL:20 KA-B41-180306</span>
+            <span class="dl-text">DL:20 KA-B41-180307</span>
+          </div>
             <div class="flex-change34">
+            
             <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 113px; height: 113px; margin-left: 104px; margin-top:32px;">
     
             <div class='main-heading'>
+        <h1>ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
             <h1>Dhanvantri Pharma</h1>
             <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
             Hampinagara , Bengaluru-560104</h3>
-            <h3>Mob:+91 9916351311</h3>
+            
+            </div>
+           
+            <div class="contact-info">
+              <span class="gst-text">GSTIN:29BFNPM5181H1ZX</span>
+              <span class="phone-text">Mob:+91 9916351311</span>
             </div>
             </div>
             <div class="borderbox"></div>
-            <h3 class="print-title">Billing Details</h3>
+            <h3 class="print-title">Tax Invoice</h3>
             <div class="flex-column">
-            <div class="dl-info">
-              <span class="dl-text">DL:20 KA-B41-180306</span>
-              <span class="dl-text">DL:20 KA-B41-180307</span>
-            </div>
-            <div class="contact-info">
-              <span class="gst-text">GSTIN:29BFNPM5181H1ZX</span>
-              <span class="phone-text">PHONE:+91 9886819877</span>
-            </div>
+            
           </div>
               <!-- Include your billing details in the HTML content -->
               <div>
                 <p class="print-details">Patient Name: ${patientName}</p>
-                <p class="print-details">Mobile number: ${mobilenumber}</p>
                 <p class="print-details">Date: ${date}</p>
                 <table class="billing-table">
                   <thead>
@@ -404,7 +407,8 @@ const handlePrintAndSubmit = async () => {
         <img className='image45' src={imageUrl} alt="Example" />
 
         <div className='main-heading'>
-        <h1>Dhanvantri Pharmacy </h1>
+        <h1>ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
+        <h1>Dhanvantri Pharma </h1>
         <h4> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h4>
         <h4>Hampinagara , Bengaluru-560104</h4>
        
