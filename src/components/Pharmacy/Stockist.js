@@ -38,7 +38,7 @@ const Stockist = () => {
       console.error('Error fetching stockists:', error);
     }
   };
-
+   
   useEffect(() => {
     fetchStockists();
   }, []);

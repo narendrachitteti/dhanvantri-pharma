@@ -791,7 +791,7 @@ const handleDelete = (indexToDelete) => {
           <tbody>
             <tr>
               <td>Total</td>
-              <td>{amounts.Total}</td>
+              <td>{amounts.total}</td>
             </tr>
             <tr>
               <td>Discount</td>

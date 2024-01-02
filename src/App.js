@@ -36,6 +36,7 @@ import PageNotFound from './PageNotFound.js';
 import PrivateRoute from './components/Pharmacy/PrivateRoute.js';
 import ItemDescription1 from './components/Pharmacy/ItemDescription1.jsx';
 import ItemEditPage from './components/Pharmacy/ItemEditPage.jsx';
+import AccountDetails from './components/Pharmacy/AccountDetails.js';
 
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
           <Route path='/invoice' element={<Invoice/>}/>   
           <Route path='/MedicineDataComponent' element={<MedicineDataComponent/>}/> 
           <Route path="/itemedit" element={<ItemEditPage/>} />
+          <Route path="/Account" element={<AccountDetails/>} />
           {/* </Route> */}
         
         </Routes>
