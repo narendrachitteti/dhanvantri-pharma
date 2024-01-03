@@ -50,11 +50,12 @@ const AccountDetails = () => {
 
       // Update the accounts state with the response data from the server
       setAccounts([...accounts, response.data.account]); // Assuming the response contains the added account data
-      const generatedUniqueID = response.data.uniqueID;
-
+      // const generatedUniqueID = response.data.uniqueID;
+      const { account, uniqueID } = response.data;
       // Reset form fields
       setNewAccountData({
-        uniqueID: generatedUniqueID, // Set the received uniqueID in the state
+        ...newAccountData,
+        uniqueID: uniqueID,// Set the received uniqueID in the state
         name: '',
         AccountNumber: '',
         ifcscode: '',
@@ -94,18 +95,16 @@ const AccountDetails = () => {
     return new Date(dateString).toLocaleDateString();
   };
 
-  const handleEditAccount = async (AccountID) => {
+  const handleEditAccount = async (accountID) => {
     try {
-      await axios.put(`http://localhost:5000/api/update-Account/${AccountID}`, editAccountData);
-
+      await axios.put(`http://localhost:5000/api/update-Account/${accountID}`, editAccountData);
       const response = await axios.get('http://localhost:5000/api/get-accounts');
       const updatedAccounts = response.data;
-
-      setAccounts(updatedAccounts); // Corrected from setStockists
+      setAccounts(updatedAccounts);
 
       setEditMode(null);
       setEditAccountData({
-        uniqueID: '',
+        uniqueID: '', // Clearing uniqueID in edit mode, you may want to revise this logic
         name: '',
         AccountNumber: '',
         ifcscode: '',
@@ -115,6 +114,15 @@ const AccountDetails = () => {
       console.error('Error editing account:', error);
       alert('Error editing account. Please try again.');
     }
+  };
+
+
+  const [activePage, setActivePage] = useState(1);
+
+  // Update active page when pagination changes
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+    setStartIndex((pageNumber - 1) * itemsPerPage);
   };
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(itemsPerPage);
@@ -231,13 +239,13 @@ const AccountDetails = () => {
             </tr>
           </thead>
           <tbody>
-          {filteredAccounts.slice(startIndex, endIndex).map((account) => (
+            {filteredAccounts.slice(startIndex, endIndex).map((account) => (
               <tr key={account._id}>
                 <td>
                   {editMode === account._id ? (
                     <input type="text" value={editAccountData.uniqueID} disabled />
                   ) : (
-                    account.uniqueID
+                    account.uniqueID // Display uniqueID received from backend
                   )}
                 </td>
 
@@ -301,12 +309,12 @@ const AccountDetails = () => {
           </tbody>
         </table>
         <div className='ReactJsPagination'>
-        <ReactJsPagination
-            activePage={currentPage}
+          <ReactJsPagination
+            activePage={activePage}
             itemsCountPerPage={itemsPerPage}
             totalItemsCount={filteredAccounts.length}
             pageRangeDisplayed={3}
-            onChange={(pageNumber) => setStartIndex((pageNumber - 1) * itemsPerPage)}
+            onChange={handlePageChange}
           />
         </div>
       </div>
