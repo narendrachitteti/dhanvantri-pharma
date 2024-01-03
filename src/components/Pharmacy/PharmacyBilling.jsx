@@ -354,10 +354,10 @@ const handlePrintAndSubmit = async () => {
         <FaPlusCircle className="icon-plus-main"/>
 
         <div className='main-heading'>
-        <h1>Dhanvantri Pharmacy </h1>
-        <h4> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h4>
-        <h4>Hampinagara , Bengaluru-560104</h4>
-       
+        <h1 className="dhanvantri-heading">ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
+        <h2 className="dhanvantri-heading">Dhanvantri Pharma</h2>
+        <h5 className="dhanvantri-heading-address"> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h5>
+        <h5 className="dhanvantri-heading-hampinagar">Hampinagara , Bengaluru-560104</h5>
         </div>
         <FaPlusCircle className="icon-plus-main-second"/>
         </div>
