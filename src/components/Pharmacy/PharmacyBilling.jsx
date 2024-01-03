@@ -332,9 +332,7 @@ const handlePrintAndSubmit = async () => {
   return (
     <>
     <PharmacyNav/>
-   
       <div className="patientbill-page">
-       
         <div className="gst-ph-header">
         <div className="gst-ph-head-dl">
           <span className="dl-1-text">DL:20 KA-B41-180306</span>
