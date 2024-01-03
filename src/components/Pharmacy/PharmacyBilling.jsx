@@ -8,23 +8,19 @@ import { FaPlusCircle } from "react-icons/fa";
 
 const PharmacyBilling = () => {
   const [quantity, setQuantity] = useState('');
-  // const [medicines, setMedicines] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
-  // const [HSNCode, setHSNCode] = useState('');
-  // const [price, setPrice] = useState('');
+ 
   const [manufacturer, setManufacturer] = useState('');
   const [Gst, setGst] = useState('');
-  // const [selectedBatch, setSelectedBatch] = useState('');
   const [batchExpiry, setBatchExpiry] = useState('');
-  // const [batches, setBatches] = useState([]);
   const [subtotalWithGST, setSubtotalWithGST] = useState(0);
   const [subtotalWithoutGST, setSubtotalWithoutGST] = useState(0);
   const [mobilenumber, setmobilenumber] = useState('');
   const [sign , setSign]=useState('');
   const [patientName, setPatientName] = useState('');
   const [date, setDate] = useState('');
+  const [taxCode, setTaxCode] = useState('');
   const [taxableValues, setTaxableValues] = useState([]);
-  // const [gstValue, setGstValue] = useState('');
 const [hsnCode, setHsnCode] = useState('');
 const [batch, setBatch] = useState('');
 const [ptr, setPTR] = useState('');
@@ -32,6 +28,7 @@ const [PerStrip, setPerStrip] = useState('');
 const [products, setProducts] = useState([]);
 const [signature , setsignature] = useState('');
 const [doctorName , setdoctorName] = useState("");
+  
   const [items, setItems] = useState([
     {
       _id: 1,
@@ -46,7 +43,6 @@ const [doctorName , setdoctorName] = useState("");
       gst: "",
     },
   ]);
-  
   const handleQuantityChange = (e, index) => {
     const { value } = e.target;
     const updatedItems = items.map((item, i) => {
@@ -62,6 +58,9 @@ const [doctorName , setdoctorName] = useState("");
         });
         return {
           ...item,
+          product:selectedProduct,
+          ptr:ptr,
+          taxCode:taxCode,
           quantity: value,
           totalValue: totalValue, // Update total value in the state
         };
@@ -136,7 +135,7 @@ const handlePrintAndSubmit = async () => {
       patientName,
       doctorName,
       mobilenumber,
-      ptr,
+      // ptr,
       date,
       items,
       subtotalWithGST,
