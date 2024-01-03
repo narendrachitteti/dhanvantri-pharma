@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./PatientBill.css";
 import PharmacyNav from "./PharmacyNav";
 import imageUrl from './PharmacyLogo.jpg';
+// import image from './pharmalogo.png';
 import { FaPlusCircle } from "react-icons/fa";
 
 const PharmacyBilling = () => {
@@ -29,7 +30,7 @@ const [batch, setBatch] = useState('');
 const [ptr, setPTR] = useState('');
 const [PerStrip, setPerStrip] = useState('');
 const [products, setProducts] = useState([]);
-
+const [signature , setsignature] = useState('');
 const [doctorName , setdoctorName] = useState("");
   const [items, setItems] = useState([
     {
@@ -166,6 +167,8 @@ const handlePrintAndSubmit = async () => {
     } else {
       console.error('Unexpected response format:', response);
     }
+    
+    // import { FaPlusCircle } from "react-icons/fa";
     const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
     console.log('Image URL:', imageUrl);
     const img = new Image();
@@ -206,6 +209,7 @@ const handlePrintAndSubmit = async () => {
                 text-align: center;
               }
               .main-heading{
+                  font-size:10px;
                   width:70%;
                   text-align: center;
                 }
@@ -219,9 +223,13 @@ const handlePrintAndSubmit = async () => {
                }
                
               .dl-info {
-                display: flex;
-                flex-direction: column;
+                width:240px;
+                font-size:13px;
                 margin-bottom: 20px;
+              }
+              .phone-gst-text {
+                width:200px;
+                font-size:15px;
               }
               .contact-info {
                   display: flex;
@@ -236,44 +244,52 @@ const handlePrintAndSubmit = async () => {
                   justify-content: space-between;
                 }
                
-              .dl-text {
-                margin-left: 20px;
+              .dl-text, .contact-text {
+                margin-right: 20px;
               }
               .print-details2{
                   display: flex;
                   flex-direction: column;
               }
+            
             </style>
             </head>
             <body>
             <div class="print-container">
-            <div class="dl-info">
-            <span class="dl-text">DL:20 KA-B41-180306</span>
-            <span class="dl-text">DL:20 KA-B41-180307</span>
-          </div>
             <div class="flex-change34">
-            
-            <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 113px; height: 113px; margin-left: 104px; margin-top:32px;">
+            <div style="display:flex">
+            <div class="dl-info">
+              <span class="dl-text">DL:20 KA-B41-180306</span>
+              <span class="dl-text">DL:20 KA-B41-180307</span>
+            </div>
+            <div style='display:flex'> 
+            <div>
+            <FaPlusCircle />
+            <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 113px; height: 113px; margin-left: -150px; margin-top:38px;">
+            </div>
             <div class='main-heading'>
+            <h1>TAX INVOICE</h1>
+            <h1>ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
             <h1>Dhanvantri Pharmacy </h1>
             <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
             Hampinagara , Bengaluru-560104</h3>
-            
             </div>
-           
-            <div class="contact-info">
-              <span class="gst-text">GSTIN:29BFNPM5181H1ZX</span>
-              <span class="phone-text">Mob:+91 9916351311</span>
+
+            <div >
+            <h3 style="font-size:13px; margin-top:-1px;">GSTIN:29BFNPM5181H1ZX</h3>
+            <h3 style="font-size:13px; margin-top:-10px; font-weight:light;">PHONE:+91 9886819877</h3>
+            </div>
+            </div>
             </div>
             </div>
             <div class="borderbox"></div>
-            <h3 class="print-title">Tax Invoice</h3>
+            <h3 class="print-title">TAX INVOICE</h3>
             <div class="flex-column">
-            
           </div>
               <!-- Include your billing details in the HTML content -->
               <div>
                 <p class="print-details">Patient Name: ${patientName}</p>
+                <p class="print-details">Doctor Name: ${doctorName}</p>
                 <p class="print-details">Date: ${date}</p>
                 <table class="billing-table">
                   <thead>
@@ -307,6 +323,7 @@ const handlePrintAndSubmit = async () => {
                 </table>
                 <strong class="print-details2">Subtotal with GST: ${subtotalWithGST}</strong>
                 <strong class="print-details2">Subtotal without GST: ${subtotalWithoutGST}</strong>
+                <h1 style='font-size:15px'>Signature: ${sign}</h1>
               </div>
             </body>
           </html>
@@ -334,7 +351,9 @@ const handlePrintAndSubmit = async () => {
   return (
     <>
     <PharmacyNav/>
+   
       <div className="patientbill-page">
+       
         <div className="gst-ph-header">
         <div className="gst-ph-head-dl">
           <span className="dl-1-text">DL:20 KA-B41-180306</span>
@@ -352,7 +371,7 @@ const handlePrintAndSubmit = async () => {
         <FaPlusCircle className="icon-plus-main"/>
 
         <div className='main-heading'>
-        <h1 className="dhanvantri-heading">ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
+
         <h2 className="dhanvantri-heading">Dhanvantri Pharma</h2>
         <h5 className="dhanvantri-heading-address"> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h5>
         <h5 className="dhanvantri-heading-hampinagar">Hampinagara , Bengaluru-560104</h5>
@@ -403,28 +422,30 @@ const handlePrintAndSubmit = async () => {
         <table className="pharma-bill-table23">
           <thead className="pharma-bill-tablehead">
              <tr >
-              <th>Qty</th>
-              <th className="class567">Product</th>
-              <th>Product Price</th>
-              <th>Mfr name</th>
-              <th>Batch No</th>
-              <th>Taxable Value</th>
-              <th>GST (%)</th>
-              <th>Value</th>
-              <th>Action</th>
-            </tr>
-            <tr className="table-bill-row">
+              <th className="oty-table">Qty</th>
+              <th className="product-product-table">Product</th>
+              <th className="product-price-table">Product Price</th>
+              <th className="product-price-table">Mfr name</th>
+              <th className="product-price-table">Batch No</th>
+              <th className="product-price-table">Taxable Value</th>
+              <th className="product-price-table">GST (%)</th>
+              <th className="merge-tabe">
+              <th  colspan="2" className="table-value">Value</th>
+              <tr className="table-bill-row">
                 <th className="with-gst">with Gst</th>
                 <th className="table-cell-177 table-header-177">without Gst</th>
               </tr>
-          </thead> 
+              </th>
+              <th className="product-action-table">Action</th>
+            </tr>
+           </thead> 
           <tbody className="pharma-bill-table-body">
             {items.map((item, index) => (
               <tr key={item._id}>
                 <td>
                 <input
               type="number"
-              className="pharma-bill-input-quantity"
+              className="pharma-bill-quantity"
               value={item.quantity}
               onChange={(e) => handleQuantityChange(e, index)}
               min="0"
@@ -446,13 +467,14 @@ const handlePrintAndSubmit = async () => {
                 </td>
                 <td>
                   <input
-                    className='price-input'
+                    className="pharma-bill-quantity"
                     id="salesRateSelect"
                     value={ptr}
                   />
                 </td>
                 <td>
                 <input
+                className="pharma-bill-quantity"
                 type="text"
                 id="Manufacturer"
                 value={manufacturer}
@@ -460,6 +482,7 @@ const handlePrintAndSubmit = async () => {
                 </td>
                 <td>
                 <input
+                className="pharma-bill-quantity"
                 type="Batch"
                 id="Batch"
                 value={batch}
@@ -467,6 +490,7 @@ const handlePrintAndSubmit = async () => {
                 </td>
                 <td>
                    <input
+                   className="pharma-bill-quantity"
                         type="text"
                         value={taxableValues[index] || ''}
                         readOnly
@@ -517,24 +541,26 @@ const handlePrintAndSubmit = async () => {
         {/* <p>Total with GST: {subtotalWithGST}</p>
         <p>Total without GST: {subtotalWithoutGST}</p> */}
       </div>
-        <div className="pharma-sign">
-          <label>Sign : </label>
-          <input
-            type="textarea"
-            className="sign-area"
-            value={sign}
-            onChange={(e) => setSign(e.target.value)}
-          />
+      <div className="merge-sign-para">
+        <div>
+          <div className="pharma-sign">
+            <label>Sign : </label>
+            <input
+              type="textarea"
+              className="sign-area"
+              value={sign}
+              onChange={(e) => setSign(e.target.value)}
+            />
+          </div>
+          <button onClick={handlePrintAndSubmit} className="print-btn">
+            Print
+          </button>
+          </div>
+          <div>
+            <h1 className="goods-class">Goods once sold cannot be taken back or exchanged</h1>
+            <h1 className="goods-class">Subjected to Bengular-560104 Jurisdiction</h1>
+          </div>
         </div>
-
-        {/* <button onClick={handleSubmit}  className="pharma-bill-submit-btn del-btn">
-          Submit
-        </button> */}
-
-        <button onClick={handlePrintAndSubmit} className="print-btn">
-          Print
-        </button>
-
       </div>
     </>
   );

@@ -5,6 +5,38 @@
   padding: 10px;
   border: 2px solid grey;
 }
+.oty-table{
+  width: 70px;
+}
+/* .merge-tabe{
+  width: 10%;
+} */
+.table-value{
+  width: 200px;
+}
+.product-action-table{
+  width: 80px;
+}
+.goods-class{
+  font-size: 13px;
+  margin-left: 250%;
+  width: 350px;
+}
+.merge-sign-para{
+  display: flex;
+}
+.product-product-table{
+  width: 130px;
+}
+.product-price-table{
+  width: 100px;
+}
+.product-value-table{
+  width: 20%;
+}
+.pharma-bill-quantity{
+  width: 100%;
+}
 .main-heading{
   width:72%;
   text-align: center;
@@ -16,13 +48,13 @@
   border: 1px solid #ccc;
   /* border-radius: 4px; */
   border-radius: 3px;
-  width: 50%;
+  width: 23%;
 }
 .pharma-doctor-input{
   width: 13%;
 }
 .print-btn{
-  width: 5%;
+  width: 35%;
   height: 40px;
   margin-left: 2%;
 }
@@ -60,8 +92,8 @@ margin-left: 3%;
 .pharma-bill-tablehead th, .pharma-bill-table-body td {
   border: 1px solid #ddd;
   height: 5vh;
-  width: 8vw;
-  text-align: left;
+  /* width: 8vw; */
+  /* text-align: left; */
 }
 .pharma-bill-tablehead{
   background-color: #9b8bf4;
@@ -212,6 +244,8 @@ margin-left: -25%;
 .pharma-sign{
   font-weight: bold;
   margin: 1% 2%;
+  display: flex;
+  width: 220px;
 }
 .sign-area{
   /* height: 6vh; */
