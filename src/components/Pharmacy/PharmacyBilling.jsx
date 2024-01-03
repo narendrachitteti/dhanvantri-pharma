@@ -30,7 +30,6 @@ const [signature , setsignature] = useState('');
 const [doctorName , setdoctorName] = useState("");
   
   const [items, setItems] = useState([
-  const [items, setItems] = useState([   
     {
       _id: 1,
       product: "",
