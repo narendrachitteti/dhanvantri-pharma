@@ -241,13 +241,7 @@ const AccountDetails = () => {
           <tbody>
             {filteredAccounts.slice(startIndex, endIndex).map((account) => (
               <tr key={account._id}>
-                <td>
-                  {editMode === account._id ? (
-                    <input type="text" value={editAccountData.uniqueID} disabled />
-                  ) : (
-                    account.uniqueID // Display uniqueID received from backend
-                  )}
-                </td>
+               <td>{account.uniqueID}</td>
 
                 <td>
                   {editMode === account._id ? (
