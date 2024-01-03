@@ -30,6 +30,7 @@ const [signature , setsignature] = useState('');
 const [doctorName , setdoctorName] = useState("");
   
   const [items, setItems] = useState([
+  const [items, setItems] = useState([   
     {
       _id: 1,
       product: "",
@@ -431,8 +432,8 @@ const handlePrintAndSubmit = async () => {
               <th className="merge-tabe">
               <th  colspan="2" className="table-value">Value</th>
               <tr className="table-bill-row">
-                <th className="with-gst">with Gst</th>
-                <th className="table-cell-177 table-header-177">without Gst</th>
+                <th className="with-gst">without Gst</th>
+                <th className="table-cell-177 table-header-177">with Gst</th>
               </tr>
               </th>
               <th className="product-action-table">Action</th>
