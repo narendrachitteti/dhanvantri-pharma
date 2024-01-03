@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -16,6 +17,7 @@ const InvoiceStock = () => {
   const [stockName /* setStockName */] = useState("");
   const [date, setDate] = useState("");
   const [Medicine, setMedicine] = useState("");
+
   const [Category, setCategory] = useState("");
 
   const [Unit, setUnit] = useState("");
@@ -95,51 +97,7 @@ const InvoiceStock = () => {
       width: "100px",
     }),
   };
-  const handleActionButton = (action) => {
-    if (action === "add") {
-      // Create a new medicine object with the current state values
-      const newMedicine = {
-        MedId: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
-        Medicine: selectedProduct,
-        manufacturer,
-        Category: formData.schedule,
-        batch,
-        BatchExpiry: selectedDate ? `${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getFullYear()).slice(-2)}` : "", // Fetch month and year as MM-YY
-        Unit: selectedUnitPerBox,
-        strips,
-        Freestrips,
-        Gst,
-        price: selectedSalesRate,
-        MRP: selectedPurchaseRate,
-        Discount,
-        Total,
-        hsnCode,
-        RackNo,
-        BookNo,
-        NetPrice,
-        Quantity,
-      };
-      // Add the new medicine object to the tableData state
-      setTableData((prevTableData) => [...prevTableData, newMedicine]);
-      // Clear the input fields by resetting the state
-      clearInputFields();
-      // Calculate the total discount amount for the entire table
-      const totalDiscountAmount = tableData.reduce(
-        (acc, medicine) => acc + (parseFloat(medicine.Discount) || 0),
-        parseFloat(newMedicine.Discount) || 0
-      );
-      // Update the state with the new total discount amount
-      setTotalDiscountAmount(totalDiscountAmount);
-      // Log the unique ID of the newly added medicine
-      console.log(
-        "Unique ID of the newly added medicine:",
-        newMedicine.customId
-      );
-    } else if (action === "clear") {
-      // Clear the input fields by resetting the state
-      clearInputFields();
-    }
-  };
+
   const calculateTotalDiscount = () => {
     const totalDiscount = tableData.reduce(
       (acc, row) => acc + (parseFloat(row.Discount) || 0),
@@ -159,6 +117,7 @@ const InvoiceStock = () => {
     setCGst("");
     setSGst("");
     setPrice("");
+    setptr("");
     setMRP("");
     setDiscount("");
     setTotal("");
@@ -168,13 +127,7 @@ const InvoiceStock = () => {
     setNetPrice("");
     setQuantity("");
   };
-  const handleDelete = (customId) => {
-    // Update the tableData state by removing the medicine with the specified customId
-    setTableData((prevTableData) =>
-      prevTableData.filter((medicine) => medicine.customId !== customId)
-    );
-    window.alert("Medicine deleted successfully");
-  };
+
   const handleSaveInvoice = async () => {
     try {
       // Create an array of medicines using the tableData state
@@ -184,11 +137,12 @@ const InvoiceStock = () => {
         Manufacturer: row.Manufacturer,
         Category: row.Category,
         Batch: row.Batch,
-        BatchExpiry: row.BatchExpiry,
+        expiryDate: row.expiryDate,
         Unit: row.Unit,
         strips: row.strips,
         Freestrips: row.Freestrips,
         Gst: row.Gst,
+        ptr:row.ptr,
         price: row.price,
         MRP: row.MRP,
         Discount: row.Discount,
@@ -389,14 +343,14 @@ const InvoiceStock = () => {
 
 
 
-const [totalValue, setTotalValue] = useState(0);
+// const [totalValue, setTotalValue] = useState(0);
 
 const [selectedProduct, setSelectedProduct] = useState('');
 const [hsnCode, setHsnCode] = useState('');
 const [manufacturer, setManufacturer] = useState('');
 const [batch, setBatch] = useState('');
-const [batchExpiry, setBatchExpiry] = useState('');
-const [ptr, setPTR] = useState('');
+const [expiryDate, setExpiryDate] = useState('');
+const [ptr, setptr] = useState('');
 const [PerStrip, setPerStrip] = useState('');
 const [products, setProducts] = useState([]);
 
@@ -412,9 +366,10 @@ const handleProductChange = async (e) => {
     setHsnCode(productDetails.hsnCode);
     setManufacturer(productDetails.manufacturer);
     setBatch(productDetails.batchno);
-    setBatchExpiry(productDetails.batchExpiry);
-    setPTR(productDetails.ptr);
+    setExpiryDate(productDetails.expiryDate);
+    setptr(productDetails.ptr);
     setPerStrip(productDetails.rate);
+    setGst(productDetails.Gst);
 
   } catch (error) {
     console.error('Error fetching product details:', error);
@@ -435,6 +390,78 @@ useEffect(() => {
   };
   fetchProducts();
 }, []);
+
+// Assuming your other imports, state, and functions are defined here...
+
+const handleActionButton = (action) => {
+  if (action === 'add') {
+    // Ensure input fields contain valid numeric values before calculations
+    if (!strips || !ptr || !Discount || !Gst) {
+      alert('Please fill in all required fields with valid numbers.');
+      return;
+    }
+
+    // Calculate MRP based on strips, price per strip, and discount
+    const calculatedMRP = strips * ptr * (1 - Discount / 100); // Apply discount percentage
+
+    // Calculate the total value based on calculated MRP and GST
+    const calculatedTotalValue = calculatedMRP * (1 + Gst / 100); // Apply GST percentage
+
+    // Create a new medicine object with the current state values including calculated total value
+    const newMedicine = {
+      MedId: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
+      Medicine: selectedProduct,
+      manufacturer,
+      Category: Category,
+      batch,
+      expiryDate: expiryDate,
+      Unit: Unit,
+      strips,
+      Freestrips,
+      Gst,
+      price,
+      ptr ,
+      MRP: calculatedMRP.toFixed(2), // Use the calculated MRP here
+      Discount,
+      Total: calculatedTotalValue.toFixed(2), // Add the calculated total value
+      HSNcode: hsnCode,
+      RackNo,
+      BookNo,
+      NetPrice,
+      Quantity,
+    };
+
+    // Add the new medicine object to the tableData state
+    setTableData((prevTableData) => [...prevTableData, newMedicine]);
+
+    // Clear the input fields by resetting the state
+    clearInputFields();
+  } else if (action === 'clear') {
+    // Clear the input fields by resetting the state
+    clearInputFields();
+  }
+};
+
+// Calculate MRP based on strips, price per strip, and discount
+const calculateMRP = () => {
+  const calculatedMRP = strips * ptr * (1 - Discount / 100); // Apply discount percentage
+  return calculatedMRP.toFixed(2); // Return the calculated MRP with 2 decimal places
+};
+
+// Calculate total value based on MRP and GST
+const calculateTotalValue = () => {
+  const calculatedMRP = calculateMRP();
+  const calculatedTotalValue = calculatedMRP * (1 + Gst / 100); // Apply GST percentage
+  return calculatedTotalValue.toFixed(2); // Return the calculated total value with 2 decimal places
+};
+
+const handleDelete = (indexToDelete) => {
+  // Update the tableData state by removing the row at the specified index
+  setTableData((prevTableData) =>
+    prevTableData.filter((_, index) => index !== indexToDelete)
+  );
+  window.alert("Row deleted successfully");
+};
 
 
 
@@ -562,11 +589,11 @@ useEffect(() => {
             </div>
             &nbsp;
             <div className="input-container-1">
-              <label htmlFor="BatchExpiry">Batch Expiry</label>
+              <label htmlFor="expiryDate">Batch Expiry</label>
               <input
-                id="BatchExpiry"
-                value={batchExpiry}
-
+                id="expiryDate"
+                value={expiryDate}
+              
               
               />
             </div>
@@ -588,7 +615,7 @@ useEffect(() => {
           
             &nbsp;  &nbsp;
 
-            <div className="input-container-1">
+            {/* <div className="input-container-1">
               <label htmlFor="strips">Quantity</label>
               <input
                 type="quantity"
@@ -596,7 +623,7 @@ useEffect(() => {
                 value={PerStrip}
                 
               />
-            </div>
+            </div> */}
 
             &nbsp;
 
@@ -628,12 +655,13 @@ useEffect(() => {
               <label htmlFor="MRP">MRP</label>
               <input
                 id="purchaseRateSelect"
-                value={selectedPurchaseRate}
-                onChange={(e) => setSelectedPurchaseRate(e.target.value)}
-              
+                value={calculateMRP()} // Calculate MRP dynamically
+                readOnly // Make the input field read-only
               />
             </div>
             &nbsp;   
+
+            
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="Freestrips">Free strips</label>
@@ -648,7 +676,7 @@ useEffect(() => {
             <div className="input-container-1">
               <label htmlFor="Gst">GST Total%</label>
               <input
-                type="number"
+                type="Gst"
                 id="Gst"
                 value={Gst}
                 
@@ -662,7 +690,7 @@ useEffect(() => {
   <label> totalValue </label>
   <input
     type="text"
-    value={totalValue}
+    value={calculateTotalValue()}
     readOnly
   />
 </div>
@@ -705,47 +733,51 @@ useEffect(() => {
                 <th>Product</th>
                 <th>Mfr</th>
                 <th>Batch No</th>
-                <th>Packing</th>
+                {/* <th>Packing</th> */}
                 <th>Expiry</th>
-                <th>Quantity</th>
-                <th> PTR ..</th>
+                {/* <th>Quantity</th> */}
+                <th> ptr ..</th>
                 <th>Discount</th>
-                <th>Taxable Value </th>
+                <th>MRP/Strip</th>
+              
                 <th>GST%</th>
                 <th>SGST%</th>
                 <th>CGST%</th>
-                <th>MRP/Strip</th>
+                <th>Total Value </th>
+               
 
              
                 <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              {tableData.map((row) => (
+              {tableData.map((row , index) => (
                 <tr key={row._id}>
                   <td>{row.Medicine}</td>
-                  <td>{row.Manufacturer}</td>
-                  <td>{row.Batch}</td>
-                  <td>{row.Unit}</td>
-                  <td>{row.BatchExpiry}</td>
-                  <td>{row.Quantity}</td>
-                  <td></td>
+                  <td>{row.manufacturer}</td>
+                  <td>{row.batch}</td>
+                  {/* <td>{row.Unit}</td> */}
+                  <td>{row.expiryDate}</td>
+                  {/* <td>{row.PerStrip}</td> */}
+                  <td> {row.ptr}  </td>
                   <td>{row.Discount}</td>
-                  <td></td>
+                  <td>{row.MRP}</td>
+                  
                   <td>{row.Gst}</td>
                   <td>{(row.Gst / 2).toFixed(2)}</td>
                   <td>{(row.Gst / 2).toFixed(2)}</td>
-                  <td>{row.MRP}</td>
+                  <td>{row.Total} </td>
+                 
 
 
                   <td>
-                    <button
-                      style={{ color: "red" }}
-                      onClick={() => handleDelete(row.customId)} // Pass the customId to the handleDelete function
-                    >
-                      <AiFillDelete />
-                    </button>
-                  </td>
+  <button
+    style={{ color: "red" }}
+    onClick={() => handleDelete(index)} // Pass the index to the handleDelete function
+  >
+    <AiFillDelete />
+  </button>
+</td>
                 </tr>
               ))}
             </tbody>

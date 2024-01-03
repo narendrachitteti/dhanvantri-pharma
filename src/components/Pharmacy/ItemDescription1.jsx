@@ -10,7 +10,7 @@ const ItemDescription1 = () => {
   const [formData, setFormData] = useState({
     product: "",
     company: "",
-    taxCode: "",
+    Gst: "",
     manufacturer: "",
     batchno: "",
     schedule: "",
@@ -101,8 +101,8 @@ const ItemDescription1 = () => {
               <div className="item-company-name">
                 <label className="tax-c-label">GST %:</label>
                 <input
-                  name="taxCode"
-                  value={formData.taxCode}
+                  name="Gst"
+                  value={formData.Gst}
                   onChange={handleChange}
                 >
                   {/* Options for tax code */}
