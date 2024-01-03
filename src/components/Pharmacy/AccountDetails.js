@@ -116,7 +116,12 @@ const AccountDetails = () => {
       alert('Error editing account. Please try again.');
     }
   };
+  const [startIndex, setStartIndex] = useState(0);
+  const [endIndex, setEndIndex] = useState(itemsPerPage);
 
+  useEffect(() => {
+    setEndIndex(startIndex + itemsPerPage);
+  }, [startIndex]);
 
   const startEditing = (account) => {
     setEditMode(account._id);
@@ -226,7 +231,7 @@ const AccountDetails = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredAccounts.map((account) => (
+          {filteredAccounts.slice(startIndex, endIndex).map((account) => (
               <tr key={account._id}>
                 <td>
                   {editMode === account._id ? (
@@ -235,6 +240,7 @@ const AccountDetails = () => {
                     account.uniqueID
                   )}
                 </td>
+
                 <td>
                   {editMode === account._id ? (
                     <input
@@ -295,12 +301,12 @@ const AccountDetails = () => {
           </tbody>
         </table>
         <div className='ReactJsPagination'>
-          <ReactJsPagination
+        <ReactJsPagination
             activePage={currentPage}
             itemsCountPerPage={itemsPerPage}
-            totalItemsCount={filteredAccounts.length} // Change this from filteredStockists to filteredAccounts
+            totalItemsCount={filteredAccounts.length}
             pageRangeDisplayed={3}
-            onChange={(pageNumber) => setCurrentPage(pageNumber)} // Fix the onChange prop
+            onChange={(pageNumber) => setStartIndex((pageNumber - 1) * itemsPerPage)}
           />
         </div>
       </div>
