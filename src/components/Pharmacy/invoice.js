@@ -78,6 +78,7 @@ const Invoice = () => {
     };  
     const [editedData, setEditedData] = useState({
         patientName: '',
+        DoctorName:'',
         mobilenumber: '',
         date: '',
         product:'',
@@ -96,6 +97,7 @@ const Invoice = () => {
         // Set initial values for the form fields
         setEditedData({
             patientName: invoice.patientName,
+            DoctorName: invoice.DoctorName,
             mobilenumber: invoice.mobilenumber,
             date: invoice.date,
             product: invoice.items[0].product, 
@@ -166,17 +168,18 @@ const Invoice = () => {
                 className="search-input-sk143"
             />
            </div>
-            <ul className="invoice-list-sk143">
+            <ul className="invoice-list-sk143">   
             {invoices &&
                     filteredInvoices.map((invoice, index) => (
                         <li key={index} className="invoice-item-sk143">
                         <h2 className="patient-info-heading-sk143">Patient Information</h2>
                         <p className="patient-name-sk143">Patient Name: {invoice.patientName}</p>
+                        <p className="patient-name-sk143">Doctor Name: {invoice.DoctorName}</p>
                         <p className="patient-name-sk143">MobileNumber: {invoice.mobilenumber}</p>
                         <p className="date-sk143">Date: {invoice.date}</p>
 
                         <table className="items-table-sk143">
-                            <thead>
+                            <thead className='items-table-123'>
                                 <tr>
                                     <th className="product-th-sk143">Product</th>
                                     <th className="quantity-th-sk143">Quantity</th>
@@ -215,6 +218,15 @@ const Invoice = () => {
                                                 onChange={(e) => setEditedData({ ...editedData, patientName: e.target.value })}
                                             />
                                         </div>
+                                        <div>
+                                            <label>Doctor Name:</label>
+                                            <input
+                                                type="text"
+                                                value={editedData.DoctorName}
+                                                onChange={(e) => setEditedData({ ...editedData, DoctorName: e.target.value })}
+                                            />
+                                        </div>
+
                                         <div>
                                             <label>Mobile Number:</label>
                                             <input
