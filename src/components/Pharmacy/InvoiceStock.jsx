@@ -788,7 +788,7 @@ const calculateGrossAmount = () => {
               >
                 Add{" "}
               </button>{" "}
-            </div>{" "}
+            </div>{" "}  
             &nbsp; &nbsp; &nbsp;
             <div className="input-container-2">
               {" "}

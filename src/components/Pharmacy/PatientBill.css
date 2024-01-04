@@ -73,6 +73,10 @@
 }
 .del-btn{
   margin-left: 15px;
+  background-color: rgb(234, 96, 96);
+}
+.pharma-head-patientname-input{
+  margin-left: 4%;
 }
 .value-input{
   margin: 5px 0;
@@ -85,7 +89,9 @@
   justify-content: space-between;
 }
 .pharma-doctor-input{
-  width: 13%;
+  width: 15%;
+  margin-left: 1%;
+  
 }
 .print-btn{
   width: 35%;
@@ -96,6 +102,9 @@
   border: none;
   margin-top: 10px;
 color: white;
+}
+.print-btn:hover{
+  background-color: #674df7;
 }
 .flex-change34{
   display:flex;
@@ -183,6 +192,9 @@ margin-left: 3%;
   color: #fff;
   margin-left: 45%;
   margin-bottom: 1%;
+}
+.Add-btn:hover{
+  background-color: #674df7;
 }
 .class567{
   text-align: center !important;
@@ -329,10 +341,13 @@ margin-left: -25%;
 .del-btn{
   border: none;
   color: white;
-  background-color:#9B8BF4;
+  background-color:#f05555;
   height: 5vh;
   width: 10vh;
   border-radius: 1vh;
+}
+.del-btn:hover{
+  background-color: #b40303;
 }
 
 /* 425 * 553 */
