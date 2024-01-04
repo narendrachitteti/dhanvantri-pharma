@@ -72,6 +72,9 @@ table .edit-ol {
   margin: 5px;
   border-radius: 5px;
 }
+table .edit-ol:hover{
+  background-color: #71b2f7;
+}
 
 /* Save button styles */
 table .save-ol {
@@ -96,6 +99,10 @@ table .delete-ol {
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
+}
+table .delete-ol:hover{
+  color: white;
+  background-color: rgb(242, 135, 131);
 }
 
 @media screen and (max-width: 429px) {
