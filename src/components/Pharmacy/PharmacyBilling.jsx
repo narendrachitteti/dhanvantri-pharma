@@ -58,11 +58,11 @@ const PharmacyBilling = () => {
         });
         return {
           ...item,
-          product: selectedProduct,
-          ptr: ptr,
-
-          Gst: Gst,
-          manufacturer: manufacturer,
+          product:selectedProduct,
+          ptr:ptr,
+          
+          Gst:Gst,
+          manufacturer:manufacturer,
           quantity: value,
           totalValue: totalValue, // Update total value in the state
         };
@@ -170,6 +170,9 @@ const PharmacyBilling = () => {
         setPatientName('');
         setmobilenumber('');
         setdoctorName('');
+        // setSelectedProduct('');
+        setTaxableValues('');
+        setManufacturer('');
         setSign('');
         setDate('');
         setItems([
@@ -179,6 +182,7 @@ const PharmacyBilling = () => {
             quantity: "",
             ptr: "",
             // taxCode: "",
+            manufacturer: "",
             group: "",
             // category: "",
             // purchaseRate: "",
