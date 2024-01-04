@@ -72,7 +72,11 @@ const [doctorName , setdoctorName] = useState("");
     setItems(updatedItems);
     setQuantity(value);
   };
-  
+
+  useEffect(()=>{
+    handleAddRow();
+  }, []);
+
   const handleAddRow = () => {
     const newItem = {
       _id: items.length + 1,
@@ -106,24 +110,41 @@ const [doctorName , setdoctorName] = useState("");
     fetchProducts();
   }, []);
 
-  const handleProductChange = async (e) => {
+  const handleProductChange = async (e, index) => {
     const selectedProductValue = e.target.value;
     try {
       const response = await axios.get(`http://localhost:5000/api/itemdec/details?productName=${selectedProductValue}`);
       const productDetails = response.data;
-      setHsnCode(productDetails.hsnCode);
       setManufacturer(productDetails.manufacturer);
       setBatch(productDetails.batchno);
       setBatchExpiry(productDetails.batchExpiry);
       setPTR(productDetails.ptr);
       setPerStrip(productDetails.rate);
-      setGst(productDetails.taxCode)
+      setGst(productDetails.taxCode);
+  
+      // Update the items array with the selected product details
+      const updatedItems = items.map((item, i) => {
+        if (index === i) {
+          return {
+            ...item,
+            product: selectedProductValue,
+            ptr: productDetails.ptr,
+            Gst: productDetails.taxCode,
+            manufacturer: productDetails.manufacturer,
+            batch: productDetails.batchno,
+            gst: productDetails.taxCode,
+            // Gst: productDetails.taxCode || 0,
+          };
+        }
+        return item;
+      });
+      setItems(updatedItems);
     } catch (error) {
       console.error('Error fetching product details:', error);
     }
     setSelectedProduct(selectedProductValue);
   };
-
+  
 // currentdate
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
@@ -325,7 +346,7 @@ const [doctorName , setdoctorName] = useState("");
                             <tr>                        
                               <td>${item.quantity}</td>
                               <td>${item.product}</td>
-                              <td>${item.price}</td>
+                              <td>${item.ptr}</td>
                               <td>${item.manufacturer}</td>
                               <td>${item.batch}</td>
                               <td>${taxableValues[index] || ''}</td>
@@ -473,23 +494,23 @@ const [doctorName , setdoctorName] = useState("");
                 <td>
                 <select
                 className="select-p1"
-                id="productSelect"
-                value={selectedProduct}
-                onChange={handleProductChange}
-              >
-                <option value="">Select a product</option>
-                {products.map((product) => (
-                  <option key={product._id} value={product.product}>
+                id={`productSelect_${index}`}  // Use a unique id for each select
+            value={item.selectedProduct}
+            onChange={(e) => handleProductChange(e, index)}  // Pass the index here
+        >
+            <option value="">Select a product</option>
+            {products.map((product) => (
+                <option key={product._id} value={product.product}>
                     {product.product}
-                  </option>
-                ))}
+                </option>
+            ))}
               </select>
                 </td>
                 <td>
                   <input
                     className="pharma-bill-quantity"
                     id="salesRateSelect"
-                    value={ptr}
+                    value={item.ptr}
                   />
                 </td>
                 <td>
@@ -497,7 +518,7 @@ const [doctorName , setdoctorName] = useState("");
                 className="pharma-bill-quantity"
                 type="text"
                 id="Manufacturer"
-                value={manufacturer}
+                value={item.manufacturer}
               />
                 </td>
                 <td>
@@ -505,7 +526,7 @@ const [doctorName , setdoctorName] = useState("");
                 className="pharma-bill-quantity"
                 type="Batch"
                 id="Batch"
-                value={batch}
+                value={item.batch}
               />
                 </td>
                 <td>
@@ -521,7 +542,7 @@ const [doctorName , setdoctorName] = useState("");
                     className='gst-input'
                     type="number"
                     id="Gst"
-                    value={Gst}
+                    value={item.gst}
                   />
                 </td>
                 <td>
