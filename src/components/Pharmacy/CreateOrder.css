@@ -1,10 +1,7 @@
 .create-purchase-order{
   background-color: white;
 }
-.header-cpo{
-  
-  /* margin-bottom: 40px; */
-}
+
 .stocklist-cpo{
   justify-content: space-evenly;
   display: flex;
@@ -51,6 +48,9 @@ text-align: center;
 }
 .stocklist-cpo-buttonsecond {
  float: right;
+}
+.stocklist-table-cpo th{
+  color: white;
 }
 
 .stocklist-cpo1 {

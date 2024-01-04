@@ -15,8 +15,8 @@
   margin-top: 80px;
 }
 .table-color{
-  background-color: #c590f3;
-  color: white;
+  background-color: #b240e7;
+  /* color: white; */
 }
 /* Table styles */
 .table-dropdown {
@@ -26,6 +26,9 @@
   top: 0.8em;
   position: relative;
   margin: auto;
+}
+.table-dropdown th{
+  color: white;
 }
 
 .table-dropdown th,
