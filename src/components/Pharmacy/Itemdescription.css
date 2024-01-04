@@ -21,9 +21,10 @@
     display: flex;
    }
    .item-shedu-sele1{
-    width: 20%;
+    width: 150px;
     height: 5vh;
     margin-left: 6%;
+    /* display: inline; */
    }
    .item-pro-in{
        height: 5vh;
@@ -64,6 +65,7 @@
    }
    .item-schedu-label1{
     margin-left: 9.5%;
+    display: inline;
    }
    .merge-product-sale{
     display: flex;
@@ -75,12 +77,15 @@
        width: 15vw;
        margin-left: 9.4%;
    }
+   .item-narr-div{
+    margin-top: -20%;
+   }
    .item-group-selc{
        margin-left: 3.1%;
        width: 15vw;
    }
    .item-pack-mrp001{
-    margin-left: 38%;
+    margin-left: 4%;
     /* width: 250px; */
    }
    .hsn-ode{
@@ -99,6 +104,10 @@
    .filed-sets{
        width: 26.5vw;
        /* margin-left: -20%; */
+   }
+   .filed-sets009{
+    margin-left: 65%;
+    margin-top: -9%;
    }
    .tax-input001{
     margin-left: 9%;
@@ -198,13 +207,33 @@
    }
    .edit-btn{
     width: 90px;
+    margin-left: 20px;
+   }
+   .item-submit-button009{
+    display: inline;
+    justify-content: space-between;
    }
    .item-form-right{
-       margin-top: 2%;
-       margin-left: 8%;
+       margin-top: -4%;
+       margin-left: 38%;
        display: flex;
-       flex-direction: column;
-       row-gap: 3%;
+       flex-direction: row;
+       gap: 4%;
+      
+   }
+   .del-bts009{
+    padding: 7px 23px;
+    background-color:rgb(249, 76, 88) ;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    margin-left: 45%;
+    width: 100px;
+    margin-top: -3%;
+    position: absolute;
+   }
+   .del-bts009:hover{
+    background-color: rgb(133, 1, 1);
    }
    .item-form-right button{
        padding: 7px 23px;

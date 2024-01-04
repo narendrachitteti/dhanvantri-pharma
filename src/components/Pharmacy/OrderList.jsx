@@ -224,8 +224,8 @@ function OrderList() {
         <Search filterText={filterText} onFilterTextChange={setFilterText} />
         <div className="dropdown-table">
           <table className="table-dropdown">
-            <thead>
-              <tr>
+            <thead className="table-color">
+              <tr >
                 <th>Order Number</th>
                 <th>Stockist</th>
                 <th>Date</th>

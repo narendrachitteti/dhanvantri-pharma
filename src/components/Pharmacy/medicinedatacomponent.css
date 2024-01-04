@@ -29,15 +29,15 @@
     border-collapse: collapse;
     border: 1px solid black;
     text-align: center;
-
-
   }
   .mdc-tddh,
   .mdc-tdd,
   .mdc-tddhs{
     text-align: center;
   }
-  
+  .mdc-thhss{
+    color: white;
+  }
   .mdc-thh,
   .mdc-tdd {
     padding: 10px;
@@ -47,7 +47,9 @@
     
   }
   
-
+.mdc-thh{
+  color: white;
+}
   
   .mdc-tbody .mdc-trow:nth-child(even) {
     background-color: #f2f2f2;

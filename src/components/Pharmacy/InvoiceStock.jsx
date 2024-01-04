@@ -762,7 +762,7 @@ const calculateGrossAmount = () => {
            
           
             &nbsp; &nbsp; &nbsp;
-            <div className="input-container-2">
+            <div className="input-container-1">
   <label> totalValue </label>
   <input
     type="text"

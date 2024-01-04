@@ -77,12 +77,15 @@ h1 {
   padding: 10px;
   text-align: center;
   background-color: #9b8bf4;
-  color: rgb(14, 13, 13);
+  /* color: rgb(14, 13, 13); */
+  color: white;
 }
 
 .table-row-177 {
   text-align: center;
+  /* color: white; */
 }
+
 
 .table-cell-177 {
   padding: 10px;

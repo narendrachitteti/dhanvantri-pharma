@@ -133,10 +133,10 @@ const PharmaLab = () => {
         </div>
         <table className="lab-service-table_5">
           <thead style={{ backgroundColor: '#3d50ae' }}>
-            <tr>
-              <th> Product Composition</th>
-              <th>Product Name</th>
-              <th>Actions</th>
+            <tr className="product-ooi">
+              <th className="product-ooi"> Product Composition</th>
+              <th className="product-ooi">Product Name</th>
+              <th className="product-ooi">Actions</th>
             </tr>
           </thead>
           <tbody>
