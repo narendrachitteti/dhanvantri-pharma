@@ -35,12 +35,12 @@ const [doctorName , setdoctorName] = useState("");
       product: "",
       quantity: "",
       ptr: "",
-      taxCode: "",
+      // taxCode: "",
       manufacturer: "",
-      category: "",
-      purchaseRate: "",
+      // category: "",
+      // purchaseRate: "",
       batch: "",
-      gst: "",
+      Gst: "",
     },
   ]);
   const handleQuantityChange = (e, index) => {
@@ -60,7 +60,7 @@ const [doctorName , setdoctorName] = useState("");
           ...item,
           product:selectedProduct,
           ptr:ptr,
-          taxCode:Gst,
+          Gst:Gst,
           manufacturer:manufacturer,
           quantity: value,
           totalValue: totalValue, // Update total value in the state
@@ -83,12 +83,12 @@ const [doctorName , setdoctorName] = useState("");
       product: "",
       quantity: "",
       ptr: "",
-      taxCode: "",
+      // taxCode: "",
       manufacturer: "",
-      category: "",
-      purchaseRate: "",
+      // category: "",
+      // purchaseRate: "",
       batch: "",
-      gst: "",
+      Gst: "",
     };
     setItems([...items, newItem]);
   };
@@ -120,7 +120,7 @@ const [doctorName , setdoctorName] = useState("");
       setBatchExpiry(productDetails.batchExpiry);
       setPTR(productDetails.ptr);
       setPerStrip(productDetails.rate);
-      setGst(productDetails.taxCode);
+      setGst(productDetails.Gst);
   
       // Update the items array with the selected product details
       const updatedItems = items.map((item, i) => {
@@ -129,7 +129,7 @@ const [doctorName , setdoctorName] = useState("");
             ...item,
             product: selectedProductValue,
             ptr: productDetails.ptr,
-            Gst: productDetails.taxCode,
+            Gst: productDetails.Gst,
             manufacturer: productDetails.manufacturer,
             batch: productDetails.batchno,
             gst: productDetails.taxCode,
@@ -177,12 +177,12 @@ const [doctorName , setdoctorName] = useState("");
             product: "",
             quantity: "",
             ptr:"",
-            taxCode: "",
+            // taxCode: "",
             group: "",
-            category: "",
-            purchaseRate: "",
+            // category: "",
+            // purchaseRate: "",
             batch: "",
-            gst: "",
+            Gst: "",
           },
         ]);
       } else {
@@ -350,7 +350,7 @@ const [doctorName , setdoctorName] = useState("");
                               <td>${item.manufacturer}</td>
                               <td>${item.batch}</td>
                               <td>${taxableValues[index] || ''}</td>
-                              <td>${item.gst}</td>
+                              <td>${item.Gst}</td>
                               <td>${taxableValues[index] || ''}</td>
                               <td>${item.totalValue || ''}</td>   
                             </tr>
@@ -542,7 +542,7 @@ const [doctorName , setdoctorName] = useState("");
                     className='gst-input'
                     type="number"
                     id="Gst"
-                    value={item.gst}
+                    value={item.Gst}
                   />
                 </td>
                 <td>
