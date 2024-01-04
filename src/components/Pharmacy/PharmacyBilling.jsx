@@ -60,6 +60,7 @@ const [doctorName , setdoctorName] = useState("");
           ...item,
           product:selectedProduct,
           ptr:ptr,
+          
           Gst:Gst,
           manufacturer:manufacturer,
           quantity: value,
