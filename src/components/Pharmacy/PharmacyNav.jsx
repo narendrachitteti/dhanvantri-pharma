@@ -119,8 +119,8 @@ const PharmacyNav = () => {
                 <Link to="/ItemDescription">Item Description</Link>
                 <Link to="/Stockist">Stockists</Link>
                 <Link to="/invoicestock">Invoices</Link>
-                <Link to="/Form3">Tax Code</Link>
-                <Link to="/Form4">HSN Code</Link>
+                {/* <Link to="/Form3">Tax Code</Link>
+                <Link to="/Form4">HSN Code</Link> */}
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@
    .item-shedu-sele1{
     width: 150px;
     height: 5vh;
-    margin-left: 6%;
+    margin-left: 5%;
     /* display: inline; */
    }
    .item-pro-in{
@@ -35,7 +35,7 @@
        margin-top: -0.5%;
    }
    .from-control{
-    margin-left: 15%;
+    margin-left: 14%;
     margin-top: -25px;
    }
    .item-company-name{
@@ -89,7 +89,7 @@
     /* width: 250px; */
    }
    .hsn-ode{
-    margin-left: 9%;
+    margin-left: 9.5%;
    }
    .item-schedu-label{
        margin-left: 9.3%; 
@@ -180,7 +180,7 @@
        border: 1px solid gray;
    }
    .drug-comp{
-    margin-left: 2%;
+    margin-left: 3.5%;
    }
    .item-hsn-button{
        margin-left: 28%;
