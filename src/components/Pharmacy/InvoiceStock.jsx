@@ -922,4 +922,4 @@ const calculateGrossAmount = () => {
   );
 };
 
-export default InvoiceStock;    
+export default InvoiceStock;
