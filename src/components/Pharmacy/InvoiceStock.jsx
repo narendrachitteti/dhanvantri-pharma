@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -17,10 +16,13 @@ const InvoiceStock = () => {
   const [stockName /* setStockName */] = useState("");
   const [date, setDate] = useState("");
   const [Medicine, setMedicine] = useState("");
+  const [Capsules , setCapsules] = useState("");
+  const [capsulePrice , setcapsulePrice] = useState("");
 
-  const [Category, setCategory] = useState("");
 
-  const [Unit, setUnit] = useState("");
+//   const [Category, setCategory] = useState("");
+
+//   const [Unit, setUnit] = useState("");
   const [strips, setstrips] = useState("");
   const [Freestrips, setFreestrips] = useState("");
   const [Gst, setGst] = useState("");
@@ -33,21 +35,22 @@ const InvoiceStock = () => {
   const [Discount, setDiscount] = useState("");
   const [Total, setTotal] = useState("");
  
-  const [RackNo, setRackNo] = useState("");
-  const [BookNo, setBookNo] = useState("");
-  const [NetPrice, setNetPrice] = useState("");
+//   const [RackNo, setRackNo] = useState("");
+//   const [BookNo, setBookNo] = useState("");
+//   const [NetPrice, setNetPrice] = useState("");
   const [stockistOptions, setStockistOptions] = useState([]);
   const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
   const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [selectedSalesRate, setSelectedSalesRate] = useState('');
   const [productOptions, setProductOptions] = useState([]);
-  const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
+//   const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
 
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
-  const [Quantity, setQuantity] = useState(0);
+  // const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
+  const totalAmount = tableData.reduce((acc, row) => acc + row.Total, 0); 
 
 
   // const [isPopupVisible, setPopupVisible] = useState(false);
@@ -108,9 +111,9 @@ const InvoiceStock = () => {
   const clearInputFields = () => {
     setMedicine("");
   
-    setCategory("");
+    // setCategory("");
   
-    setUnit("");
+    // setUnit("");
     setstrips("");
     setFreestrips("");
     setGst("");
@@ -122,10 +125,12 @@ const InvoiceStock = () => {
     setDiscount("");
     setTotal("");
     setHsnCode("");
-    setRackNo("");
-    setBookNo("");
-    setNetPrice("");
-    setQuantity("");
+    setCapsules("");
+    setcapsulePrice("");
+    // setRackNo("");
+    // setBookNo("");
+    // setNetPrice("");
+    // setQuantity("");
   };
 
   const handleSaveInvoice = async () => {
@@ -135,25 +140,28 @@ const InvoiceStock = () => {
         MedId: row.MedId,
         Medicine: row.Medicine,
         Manufacturer: row.Manufacturer,
-        Category: row.Category,
+        // Category: row.Category,
         Batch: row.Batch,
         expiryDate: row.expiryDate,
-        Unit: row.Unit,
+        // Unit: row.Unit,
+        capsulePrice :row.capsulePrice,
+        Capsules:row.Capsules,
         strips: row.strips,
         Freestrips: row.Freestrips,
         Gst: row.Gst,
         ptr:row.ptr,
-        price: row.price,
+        price: row.ptr,
         MRP: row.MRP,
         Discount: row.Discount,
-        Total: row.Total,
+        totalDiscount :row.totalDiscount,
+        totalAmount: row.totalAmount,
         HSNcode: row.HSNcode,
-        RackNo: row.RackNo,
-        BookNo: row.BookNo,
-        NetPrice: row.NetPrice,
-        Quantity:
-          parseFloat(row.Unit) * parseFloat(row.strips) +
-          parseFloat(row.Freestrips),
+        // RackNo: row.RackNo,
+        // BookNo: row.BookNo,
+        // NetPrice: row.NetPrice,
+        // Quantity:
+        //   parseFloat(row.Unit) * parseFloat(row.strips) +
+        //   parseFloat(row.Freestrips),
       }));
 
       // Calculate the invoice details from the table data
@@ -165,16 +173,16 @@ const InvoiceStock = () => {
         supplieddate,
         medicines, // Assign the array of medicines
         manufacturer,
-        Category,
-        Total: calculatedAmounts.total,
-        Discount,
+        // Category,
+        Total: calculateTotalAmounts(),
+        Discount: totalDiscount, 
         GST: calculatedAmounts.gst,
         CGST: calculatedAmounts.cgst,
         SGST: calculatedAmounts.sgst,
-        GrossAmount: calculatedAmounts.grossAmount,
-        RoundOff: calculatedAmounts.roundoff,
-        StocksReturned: calculatedAmounts.stocksReturned,
-        PurchaseAmount: calculatedAmounts.purchaseAmount,
+        GrossAmount: calculateGrossAmount(),
+        // RoundOff: calculatedAmounts.roundoff,
+        // StocksReturned: calculatedAmounts.stocksReturned,
+        PurchaseAmount: calculateTotalAmounts(),
       }; // Send a POST request to save the invoice details to the server
       const response = await axios.post(
         "http://localhost:5000/api/addInvoice",
@@ -188,6 +196,15 @@ const InvoiceStock = () => {
       // Handle error if the request fails
     }
   };
+
+  const calculateTotalDiscounts = () => {
+    const totalDiscount = tableData.reduce(
+      (acc, row) => acc + (parseFloat(row.DiscountAmount) || 0),
+      0
+    );
+    return totalDiscount.toFixed(2);
+  };
+  
 
   const calculateAmounts = () => {
     let totalAmountBeforeTax = 0;
@@ -212,8 +229,7 @@ const InvoiceStock = () => {
       ? totalGST / 2
       : tableData.reduce((acc, row) => acc + (parseFloat(row.Gst) / 2 || 0), 0);
     const grossAmount = totalAmountBeforeTax + gst;
-    const purchaseAmount = Math.floor(grossAmount * 100) / 100; // Round down to 2 decimal places
-    const roundoff = (grossAmount - purchaseAmount).toFixed(2); // Round to 2 decimal places
+    const purchaseAmount = Math.floor(grossAmount * 100) / 100; 
     return {
       total: total.toFixed(2),
       discount: totalDiscountAmount.toFixed(2),
@@ -223,7 +239,6 @@ const InvoiceStock = () => {
       sgst: sgst.toFixed(2),
       grossAmount: grossAmount.toFixed(2),
       purchaseAmount: purchaseAmount.toFixed(2),
-      roundoff: parseFloat(roundoff).toFixed(2),
     };
   };
 
@@ -400,6 +415,11 @@ const handleActionButton = (action) => {
       alert('Please fill in all required fields with valid numbers.');
       return;
     }
+   
+  
+    // Calculation logic using discountAmount and calculatedTotalValue
+  
+    // Example usage
 
     // Calculate MRP based on strips, price per strip, and discount
     const calculatedMRP = strips * ptr * (1 - Discount / 100); // Apply discount percentage
@@ -407,28 +427,37 @@ const handleActionButton = (action) => {
     // Calculate the total value based on calculated MRP and GST
     const calculatedTotalValue = calculatedMRP * (1 + Gst / 100); // Apply GST percentage
 
-    // Create a new medicine object with the current state values including calculated total value
+    // Calculate the discount amount for this row based on MRP
+    const discountAmount = strips * ptr - calculatedMRP;
+    
+    const calculatedgrossamount = discountAmount + calculatedTotalValue ; // Calculate discount amount
+
+    // Create a new medicine object with the current state values including calculated total value and discount amount
     const newMedicine = {
       MedId: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
       Medicine: selectedProduct,
       manufacturer,
-      Category: Category,
+      // Category: Category,
       batch,
       expiryDate: expiryDate,
-      Unit: Unit,
+      // Unit: Unit,
+      Capsules,
+      capsulePrice,
       strips,
       Freestrips,
       Gst,
       price,
-      ptr ,
+      ptr,
       MRP: calculatedMRP.toFixed(2), // Use the calculated MRP here
       Discount,
       Total: calculatedTotalValue.toFixed(2), // Add the calculated total value
       HSNcode: hsnCode,
-      RackNo,
-      BookNo,
-      NetPrice,
-      Quantity,
+      // RackNo,
+      // BookNo,
+      // NetPrice,
+      // Quantity,
+      DiscountAmount: discountAmount.toFixed(2), // Add the calculated discount amount
+      GrossValue: calculatedgrossamount.toFixed(2), 
     };
 
     // Add the new medicine object to the tableData state
@@ -441,6 +470,7 @@ const handleActionButton = (action) => {
     clearInputFields();
   }
 };
+
 
 // Calculate MRP based on strips, price per strip, and discount
 const calculateMRP = () => {
@@ -462,6 +492,30 @@ const handleDelete = (indexToDelete) => {
   );
   window.alert("Row deleted successfully");
 };
+
+
+// const calculateTotalAmount = () => {
+//   return tableData.reduce((acc, row) => acc + row.Total, 0);
+// };
+
+const calculateTotalAmounts = () => {
+  const totalAmount = tableData.reduce(
+    (acc, row) => acc + (parseFloat(row.Total) || 0),
+    0
+  );
+  return totalAmount.toFixed(2);
+};
+
+const calculateGrossAmount = () => {
+  const grossAmount = tableData.reduce(
+    (acc, row) => acc + parseFloat(row.GrossValue || 0),
+    0
+  );
+  return grossAmount.toFixed(2); 
+};
+
+
+
 
 
 
@@ -639,6 +693,28 @@ const handleDelete = (indexToDelete) => {
             </div>
             &nbsp;
           
+
+            <div className="input-container-1">
+              <label htmlFor="Capsules">Capsules/PerStrip</label>
+              <input
+                type="Capsules"
+                id="Capsules"
+                value={Capsules}
+                onChange={(e) => setCapsules(e.target.value)}
+              />
+            </div>
+
+
+            &nbsp;
+            <div className="input-container-1">
+              <label htmlFor="capsuleprice">Capsule/Price</label>
+              <input
+                type="capsulePrice"
+                id="capsulePrice"
+                value={capsulePrice}
+                onChange={(e) => setcapsulePrice(e.target.value)}
+              />
+            </div>
             &nbsp;
             <div className="input-container-1">
               <label htmlFor="DiscountInput">Discount</label>
@@ -744,7 +820,7 @@ const handleDelete = (indexToDelete) => {
                 <th>SGST%</th>
                 <th>CGST%</th>
                 <th>Total Value </th>
-               
+                <th>Gross value</th>
 
              
                 <th>Delete</th>
@@ -767,8 +843,8 @@ const handleDelete = (indexToDelete) => {
                   <td>{(row.Gst / 2).toFixed(2)}</td>
                   <td>{(row.Gst / 2).toFixed(2)}</td>
                   <td>{row.Total} </td>
-                 
-
+                  <td>{row.GrossValue}</td>
+                  {/* <td>{row.DiscountAmount}</td> */}
 
                   <td>
   <button
@@ -791,7 +867,7 @@ const handleDelete = (indexToDelete) => {
           <tbody>
             <tr>
               <td>Total</td>
-              <td>{amounts.total}</td>
+              <td>{calculateTotalAmounts()}</td>
             </tr>
             <tr>
               <td>Discount</td>
@@ -800,7 +876,7 @@ const handleDelete = (indexToDelete) => {
 
             <tr>
               <td>Total Disc Amount</td>
-              <td>{amounts.discount}</td>
+              <td>{calculateTotalDiscounts()}</td>
             </tr>
             <tr>
               <td>Total Tax(GST)</td>
@@ -816,17 +892,19 @@ const handleDelete = (indexToDelete) => {
             </tr>
             <tr>
               <td>Gross Amount</td>
-              <td>{amounts.grossAmount}</td>
+              <td>{calculateGrossAmount()}</td>
             </tr>
-            <tr>
-              <td>Round Off</td>
-              <td>{amounts.roundoff}</td>
-            </tr>
+            {/* <tr>
+  <td>Round Off</td>
+  <td>{roundOffValue}</td>
+</tr> */}
+
           
             <tr>
               <td>Purchase Amount</td>
-              <td>{amounts.grossAmount}</td>
+              <td>{calculateTotalAmounts()}</td>
             </tr>
+            
           </tbody>
         </table>
       </div>
