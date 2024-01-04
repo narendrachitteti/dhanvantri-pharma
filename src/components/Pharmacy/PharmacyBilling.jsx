@@ -149,7 +149,7 @@ const [doctorName , setdoctorName] = useState("");
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
     setDate(currentDate);
-  }, []);
+  });
 
   const handlePrintAndSubmit = async () => {
     try {
