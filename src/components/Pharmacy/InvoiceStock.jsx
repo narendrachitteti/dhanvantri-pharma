@@ -553,7 +553,7 @@ const handleDelete = (indexToDelete) => {
             &nbsp;
             &nbsp;
 
-            <div className="input-container-2">
+            <div className="input-container-1">
         <label htmlFor="HSNCode">hsnCode</label>
         <input
           name="hsn"

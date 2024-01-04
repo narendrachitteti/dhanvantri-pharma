@@ -91,6 +91,7 @@ const ItemDescription1 = () => {
               <Form.Label>Expiry Date:</Form.Label>
               <Form.Control
                 type="date"
+                className="from-control"
                 name="expiryDate"
                 value={formData.expiryDate}
                 onChange={handleChange}
@@ -101,12 +102,13 @@ const ItemDescription1 = () => {
               <div className="item-company-name">
                 <label className="tax-c-label">GST %:</label>
                 <input
+                className="tax-input001"
                   name="Gst"
                   value={formData.Gst}
                   onChange={handleChange}
                 >
                   {/* Options for tax code */}
-                </input>
+                </input>   
 
                 <label className="item-narr-label">
                   Manufacturer:
@@ -122,6 +124,7 @@ const ItemDescription1 = () => {
               <div className="item-company-name">
                 <label className="label">Batch No:</label>
                 <input
+                className="batch-input09"
                   name="batchno"
                   value={formData.batchno}
                   onChange={handleChange}
@@ -182,7 +185,7 @@ const ItemDescription1 = () => {
                   <label className="label">
                     PerStrip:
                     <input
-                      className="item-pack-mrp"
+                      className="item-pack-mrp001"
                       type="number"
                       name="perStrip"
                       value={formData.perStrip}
@@ -195,6 +198,7 @@ const ItemDescription1 = () => {
               <div className="item-hsn-div">
                 <label className="label">HSN Code:</label>
                 <input
+                className="hsn-ode"
                   name="hsnCode"
                   value={formData.hsnCode}
                   onChange={handleChange}
@@ -215,6 +219,7 @@ const ItemDescription1 = () => {
               <div className="item-hsn-div">
                 <label className="label">Drug Composition:</label>
                 <input
+                className="drug-comp"
                   name="drugComposition"
                   value={formData.drugComposition}
                   onChange={handleChange}
@@ -230,7 +235,7 @@ const ItemDescription1 = () => {
 
             <div className="item-form-right">
             <Link to="/itemedit">
-              <button>Edit</button>
+              <button className="edit-btn">Edit</button>
             </Link>
             <Link to="/itemedit">
               <button>Delete</button>
