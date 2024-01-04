@@ -6,13 +6,13 @@ import PharmacyNav from './PharmacyNav';
 
 const AccountDetails = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredStockists, setFilteredStockists] = useState([]);
+  // const [filteredStockists, setFilteredStockists] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [accounts, setAccounts] = useState([]);
   const [filteredAccounts, setFilteredAccounts] = useState([]);
   const [newAccountData, setNewAccountData] = useState({
 
-    AccountID: '',
+    uniqueID: '',
     name: '',
     AccountNumber: '',
     ifcscode: '',
@@ -24,7 +24,7 @@ const AccountDetails = () => {
   const [editMode, setEditMode] = useState(null);
   const [editAccountData, setEditAccountData] = useState({
 
-    AccountID: '',
+    uniqueID: '',
     name: '',
     AccountNumber: '',
     ifcscode: '',
@@ -35,10 +35,12 @@ const AccountDetails = () => {
   const handleAddAccount = async () => {
     try {
       // Check if all fields are filled
-      if (!newAccountData.name ||
+      if (
+        !newAccountData.name ||
         !newAccountData.AccountNumber ||
         !newAccountData.ifcscode ||
-        !newAccountData.phoneNumber) {
+        !newAccountData.phoneNumber
+      ) {
         alert('Please fill in all fields.');
         return;
       }
@@ -47,11 +49,13 @@ const AccountDetails = () => {
       const response = await axios.post('http://localhost:5000/api/submit-account', newAccountData);
 
       // Update the accounts state with the response data from the server
-      setAccounts([...accounts, response.data]); // Assuming the response contains the added account data
-
+      setAccounts([...accounts, response.data.account]); // Assuming the response contains the added account data
+      // const generatedUniqueID = response.data.uniqueID;
+      const { account, uniqueID } = response.data;
       // Reset form fields
       setNewAccountData({
-        AccountID: '',
+        ...newAccountData,
+        uniqueID: uniqueID,// Set the received uniqueID in the state
         name: '',
         AccountNumber: '',
         ifcscode: '',
@@ -65,7 +69,11 @@ const AccountDetails = () => {
       alert('Error adding account. Please try again.');
     }
   };
-useEffect(() => {
+
+
+
+
+  useEffect(() => {
     const fetchAccounts = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/get-accounts');
@@ -87,18 +95,16 @@ useEffect(() => {
     return new Date(dateString).toLocaleDateString();
   };
 
-  const handleEditAccount = async (AccountID) => {
+  const handleEditAccount = async (accountID) => {
     try {
-      await axios.put(`http://localhost:5000/api/update-Account/${AccountID}`, editAccountData);
-  
+      await axios.put(`http://localhost:5000/api/update-Account/${accountID}`, editAccountData);
       const response = await axios.get('http://localhost:5000/api/get-accounts');
       const updatedAccounts = response.data;
-  
-      setAccounts(updatedAccounts); // Corrected from setStockists
-  
+      setAccounts(updatedAccounts);
+
       setEditMode(null);
       setEditAccountData({
-        AccountID: '',
+        uniqueID: '', // Clearing uniqueID in edit mode, you may want to revise this logic
         name: '',
         AccountNumber: '',
         ifcscode: '',
@@ -109,7 +115,21 @@ useEffect(() => {
       alert('Error editing account. Please try again.');
     }
   };
-  
+
+
+  const [activePage, setActivePage] = useState(1);
+
+  // Update active page when pagination changes
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+    setStartIndex((pageNumber - 1) * itemsPerPage);
+  };
+  const [startIndex, setStartIndex] = useState(0);
+  const [endIndex, setEndIndex] = useState(itemsPerPage);
+
+  useEffect(() => {
+    setEndIndex(startIndex + itemsPerPage);
+  }, [startIndex]);
 
   const startEditing = (account) => {
     setEditMode(account._id);
@@ -219,16 +239,10 @@ useEffect(() => {
             </tr>
           </thead>
           <tbody>
-          {filteredAccounts.map((account) => (
+            {filteredAccounts.slice(startIndex, endIndex).map((account) => (
               <tr key={account._id}>
-                
-                <td>
-                  {editMode === account._id ? (
-                    <input type="text" value={editAccountData.uniqueID} disabled />
-                  ) : (
-                    account.uniqueID
-                  )}
-                </td>
+               <td>{account.uniqueID}</td>
+
                 <td>
                   {editMode === account._id ? (
                     <input
@@ -289,14 +303,14 @@ useEffect(() => {
           </tbody>
         </table>
         <div className='ReactJsPagination'>
-        <ReactJsPagination
-          activePage={currentPage}
-          itemsCountPerPage={itemsPerPage}
-          totalItemsCount={filteredAccounts.length} // Change this from filteredStockists to filteredAccounts
-          pageRangeDisplayed={3}
-          onChange={(pageNumber) => setCurrentPage(pageNumber)} // Fix the onChange prop
-        />
-      </div>
+          <ReactJsPagination
+            activePage={activePage}
+            itemsCountPerPage={itemsPerPage}
+            totalItemsCount={filteredAccounts.length}
+            pageRangeDisplayed={3}
+            onChange={handlePageChange}
+          />
+        </div>
       </div>
     </div>
   );

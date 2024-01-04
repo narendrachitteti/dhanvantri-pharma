@@ -64,23 +64,25 @@ const Note = () => {
         "http://localhost:5000/api/submitDebitNote",
         formData
       );
-
+  
       console.log("Server response:", response.data);
       console.log("Debit Note data submitted successfully");
-
+  
+      // Fetch the next DR number and update the form fields
+      const nextDrResponse = await axios.get("http://localhost:5000/api/Debit-notes/new-id");
+      const nextDrNo = nextDrResponse.data.DrNo;
+  
       setFormData({
-        DrNo: "",
+        DrNo: nextDrNo,
         DrDate: "",
-        // Company: "",
         Amount: "",
-        // ManualNo: "",
         Narration: "",
-        // Condition: "",
       });
     } catch (error) {
       console.error("Error submitting debit note data:", error);
     }
   };
+  
 
   const handleSubmits = async () => {
     try {
@@ -88,23 +90,25 @@ const Note = () => {
         "http://localhost:5000/api/submitCreditNote",
         formDatas
       );
+      
       console.log("Server response:", submitResponse.data);
       console.log("Credit Note data submitted successfully");
-
-      // Reset the form after submission
+      
+      // Fetch the next CR number and update the form fields
+      const response = await axios.get("http://localhost:5000/api/credit-notes/new-id");
+      const nextCrNo = response.data.CrNo;
+      
       setFormDatas({
-        CrNo: "",
+        CrNo: nextCrNo,
         CrDate: "",
-        // Company: "",
         Amount: "",
-        // ManualNo: "",
         Narration: "",
-        // Condition: "",
       });
     } catch (error) {
       console.error("Error submitting credit note data:", error);
     }
   };
+  
 
   const [selectedOption, setSelectedOption] = useState("option1");
   const [selectedHeading, setSelectedHeading] = useState("Credit Note");

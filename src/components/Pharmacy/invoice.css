@@ -10,11 +10,17 @@
     border: 1px solid #ddd;
     background-color: #f9f9f9;
   }
-  
+  .items-table-123{
+    background-color: rgb(145, 80, 236);
+    /* color: white; */
+  }
   .invoice-heading-sk143 {
     text-align: center;
     font-size: 24px;
     margin-bottom: 10px;
+  }
+  .patient-info-heading-sk143{
+    color: rgb(22, 3, 40);
   }
   .search-container {
     margin-bottom: 20px;
@@ -53,6 +59,18 @@
     font-size: 16px;
     margin-bottom: 5px;
   }
+  .date-sk143{
+   
+    margin-left: 550px;
+    margin-top: -30px;
+  }
+  .total-with-gst-sk143{
+    margin-left: 350px;
+    margin-top: -35px;
+  }
+  .total-without-gst-sk143{
+    margin-top: 20px;
+  }
   
   .items-table-sk143 {
     width: 100%;
@@ -70,6 +88,7 @@
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    color: white;
   }
   
   .product-td-sk143,
