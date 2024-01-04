@@ -284,7 +284,7 @@ const handlePrint = () => {
         <input
         className="item-pro-in"
           type="text"
-          name="product"
+          name="product"    
           value={formData.product}
           onChange={handleInputChange}
         />
