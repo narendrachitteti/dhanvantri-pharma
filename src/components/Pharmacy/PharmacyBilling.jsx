@@ -35,12 +35,12 @@ const [doctorName , setdoctorName] = useState("");
       product: "",
       quantity: "",
       ptr: "",
-      taxCode: "",
-      group: "",
-      category: "",
-      purchaseRate: "",
+      // taxCode: "",
+      manufacturer: "",
+      // category: "",
+      // purchaseRate: "",
       batch: "",
-      gst: "",
+      Gst: "",
     },
   ]);
   const handleQuantityChange = (e, index) => {
@@ -60,7 +60,9 @@ const [doctorName , setdoctorName] = useState("");
           ...item,
           product:selectedProduct,
           ptr:ptr,
-          taxCode:taxCode,
+          
+          Gst:Gst,
+          manufacturer:manufacturer,
           quantity: value,
           totalValue: totalValue, // Update total value in the state
         };
@@ -71,19 +73,23 @@ const [doctorName , setdoctorName] = useState("");
     setItems(updatedItems);
     setQuantity(value);
   };
-  
+
+  useEffect(()=>{
+    handleAddRow();
+  }, []);
+
   const handleAddRow = () => {
     const newItem = {
       _id: items.length + 1,
       product: "",
       quantity: "",
       ptr: "",
-      taxCode: "",
-      group: "",
-      category: "",
-      purchaseRate: "",
+      // taxCode: "",
+      manufacturer: "",
+      // category: "",
+      // purchaseRate: "",
       batch: "",
-      gst: "",
+      Gst: "",
     };
     setItems([...items, newItem]);
   };
@@ -105,248 +111,284 @@ const [doctorName , setdoctorName] = useState("");
     fetchProducts();
   }, []);
 
-  const handleProductChange = async (e) => {
+  const handleProductChange = async (e, index) => {
     const selectedProductValue = e.target.value;
     try {
       const response = await axios.get(`http://localhost:5000/api/itemdec/details?productName=${selectedProductValue}`);
       const productDetails = response.data;
-      setHsnCode(productDetails.hsnCode);
       setManufacturer(productDetails.manufacturer);
       setBatch(productDetails.batchno);
       setBatchExpiry(productDetails.batchExpiry);
       setPTR(productDetails.ptr);
       setPerStrip(productDetails.rate);
-      setGst(productDetails.taxCode)
+      setGst(productDetails.Gst);
+  
+      // Update the items array with the selected product details
+      const updatedItems = items.map((item, i) => {
+        if (index === i) {
+          return {
+            ...item,
+            product: selectedProductValue,
+            ptr: productDetails.ptr,
+            Gst: productDetails.Gst,
+            manufacturer: productDetails.manufacturer,
+            batch: productDetails.batchno,
+            gst: productDetails.taxCode,
+            // Gst: productDetails.taxCode || 0,
+          };
+        }
+        return item;
+      });
+      setItems(updatedItems);
     } catch (error) {
       console.error('Error fetching product details:', error);
     }
     setSelectedProduct(selectedProductValue);
   };
-
+  
 // currentdate
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
     setDate(currentDate);
-  }, []);
+  });
 
-const handlePrintAndSubmit = async () => {
-  try {
-    const response = await axios.post('http://localhost:5000/api/patient-bill', {
-      patientName,
-      doctorName,
-      mobilenumber,
-      // ptr,
-      date,
-      items,
-      subtotalWithGST,
-      subtotalWithoutGST,
-      sign
-    });
-    if (response && response.data) {
-      console.log('PatientBill submitted successfully:', response.data);
-      setPatientName('');
-      setmobilenumber('');
-      setdoctorName('');
-      setSign('');
-      setDate('');
-      setItems([
-        {
-          _id: 1,
-          product: "",
-          quantity: "",
-          ptr:"",
-          taxCode: "",
-          group: "",
-          category: "",
-          purchaseRate: "",
-          batch: "",
-          gst: "",
-        },
-      ]);
-    } else {
-      console.error('Unexpected response format:', response);
-    }
-    
-    // import { FaPlusCircle } from "react-icons/fa";
-    const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
-    console.log('Image URL:', imageUrl);
-    const img = new Image();
-    img.src = imageUrl;
-        img.onload = function () {
-        const printContent = `
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <!-- Include any necessary stylesheets or styling here -->
-              <style>
-              body {
-                font-family: 'Arial', sans-serif;
-              }
-              .billing-table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 20px;
-              }
-              .billing-table th, .billing-table td {
-                border: 1px solid #ddd;
-                padding: 12px;
-                text-align: left;
-              }
-              .print-container {
-                max-height: 100%;
-                overflow-y: auto;
-                padding: 20px;
-                border-radius: 5px;
-               
-                background: #fff;
-               
-                position: relative;
-              }
-              .print-title {
-                font-size: 24px;
-                margin-bottom: 20px;
-                text-align: center;
-              }
-              .main-heading{
-                  font-size:10px;
-                  width:70%;
+  const handlePrintAndSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/patient-bill', {
+        patientName,
+        doctorName,
+        mobilenumber,
+        ptr,
+        date,
+        items,
+        subtotalWithGST,
+        subtotalWithoutGST,
+        sign
+      });
+      if (response && response.data) {
+        console.log('PatientBill submitted successfully:', response.data);
+        setPatientName('');
+        setmobilenumber('');
+        setdoctorName('');
+        setSign('');
+        setDate('');
+        setItems([
+          {
+            _id: 1,
+            product: "",
+            quantity: "",
+            ptr:"",
+            // taxCode: "",
+            group: "",
+            // category: "",
+            // purchaseRate: "",
+            batch: "",
+            Gst: "",
+          },
+        ]);
+      } else {
+        console.error('Unexpected response format:', response);
+      }
+      
+      // import { FaPlusCircle } from "react-icons/fa";
+      const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
+      console.log('Image URL:', imageUrl);
+      const img = new Image();
+      img.src = imageUrl;
+          img.onload = function () {
+          const printContent = `
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <!-- Include any necessary stylesheets or styling here -->
+                <style>
+                body {
+                  font-family: 'Arial', sans-serif;
+                }
+                .billing-table {
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin-bottom: 20px;
+                }
+                .billing-table th, .billing-table td {
+                  border: 1px solid #ddd;
+                  padding: 12px;
+                  text-align: left;
+                }
+                .print-container {
+                  max-height: 100%;
+                  overflow-y: auto;
+                  padding: 20px;
+                  border-radius: 5px;
+                 
+                  background: #fff;
+                 
+                  position: relative;
+                }
+                .print-title {
+                  font-size: 24px;
+                  margin-bottom: 20px;
                   text-align: center;
                 }
-                .flex-change34{
-                  display:flex;
-                  justify-content: space-between;
-                  border: 2px solid black;
-               }
-               .image45{
-                width:30%;
-               }
-               
-              .dl-info {
-                width:240px;
-                font-size:13px;
-                margin-bottom: 20px;
-              }
-              .phone-gst-text {
-                width:200px;
-                font-size:15px;
-              }
-              .contact-info {
-                  display: flex;
-                  flex-direction: column;
+                .main-heading{
+                    font-size:10px;
+                    width:70%;
+                    text-align: center;
+                  }
+                  .flex-change34{
+                    display:flex;
+                    justify-content: space-between;
+                    border: 2px solid black;
+                 }
+                 .image45{
+                  width:30%;
+                 }
+                 
+                .dl-info {
+                  width:240px;
+                  font-size:13px;
                   margin-bottom: 20px;
-                  margin-right: 0px;
-    
                 }
-                .flex-column {
-                  margin-top: 30px;
-                  display: flex;
-                  justify-content: space-between;
+                .phone-gst-text {
+                  width:200px;
+                  font-size:15px;
                 }
-               
-              .dl-text, .contact-text {
-                margin-right: 20px;
-              }
-              .print-details2{
-                  display: flex;
-                  flex-direction: column;
-              }
-            
-            </style>
-            </head>
-            <body>
-            <div class="print-container">
-            <div class="flex-change34">
-            <div style="display:flex">
-            <div class="dl-info">
-              <span class="dl-text">DL:20 KA-B41-180306</span>
-              <span class="dl-text">DL:20 KA-B41-180307</span>
-            </div>
-            <div style='display:flex'> 
-            <div>
-            <FaPlusCircle />
-            <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 113px; height: 113px; margin-left: -150px; margin-top:38px;">
-            </div>
-            <div class='main-heading'>
-            <h1>TAX INVOICE</h1>
-            <h1>ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
-            <h1>Dhanvantri Pharmacy </h1>
-            <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
-            Hampinagara , Bengaluru-560104</h3>
-            </div>
-
-            <div >
-            <h3 style="font-size:13px; margin-top:-1px;">GSTIN:29BFNPM5181H1ZX</h3>
-            <h3 style="font-size:13px; margin-top:-10px; font-weight:light;">PHONE:+91 9886819877</h3>
-            </div>
-            </div>
-            </div>
-            </div>
-            <div class="borderbox"></div>
-            <h3 class="print-title">TAX INVOICE</h3>
-            <div class="flex-column">
-          </div>
-              <!-- Include your billing details in the HTML content -->
-              <div>
-                <p class="print-details">Patient Name: ${patientName}</p>
-                <p class="print-details">Doctor Name: ${doctorName}</p>
-                <p class="print-details">Date: ${date}</p>
-                <table class="billing-table">
-                  <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Quantity</th>
-                      <th>Product Price</th>
-                      <th>Manufacturer</th>
-                      <th>Batch No</th>
-                      <th>Expiry Date</th>
-                      <th>GST (%)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${items
-                      .map(
-                        (item, index) => `
-                          <tr>
-                            <td>${item.product}</td>
-                            <td>${item.quantity}</td>
-                            <td>${item.price}</td>
-                            <td>${item.manufacturer}</td>
-                            <td>${item.batch}</td>
-                            <td>${item.batchExpiry}</td>
-                            <td>${item.gst}</td>
-                          </tr>
-                        `
-                      )
-                      .join("")}
-                  </tbody>
-                </table>
-                <strong class="print-details2">Subtotal with GST: ${subtotalWithGST}</strong>
-                <strong class="print-details2">Subtotal without GST: ${subtotalWithoutGST}</strong>
-                <h1 style='font-size:15px'>Signature: ${sign}</h1>
+                .contact-info {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 20px;
+                    margin-right: 0px;
+      
+                  }
+                  .flex-column {
+                    margin-top: 30px;
+                    display: flex;
+                    justify-content: space-between;
+                  }
+                 
+                .dl-text, .contact-text {
+                  margin-right: 20px;
+                }
+                .print-details2{
+                    display: flex;
+                    flex-direction: column;
+                }
+                .quantity{
+                  width:20px;
+                }
+                .value{
+                  margin-left:20px;
+                }
+                .goods-class1{
+                  font-size:15px;
+                }
+              
+              </style>
+              </head>
+              <body>
+              <div class="print-container">
+              <div class="flex-change34">
+              <div style="display:flex">
+              <div class="dl-info">
+                <span class="dl-text">DL:20 KA-B41-180306</span>
+                <span class="dl-text">DL:20 KA-B41-180307</span>
               </div>
-            </body>
-          </html>
-        `;
-        const printWindow = window.open("", "", "height=600");
-        printWindow.document.open();
-        printWindow.document.write(printContent);
-        printWindow.document.close();
-        // Trigger the print operation
-        printWindow.print();
-        // Close the print window after printing
-        printWindow.onafterprint = function () {
-          printWindow.close();  
+              <div style='display:flex'> 
+              <div>
+              <FaPlusCircle />
+              <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 113px; height: 113px; margin-left: -150px; margin-top:38px;">
+              </div>
+              <div class='main-heading'>
+              <h1>TAX INVOICE</h1>
+              <h1>ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
+              <h1>Dhanvantri Pharmacy </h1>
+              <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
+              Hampinagara , Bengaluru-560104</h3>
+              </div>
+  
+              <div >
+              <h3 style="font-size:13px; margin-top:-1px;">GSTIN:29BFNPM5181H1ZX</h3>
+              <h3 style="font-size:13px; margin-top:-10px; font-weight:light;">PHONE:+91 9886819877</h3>
+              </div>
+              </div>
+              </div>
+              </div>
+              <div class="borderbox"></div>
+              <h3 class="print-title">TAX INVOICE</h3>
+              <div class="flex-column">
+            </div>
+                <!-- Include your billing details in the HTML content -->
+                <div>
+                  <p class="print-details">Patient Name: ${patientName}</p>
+                  <p class="print-details">Doctor Name: ${doctorName}</p>
+                  <p class="print-details">Date: ${date}</p>
+                  <table class="billing-table">
+                    <thead>
+                      <tr>
+                        <th className="quantity" rowspan="2">Qty</th> 
+                        <th style="width: 143px;" rowspan="2">Product</th>
+                        <th style="width: 50px;" rowspan="2">Product Price</th>
+                        <th style="width: 50px;" rowspan="2">Mfr</th>
+                        <th style="width: 63px;" rowspan="2">Batch No</th>
+                        <th style="width: 50px;" rowspan="2">Taxable value</th>
+                        <th style="width: 50px;" rowspan="2">GST (%)</th>
+                        <th colspan="2" className="value">Value</th>
+                        
+                      </tr>
+                      <tr>
+                        <th style="width: 50px;">Without Gst</th>
+                        <th>With Gst</th>
+                      </tr>
+                    </thead>                 
+                    <tbody>
+                      ${items
+                        .map(
+                          (item, index) => `
+                            <tr>                        
+                              <td>${item.quantity}</td>
+                              <td>${item.product}</td>
+                              <td>${item.ptr}</td>
+                              <td>${item.manufacturer}</td>
+                              <td>${item.batch}</td>
+                              <td>${taxableValues[index] || ''}</td>
+                              <td>${item.Gst}</td>
+                              <td>${taxableValues[index] || ''}</td>
+                              <td>${item.totalValue || ''}</td>   
+                            </tr>
+                          `
+                        )
+                        .join("")}
+                    </tbody>
+                  </table>
+                  <h1 style='font-size:15px'>Signature: ${sign}</h1>
+                  <div>
+                  <h1 style='font-size:15px; margin-left:45%;'>Goods once sold cannot be taken back or exchanged</h1>
+                  <h1 style='font-size:15px; margin-left:45%;'>Subjected to Bengular-560104 Jurisdiction</h1>
+                </div>
+                </div>
+              </body>
+            </html>
+          `;
+          const printWindow = window.open("", "", "height=600");
+          printWindow.document.open();
+          printWindow.document.write(printContent);
+          printWindow.document.close();
+          // Trigger the print operation
+          printWindow.print();
+          // Close the print window after printing
+          printWindow.onafterprint = function () {
+            printWindow.close();  
+          };
         };
-      };
-      img.onerror = function (error) {
-        console.error('Error loading image for printing', error);
-      };
-  } catch (error) {
-    console.error('Error submitting PatientBill:', error);
-    console.error('Server response:', error.response ? error.response.data : 'No response data'); // Log server response details
-  }
-};
-
+        img.onerror = function (error) {
+          console.error('Error loading image for printing', error);
+        };
+    } catch (error) {
+      console.error('Error submitting PatientBill:', error);
+      console.error('Server response:', error.response ? error.response.data : 'No response data'); // Log server response details
+    }
+  };
+  
   return (
     <>
     <PharmacyNav/>
@@ -432,7 +474,7 @@ const handlePrintAndSubmit = async () => {
               <th  colspan="2" className="table-value">Value</th>
               <tr className="table-bill-row">
                 <th className="with-gst">without Gst</th>
-                <th className="table-cell-177 table-header-177">with Gst</th>
+                <th className="table-cell-177-table-header-177">with Gst</th>
               </tr>
               </th>
               <th className="product-action-table">Action</th>
@@ -452,23 +494,24 @@ const handlePrintAndSubmit = async () => {
                 </td>
                 <td>
                 <select
-                id="productSelect"
-                value={selectedProduct}
-                onChange={handleProductChange}
-              >
-                <option value="">Select a product</option>
-                {products.map((product) => (
-                  <option key={product._id} value={product.product}>
+                className="select-p1"
+                id={`productSelect_${index}`}  // Use a unique id for each select
+            value={item.selectedProduct}
+            onChange={(e) => handleProductChange(e, index)}  // Pass the index here
+        >
+            <option value="">Select a product</option>
+            {products.map((product) => (
+                <option key={product._id} value={product.product}>
                     {product.product}
-                  </option>
-                ))}
+                </option>
+            ))}
               </select>
                 </td>
                 <td>
                   <input
                     className="pharma-bill-quantity"
                     id="salesRateSelect"
-                    value={ptr}
+                    value={item.ptr}
                   />
                 </td>
                 <td>
@@ -476,7 +519,7 @@ const handlePrintAndSubmit = async () => {
                 className="pharma-bill-quantity"
                 type="text"
                 id="Manufacturer"
-                value={manufacturer}
+                value={item.manufacturer}
               />
                 </td>
                 <td>
@@ -484,7 +527,7 @@ const handlePrintAndSubmit = async () => {
                 className="pharma-bill-quantity"
                 type="Batch"
                 id="Batch"
-                value={batch}
+                value={item.batch}
               />
                 </td>
                 <td>
@@ -500,7 +543,7 @@ const handlePrintAndSubmit = async () => {
                     className='gst-input'
                     type="number"
                     id="Gst"
-                    value={Gst}
+                    value={item.Gst}
                   />
                 </td>
                 <td>

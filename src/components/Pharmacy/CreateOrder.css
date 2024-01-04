@@ -1,10 +1,7 @@
 .create-purchase-order{
   background-color: white;
 }
-.header-cpo{
-  
-  /* margin-bottom: 40px; */
-}
+
 .stocklist-cpo{
   justify-content: space-evenly;
   display: flex;
@@ -51,6 +48,9 @@ text-align: center;
 }
 .stocklist-cpo-buttonsecond {
  float: right;
+}
+.stocklist-table-cpo th{
+  color: white;
 }
 
 .stocklist-cpo1 {
@@ -109,9 +109,10 @@ font-weight: bold;
   background-color: #9b8bf4;
   color: white;
   border: none;
-  padding: 3px 6px;
+  padding: 10px 8px;
   border-radius: 4px;
   cursor: pointer;
+  margin-left:10rem;
 }
 .button-cpoc {
   color: white;
@@ -120,10 +121,11 @@ font-weight: bold;
   padding: 3px 6px;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: -20%;
   /* margin-right: 15px; */
 }
 .button-save-po{
-  background-color: #28a745;
+  background-color: #2887a7;
 }
 .button-cancel-po{
   background-color: #dc3545;

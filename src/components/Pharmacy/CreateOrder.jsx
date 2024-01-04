@@ -268,7 +268,7 @@ const CreatePurchaseOrder = () => {
         orderedQuantity: newOrderedQuantity,
       };
       setTableData(updatedTableData);
-      setIsEditing(false);   
+      setIsEditing(false);
     } else {
       window.alert("Item not found for editing. Please try again.");
     }
@@ -350,9 +350,9 @@ const CreatePurchaseOrder = () => {
               Stockist Name
             </label>
             <select
-            id="productSelect"
-             value={selectedStockist} 
-             onChange={handleSelectChange}>
+              id="productSelect"
+              value={selectedStockist}
+              onChange={handleSelectChange}>
               <option value="">Select a stockist</option>
               {stockistNames.map((stockist, index) => (
                 <option key={index} value={stockist.stockistName}>
@@ -408,7 +408,7 @@ const CreatePurchaseOrder = () => {
         <div className="stocklist-cposecond">
           <div className="stocklist-cpo2">
             <label className="cr-order-l " htmlFor="UnitStrip">
-               Unit / Strip
+              Unit / Strip
             </label>&nbsp;
             <select
               id="unitPerBoxSelect"
@@ -436,16 +436,17 @@ const CreatePurchaseOrder = () => {
               onChange={(e) => setNoOfStrips(e.target.value)}
             />
           </div>
-
-          <div className="stocklist-cpo2">
-            <button className="button-cpos" onClick={handleSave}>
-              Save
-            </button>
-          </div>
-          <div className="stocklist-cpo2">
-            <button className="button-cpoc" onClick={handleClearInputs}>
-              Clear
-            </button>
+          <div className="stocklist-009">
+            <div className="stocklist-cpo2">
+              <button className="button-cpos" onClick={handleSave}>
+                Save
+              </button>
+            </div>
+            <div className="stocklist-cpo2">
+              <button className="button-cpoc" onClick={handleClearInputs}>
+                Clear
+              </button>
+            </div>
           </div>
         </div>
         <div className="print-container">

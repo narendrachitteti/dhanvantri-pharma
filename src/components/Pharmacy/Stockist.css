@@ -26,6 +26,9 @@
     margin: 20px;
     border-radius: 5px;
   }
+  .add-stockists-button:hover{
+    color: white;
+  }
 
  
   
@@ -56,6 +59,7 @@
     padding: 10px;
     background-color: #9b8bf4;
     border-bottom: 1px solid #ccc;
+    color: white;
   }
   
   /* Table rows */

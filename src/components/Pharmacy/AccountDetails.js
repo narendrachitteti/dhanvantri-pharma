@@ -170,7 +170,7 @@ const AccountDetails = () => {
         </button>
       </div>
 
-      {showPopup && (
+      {showPopup && (   
         <div className="popup001">
           <div className="popup-header001">
             Add Account

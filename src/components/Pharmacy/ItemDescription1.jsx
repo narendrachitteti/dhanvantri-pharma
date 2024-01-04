@@ -86,21 +86,23 @@ const ItemDescription1 = () => {
               </div> */}
 
 
-<div className="item-expiry-date">
-            <Form.Group controlId="expiryDate">
-              <Form.Label>Expiry Date:</Form.Label>
-              <Form.Control
-                type="date"
-                name="expiryDate"
-                value={formData.expiryDate}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </div>
+              <div className="item-expiry-date">
+                <Form.Group controlId="expiryDate">
+                  <Form.Label>Expiry Date:</Form.Label>
+                  <Form.Control
+                    type="date"
+                    className="from-control"
+                    name="expiryDate"
+                    value={formData.expiryDate}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </div>
 
               <div className="item-company-name">
                 <label className="tax-c-label">GST %:</label>
                 <input
+                  className="tax-input001"
                   name="Gst"
                   value={formData.Gst}
                   onChange={handleChange}
@@ -122,6 +124,7 @@ const ItemDescription1 = () => {
               <div className="item-company-name">
                 <label className="label">Batch No:</label>
                 <input
+                  className="batch-input09"
                   name="batchno"
                   value={formData.batchno}
                   onChange={handleChange}
@@ -130,20 +133,20 @@ const ItemDescription1 = () => {
                 </input>
 
                 <label className="item-schedu-label1">Schedule:</label>
-<select
-  name="schedule"
-  value={formData.schedule}
-  onChange={handleChange}
-  className="item-shedu-sele1"
->
-  <option value="">Select Schedule</option>
-  <option value="C">C</option>
-  <option value="C1">C1</option>
-  <option value="X">X</option>
-  <option value="X1">X1</option>
+                <select
+                  name="schedule"
+                  value={formData.schedule}
+                  onChange={handleChange}
+                  className="item-shedu-sele1"
+                >
+                  <option value="">Select Schedule</option>
+                  <option value="C">C</option>
+                  <option value="C1">C1</option>
+                  <option value="X">X</option>
+                  <option value="X1">X1</option>
 
-  {/* Add more options as needed */}
-</select>
+                  {/* Add more options as needed */}
+                </select>
 
               </div>
 
@@ -176,13 +179,13 @@ const ItemDescription1 = () => {
                 </fieldset>
               </div>
 
-              <fieldset className="filed-sets">
+              <fieldset className="filed-sets009">
                 <legend className="item-legends">Packing</legend>
                 <div className="lot-merge">
                   <label className="label">
                     PerStrip:
                     <input
-                      className="item-pack-mrp"
+                      className="item-pack-mrp001"
                       type="number"
                       name="perStrip"
                       value={formData.perStrip}
@@ -195,6 +198,7 @@ const ItemDescription1 = () => {
               <div className="item-hsn-div">
                 <label className="label">HSN Code:</label>
                 <input
+                  className="hsn-ode"
                   name="hsnCode"
                   value={formData.hsnCode}
                   onChange={handleChange}
@@ -215,6 +219,7 @@ const ItemDescription1 = () => {
               <div className="item-hsn-div">
                 <label className="label">Drug Composition:</label>
                 <input
+                  className="drug-comp"
                   name="drugComposition"
                   value={formData.drugComposition}
                   onChange={handleChange}
@@ -222,19 +227,22 @@ const ItemDescription1 = () => {
                   {/* Options for drug composition */}
                 </input>
               </div>
-
+              <div className="item-submit-button009">
               <button type="submit" className="item-submit-button">
                 Submit
               </button>
-            </div>
-
-            <div className="item-form-right">
-            <Link to="/itemedit">
-              <button>Edit</button>
-            </Link>
-            <Link to="/itemedit">
-              <button>Delete</button>
-            </Link>
+           
+             <div className="item-form-right">
+              <Link to="/itemedit">
+                <button className="edit-btn">Edit</button>
+              </Link>
+              </div>
+           <div className="del-bts0090">
+              <Link to="/itemedit">
+                <button className="del-bts009">Delete</button>
+              </Link>
+              </div>
+              </div>
             </div>
           </div>
         </form>

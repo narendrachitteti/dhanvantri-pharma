@@ -8,12 +8,14 @@
   border-collapse: collapse;
 }
 
+
 .invoice-table_si th,
 .invoice-table_si td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
   background-color: #9b8bf4;
+  /* color: white; */
 }
 
 .invoice-table_si tr:nth-child(even) {

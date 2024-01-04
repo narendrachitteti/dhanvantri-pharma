@@ -607,7 +607,7 @@ const calculateGrossAmount = () => {
             &nbsp;
             &nbsp;
 
-            <div className="input-container-2">
+            <div className="input-container-1">
         <label htmlFor="HSNCode">hsnCode</label>
         <input
           name="hsn"
@@ -762,7 +762,7 @@ const calculateGrossAmount = () => {
            
           
             &nbsp; &nbsp; &nbsp;
-            <div className="input-container-2">
+            <div className="input-container-1">
   <label> totalValue </label>
   <input
     type="text"
@@ -788,7 +788,7 @@ const calculateGrossAmount = () => {
               >
                 Add{" "}
               </button>{" "}
-            </div>{" "}
+            </div>{" "}  
             &nbsp; &nbsp; &nbsp;
             <div className="input-container-2">
               {" "}

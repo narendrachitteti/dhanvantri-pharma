@@ -6,11 +6,13 @@
     /* margin: 0 auto; */
     /* max-width: 800px; */
     padding: 20px;
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+  .product-ooi{
+    color: white;
+  }
   .search-add_5 {
     margin-bottom: 5vh;
     display: flex;
