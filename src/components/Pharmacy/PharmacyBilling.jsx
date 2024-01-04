@@ -60,7 +60,7 @@ const [doctorName , setdoctorName] = useState("");
           ...item,
           product:selectedProduct,
           ptr:ptr,
-          
+
           Gst:Gst,
           manufacturer:manufacturer,
           quantity: value,
@@ -170,6 +170,9 @@ const [doctorName , setdoctorName] = useState("");
         setPatientName('');
         setmobilenumber('');
         setdoctorName('');
+        // setSelectedProduct('');
+        setTaxableValues('');
+        setManufacturer('');
         setSign('');
         setDate('');
         setItems([
@@ -179,6 +182,7 @@ const [doctorName , setdoctorName] = useState("");
             quantity: "",
             ptr:"",
             // taxCode: "",
+            manufacturer: "",
             group: "",
             // category: "",
             // purchaseRate: "",
