@@ -37,11 +37,11 @@ const Dbdetails = () => {
       <PharmacyNav />
       <div className="pharma-container123db">
         <div className="sk14-arrows143db">
-          
+
           <div className="heading6789db">
-          <Link to="/BillingDashboard" style={{fontSize:'2rem',color:'#9b8bf4'}}>
-            <FaArrowCircleLeft />
-          </Link>
+            <Link to="/BillingDashboard" style={{ fontSize: '2rem', color: '#9b8bf4' }}>
+              <FaArrowCircleLeft />
+            </Link>
             <h1 className="h1cvvroyaldb">Pharmacy Billing Data</h1>
           </div>
         </div>

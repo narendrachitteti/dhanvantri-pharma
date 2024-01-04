@@ -228,20 +228,20 @@ const ItemDescription1 = () => {
                 </input>
               </div>
               <div className="item-submit-button009">
-              <button type="submit" className="item-submit-button">
-                Submit
-              </button>
-           
-             <div className="item-form-right">
-              <Link to="/itemedit">
-                <button className="edit-btn">Edit</button>
-              </Link>
-              </div>
-           <div className="del-bts0090">
-              <Link to="/itemedit">
-                <button className="del-bts009">Delete</button>
-              </Link>
-              </div>
+                <button type="submit" className="item-submit-button">
+                  Submit
+                </button>
+
+                <div className="item-form-right">
+                  <Link to="/itemedit">
+                    <button className="edit-btn">Edit</button>
+                  </Link>
+                </div>
+                <div className="del-bts0090">
+                  <Link to="/itemedit">
+                    <button className="del-bts009">Delete</button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

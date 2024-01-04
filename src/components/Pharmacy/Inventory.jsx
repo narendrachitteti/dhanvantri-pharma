@@ -137,7 +137,7 @@ function Inventory() {
           <span>
             Page {currentPage} of {totalPages}
           </span> */}
-          
+
           {/* <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage >= totalPages}
@@ -168,33 +168,29 @@ function Inventory() {
         </p>
         <div className="heading-table-OP">
           <div
-            className={`heading-cell-OP ${
-              activeCategory === "stocks" ? "active" : ""
-            }`}
+            className={`heading-cell-OP ${activeCategory === "stocks" ? "active" : ""
+              }`}
             onClick={() => handleCategoryClick("stocks")}
           >
             Stocks
           </div>
           <div
-            className={`heading-cell-OP ${
-              activeCategory === "expiry" ? "active" : ""
-            }`}
+            className={`heading-cell-OP ${activeCategory === "expiry" ? "active" : ""
+              }`}
             onClick={() => handleCategoryClick("expiry")}
           >
             Expiry Stocks
           </div>
           <div
-            className={`heading-cell-OP ${
-              activeCategory === "low" ? "active" : ""
-            }`}
+            className={`heading-cell-OP ${activeCategory === "low" ? "active" : ""
+              }`}
             onClick={() => handleCategoryClick("low")}
           >
             Low Stocks
           </div>
           <div
-            className={`heading-cell-OP ${
-              activeCategory === "zero" ? "active" : ""
-            }`}
+            className={`heading-cell-OP ${activeCategory === "zero" ? "active" : ""
+              }`}
             onClick={() => handleCategoryClick("zero")}
           >
             Zero Stocks

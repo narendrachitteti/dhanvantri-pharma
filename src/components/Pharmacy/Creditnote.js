@@ -7,7 +7,7 @@ import axios from "axios";
 const Note = () => {
   const [formDatas, setFormDatas] = useState({
     CrNo: "",
-    CrDate: "", 
+    CrDate: "",
     Amount: "",
     Narration: "",
   });
@@ -24,12 +24,12 @@ const Note = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/credit-notes/new-id");
         const nextCrNo = response.data.CrNo;
-  
+
         setFormDatas((prevData) => ({ ...prevData, CrNo: nextCrNo }));
       } catch (error) {
         console.error("Error fetching new CrNo:", error);
       }
-    };  
+    };
     fetchNewCrNo();
   }, []);
   useEffect(() => {
@@ -37,17 +37,17 @@ const Note = () => {
       try {
         const response = await axios.get("http://localhost:5000/api/Debit-notes/new-id");
         const nextDrNo = response.data.DrNo;
-  
+
         setFormData((prevData) => ({ ...prevData, DrNo: nextDrNo }));
       } catch (error) {
         console.error("Error fetching new CrNo:", error);
       }
     };
-  
+
     fetchNewDrNo();
   }, []);
-  
-  
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -56,22 +56,22 @@ const Note = () => {
     const { name, value } = e.target;
     setFormDatas((prevData) => ({ ...prevData, [name]: value }));
   };
-  
-  
+
+
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/submitDebitNote",
         formData
       );
-  
+
       console.log("Server response:", response.data);
       console.log("Debit Note data submitted successfully");
-  
+
       // Fetch the next DR number and update the form fields
       const nextDrResponse = await axios.get("http://localhost:5000/api/Debit-notes/new-id");
       const nextDrNo = nextDrResponse.data.DrNo;
-  
+
       setFormData({
         DrNo: nextDrNo,
         DrDate: "",
@@ -82,7 +82,7 @@ const Note = () => {
       console.error("Error submitting debit note data:", error);
     }
   };
-  
+
 
   const handleSubmits = async () => {
     try {
@@ -90,14 +90,14 @@ const Note = () => {
         "http://localhost:5000/api/submitCreditNote",
         formDatas
       );
-      
+
       console.log("Server response:", submitResponse.data);
       console.log("Credit Note data submitted successfully");
-      
+
       // Fetch the next CR number and update the form fields
       const response = await axios.get("http://localhost:5000/api/credit-notes/new-id");
       const nextCrNo = response.data.CrNo;
-      
+
       setFormDatas({
         CrNo: nextCrNo,
         CrDate: "",
@@ -108,7 +108,7 @@ const Note = () => {
       console.error("Error submitting credit note data:", error);
     }
   };
-  
+
 
   const [selectedOption, setSelectedOption] = useState("option1");
   const [selectedHeading, setSelectedHeading] = useState("Credit Note");
@@ -157,13 +157,13 @@ const Note = () => {
                       <div className="CrNo">
                         <label className="Head">CrNo:</label>
                         <input
-                            type="text"
-                            name="CrNo"
-                            value={formDatas.CrNo}
-                            onChange={handleChanges}
-                            className="numbers1"
-                            disabled
-                          />
+                          type="text"
+                          name="CrNo"
+                          value={formDatas.CrNo}
+                          onChange={handleChanges}
+                          className="numbers1"
+                          disabled
+                        />
 
                       </div>
 
@@ -179,7 +179,7 @@ const Note = () => {
                         />
                       </div>
 
-                      
+
                       <div className="Amount">
                         <label className="Head">Amount:</label>
 
@@ -255,7 +255,7 @@ const Note = () => {
                         />
                       </div>
 
-                                            <div className="Amount">
+                      <div className="Amount">
                         <label className="Head">Amount:</label>
 
                         <input
@@ -291,7 +291,7 @@ const Note = () => {
                           >
                             Submit
                           </button>
-{/* 
+                          {/* 
                           <button className="Prints1" type="button">
                             Register
                           </button> */}
