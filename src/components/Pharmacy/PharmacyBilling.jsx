@@ -171,6 +171,7 @@ const PharmacyBilling = () => {
         setmobilenumber('');
         setdoctorName('');
         setTaxableValues('');
+        setSelectedProduct('');
         setSign('');
         setDate('');
         setItems([
