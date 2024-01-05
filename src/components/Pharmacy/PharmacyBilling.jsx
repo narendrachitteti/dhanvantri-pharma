@@ -343,7 +343,7 @@ const PharmacyBilling = () => {
                   <p class="print-details">Patient Name: ${patientName}</p>
                   <p class="print-details">Doctor Name: ${doctorName}</p>
                   <p class="print-details">Date: ${date}</p>
-                  <p>Invoice Number: ${invoiceNumber}</p>
+                  <p>Invoice Number :INV00${invoiceNumber}</p>
                   <table class="billing-table">
                     <thead>
                       <tr>
