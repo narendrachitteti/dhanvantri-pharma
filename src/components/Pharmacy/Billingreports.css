@@ -81,7 +81,7 @@ h1 {
 }
   
 .bexportButtonv {
-  background-color: #9b8bf4;
+  background-color: #20c997;
   color: #0f0f0f;
   border: none;
   padding: 8px 16px;
@@ -182,7 +182,7 @@ h1 {
 
 /* Detailed Data Table Header */
 .report-table-br th {
-  background-color: #9b8bf4;
+  background-color: #20c997;
   border: 1px solid #d1d1d1;
   text-align: center;
   padding: 10px;
