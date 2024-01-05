@@ -9,26 +9,26 @@ import { FaPlusCircle } from "react-icons/fa";
 const PharmacyBilling = () => {
   const [quantity, setQuantity] = useState('');
   const [selectedProduct, setSelectedProduct] = useState('');
- 
+
   const [manufacturer, setManufacturer] = useState('');
   const [Gst, setGst] = useState('');
   const [batchExpiry, setBatchExpiry] = useState('');
   const [subtotalWithGST, setSubtotalWithGST] = useState(0);
   const [subtotalWithoutGST, setSubtotalWithoutGST] = useState(0);
   const [mobilenumber, setmobilenumber] = useState('');
-  const [sign , setSign]=useState('');
+  const [sign, setSign] = useState('');
   const [patientName, setPatientName] = useState('');
   const [date, setDate] = useState('');
   const [taxCode, setTaxCode] = useState('');
   const [taxableValues, setTaxableValues] = useState([]);
-const [hsnCode, setHsnCode] = useState('');
-const [batch, setBatch] = useState('');
-const [ptr, setPTR] = useState('');
-const [PerStrip, setPerStrip] = useState('');
-const [products, setProducts] = useState([]);
-const [signature , setsignature] = useState('');
-const [doctorName , setdoctorName] = useState("");
-  
+  const [hsnCode, setHsnCode] = useState('');
+  const [batch, setBatch] = useState('');
+  const [ptr, setPTR] = useState('');
+  const [PerStrip, setPerStrip] = useState('');
+  const [products, setProducts] = useState([]);
+  const [signature, setsignature] = useState('');
+  const [doctorName, setdoctorName] = useState("");
+
   const [items, setItems] = useState([
     {
       _id: 1,
@@ -60,7 +60,7 @@ const [doctorName , setdoctorName] = useState("");
           ...item,
           product:selectedProduct,
           ptr:ptr,
-
+          
           Gst:Gst,
           manufacturer:manufacturer,
           quantity: value,
@@ -69,12 +69,12 @@ const [doctorName , setdoctorName] = useState("");
       }
       return item;
     });
-  
+
     setItems(updatedItems);
     setQuantity(value);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     handleAddRow();
   }, []);
 
@@ -122,7 +122,7 @@ const [doctorName , setdoctorName] = useState("");
       setPTR(productDetails.ptr);
       setPerStrip(productDetails.rate);
       setGst(productDetails.Gst);
-  
+
       // Update the items array with the selected product details
       const updatedItems = items.map((item, i) => {
         if (index === i) {
@@ -145,8 +145,8 @@ const [doctorName , setdoctorName] = useState("");
     }
     setSelectedProduct(selectedProductValue);
   };
-  
-// currentdate
+
+  // currentdate
   useEffect(() => {
     const currentDate = new Date().toISOString().split('T')[0];
     setDate(currentDate);
@@ -178,7 +178,7 @@ const [doctorName , setdoctorName] = useState("");
             _id: 1,
             product: "",
             quantity: "",
-            ptr:"",
+            ptr: "",
             // taxCode: "",
             group: "",
             // category: "",
@@ -191,14 +191,14 @@ const [doctorName , setdoctorName] = useState("");
       } else {
         console.error('Unexpected response format:', response);
       }
-      
+
       // import { FaPlusCircle } from "react-icons/fa";
       const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
       console.log('Image URL:', imageUrl);
       const img = new Image();
       img.src = imageUrl;
-          img.onload = function () {
-          const printContent = `
+      img.onload = function () {
+        const printContent = `
             <!DOCTYPE html>
             <html>
               <head>
@@ -344,8 +344,8 @@ const [doctorName , setdoctorName] = useState("");
                     </thead>                 
                     <tbody>
                       ${items
-                        .map(
-                          (item, index) => `
+            .map(
+              (item, index) => `
                             <tr>                        
                               <td>${item.quantity}</td>
                               <td>${item.product}</td>
@@ -358,8 +358,8 @@ const [doctorName , setdoctorName] = useState("");
                               <td>${item.totalValue || ''}</td>   
                             </tr>
                           `
-                        )
-                        .join("")}
+            )
+            .join("")}
                     </tbody>
                   </table>
                   <h1 style='font-size:15px'>Signature: ${sign}</h1>
@@ -371,68 +371,68 @@ const [doctorName , setdoctorName] = useState("");
               </body>
             </html>
           `;
-          const printWindow = window.open("", "", "height=600");
-          printWindow.document.open();
-          printWindow.document.write(printContent);
-          printWindow.document.close();
-          // Trigger the print operation
-          printWindow.print();
-          // Close the print window after printing
-          printWindow.onafterprint = function () {
-            printWindow.close();  
-          };
+        const printWindow = window.open("", "", "height=600");
+        printWindow.document.open();
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+        // Trigger the print operation
+        printWindow.print();
+        // Close the print window after printing
+        printWindow.onafterprint = function () {
+          printWindow.close();
         };
-        img.onerror = function (error) {
-          console.error('Error loading image for printing', error);
-        };
+      };
+      img.onerror = function (error) {
+        console.error('Error loading image for printing', error);
+      };
     } catch (error) {
       console.error('Error submitting PatientBill:', error);
       console.error('Server response:', error.response ? error.response.data : 'No response data'); // Log server response details
     }
   };
-  
+
   return (
     <>
-    <PharmacyNav/>
-   
+      <PharmacyNav />
+
       <div className="patientbill-page">
-       
+
         <div className="gst-ph-header">
-        <div className="gst-ph-head-dl">
-          <span className="dl-1-text">DL:20 KA-B41-180306</span>
-          <span className="dl-2-text">DL:20 KA-B41-180307</span>
-        </div>
-        <div className="gst-ph-head">
-          <span className="gst-text">GSTIN:29BFNPM5181H1ZX</span>
-          <span className="phone-text">PHONE:+91 9886819877</span>
-        </div>
+          <div className="gst-ph-head-dl">
+            <span className="dl-1-text">DL:20 KA-B41-180306</span>
+            <span className="dl-2-text">DL:20 KA-B41-180307</span>
+          </div>
+          <div className="gst-ph-head">
+            <span className="gst-text">GSTIN:29BFNPM5181H1ZX</span>
+            <span className="phone-text">PHONE:+91 9886819877</span>
+          </div>
         </div>
         <h3 className="tax-title">TAX INVOICE</h3>
 
         <div className="flex-change34">
-        <img className='image45' src={imageUrl} alt="Example" />
-        <FaPlusCircle className="icon-plus-main"/>
+          <img className='image45' src={imageUrl} alt="Example" />
+          <FaPlusCircle className="icon-plus-main" />
 
-        <div className='main-heading'>
+          <div className='main-heading'>
 
-        <h2 className="dhanvantri-heading">Dhanvantri Pharma</h2>
-        <h5 className="dhanvantri-heading-address"> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h5>
-        <h5 className="dhanvantri-heading-hampinagar">Hampinagara , Bengaluru-560104</h5>
-        </div>
-        <FaPlusCircle className="icon-plus-main-second"/>
+            <h2 className="dhanvantri-heading">Dhanvantri Pharma</h2>
+            <h5 className="dhanvantri-heading-address"> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h5>
+            <h5 className="dhanvantri-heading-hampinagar">Hampinagara , Bengaluru-560104</h5>
+          </div>
+          <FaPlusCircle className="icon-plus-main-second" />
         </div>
         <div className="pharma-bill-details">
-        <div>
-          <label className="pharma-patientname-labels">Patient Name : </label>
-          <input
-            type="text"
-            className="pharma-head-patientname-input"
-            value={patientName}
-            onChange={(e) => setPatientName(e.target.value)}
-          />
+          <div>
+            <label className="pharma-patientname-labels">Patient Name : </label>
+            <input
+              type="text"
+              className="pharma-head-patientname-input"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
-      <div>
+        <div>
           <label className="pharma-patientname-labels">Doctor Name : </label>
           <input
             type="text"
@@ -441,30 +441,30 @@ const [doctorName , setdoctorName] = useState("");
             onChange={(e) => setdoctorName(e.target.value)}
           />
         </div>
-      <div className="pharma-bill-details-2">
-        <div>
-          <label className="pharma-doctor-label">Mobile number : </label>
-          <input
-            type="text"
-            className="pharma-head-mobilenumber-input"
-            value={mobilenumber}
-            onChange={(e) => setmobilenumber(e.target.value)}
-          />
+        <div className="pharma-bill-details-2">
+          <div>
+            <label className="pharma-doctor-label">Mobile number : </label>
+            <input
+              type="text"
+              className="pharma-head-mobilenumber-input"
+              value={mobilenumber}
+              onChange={(e) => setmobilenumber(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="pharma-date-label">Date : </label>
+            <input
+              type="date"
+              disabled
+              className="pharma-bill-input-date-2"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
         </div>
-        <div>
-          <label className="pharma-date-label">Date : </label>
-          <input
-            type="date"
-            disabled
-            className="pharma-bill-input-date-2"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}  
-          />
-        </div>
-      </div>
         <table className="pharma-bill-table23">
           <thead className="pharma-bill-tablehead">
-             <tr >
+            <tr >
               <th className="oty-table">Qty</th>
               <th className="product-product-table">Product</th>
               <th className="product-price-table">Product Price</th>
@@ -473,41 +473,41 @@ const [doctorName , setdoctorName] = useState("");
               <th className="product-price-table">Taxable Value</th>
               <th className="product-price-table">GST (%)</th>
               <th className="merge-tabe">
-              <th  colspan="2" className="table-value">Value</th>
-              <tr className="table-bill-row">
-                <th className="with-gst">without Gst</th>
-                <th className="table-cell-177-table-header-177">with Gst</th>
-              </tr>
+                <th colspan="2" className="table-value">Value</th>
+                <tr className="table-bill-row">
+                  <th className="with-gst">without Gst</th>
+                  <th className="table-cell-177-table-header-177">with Gst</th>
+                </tr>
               </th>
               <th className="product-action-table">Action</th>
             </tr>
-           </thead> 
+          </thead>
           <tbody className="pharma-bill-table-body">
             {items.map((item, index) => (
               <tr key={item._id}>
                 <td>
-                <input
-              type="number"
-              className="pharma-bill-quantity"
-              value={item.quantity}
-              onChange={(e) => handleQuantityChange(e, index)}
-              min="0"
-            />
+                  <input
+                    type="number"
+                    className="pharma-bill-quantity"
+                    value={item.quantity}
+                    onChange={(e) => handleQuantityChange(e, index)}
+                    min="0"
+                  />
                 </td>
                 <td>
-                <select
-                className="select-p1"
-                id={`productSelect_${index}`}  // Use a unique id for each select
-            value={item.selectedProduct}
-            onChange={(e) => handleProductChange(e, index)}  // Pass the index here
-        >
-            <option value="">Select a product</option>
-            {products.map((product) => (
-                <option key={product._id} value={product.product}>
-                    {product.product}
-                </option>
-            ))}
-              </select>
+                  <select
+                    className="select-p1"
+                    id={`productSelect_${index}`}  // Use a unique id for each select
+                    value={item.selectedProduct}
+                    onChange={(e) => handleProductChange(e, index)}  // Pass the index here
+                  >
+                    <option value="">Select a product</option>
+                    {products.map((product) => (
+                      <option key={product._id} value={product.product}>
+                        {product.product}
+                      </option>
+                    ))}
+                  </select>
                 </td>
                 <td>
                   <input
@@ -517,28 +517,28 @@ const [doctorName , setdoctorName] = useState("");
                   />
                 </td>
                 <td>
-                <input
-                className="pharma-bill-quantity"
-                type="text"
-                id="Manufacturer"
-                value={item.manufacturer}
-              />
+                  <input
+                    className="pharma-bill-quantity"
+                    type="text"
+                    id="Manufacturer"
+                    value={item.manufacturer}
+                  />
                 </td>
                 <td>
-                <input
-                className="pharma-bill-quantity"
-                type="Batch"
-                id="Batch"
-                value={item.batch}
-              />
+                  <input
+                    className="pharma-bill-quantity"
+                    type="Batch"
+                    id="Batch"
+                    value={item.batch}
+                  />
                 </td>
                 <td>
-                   <input
-                   className="pharma-bill-quantity"
-                        type="text"
-                        value={taxableValues[index] || ''}
-                        readOnly
-                      />
+                  <input
+                    className="pharma-bill-quantity"
+                    type="text"
+                    value={taxableValues[index] || ''}
+                    readOnly
+                  />
                 </td>
                 <td>
                   <input
@@ -550,19 +550,19 @@ const [doctorName , setdoctorName] = useState("");
                 </td>
                 <td>
                   <input
-                    className='value-input'   
-                type="number"
-                id="Gst"
-                value={taxableValues[index] || ''}
-                // value={Gst}
+                    className='value-input'
+                    type="number"
+                    id="Gst"
+                    value={taxableValues[index] || ''}
+                  // value={Gst}
                   />
                   <input
-                    className='value-input'   
-                type="number"
-                disabled
-                id="Gst"
-                value={item.totalValue || ''}
-                // value={Gst}
+                    className='value-input'
+                    type="number"
+                    disabled
+                    id="Gst"
+                    value={item.totalValue || ''}
+                  // value={Gst}
                   />
                 </td>
                 <td className="add-del">
@@ -581,24 +581,24 @@ const [doctorName , setdoctorName] = useState("");
         <button onClick={handleAddRow} className="Add-btn">
           Add
         </button>
-         <div className="pharma-subtotal">
-        {/* <p>Total with GST: {subtotalWithGST}</p>
+        <div className="pharma-subtotal">
+          {/* <p>Total with GST: {subtotalWithGST}</p>
         <p>Total without GST: {subtotalWithoutGST}</p> */}
-      </div>
-      <div className="merge-sign-para">
-        <div>
-          <div className="pharma-sign">
-            <label>Sign : </label>
-            <input
-              type="textarea"
-              className="sign-area"
-              value={sign}
-              onChange={(e) => setSign(e.target.value)}
-            />
-          </div>
-          <button onClick={handlePrintAndSubmit} className="print-btn">
-            Print
-          </button>
+        </div>
+        <div className="merge-sign-para">
+          <div>
+            <div className="pharma-sign">
+              <label>Sign : </label>
+              <input
+                type="textarea"
+                className="sign-area"
+                value={sign}
+                onChange={(e) => setSign(e.target.value)}
+              />
+            </div>
+            <button onClick={handlePrintAndSubmit} className="print-btn">
+              Print
+            </button>
           </div>
           <div>
             <h1 className="goods-class">Goods once sold cannot be taken back or exchanged</h1>

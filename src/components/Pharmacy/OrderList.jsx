@@ -12,7 +12,7 @@ import ReactJsPagination from "react-js-pagination";
 
 function Search({ filterText, onFilterTextChange }) {
   return (
-    <div className="searchBox-main" style={{ fontFamily: "Inria Serif"  }}>
+    <div className="searchBox-main" style={{ fontFamily: "Inria Serif" }}>
       <div className="search-box-tnx" style={{ background: "white" }}>
         <input
           type="text"
@@ -176,7 +176,7 @@ function OrderList() {
         <td>
           {row.editing ? (
             <button className="save-ol" onClick={() => handleEditOrder(row.customOrderId)}>
-             <FiSave size={25} />
+              <FiSave size={25} />
             </button>
           ) : (
             <button className="edit-ol"
@@ -200,7 +200,7 @@ function OrderList() {
         </td>
         <td>
           <button className="delete-ol" onClick={() => handleDeleteOrder(row.customOrderId)}>
-          <MdDelete size={25} />
+            <MdDelete size={25} />
           </button>
         </td>
       </tr>
@@ -212,13 +212,13 @@ function OrderList() {
       <PharmacyNav />
       <div
         className="OrderList-main"
-        style={{  fontFamily: "Inria Serif" }}
-      ><br/>
-        <h1 style={{margin:'.5rem'}}>
-          <Link to="/PharmacyHome" style={{color: "#9b8bf4" }}>
+        style={{ fontFamily: "Inria Serif" }}
+      ><br />
+        <h1 style={{ margin: '.5rem' }}>
+          <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
             <FaArrowCircleLeft />
-          </Link>{" "} 
-        <span>Purchase Order</span>
+          </Link>{" "}
+          <span>Purchase Order</span>
         </h1>
         <hr style={{ backgroundColor: "black", padding: "1px" }} />
         <Search filterText={filterText} onFilterTextChange={setFilterText} />
@@ -238,7 +238,7 @@ function OrderList() {
           </table>
         </div>
         <div className="pagination01">
-        <ReactJsPagination
+          <ReactJsPagination
             activePage={currentPage}
             itemsCountPerPage={itemsPerPage}
             totalItemsCount={filteredOrders.length}

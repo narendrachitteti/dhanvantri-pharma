@@ -6,7 +6,7 @@ import Navbar from './PharmacyNav';
 
 const SalesReceipt = () => {
 
- 
+
   const [sortBy, setSortBy] = useState(null);
   const [dosPrint, setDosPrint] = useState(false);
   const [allAccounts, setAllAccounts] = useState(false);
@@ -33,48 +33,48 @@ const SalesReceipt = () => {
     bankName: '',
     bankTown: '',
     nomitation: '',
-    sortBy:'',
+    sortBy: '',
     dosPrint: false,
     allAccounts: false,
     bOpBills: '',
     sInvoices: '',
     percRet: '',
-    slNo:'',
-   
+    slNo: '',
+
   });
 
 
 
-    
+
   const printData = (dataToPrint) => {
     const printWindow = window.open('', '_blank');
     printWindow.document.open();
     printWindow.document.write('<html><head><title>Print</title></head><body>');
     printWindow.document.write('<h1>Printed Content</h1>');
 
-  
+
     for (const key in dataToPrint) {
       if (dataToPrint.hasOwnProperty(key)) {
         printWindow.document.write(<p>${key}: ${dataToPrint[key]}</p>);
       }
     }
-  
+
     printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.print();
     printWindow.close();
   };
-  
+
   const handlePrint = () => {
     const dataToPrint = {
       'Date': formInputs.date,
-      'the sum of rs ':formInputs.intAmt,
-      'throught cheque no':formInputs.chequeNo,
+      'the sum of rs ': formInputs.intAmt,
+      'throught cheque no': formInputs.chequeNo,
       'dated': formInputs.chequeDate,
       'Bank comm': formInputs.bankComm,
-      'Manual No':formInputs.manualRecNo,
-      'BillNo': formInputs.trNo ,
-      'BillDate': formInputs.date ,
+      'Manual No': formInputs.manualRecNo,
+      'BillNo': formInputs.trNo,
+      'BillDate': formInputs.date,
 
     };
     printData(dataToPrint);
@@ -83,7 +83,7 @@ const SalesReceipt = () => {
   // Update your handleInputChange function to handle the sortBy field
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-  
+
     // If the name is sortBy, check if the value is a valid enum value
     if (name === 'sortBy' && !['billNo', 'billDate', 'billAmt'].includes(value)) {
       console.error('Invalid value for sortBy:', value);
@@ -98,8 +98,8 @@ const SalesReceipt = () => {
       }));
     }
   };
-  
-  
+
+
 
 
   const handleSubmit = async () => {
@@ -107,7 +107,7 @@ const SalesReceipt = () => {
       const postData = {
         formData: formInputs,
         shopData: {
-          name: selectedShopData ? selectedShopData.label : '', 
+          name: selectedShopData ? selectedShopData.label : '',
           tableData: tableData,
 
         },
@@ -131,8 +131,8 @@ const SalesReceipt = () => {
       console.error('Error submitting sales receipt data:', error);
     }
   };
-  
-  
+
+
 
 
 
@@ -143,10 +143,10 @@ const SalesReceipt = () => {
       sortBy: e.target.value,
     }));
   };
-  
 
 
-  
+
+
 
   const handleDosPrintChange = () => {
     setDosPrint(!dosPrint);
@@ -197,7 +197,7 @@ const SalesReceipt = () => {
   }, []);
 
   const [selectedShopData, setSelectedShopData] = useState(null);
-  
+
   useEffect(() => {
     // Fetch details from the server when the selected shop data changes
     if (selectedShopData) {
@@ -255,160 +255,160 @@ const SalesReceipt = () => {
 
   return (
     <>
-    <Navbar/>
-    <div className='salesreceipt-page'>
-        
+      <Navbar />
+      <div className='salesreceipt-page'>
 
-      <div className='sales-title'>
-        <MdNoteAlt className='salespage-noteicon' />
-        <p>Receipt for sales</p>
-      </div>
-      <div className='sales-header-sec'>
-        <div className='sales-first-col'>
-          <div className='sales-first-1-lab-inp'>
-            <label>Tr No </label>
-            <input type='text' name='trNo' value={formInputs.trNo} onChange={handleInputChange} />
-          </div>
-          <div className='sales-first-2-lab-inp'>
-            <div>
-            <label>Rec From </label>
-            </div>
-            <div>
-            <Select
-            options={shopData.nameOptions}
-            value={selectedShopData}
-            onChange={selectedOption => setSelectedShopData(selectedOption)}
-            className='recform-select'
-          />
-          </div>
-          </div>
-          <div className='sales-first-3-lab-inp'>
-            <label>Cr.Sl </label>
-            <input type='text' name='crSl' value={formInputs.crSl} onChange={handleInputChange} />
-          </div>
-          <div className='sales-first-4-lab-inp'>
-            <label>Rec Amt </label>
-            <input type='text' name='recAmt' value={formInputs.recAmt} onChange={handleInputChange} />
-          </div>
-          <div className='sales-first-5-lab-inp'>
-            <label>Dis Amt </label>
-            <input type='text' name='disAmt' value={formInputs.disAmt} onChange={handleInputChange} />
-          </div>
-          <div className='sales-first-6-lab-inp'>
-            <label>Cheque No </label>
-            <input type='text' name='chequeNo' value={formInputs.chequeNo} onChange={handleInputChange} />
-          </div>
-          <div className='sales-first-7-lab-inp'>
-  <label>Cheque date </label>
-  <input
-    type='date'
-    name='chequeDate'
-    value={formInputs.chequeDate}
-    onChange={handleInputChange}
-  />
-</div>
 
-          <div className='sales-first-8-lab-inp'>
-            <label>Int Amt </label>
-            <input type='text' name='intAmt' value={formInputs.intAmt} onChange={handleInputChange} />
-          </div>
-          <div className='sales-first-9-lab-inp'>
-            <label>Manual rec No </label>
-            <input
-              type='text'
-              name='manualRecNo'
-              value={formInputs.manualRecNo}
-              onChange={handleInputChange}
-            />
-          </div>
+        <div className='sales-title'>
+          <MdNoteAlt className='salespage-noteicon' />
+          <p>Receipt for sales</p>
         </div>
-        <div className='sales-second-col'>
-          <div className='sales-second-1-lab-inp'>
-            <label>Date </label>
-            <input type='date' name='date' value={formInputs.date} onChange={handleInputChange} />
-          </div>
-          <div className='sales-second-2-lab-inp'>
-            <label>Debit A/c </label>
-            <input type='text' name='debitAcc' value={formInputs.debitAcc} onChange={handleInputChange} />
-          </div>
-          <div className='sales-second-3-lab-inp'>
-            <label>Db SL </label>
-            <input type='text' name='dbSl' value={formInputs.dbSl} onChange={handleInputChange} />
-          </div>
-          <div className='sales-second-4-lab-inp'>
-            <label>On Acc Amt </label>
-            <input type='text' name='onAccAmt' value={formInputs.onAccAmt} onChange={handleInputChange} />
-          </div>
-          <div className='sales-second-5-lab-inp'>
-            <label>Bank Comm </label>
-            <input type='text' name='bankComm' value={formInputs.bankComm} onChange={handleInputChange} />
-          </div>
-          <div className='sales-second-6-lab-inp'>
-            <label>Bank Name </label>
-            <input type='text' name='bankName' value={formInputs.bankName} onChange={handleInputChange} />
-          </div>
-          <div className='sales-second-7-lab-inp'>
-            <label>Bank Town </label>
-            <input type='text' name='bankTown' value={formInputs.bankTown} onChange={handleInputChange} />
-          </div>
-          <div className='sales-second-8-lab-inp'>
-            <label>Nomination </label>
-            <input type='text' name='nomitation' value={formInputs.nomitation} onChange={handleInputChange} />
-          </div>
-        </div>
-        <div className='sales-third-col'>
-          <fieldset className='sales-fieldset'>
-            <legend>Sort By</legend>
-            <div className='sales-third-sec-btn1'>
-              <input
-              className='radionodesd'
-                type='radio'
-                value='billNo'
-                checked={sortBy === 'billNo'}
-                onChange={handleSortByChange}
-              />
-              <label className='sales-third-sec-btn1-lable'>Bill No</label>
+        <div className='sales-header-sec'>
+          <div className='sales-first-col'>
+            <div className='sales-first-1-lab-inp'>
+              <label>Tr No </label>
+              <input type='text' name='trNo' value={formInputs.trNo} onChange={handleInputChange} />
             </div>
-            <div className='sales-third-sec-btn2'>
+            <div className='sales-first-2-lab-inp'>
+              <div>
+                <label>Rec From </label>
+              </div>
+              <div>
+                <Select
+                  options={shopData.nameOptions}
+                  value={selectedShopData}
+                  onChange={selectedOption => setSelectedShopData(selectedOption)}
+                  className='recform-select'
+                />
+              </div>
+            </div>
+            <div className='sales-first-3-lab-inp'>
+              <label>Cr.Sl </label>
+              <input type='text' name='crSl' value={formInputs.crSl} onChange={handleInputChange} />
+            </div>
+            <div className='sales-first-4-lab-inp'>
+              <label>Rec Amt </label>
+              <input type='text' name='recAmt' value={formInputs.recAmt} onChange={handleInputChange} />
+            </div>
+            <div className='sales-first-5-lab-inp'>
+              <label>Dis Amt </label>
+              <input type='text' name='disAmt' value={formInputs.disAmt} onChange={handleInputChange} />
+            </div>
+            <div className='sales-first-6-lab-inp'>
+              <label>Cheque No </label>
+              <input type='text' name='chequeNo' value={formInputs.chequeNo} onChange={handleInputChange} />
+            </div>
+            <div className='sales-first-7-lab-inp'>
+              <label>Cheque date </label>
               <input
-                type='radio'
-                value='billDate'
+                type='date'
+                name='chequeDate'
+                value={formInputs.chequeDate}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className='sales-first-8-lab-inp'>
+              <label>Int Amt </label>
+              <input type='text' name='intAmt' value={formInputs.intAmt} onChange={handleInputChange} />
+            </div>
+            <div className='sales-first-9-lab-inp'>
+              <label>Manual rec No </label>
+              <input
+                type='text'
+                name='manualRecNo'
+                value={formInputs.manualRecNo}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <div className='sales-second-col'>
+            <div className='sales-second-1-lab-inp'>
+              <label>Date </label>
+              <input type='date' name='date' value={formInputs.date} onChange={handleInputChange} />
+            </div>
+            <div className='sales-second-2-lab-inp'>
+              <label>Debit A/c </label>
+              <input type='text' name='debitAcc' value={formInputs.debitAcc} onChange={handleInputChange} />
+            </div>
+            <div className='sales-second-3-lab-inp'>
+              <label>Db SL </label>
+              <input type='text' name='dbSl' value={formInputs.dbSl} onChange={handleInputChange} />
+            </div>
+            <div className='sales-second-4-lab-inp'>
+              <label>On Acc Amt </label>
+              <input type='text' name='onAccAmt' value={formInputs.onAccAmt} onChange={handleInputChange} />
+            </div>
+            <div className='sales-second-5-lab-inp'>
+              <label>Bank Comm </label>
+              <input type='text' name='bankComm' value={formInputs.bankComm} onChange={handleInputChange} />
+            </div>
+            <div className='sales-second-6-lab-inp'>
+              <label>Bank Name </label>
+              <input type='text' name='bankName' value={formInputs.bankName} onChange={handleInputChange} />
+            </div>
+            <div className='sales-second-7-lab-inp'>
+              <label>Bank Town </label>
+              <input type='text' name='bankTown' value={formInputs.bankTown} onChange={handleInputChange} />
+            </div>
+            <div className='sales-second-8-lab-inp'>
+              <label>Nomination </label>
+              <input type='text' name='nomitation' value={formInputs.nomitation} onChange={handleInputChange} />
+            </div>
+          </div>
+          <div className='sales-third-col'>
+            <fieldset className='sales-fieldset'>
+              <legend>Sort By</legend>
+              <div className='sales-third-sec-btn1'>
+                <input
+                  className='radionodesd'
+                  type='radio'
+                  value='billNo'
+                  checked={sortBy === 'billNo'}
+                  onChange={handleSortByChange}
+                />
+                <label className='sales-third-sec-btn1-lable'>Bill No</label>
+              </div>
+              <div className='sales-third-sec-btn2'>
+                <input
+                  type='radio'
+                  value='billDate'
+                  className='salesradiosandcheck'
+                  checked={sortBy === 'billDate'}
+                  onChange={handleSortByChange}
+                />
+                <label className='sales-third-sec-btn1-lable'>Bill Date</label>
+              </div>
+              <div className='sales-third-sec-btn3'>
+                <input
+                  className='salesradiosandcheck'
+                  type='radio'
+                  value='billAmt'
+                  checked={sortBy === 'billAmt'}
+                  onChange={handleSortByChange}
+                />
+                <label className='sales-third-sec-btn1-lable'>Bill Amt</label>
+              </div>
+            </fieldset>
+            <div className='sales-third-ck1'>
+              <input
+                className='checkboxsales'
+                type='checkbox'
+                checked={dosPrint}
+                onChange={handleDosPrintChange}
+              />
+              <label className='sales-third-sec-btn1-lable'>DOS Print</label>
+            </div>
+            <div className='sales-third-ck2'>
+              <input
                 className='salesradiosandcheck'
-                checked={sortBy === 'billDate'}
-                onChange={handleSortByChange}
+                type='checkbox'
+                checked={allAccounts}
+                onChange={handleAllAccountsChange}
               />
-              <label className='sales-third-sec-btn1-lable'>Bill Date</label>
+              <label className='sales-third-sec-btn1-lable'>All Accounts</label>
             </div>
-            <div className='sales-third-sec-btn3'>
-              <input
-                className='salesradiosandcheck'
-                type='radio'
-                value='billAmt'
-                checked={sortBy === 'billAmt'}
-                onChange={handleSortByChange}
-              />
-              <label className='sales-third-sec-btn1-lable'>Bill Amt</label>
-            </div>
-          </fieldset>
-          <div className='sales-third-ck1'>
-            <input
-            className='checkboxsales'
-              type='checkbox'
-              checked={dosPrint}
-              onChange={handleDosPrintChange}
-            />
-            <label className='sales-third-sec-btn1-lable'>DOS Print</label>
-          </div>
-          <div className='sales-third-ck2'>
-            <input
-            className='salesradiosandcheck'
-              type='checkbox'
-              checked={allAccounts}
-              onChange={handleAllAccountsChange}
-            /> 
-            <label className='sales-third-sec-btn1-lable'>All Accounts</label>
-          </div>
-          {/* <div className='sales-third-inps'>
+            {/* <div className='sales-third-inps'>
             <input
               type='text'
               placeholder='>> B Op Bills'
@@ -429,64 +429,64 @@ const SalesReceipt = () => {
               onChange={(e) => handleInputFieldChange(e, setPercRet)}
             />
           </div> */}
+          </div>
+          <div className='sales-forth-col'>
+            <button>Old Bill</button>
+            <button>Auto Adjust</button>
+            <button>Edit</button>
+            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleRefresh}>Refresh</button>
+            <button onClick={handlePrint} >Print</button>
+            <button>Delete Ete</button>
+            <button>Exit</button>
+          </div>
         </div>
-        <div className='sales-forth-col'>
-          <button>Old Bill</button>
-          <button>Auto Adjust</button>
-          <button>Edit</button>
-          <button onClick={handleSubmit}>Submit</button>
-          <button onClick={handleRefresh}>Refresh</button>
-          <button  onClick={handlePrint} >Print</button>
-          <button>Delete Ete</button>
-          <button>Exit</button>
-        </div>
-      </div>
 
-      <table className='sales-receipt-table'>
-        <thead>
-          <tr>
-          <th>Sl No</th>
-          <th>Series</th>
-          <th>Inv No</th>
-          <th>Date</th>
-          <th>Amount</th>
-          <th>Paid</th>
-          <th>Balance</th>
-          <th>Rec Amt</th>
-          <th>Narr</th>
-          <th>Days</th>
-          <th>T</th>
-          <th>Discount</th>
-          <th>S.Man</th>
-          <th>Ord.Ref</th>
-          <th>Bill Narr</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.map((row) => (
-            <tr key={row.slNo}>
-              <td>{row.slNo}</td>
-              <td>{row.series}</td>
-              <td>{row.invNo}</td>
-              <td>{row.date}</td>
-              <td>{row.amount}</td>
-              <td>{row.paid}</td>
-              <td>{row.balance}</td>
-              <td>{row.recAmt}</td>
-              <td>{row.narr}</td>
-              <td>{row.days}</td>
-              <td>{row.t}</td>
-              <td>{row.discount}</td>
-              <td>{row.sMan}</td>
-              <td>{row.ordRef}</td>
-              <td>{row.billNarr}</td>
-
+        <table className='sales-receipt-table'>
+          <thead>
+            <tr>
+              <th>Sl No</th>
+              <th>Series</th>
+              <th>Inv No</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Paid</th>
+              <th>Balance</th>
+              <th>Rec Amt</th>
+              <th>Narr</th>
+              <th>Days</th>
+              <th>T</th>
+              <th>Discount</th>
+              <th>S.Man</th>
+              <th>Ord.Ref</th>
+              <th>Bill Narr</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-     
-    </div>
+          </thead>
+          <tbody>
+            {tableData.map((row) => (
+              <tr key={row.slNo}>
+                <td>{row.slNo}</td>
+                <td>{row.series}</td>
+                <td>{row.invNo}</td>
+                <td>{row.date}</td>
+                <td>{row.amount}</td>
+                <td>{row.paid}</td>
+                <td>{row.balance}</td>
+                <td>{row.recAmt}</td>
+                <td>{row.narr}</td>
+                <td>{row.days}</td>
+                <td>{row.t}</td>
+                <td>{row.discount}</td>
+                <td>{row.sMan}</td>
+                <td>{row.ordRef}</td>
+                <td>{row.billNarr}</td>
+
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+      </div>
     </>
   );
 };

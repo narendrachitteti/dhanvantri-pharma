@@ -104,34 +104,34 @@ function BillingDashboard() {
   };
 
   // Function to fetch fast-moving medicines
-const fetchFastMovingMedicines = async () => {
-  try {
-    const response = await axios.get("http://localhost:5000/api/pharmacy-billing");
-    const fastMovingMedicinesData = response.data
-      .map((item) => item.pharmacyTable) // Extract the pharmacyTable from each item
-      .flat() // Flatten the array
-      .filter((medicine) => medicine.quantity >= 100);
-    setFastMovingProducts(fastMovingMedicinesData);
-  } catch (error) {
-    console.error(error);
-  }
-};
+  const fetchFastMovingMedicines = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/pharmacy-billing");
+      const fastMovingMedicinesData = response.data
+        .map((item) => item.pharmacyTable) // Extract the pharmacyTable from each item
+        .flat() // Flatten the array
+        .filter((medicine) => medicine.quantity >= 100);
+      setFastMovingProducts(fastMovingMedicinesData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-// Function to render fast-moving medicines
-const renderFastMovingMedicines = () => {
-  return fastMovingProducts.map((medicine, index) => (
-    <tr key={index}>
-      <td>{medicine.medicineName}</td>
-      <td>{medicine.quantity}</td>
-    </tr>
-  ));
-};
+  // Function to render fast-moving medicines
+  const renderFastMovingMedicines = () => {
+    return fastMovingProducts.map((medicine, index) => (
+      <tr key={index}>
+        <td>{medicine.medicineName}</td>
+        <td>{medicine.quantity}</td>
+      </tr>
+    ));
+  };
 
 
   const fetchInventoryData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/getInvoices");
-      
+
       // Initialize variables to store calculated values
       let totalMedicines = 0;
       let totalManufacturers = new Set(); // Use a Set to keep track of unique manufacturers
@@ -139,37 +139,37 @@ const renderFastMovingMedicines = () => {
       let currentInventoryMRP = 0;
       let inStockInventoryQuantity = 0;
       let medicineOutOfStock = 0;
-  
+
       // Loop through each invoice in the API response
       response.data.forEach((invoice) => {
         // Calculate the total number of medicines
         totalMedicines += invoice.medicines.length;
-  
+
         // Collect unique manufacturers in this invoice
         invoice.medicines.forEach((medicine) => {
           totalManufacturers.add(medicine.Manufacturer);
-  
+
           // Ensure that you're parsing quantity, price, and MRP as floats to avoid NaN
           const quantity = parseFloat(medicine.Quantity);
           const price = parseFloat(medicine.price);
           const mrp = parseFloat(medicine.MRP);
-  
+
           // Check if the medicine is in stock or out of stock
           if (quantity === 0) {
             medicineOutOfStock++;
           } else {
             inStockInventoryQuantity += quantity;
           }
-  
+
           // Calculate the current inventory cost and MRP
           currentInventoryCost += price * quantity;
           currentInventoryMRP += mrp * quantity;
         });
       });
-  
+
       // Calculate the actual total manufacturers count
       totalManufacturers = totalManufacturers.size;
-  
+
       // Set the calculated values to state
       setTotalMedicines(totalMedicines);
       setTotalManufacturers(totalManufacturers);
@@ -178,7 +178,7 @@ const renderFastMovingMedicines = () => {
       setInStockInventoryQuantity(inStockInventoryQuantity);
       setMedicineOutOfStock(medicineOutOfStock);
     } catch (error) {
-      console.error("API Error:", error); 
+      console.error("API Error:", error);
     }
   };
 
@@ -190,58 +190,58 @@ const renderFastMovingMedicines = () => {
         return sum + (item.subtotalWithGST || 0); // Use 0 if subtotalWithGST is undefined or null
       }, 0);
       setTotalCollection(subtotalWithGSTSum);
-      
+
     } catch (error) {
       console.error("API Error:", error);
     }
   };
-  
-  useEffect(()=> {
+
+  useEffect(() => {
     fetchCollectionData();
-    
+
   },);
 
-const fetchTotalBilldata = async () => {
-  try {
-    const response = await axios.get("http://localhost:5000/api/getIn");
-    const totalbills = response.data.length;
-    setTotalbills(totalbills);
-    
-  } catch (error) {
-    console.error("API Error:", error);
-  }
-};
+  const fetchTotalBilldata = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/getIn");
+      const totalbills = response.data.length;
+      setTotalbills(totalbills);
+
+    } catch (error) {
+      console.error("API Error:", error);
+    }
+  };
   useEffect(() => {
     fetchTotalBilldata();
   },);
-  
+
   return (
     <>
       <PharmacyNav />
       <div className="Appbilldb">
         <div className="date-head-container">
-        <h1 className="date2" >
-       Billing Dashboard
-        </h1>
-        <div className="date-container">
-          <label className="la-bill-dash" >From: </label>
-          <input className="billing-data-sel"
-            type="date"
-            id={fromDateId}
-            value={fromDate}
-            name="fromDate"
-            onChange={(e) => setFromDate(e.target.value)}
-          />
-          <label className="la-bill-dash" >To:</label>
-          <input className="billing-data-sel"
-            type="date"
-            id={toDateId}
+          <h1 className="date2" >
+            Billing Dashboard
+          </h1>
+          <div className="date-container">
+            <label className="la-bill-dash" >From: </label>
+            <input className="billing-data-sel"
+              type="date"
+              id={fromDateId}
+              value={fromDate}
+              name="fromDate"
+              onChange={(e) => setFromDate(e.target.value)}
+            />
+            <label className="la-bill-dash" >To:</label>
+            <input className="billing-data-sel"
+              type="date"
+              id={toDateId}
               name="toDate"
-            value={toDate}
-            onChange={(e) => setToDate(e.target.value)}
-          />
-          <button className="billing-dash-go" onClick={handleFilter}>Go</button>
-        </div>
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
+            />
+            <button className="billing-dash-go" onClick={handleFilter}>Go</button>
+          </div>
         </div>
         <hr />
         <div className="dbicon-box">
@@ -279,7 +279,7 @@ const fetchTotalBilldata = async () => {
           </Link> */}
         </div>
       </div>
-      <div className="card-container2" style={{fontFamily: "Inria Serif"}}>
+      <div className="card-container2" style={{ fontFamily: "Inria Serif" }}>
         <div className="card2">
           <h4 className="card-heading">Statistics</h4>
           <div className="card-content">

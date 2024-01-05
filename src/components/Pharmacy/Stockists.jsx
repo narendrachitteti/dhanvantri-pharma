@@ -21,7 +21,7 @@ const Stockists = () => {
     email: "",
   });
 
-  
+
   const [selectedStockist, setSelectedStockist] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
@@ -188,7 +188,7 @@ const Stockists = () => {
         ></div>
         <h3>
           <Link to="/PharmacyHome">
-            <FaArrowCircleLeft style={{color:'#9b8bf4'}} />
+            <FaArrowCircleLeft style={{ color: '#9b8bf4' }} />
           </Link>{" "}
           &nbsp; Pharmacy Stockists
         </h3>
@@ -249,12 +249,12 @@ const Stockists = () => {
                     <td>{stockist.totalPaid}</td>
                     <td>{stockist.balance}</td>
                     <td>
-                    <button
-                          className="edit-button_5"
-                          onClick={() => handleEdit(stockist)}
-                        >
-                          <BiEdit size={25} />
-                        </button>
+                      <button
+                        className="edit-button_5"
+                        onClick={() => handleEdit(stockist)}
+                      >
+                        <BiEdit size={25} />
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -310,7 +310,7 @@ const Stockists = () => {
                   onChange={(e) =>
                     setNewStockistData({
                       ...newStockistData,
-                      email:e.target.value,
+                      email: e.target.value,
                     })
                   }
                 />
@@ -322,96 +322,96 @@ const Stockists = () => {
             </div>
           )}
           {selectedStockist && (
-  <div className="popup-1">
-    <div className="popup-header-1">
-      Edit Stockist
-      <button
-        className="close-button"
-        onClick={() => setSelectedStockist(null)}
-      >
-        <AiOutlineCloseCircle size={25} />
-      </button>
-    </div>
-    <div className="popup-content-ss">
-      <input
-        type="text"
-        placeholder="Name"
-        value={selectedStockist.name}
-        onChange={(e) =>
-          setSelectedStockist({
-            ...selectedStockist,
-            name: e.target.value,
-          })
-        }
-      />
-      <input
-        type="text"
-        placeholder="GST Number"
-        value={selectedStockist.gstNumber}
-        onChange={(e) =>
-          setSelectedStockist({
-            ...selectedStockist,
-            gstNumber: e.target.value,
-          })
-        }
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={selectedStockist.email}
-        onChange={(e) =>
-          setSelectedStockist({
-            ...selectedStockist,
-            email: e.target.value,
-          })
-        }
-      />
-      {/* Add fields for Total Billed, Total Paid, and Balance here */}
-      <input
-        type="text"
-        placeholder="Total Billed"
-        value={selectedStockist.totalBilled}
-        onChange={(e) =>
-          setSelectedStockist({
-            ...selectedStockist,
-            totalBilled: e.target.value,
-            // Update Balance based on Total Billed and Total Paid
-            balance: (
-              parseFloat(e.target.value || 0) -
-              parseFloat(selectedStockist.totalPaid || 0)
-            ).toFixed(2),
-          })
-        }
-      />
-      <input
-        type="text"
-        placeholder="Total Paid"
-        value={selectedStockist.totalPaid}
-        onChange={(e) =>
-          setSelectedStockist({
-            ...selectedStockist,
-            totalPaid: e.target.value,
-            // Update Balance based on Total Billed and Total Paid
-            balance: (
-              parseFloat(selectedStockist.totalBilled || 0) -
-              parseFloat(e.target.value || 0)
-            ).toFixed(2),
-          })
-        }
-      />
-      <input
-        type="text"
-        placeholder="Balance"
-        value={selectedStockist.balance}
-        readOnly // Make the Balance field read-only
-      />
-      {/* Save button */}
-      <button className="save-stockist-button" onClick={handleSaveEdit}>
-        <FiSave size={25} />
-      </button>
-    </div>
-  </div>
-)}
+            <div className="popup-1">
+              <div className="popup-header-1">
+                Edit Stockist
+                <button
+                  className="close-button"
+                  onClick={() => setSelectedStockist(null)}
+                >
+                  <AiOutlineCloseCircle size={25} />
+                </button>
+              </div>
+              <div className="popup-content-ss">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={selectedStockist.name}
+                  onChange={(e) =>
+                    setSelectedStockist({
+                      ...selectedStockist,
+                      name: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="GST Number"
+                  value={selectedStockist.gstNumber}
+                  onChange={(e) =>
+                    setSelectedStockist({
+                      ...selectedStockist,
+                      gstNumber: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={selectedStockist.email}
+                  onChange={(e) =>
+                    setSelectedStockist({
+                      ...selectedStockist,
+                      email: e.target.value,
+                    })
+                  }
+                />
+                {/* Add fields for Total Billed, Total Paid, and Balance here */}
+                <input
+                  type="text"
+                  placeholder="Total Billed"
+                  value={selectedStockist.totalBilled}
+                  onChange={(e) =>
+                    setSelectedStockist({
+                      ...selectedStockist,
+                      totalBilled: e.target.value,
+                      // Update Balance based on Total Billed and Total Paid
+                      balance: (
+                        parseFloat(e.target.value || 0) -
+                        parseFloat(selectedStockist.totalPaid || 0)
+                      ).toFixed(2),
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Total Paid"
+                  value={selectedStockist.totalPaid}
+                  onChange={(e) =>
+                    setSelectedStockist({
+                      ...selectedStockist,
+                      totalPaid: e.target.value,
+                      // Update Balance based on Total Billed and Total Paid
+                      balance: (
+                        parseFloat(selectedStockist.totalBilled || 0) -
+                        parseFloat(e.target.value || 0)
+                      ).toFixed(2),
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Balance"
+                  value={selectedStockist.balance}
+                  readOnly // Make the Balance field read-only
+                />
+                {/* Save button */}
+                <button className="save-stockist-button" onClick={handleSaveEdit}>
+                  <FiSave size={25} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <ToastContainer />

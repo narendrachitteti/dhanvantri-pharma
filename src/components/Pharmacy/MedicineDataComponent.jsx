@@ -10,7 +10,7 @@ const MedicineDataComponent = () => {
   const [loading, setLoading] = useState(true);
 
   const [selectedDate, setSelectedDate] = useState('');
-  
+
 
   useEffect(() => {
     const fetchItemsByDate = async () => {
@@ -98,7 +98,7 @@ const MedicineDataComponent = () => {
     return stripsValue + freeStripsValue;
   };
 
- 
+
 
   useEffect(() => {
     const aggregateQuantities = () => {
@@ -117,7 +117,7 @@ const MedicineDataComponent = () => {
       });
       setAggregatedItems(aggregated);
     };
-  
+
     aggregateQuantities();
   }, [items]);
 
@@ -130,7 +130,7 @@ const MedicineDataComponent = () => {
   };
 
 
- 
+
   const fetchItemsByDate = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/api/items-by-date?date=${selectedDate}`);
@@ -171,54 +171,54 @@ const MedicineDataComponent = () => {
 
   return (
     <>
-    <PharmacyNav />
-   
-    <div className='mdc-total' >
+      <PharmacyNav />
 
-      <div className='mdc-date' >
-        <label className='date-text'>Date:    
-       <input type="date"  className="date-input" value={selectedDate} onChange={handleDateChange} />
-       </label> 
-       </div>
+      <div className='mdc-total' >
+
+        <div className='mdc-date' >
+          <label className='date-text'>Date:
+            <input type="date" className="date-input" value={selectedDate} onChange={handleDateChange} />
+          </label>
+        </div>
         <table className='mdc-table'>
-        <thead  className='mdc-thead' >
-          <tr  className='mdc-trow'>
-            <th  className='mdc-thhss'>Medicine / Product</th>
-            <th className='mdc-thhss'>Total Strips</th>
-            <th className='mdc-thh'>Billed</th>
-            <th className='mdc-thhss'>Remaining Strips</th>
-          </tr>
-        </thead>
-        <tbody className='mdc-tbody'>
-          {medicineData.map((medicine, index) => (
-            <tr  className='mdc-trow'  key={index}>
-              <td className='mdc-tddh'>
-                {medicine.Medicine}
-              </td>
-              <td className='mdc-tddhs'>
-               {calculateTotalStrips(medicine.strips, medicine.freeStrips)}
-                 
-              </td>
-              <td className='mdc-tdd'>
-                {
+          <thead className='mdc-thead' >
+            <tr className='mdc-trow'>
+              <th className='mdc-thhss'>Medicine / Product</th>
+              <th className='mdc-thhss'>Total Strips</th>
+              <th className='mdc-thh'>Billed</th>
+              <th className='mdc-thhss'>Remaining Strips</th>
+            </tr>
+          </thead>
+          <tbody className='mdc-tbody'>
+            {medicineData.map((medicine, index) => (
+              <tr className='mdc-trow' key={index}>
+                <td className='mdc-tddh'>
+                  {medicine.Medicine}
+                </td>
+                <td className='mdc-tddhs'>
+                  {calculateTotalStrips(medicine.strips, medicine.freeStrips)}
+
+                </td>
+                <td className='mdc-tdd'>
+                  {
                     aggregatedItems[medicine.Medicine]
                       ? aggregatedItems[medicine.Medicine].quantity
                       : 'N/A'
                   }
-                
-              </td>
-              <td className="mdc-tddhs">
+
+                </td>
+                <td className="mdc-tddhs">
                   {calculateRemainingStrips(
                     calculateTotalStrips(medicine.strips, medicine.freeStrips),
                     aggregatedItems[medicine.Medicine] ? aggregatedItems[medicine.Medicine].quantity : 0
                   )}
                 </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      
-    </div>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+      </div>
 
     </>
   );

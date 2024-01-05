@@ -22,7 +22,7 @@ const Invoice = () => {
 
         fetchInvoices();
     }, []);
-    
+
     const handlePrint = (invoice) => {
         const printContent = `
             <html>
@@ -75,17 +75,17 @@ const Invoice = () => {
         const printWindow = window.open('', '_blank');
         printWindow.document.write(printContent);
         printWindow.document.close();
-    };  
+    };
     const [editedData, setEditedData] = useState({
         patientName: '',
-        DoctorName:'',
+        DoctorName: '',
         mobilenumber: '',
         date: '',
-        product:'',
-        quantity:'',
-        price:'',
-        manufacturer:'',
-        batch:'',
+        product: '',
+        quantity: '',
+        price: '',
+        manufacturer: '',
+        batch: '',
         batchExpiry: '',
         gst: '',
 
@@ -100,7 +100,7 @@ const Invoice = () => {
             DoctorName: invoice.DoctorName,
             mobilenumber: invoice.mobilenumber,
             date: invoice.date,
-            product: invoice.items[0].product, 
+            product: invoice.items[0].product,
             quantity: invoice.items[0].quantity,
             price: invoice.items[0].price,
             manufacturer: invoice.items[0].manufacturer,
@@ -125,7 +125,7 @@ const Invoice = () => {
                         manufacturer: editedData.manufacturer,
                         batch: editedData.batch,
                         batchExpiry: editedData.batchExpiry,
-                        gst:editedData.gst,
+                        gst: editedData.gst,
                     },
                 ],
             });
@@ -152,178 +152,178 @@ const Invoice = () => {
 
     return (
         <>
-<PharmacyNav />
+            <PharmacyNav />
 
-        <div className="invoice-container-sk143">
-            <h1 className="invoice-heading-sk143">Invoices Details</h1>
+            <div className="invoice-container-sk143">
+                <h1 className="invoice-heading-sk143">Invoices Details</h1>
 
-            {/* Search Input */}
-            <div className="search-container">
-            <label className='labelsk143'>Search :  </label>
-            <input
-                type="text"
-                placeholder="Search by name or mobile number"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input-sk143"
-            />
-           </div>
-            <ul className="invoice-list-sk143">   
-            {invoices &&
-                    filteredInvoices.map((invoice, index) => (
-                        <li key={index} className="invoice-item-sk143">
-                        <h2 className="patient-info-heading-sk143">Patient Information</h2>
-                        <p className="patient-name-sk143">Patient Name: {invoice.patientName}</p>
-                        <p className="patient-name-sk143">Doctor Name: {invoice.DoctorName}</p>
-                        <p className="patient-name-sk143">MobileNumber: {invoice.mobilenumber}</p>
-                        <p className="date-sk143">Date: {invoice.date}</p>
+                {/* Search Input */}
+                <div className="search-container">
+                    <label className='labelsk143'>Search :  </label>
+                    <input
+                        type="text"
+                        placeholder="Search by name or mobile number"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="search-input-sk143"
+                    />
+                </div>
+                <ul className="invoice-list-sk143">
+                    {invoices &&
+                        filteredInvoices.map((invoice, index) => (
+                            <li key={index} className="invoice-item-sk143">
+                                <h2 className="patient-info-heading-sk143">Patient Information</h2>
+                                <p className="patient-name-sk143">Patient Name: {invoice.patientName}</p>
+                                <p className="patient-name-sk143">Doctor Name: {invoice.DoctorName}</p>
+                                <p className="patient-name-sk143">MobileNumber: {invoice.mobilenumber}</p>
+                                <p className="date-sk143">Date: {invoice.date}</p>
 
-                        <table className="items-table-sk143">
-                            <thead className='items-table-123'>
-                                <tr>
-                                    <th className="product-th-sk143">Product</th>
-                                    <th className="quantity-th-sk143">Quantity</th>
-                                    <th className="price-th-sk143">Price</th>
-                                    <th className="manufacturer-th-sk143">Manufacturer</th>
-                                    <th className="batch-no-th-sk143">Batch No</th>
-                                    <th className="expiry-date-th-sk143">Expiry Date</th>
-                                    <th className="gst-th-sk143">GST</th>
-                                    <th className="gst-th-sk143">Print</th>
-                                    <th className="gst-th-sk143">Action</th>
-
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {invoice.items.map((item, itemIndex) => (
-                                    <tr key={itemIndex} className="item-row-sk143">
-                                        <td className="product-td-sk143">{item.product}</td>
-                                        <td className="quantity-td-sk143">{item.quantity}</td>
-                                        <td className="price-td-sk143">&#8377; {item.price}</td>
-                                        <td className="manufacturer-td-sk143">{item.manufacturer}</td>
-                                        <td className="batch-no-td-sk143">{item.batch}</td>
-                                        <td className="expiry-date-td-sk143">{item.batchExpiry}</td>
-                                        <td className="gst-td-sk143">{item.gst}%</td>
-                                        <td className="gst-td-sk143" onClick={() => handlePrint(invoice)}>{item.print}<BsPrinter /></td>
-                                        {/* <td className="gst-td-sk143" onClick={handlePrint}>{item.print}<BsPrinter /></td> */}
-                                        <td className="gst-td-sk143">
-                                {editingInvoice === invoice ? (
-                                    <>
-                                        {/* Editable form */}
-                                        <div>
-                                            <label>Patient Name:</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.patientName}
-                                                onChange={(e) => setEditedData({ ...editedData, patientName: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>Doctor Name:</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.DoctorName}
-                                                onChange={(e) => setEditedData({ ...editedData, DoctorName: e.target.value })}
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <label>Mobile Number:</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.mobilenumber}
-                                                onChange={(e) => setEditedData({ ...editedData, mobilenumber: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>Date:</label>
-                                            <input
-                                                type="date"
-                                                value={editedData.date}
-                                                onChange={(e) => setEditedData({ ...editedData, date: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>Product:</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.product}
-                                                onChange={(e) => setEditedData({ ...editedData, product: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>quantity:</label>
-                                            <input
-                                                type="number"
-                                                value={editedData.quantity}
-                                                onChange={(e) => setEditedData({ ...editedData, quantity: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>Price</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.price}
-                                                onChange={(e) => setEditedData({ ...editedData, price: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>manufacturer:</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.manufacturer}
-                                                onChange={(e) => setEditedData({ ...editedData, manufacturer: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>Batch</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.batch}
-                                                onChange={(e) => setEditedData({ ...editedData, batch: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>Batch Expiry</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.batchExpiry}
-                                                onChange={(e) => setEditedData({ ...editedData, batchExpiry: e.target.value })}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label>Gst</label>
-                                            <input
-                                                type="text"
-                                                value={editedData.gst}
-                                                onChange={(e) => setEditedData({ ...editedData, gst: e.target.value })}
-                                            />
-                                        </div>
-                                        <button onClick={handleSave}>Update</button>
-                                    </>
-                                ) : (
-                                    
-                                    <span onClick={() => handleEdit(invoice)}>{item.edit}<FaEdit /></span>
-                                    
-                                )}
-                            </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <p className="total-without-gst-sk143">
-                            Total (without GST): &#8377; {invoices.reduce((total, item) => total + item.subtotalWithoutGST, 0).toFixed(2)}
-                        </p>
-
-                        <p className="total-with-gst-sk143">
-                            Total (with GST): &#8377; {invoices.reduce((total, invoice) => total + invoice.subtotalWithGST, 0).toFixed(2)}
-                        </p>
+                                <table className="items-table-sk143">
+                                    <thead className='items-table-123'>
+                                        <tr>
+                                            <th className="product-th-sk143">Product</th>
+                                            <th className="quantity-th-sk143">Quantity</th>
+                                            <th className="price-th-sk143">Price</th>
+                                            <th className="manufacturer-th-sk143">Manufacturer</th>
+                                            <th className="batch-no-th-sk143">Batch No</th>
+                                            <th className="expiry-date-th-sk143">Expiry Date</th>
+                                            <th className="gst-th-sk143">GST</th>
+                                            <th className="gst-th-sk143">Print</th>
+                                            <th className="gst-th-sk143">Action</th>
 
 
-                    </li>
-                ))}
-            </ul>
-        </div>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {invoice.items.map((item, itemIndex) => (
+                                            <tr key={itemIndex} className="item-row-sk143">
+                                                <td className="product-td-sk143">{item.product}</td>
+                                                <td className="quantity-td-sk143">{item.quantity}</td>
+                                                <td className="price-td-sk143">&#8377; {item.price}</td>
+                                                <td className="manufacturer-td-sk143">{item.manufacturer}</td>
+                                                <td className="batch-no-td-sk143">{item.batch}</td>
+                                                <td className="expiry-date-td-sk143">{item.batchExpiry}</td>
+                                                <td className="gst-td-sk143">{item.gst}%</td>
+                                                <td className="gst-td-sk143" onClick={() => handlePrint(invoice)}>{item.print}<BsPrinter /></td>
+                                                {/* <td className="gst-td-sk143" onClick={handlePrint}>{item.print}<BsPrinter /></td> */}
+                                                <td className="gst-td-sk143">
+                                                    {editingInvoice === invoice ? (
+                                                        <>
+                                                            {/* Editable form */}
+                                                            <div>
+                                                                <label>Patient Name:</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.patientName}
+                                                                    onChange={(e) => setEditedData({ ...editedData, patientName: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>Doctor Name:</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.DoctorName}
+                                                                    onChange={(e) => setEditedData({ ...editedData, DoctorName: e.target.value })}
+                                                                />
+                                                            </div>
+
+                                                            <div>
+                                                                <label>Mobile Number:</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.mobilenumber}
+                                                                    onChange={(e) => setEditedData({ ...editedData, mobilenumber: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>Date:</label>
+                                                                <input
+                                                                    type="date"
+                                                                    value={editedData.date}
+                                                                    onChange={(e) => setEditedData({ ...editedData, date: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>Product:</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.product}
+                                                                    onChange={(e) => setEditedData({ ...editedData, product: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>quantity:</label>
+                                                                <input
+                                                                    type="number"
+                                                                    value={editedData.quantity}
+                                                                    onChange={(e) => setEditedData({ ...editedData, quantity: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>Price</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.price}
+                                                                    onChange={(e) => setEditedData({ ...editedData, price: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>manufacturer:</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.manufacturer}
+                                                                    onChange={(e) => setEditedData({ ...editedData, manufacturer: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>Batch</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.batch}
+                                                                    onChange={(e) => setEditedData({ ...editedData, batch: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>Batch Expiry</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.batchExpiry}
+                                                                    onChange={(e) => setEditedData({ ...editedData, batchExpiry: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <div>
+                                                                <label>Gst</label>
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData.gst}
+                                                                    onChange={(e) => setEditedData({ ...editedData, gst: e.target.value })}
+                                                                />
+                                                            </div>
+                                                            <button onClick={handleSave}>Update</button>
+                                                        </>
+                                                    ) : (
+
+                                                        <span onClick={() => handleEdit(invoice)}>{item.edit}<FaEdit /></span>
+
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                                <p className="total-without-gst-sk143">
+                                    Total (without GST): &#8377; {invoices.reduce((total, item) => total + item.subtotalWithoutGST, 0).toFixed(2)}
+                                </p>
+
+                                <p className="total-with-gst-sk143">
+                                    Total (with GST): &#8377; {invoices.reduce((total, invoice) => total + invoice.subtotalWithGST, 0).toFixed(2)}
+                                </p>
+
+
+                            </li>
+                        ))}
+                </ul>
+            </div>
         </>
     );
 };

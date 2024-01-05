@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
-import { FaEdit ,FaTrash,FaCheck,FaTimes,FaSave} from 'react-icons/fa';
+import { FaEdit, FaTrash, FaCheck, FaTimes, FaSave } from 'react-icons/fa';
 import ReactJsPagination from "react-js-pagination";
 
 const StockistInvoice = () => {
@@ -51,8 +51,8 @@ const StockistInvoice = () => {
 
   useEffect(() => {
     fetchInvoices()
-  }, [searchQuery]); 
-  
+  }, [searchQuery]);
+
 
   const handleConfirmDelete = async (invoiceId) => {
     try {
@@ -97,12 +97,12 @@ const StockistInvoice = () => {
     setTotalPaidList((prev) => {
       const newList = [...prev];
       newList[index] = value;
-  
+
       const totalBilled = parseFloat(invoices[index].Total);
       const totalPaid = parseFloat(value);
       let balance = 0.00;
       let returnAmount = 0.00;
-  
+
       if (totalPaid >= totalBilled) {
         balance = 0.00;
         returnAmount = (totalPaid - totalBilled).toFixed(2);
@@ -110,24 +110,24 @@ const StockistInvoice = () => {
         balance = (totalBilled - totalPaid).toFixed(2);
         returnAmount = 0.00;
       }
-  
+
       setBalanceList((prevBalanceList) => {
         const newBalanceList = [...prevBalanceList];
         newBalanceList[index] = balance;
         return newBalanceList;
       });
-  
+
       setReturnAmountList((prevReturnAmountList) => {
         const newReturnAmountList = [...prevReturnAmountList];
         newReturnAmountList[index] = returnAmount;
         return newReturnAmountList;
       });
-  
+
       return newList;
     });
   };
-  
-  
+
+
 
   const handlePayStatusChange = (index, value) => {
     setPayStatusList((prev) => {
@@ -172,9 +172,9 @@ const StockistInvoice = () => {
         <td>
           {invoice.TotalPaid
             ? (
-                parseFloat(invoice.Total) -
-                parseFloat(invoice.TotalPaid)
-              ).toFixed(2)
+              parseFloat(invoice.Total) -
+              parseFloat(invoice.TotalPaid)
+            ).toFixed(2)
             : parseFloat(invoice.Total).toFixed(2)}
         </td>
         <td>{returnAmountList[index]}</td>
@@ -219,7 +219,7 @@ const StockistInvoice = () => {
                 className="cancel-button_si"
                 onClick={() => setEditingInvoiceId(null)}
               >
-               <FaTimes />
+                <FaTimes />
               </button>
             </div>
           ) : (
@@ -227,7 +227,7 @@ const StockistInvoice = () => {
               className="edit-button_si"
               onClick={() => handleEdit(invoice._id)}
             >
-             <FaEdit />
+              <FaEdit />
             </button>
           )}
         </td>
@@ -238,7 +238,7 @@ const StockistInvoice = () => {
                 className="confirm-delete-button_si"
                 onClick={() => handleConfirmDelete(invoice._id)}
               >
-               <FaCheck />
+                <FaCheck />
               </button>
               <button
                 className="cancel-delete-button_si"
@@ -253,7 +253,7 @@ const StockistInvoice = () => {
                 className="delete-button_si"
                 onClick={() => setConfirmDeleteId(invoice._id)}
               >
-                <FaTrash /> 
+                <FaTrash />
               </button>
             </td>
           )}
@@ -264,10 +264,10 @@ const StockistInvoice = () => {
 
   return (
     <>
-      <PharmacyNav/>
+      <PharmacyNav />
       <div className="container_si" style={{ fontFamily: "Inria Serif" }}>
         <h3>
-          <Link to="/PharmacyHome" style={{color:'#9b8bf4'}}>
+          <Link to="/PharmacyHome" style={{ color: '#9b8bf4' }}>
             <FaArrowCircleLeft />
           </Link>{" "}
           &nbsp; Stockist Invoices
@@ -301,13 +301,13 @@ const StockistInvoice = () => {
           <tbody>{renderInvoices()}</tbody>
         </table>
         <div className="pagination">
-        <ReactJsPagination
-              activePage={currentPage}
-              itemsCountPerPage={itemsPerPage}
-              totalItemsCount={invoices.length}
-              pageRangeDisplayed={5}
-              onChange={handlePageChange}
-            />
+          <ReactJsPagination
+            activePage={currentPage}
+            itemsCountPerPage={itemsPerPage}
+            totalItemsCount={invoices.length}
+            pageRangeDisplayed={5}
+            onChange={handlePageChange}
+          />
         </div>
       </div>
       <ToastContainer />

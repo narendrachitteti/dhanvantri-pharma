@@ -170,7 +170,7 @@ const AccountDetails = () => {
         </button>
       </div>
 
-      {showPopup && (   
+      {showPopup && (
         <div className="popup001">
           <div className="popup-header001">
             Add Account
@@ -241,7 +241,7 @@ const AccountDetails = () => {
           <tbody>
             {filteredAccounts.slice(startIndex, endIndex).map((account) => (
               <tr key={account._id}>
-               <td>{account.uniqueID}</td>
+                <td>{account.uniqueID}</td>
 
                 <td>
                   {editMode === account._id ? (

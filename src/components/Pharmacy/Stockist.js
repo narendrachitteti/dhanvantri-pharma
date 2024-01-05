@@ -38,7 +38,7 @@ const Stockist = () => {
       console.error('Error fetching stockists:', error);
     }
   };
-   
+
   useEffect(() => {
     fetchStockists();
   }, []);
@@ -68,14 +68,14 @@ const Stockist = () => {
         alert('Please fill in all fields.');
         return;
       }
-      
+
       const response = await axios.post('http://localhost:5000/api/submit-stockist', { postData: newStockistData });
 
       fetchStockists();
 
       const updatedResponse = await axios.get('http://localhost:5000/api/get-stockists');
       const updatedStockists = updatedResponse.data;
-  
+
       setStockists(updatedStockists);
 
       setNewStockistData({
@@ -109,7 +109,7 @@ const Stockist = () => {
 
       const response = await axios.get('http://localhost:5000/api/get-stockists');
       const updatedStockists = response.data;
-  
+
       setStockists(updatedStockists);
 
       setEditMode(null);
