@@ -18,11 +18,7 @@ const InvoiceStock = () => {
   const [Medicine, setMedicine] = useState("");
   const [Capsules , setCapsules] = useState("");
   const [capsulePrice , setcapsulePrice] = useState("");
-
-
   const [schedule, setschedule] = useState("");
-
-//   const [Unit, setUnit] = useState("");
   const [strips, setstrips] = useState("");
   const [Freestrips, setFreestrips] = useState("");
   const [Gst, setGst] = useState("");
@@ -31,52 +27,26 @@ const InvoiceStock = () => {
   const [, /*SGst */ setSGst] = useState("");
   const [price, setPrice] = useState("");
   const [MRP, setMRP] = useState("");
-
   const [Discount, setDiscount] = useState("");
   const [Total, setTotal] = useState("");
- 
-//   const [RackNo, setRackNo] = useState("");
-//   const [BookNo, setBookNo] = useState("");
-//   const [NetPrice, setNetPrice] = useState("");
   const [stockistOptions, setStockistOptions] = useState([]);
-  const [isGSTSet, setIsGSTSet] = useState(false); // Track whether GST has been set for the current invoice
-  const [totalGST, setTotalGST] = useState(0); // Store the total GST for the current invoice
+  const [isGSTSet, setIsGSTSet] = useState(false); 
+  const [totalGST, setTotalGST] = useState(0); 
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [selectedSalesRate, setSelectedSalesRate] = useState('');
   const [productOptions, setProductOptions] = useState([]);
-//   const [unitPerBoxOptions, setUnitPerBoxOptions] = useState([]);
-
   const [/*totalAmountBeforeTax */, setTotalAmountBeforeTax] = useState(0);
   const [/*totalDiscountAmount */, setTotalDiscountAmount] = useState(0);
-  // const [Quantity, setQuantity] = useState(0);
   const [stockistValue, setStockistValue] = useState("");
   const totalAmount = tableData.reduce((acc, row) => acc + row.Total, 0); 
-
-
-  // const [isPopupVisible, setPopupVisible] = useState(false);
-
   const openPopup = () => {
     console.log("Opening popup");
     setPopupVisible(true);
   };
-
-
-
-
-  // Handling product and unit per box changes
-
-
-
-
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-
- 
-
- 
   useEffect(() => {
-    // Fetch stockist options from the backend
     const fetchStockistOptions = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/stockists");
@@ -111,9 +81,7 @@ const InvoiceStock = () => {
   const clearInputFields = () => {
     setMedicine("");
     setManufacturer("");
-  
     setschedule("");
-    // setUnit("");
     setstrips("");
     setFreestrips("");
     setGst("");
@@ -127,15 +95,10 @@ const InvoiceStock = () => {
     setHsnCode("");
     setCapsules("");
     setcapsulePrice("");
-    // setRackNo("");
-    // setBookNo("");
-    // setNetPrice("");
-    // setQuantity("");
   };
 
   const handleSaveInvoice = async () => {
     try {
-      // Create an array of medicines using the tableData state
       const medicines = tableData.map((row) => ({
         MedId: row.MedId,
         Medicine: row.Medicine,
@@ -143,7 +106,6 @@ const InvoiceStock = () => {
         schedule: row.schedule,
         batchno: row.batchno,
         expiryDate: row.expiryDate,
-        // Unit: row.Unit,
         capsulePrice :row.capsulePrice,
         Capsules:row.Capsules,
         strips: row.strips,
@@ -153,26 +115,19 @@ const InvoiceStock = () => {
         price: row.ptr,
         MRP: row.MRP,
         Discount: row.Discount,
+        totalcapsules:row.totalcapsules,
         totalDiscount :row.totalDiscount,
         totalAmount: row.totalAmount,
         HSNcode: row.HSNcode,
-        totalcapsules:row.totalcapsules,
-        // RackNo: row.RackNo,
-        // BookNo: row.BookNo,
-        // NetPrice: row.NetPrice,
-        // Quantity:
-        //   parseFloat(row.Unit) * parseFloat(row.strips) +
-        //   parseFloat(row.Freestrips),
+        TotalCapsulesTimesCapsules:row.TotalCapsulesTimesCapsules
       }));
-
-      // Calculate the invoice details from the table data
       const calculatedAmounts = calculateAmounts();
       const newInvoice = {
         invoiceNumber,
         stockName:selectedStockist,
         date,
         supplieddate,
-        medicines, // Assign the array of medicines
+        medicines,
         manufacturer,
         schedule,
         Total: calculateTotalAmounts(),
@@ -182,20 +137,18 @@ const InvoiceStock = () => {
         CGST: calculatedAmounts.cgst,
         SGST: calculatedAmounts.sgst,
         GrossAmount: calculateGrossAmount(),
-        // RoundOff: calculatedAmounts.roundoff,
-        // StocksReturned: calculatedAmounts.stocksReturned,
         PurchaseAmount: calculateTotalAmounts(),
-      }; // Send a POST request to save the invoice details to the server
+      }; 
       const response = await axios.post(
         "http://localhost:5000/api/addInvoice",
         newInvoice
       );
       console.log(response.data);
       window.alert("Invoice added successfully");
-      window.location.reload(); // Reloading the page might not be the best user experience, consider other UI updates instead
+      window.location.reload(); 
     } catch (error) {
       console.error(error);
-      // Handle error if the request fails
+
     }
   };
 
@@ -220,7 +173,7 @@ const InvoiceStock = () => {
       totalAmountBeforeTax += netPrice;
       totalDiscountAmount += discountAmount;
     });
-    const total = totalAmountBeforeTax - totalDiscountAmount; // Exclude discount
+    const total = totalAmountBeforeTax - totalDiscountAmount; 
     const gst = isGSTSet
       ? totalGST
       : tableData.reduce((acc, row) => acc + (parseFloat(row.Gst) || 0), 0);
@@ -243,13 +196,8 @@ const InvoiceStock = () => {
       purchaseAmount: purchaseAmount.toFixed(2),
     };
   };
-
-
   const amounts = calculateAmounts();
   const totalDiscount = calculateTotalDiscount();
-
-
-
   const [stockists, setStockists] = useState([]);
   const [newStockistData, setNewStockistData] = useState({
     name: "",
@@ -261,7 +209,6 @@ const InvoiceStock = () => {
     setShowPopup(!showPopup);
   };
   const handleAddStockist = () => {
-    // Make sure all fields are filled
     if (
       !newStockistData.name ||
       !newStockistData.gstno ||
@@ -270,26 +217,21 @@ const InvoiceStock = () => {
       alert("Please fill in all fields.");
       return;
     }
-    // Prepare the data for the POST request
     const postData = {
       name: newStockistData.name,
       gstNumber: newStockistData.gstno,
       email: newStockistData.email,
     };
-    // Send a POST request to add a new stockist
     axios
       .post("http://localhost:5000/api/stockists", postData)
       .then((response) => {
-        // Handle the success case
         alert("Stockist added successfully.");
-        // Clear the newStockistData state and close the popup
         setNewStockistData({
           name: "",
           gstno: "",
           email: "",
         });
         setShowPopup(false);
-        // Fetch the updated stockists data here
         axios
           .get("http://localhost:5000/api/stockists")
           .then((response) => {
@@ -301,43 +243,28 @@ const InvoiceStock = () => {
           });
       })
       .catch((error) => {
-        // Handle the error case
         console.error("Error adding stockist:", error);
         alert("Error adding stockist. Please try again.");
       });
   };
-
-
   const [selectedUnitPerBox, setSelectedUnitPerBox] = useState('');
   const [selectedPurchaseRate, setSelectedPurchaseRate] = useState('');
-
-
   const handleSalesRateChange = (e) => {
     setSelectedSalesRate(e.target.value);
-    // Perform actions based on the selected sales rate here
   };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const [formData, setFormData] = useState({ hsn: '' });
-
   const handleSelectChange = (fieldName, selectedOption) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [fieldName]: selectedOption.value,
     }));
   };
- 
-
   const [stockistNames, setStockistNames] = useState([]);
-
   const [selectedStockist, setSelectedStockist] = useState("");
-
-
-
   useEffect(() => {
     const fetchStockistNames = async () => {
       try {
@@ -355,13 +282,6 @@ const InvoiceStock = () => {
   const handleSelectChangea = (e) => {
     setSelectedStockist(e.target.value);
   };
-
-
-
-
-
-// const [totalValue, setTotalValue] = useState(0);
-
 const [selectedProduct, setSelectedProduct] = useState('');
 const [hsnCode, setHsnCode] = useState('');
 const [manufacturer, setManufacturer] = useState('');
@@ -372,9 +292,6 @@ const [PerStrip, setPerStrip] = useState('');
 const [products, setProducts] = useState([]);
 const [calculatedcapsules, setcalculatedcapsules] = useState("");
 const [totalCapsules, setTotalCapsules] = useState("");
-
-
-
 const handleProductChange = async (e) => {
   const selectedProductValue = e.target.value;
 
@@ -387,17 +304,13 @@ const handleProductChange = async (e) => {
     setHsnCode(productDetails.hsnCode);
     setschedule(productDetails.schedule);
     setManufacturer(productDetails.manufacturer);
-    setBatchno(productDetails.batchno);
-    setExpiryDate(productDetails.expiryDate);
+
     setptr(productDetails.ptr);
     setPerStrip(productDetails.rate);
     setGst(productDetails.Gst);
-
   } catch (error) {
     console.error('Error fetching product details:', error);
   }
-
-  // Update the selectedProduct state variable
   setSelectedProduct(selectedProductValue);
 };
 
@@ -422,28 +335,13 @@ const handleActionButton = (action) => {
       alert('Please fill in all required fields with valid numbers.');
       return;
     }
-  
-    // Calculation logic using discountAmount and calculatedTotalValue
-  
-    // Example usa const totalStrips = parseInt(strips);
-
     const totalStrips = parseInt(strips) || 0;
     const totalFreeStrips = parseInt(Freestrips) || 0;
     const calculatedTotalCapsules = totalStrips + totalFreeStrips;
-
-
-    // Calculate MRP based on strips, price per strip, and discount
-    const calculatedMRP = strips * ptr * (1 - Discount / 100); // Apply discount percentage
-
-    // Calculate the total value based on calculated MRP and GST
+    const calculatedMRP = strips * ptr * (1 - Discount / 100); 
     const calculatedTotalValue = calculatedMRP * (1 + Gst / 100); // Apply GST percentage
-
-    // Calculate the discount amount for this row based on MRP
     const discountAmount = strips * ptr - calculatedMRP;
-    
     const calculatedgrossamount = discountAmount + calculatedTotalValue ; // Calculate discount amount
-
-    // Create a new medicine object with the current state values including calculated total value and discount amount
     const newMedicine = {
       MedId: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
       Medicine: selectedProduct,
@@ -451,7 +349,6 @@ const handleActionButton = (action) => {
       schedule: schedule,
       batchno,
       expiryDate: expiryDate,
-      // Unit: Unit,
       Capsules,
       capsulePrice,
       strips,
@@ -464,47 +361,26 @@ const handleActionButton = (action) => {
       Discount,
       Total: calculatedTotalValue.toFixed(2), // Add the calculated total value
       HSNcode: hsnCode,
-      // RackNo,
-      // BookNo,
-      // NetPrice,
-      // Quantity,
-      totalcapsules: calculatedTotalCapsules,
       DiscountAmount: discountAmount.toFixed(2), // Add the calculated discount amount
       GrossValue: calculatedgrossamount.toFixed(2), 
     };
-
-    // Add the new medicine object to the tableData state
     setTableData((prevTableData) => [...prevTableData, newMedicine]);
-
-    // Clear the input fields by resetting the state
     clearInputFields();
   } else if (action === 'clear') {
-    // Clear the input fields by resetting the state
     clearInputFields();
   }
 };
-
 const calculatecapsules = () => {
   const totalStrips = parseInt(strips) || 0;
   const totalFreeStrips = parseInt(Freestrips) || 0;
   const calculatedTotalStrips = totalStrips + totalFreeStrips;
   return calculatedTotalStrips; // Return the calculated total strips
 };
-
-
-
-// const calculatecapsules = () => {
-//   const calculatedcapsules =strips + Freestrips; // Apply discount percentage
-//   return calculatedcapsules; // Return the calculated MRP with 2 decimal places
-// };
-
-// Calculate MRP based on strips, price per strip, and discount
 const calculateMRP = () => {
   const calculatedMRP = strips * ptr * (1 - Discount / 100); // Apply discount percentage
   return calculatedMRP.toFixed(2); // Return the calculated MRP with 2 decimal places
 };
 
-// Calculate total value based on MRP and GST
 const calculateTotalValue = () => {
   const calculatedMRP = calculateMRP();
   const calculatedTotalValue = calculatedMRP * (1 + Gst / 100); // Apply GST percentage
@@ -518,11 +394,6 @@ const handleDelete = (indexToDelete) => {
   );
   window.alert("Row deleted successfully");
 };
-
-
-// const calculateTotalAmount = () => {
-//   return tableData.reduce((acc, row) => acc + row.Total, 0);
-// };
 
 const calculateTotalAmounts = () => {
   const totalAmount = tableData.reduce(
@@ -540,18 +411,12 @@ const calculateGrossAmount = () => {
   return grossAmount.toFixed(2); 
 };
 
-
-
-
 const calculateTotalCapsulesTimesCapsules = () => {
   const totalStrips = parseInt(calculatecapsules()) || 0;
   const capsulesValue = parseInt(Capsules) || 0;
   const total = totalStrips * capsulesValue;
   return total;
 };
-
-
-
 
   return (
     <>
@@ -676,6 +541,8 @@ const calculateTotalCapsulesTimesCapsules = () => {
                 type="Batch"
                 id="Batch"
                 value={batchno}
+    onChange={(e) => setBatchno(e.target.value)}
+
 
               />
             </div>
@@ -685,6 +552,8 @@ const calculateTotalCapsulesTimesCapsules = () => {
               <input
                 id="expiryDate"
                 value={expiryDate}
+    onChange={(e) => setExpiryDate(e.target.value)}
+
               />
             </div>
             &nbsp; &nbsp;
@@ -719,10 +588,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
                 id="Capsules"
                 value={Capsules}
                 onChange={(e) => {
-                  // Update Capsules state
                   setCapsules(e.target.value);
-            
-                  // Calculate Capsule/Price and update the state
                   const calculatedCapsulePrice = ptr / e.target.value;
                   setcapsulePrice(calculatedCapsulePrice);
                 }}
@@ -735,7 +601,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
   <input
     type="number"
     id="TotalCapsulesTimesCapsules"
-    value={calculateTotalCapsulesTimesCapsules()} // Display the calculated value
+    value={calculateTotalCapsulesTimesCapsules()} 
     readOnly
   />
 </div>
@@ -749,8 +615,8 @@ const calculateTotalCapsulesTimesCapsules = () => {
                   type="capsulePrice"
                   id="capsulePrice"
                   value={capsulePrice}
-    readOnly // Make it read-only as it's calculated
-  />
+                  readOnly 
+                />
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -808,14 +674,8 @@ const calculateTotalCapsulesTimesCapsules = () => {
   />
 </div>
             &nbsp;
-          
-
-
           </div>
-
           <div className="input-row-3">
-          
-         
             &nbsp;&nbsp;
             <div className="input-container-2">
               {" "}
@@ -836,7 +696,6 @@ const calculateTotalCapsulesTimesCapsules = () => {
                 clear
               </button>{" "}
             </div>
-           
           </div>
         </div>
         <div className="container-table-tnx">
@@ -846,20 +705,15 @@ const calculateTotalCapsulesTimesCapsules = () => {
                 <th>Product</th>
                 <th>Mfr</th>
                 <th>Batch No</th>
-                {/* <th>Packing</th> */}
                 <th>Expiry</th>
-                {/* <th>Quantity</th> */}
                 <th> ptr ..</th>
                 <th>Discount</th>
                 <th>MRP/Strip</th>
-              
                 <th>GST%</th>
                 <th>SGST%</th>
                 <th>CGST%</th>
                 <th>Total Value </th>
                 <th>Gross value</th>
-
-             
                 <th>Delete</th>
               </tr>
             </thead>
@@ -869,21 +723,16 @@ const calculateTotalCapsulesTimesCapsules = () => {
                   <td>{row.Medicine}</td>
                   <td>{row.manufacturer}</td>
                   <td>{row.batchno}</td>
-                  {/* <td>{row.Unit}</td> */}
                   <td>{row.expiryDate}</td>
-                  {/* <td>{row.PerStrip}</td> */}
                   <td> {row.ptr}  </td>
                   <td>{row.Discount}</td>
                   <td>{row.MRP}</td>
-                  
                   <td>{row.Gst}</td>
                   <td>{(row.Gst / 2).toFixed(2)}</td>
                   <td>{(row.Gst / 2).toFixed(2)}</td>
                   <td>{row.Total} </td>
                   <td>{row.GrossValue}</td>
-                  {/* <td>{row.totalcapsules}</td> */}
-                  {/* <td>{row.DiscountAmount}</td> */}
-
+                
                   <td>
   <button
     style={{ color: "red" }}
@@ -932,12 +781,6 @@ const calculateTotalCapsulesTimesCapsules = () => {
               <td>Gross Amount</td>
               <td>{calculateGrossAmount()}</td>
             </tr>
-            {/* <tr>
-  <td>Round Off</td>
-  <td>{roundOffValue}</td>
-</tr> */}
-
-          
             <tr>
               <td>Purchase Amount</td>
               <td>{calculateTotalAmounts()}</td>
@@ -950,7 +793,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
         <button
           className="save-tnx1"
           onClick={handleSaveInvoice}
-          style={{ backgroundColor: "#20c997", fontFamily: "Inria Serif" }}
+          style={{ backgroundColor: "#9b8bf4", fontFamily: "Inria Serif" }}
         >
           Save Invoice
         </button>
@@ -960,5 +803,3 @@ const calculateTotalCapsulesTimesCapsules = () => {
 };
 
 export default InvoiceStock;
-
-
