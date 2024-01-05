@@ -156,6 +156,7 @@ const InvoiceStock = () => {
         totalDiscount :row.totalDiscount,
         totalAmount: row.totalAmount,
         HSNcode: row.HSNcode,
+        totalcapsules:row.totalcapsules,
         // RackNo: row.RackNo,
         // BookNo: row.BookNo,
         // NetPrice: row.NetPrice,
@@ -369,6 +370,10 @@ const [expiryDate, setExpiryDate] = useState('');
 const [ptr, setptr] = useState('');
 const [PerStrip, setPerStrip] = useState('');
 const [products, setProducts] = useState([]);
+const [calculatedcapsules, setcalculatedcapsules] = useState("");
+const [totalCapsules, setTotalCapsules] = useState("");
+
+
 
 const handleProductChange = async (e) => {
   const selectedProductValue = e.target.value;
@@ -413,15 +418,19 @@ useEffect(() => {
 const handleActionButton = (action) => {
   if (action === 'add') {
     // Ensure input fields contain valid numeric values before calculations
-    if (!strips || !ptr || !Discount || !Gst) {
+    if (!strips || !ptr || !Discount || !Gst || !Capsules || !Freestrips) {
       alert('Please fill in all required fields with valid numbers.');
       return;
     }
-   
   
     // Calculation logic using discountAmount and calculatedTotalValue
   
-    // Example usage
+    // Example usa const totalStrips = parseInt(strips);
+
+    const totalStrips = parseInt(strips) || 0;
+    const totalFreeStrips = parseInt(Freestrips) || 0;
+    const calculatedTotalCapsules = totalStrips + totalFreeStrips;
+
 
     // Calculate MRP based on strips, price per strip, and discount
     const calculatedMRP = strips * ptr * (1 - Discount / 100); // Apply discount percentage
@@ -450,6 +459,7 @@ const handleActionButton = (action) => {
       Gst,
       price,
       ptr,
+      totalcapsules:calculateTotalCapsulesTimesCapsules(),
       MRP: calculatedMRP.toFixed(2), // Use the calculated MRP here
       Discount,
       Total: calculatedTotalValue.toFixed(2), // Add the calculated total value
@@ -458,6 +468,7 @@ const handleActionButton = (action) => {
       // BookNo,
       // NetPrice,
       // Quantity,
+      totalcapsules: calculatedTotalCapsules,
       DiscountAmount: discountAmount.toFixed(2), // Add the calculated discount amount
       GrossValue: calculatedgrossamount.toFixed(2), 
     };
@@ -473,6 +484,19 @@ const handleActionButton = (action) => {
   }
 };
 
+const calculatecapsules = () => {
+  const totalStrips = parseInt(strips) || 0;
+  const totalFreeStrips = parseInt(Freestrips) || 0;
+  const calculatedTotalStrips = totalStrips + totalFreeStrips;
+  return calculatedTotalStrips; // Return the calculated total strips
+};
+
+
+
+// const calculatecapsules = () => {
+//   const calculatedcapsules =strips + Freestrips; // Apply discount percentage
+//   return calculatedcapsules; // Return the calculated MRP with 2 decimal places
+// };
 
 // Calculate MRP based on strips, price per strip, and discount
 const calculateMRP = () => {
@@ -519,6 +543,12 @@ const calculateGrossAmount = () => {
 
 
 
+const calculateTotalCapsulesTimesCapsules = () => {
+  const totalStrips = parseInt(calculatecapsules()) || 0;
+  const capsulesValue = parseInt(Capsules) || 0;
+  const total = totalStrips * capsulesValue;
+  return total;
+};
 
 
 
@@ -688,21 +718,39 @@ const calculateGrossAmount = () => {
                 type="Capsules"
                 id="Capsules"
                 value={Capsules}
-                onChange={(e) => setCapsules(e.target.value)}
+                onChange={(e) => {
+                  // Update Capsules state
+                  setCapsules(e.target.value);
+            
+                  // Calculate Capsule/Price and update the state
+                  const calculatedCapsulePrice = ptr / e.target.value;
+                  setcapsulePrice(calculatedCapsulePrice);
+                }}
               />
             </div>
-            &nbsp; &nbsp;
+
+          &nbsp;
+          <div className="input-container-1">
+  <label htmlFor="TotalCapsulesTimesCapsules">Total Capsules</label>
+  <input
+    type="number"
+    id="TotalCapsulesTimesCapsules"
+    value={calculateTotalCapsulesTimesCapsules()} // Display the calculated value
+    readOnly
+  />
+</div>
+
             &nbsp;
 
             &nbsp; &nbsp;
             <div className="input-container-1">
-              <label htmlFor="capsuleprice">Capsule/Price</label>
-              <input
-                type="capsulePrice"
-                id="capsulePrice"
-                value={capsulePrice}
-                onChange={(e) => setcapsulePrice(e.target.value)}
-              />
+                <label htmlFor="capsuleprice">Capsule/Price</label>
+                <input
+                  type="capsulePrice"
+                  id="capsulePrice"
+                  value={capsulePrice}
+    readOnly // Make it read-only as it's calculated
+  />
             </div>
             &nbsp;
             <div className="input-container-1">
@@ -833,6 +881,7 @@ const calculateGrossAmount = () => {
                   <td>{(row.Gst / 2).toFixed(2)}</td>
                   <td>{row.Total} </td>
                   <td>{row.GrossValue}</td>
+                  {/* <td>{row.totalcapsules}</td> */}
                   {/* <td>{row.DiscountAmount}</td> */}
 
                   <td>
