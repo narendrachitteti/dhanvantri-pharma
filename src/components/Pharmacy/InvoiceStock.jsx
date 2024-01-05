@@ -901,7 +901,7 @@ const calculateGrossAmount = () => {
         <button
           className="save-tnx1"
           onClick={handleSaveInvoice}
-          style={{ backgroundColor: "#9b8bf4", fontFamily: "Inria Serif" }}
+          style={{ backgroundColor: "#20c997", fontFamily: "Inria Serif" }}
         >
           Save Invoice
         </button>

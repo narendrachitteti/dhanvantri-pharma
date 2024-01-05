@@ -82,7 +82,7 @@ body {
 }
 
 .add-stockists-button {
-  background-color: #9b8bf4;
+  background-color: #20c997;
   color: #0a0909;
   border: none;
   padding: 8px 16px;
@@ -142,7 +142,7 @@ body {
 .stockists-table th {
   text-align: left;
   padding: 10px;
-  background-color: #9b8bf4;
+  background-color: #20c997;
   border-bottom: 1px solid #ccc;
 }
 
@@ -163,21 +163,21 @@ body {
 }
 
 .edit-button_5{
-  background-color: #9b8bf4;
+  background-color: #20c997;
 }
 .cancel-stockist-button{
   background-color: #dc3545;
 }
 .addclose-button {
   width: 20%;
-  background-color: #9b8bf4;
+  background-color: #20c997;
   border: none;
   border-radius: 5px;
   color: #fff;
   
 }
 .save-stockist-button {
-  background-color: #9b8bf4;
+  background-color: #20c997;
   color: #fff;
   border: none;
   padding: 8px 16px;
@@ -256,7 +256,7 @@ input {
 .save-stockist-button {
   margin: 10px 0;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #20c997;
   color: white;
   border: none;
   cursor: pointer;
@@ -274,7 +274,7 @@ input {
   text-align: left;
   padding: 1px;
   font-size: 10px;
-  background-color: #9b8bf4;
+  background-color: #20c997;
   border-bottom: 1px solid #ccc;
 }
 .stockists-table {
@@ -320,7 +320,7 @@ input {
 .stockists-table th {
   text-align: left;
   padding: 1px;
-  background-color: #9b8bf4;
+  background-color:#20c997;
   border-bottom: 1px solid #ccc;
 }
 

@@ -15,7 +15,7 @@
   margin-top: 80px;
 }
 .table-color{
-  background-color: #b240e7;
+  background-color: #20c997;
   /* color: white; */
 }
 /* Table styles */
@@ -64,7 +64,7 @@
 /* Edit, Save, and Delete icon styles */
 /* Edit button styles */
 table .edit-ol {
-  background-color: #007bff; /* Blue */
+  background-color: #20c997; /* Blue */
   color: #fff; /* White text */
   border: none;
   cursor: pointer;
@@ -78,7 +78,7 @@ table .edit-ol:hover{
 
 /* Save button styles */
 table .save-ol {
-  background-color: #28a745; /* Green */
+  background-color: #28c997; /* Green */
   color: #fff; /* White text */
   border: none;
   cursor: pointer;
