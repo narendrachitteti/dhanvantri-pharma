@@ -5,9 +5,9 @@
   padding: 10px;
   border: 2px solid grey;
 }
-/* .hide-table{
+.hide-table{
   display: none;
-} */
+}
 .invoice-invoicenumber-merge{
   display: flex;
   /* margin-left: 30%; */
