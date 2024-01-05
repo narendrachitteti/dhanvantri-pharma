@@ -8,10 +8,25 @@
 /* .hide-table{
   display: none;
 } */
+.invoice-invoicenumber-merge{
+  display: flex;
+  /* margin-left: 30%; */
+}
 .oty-table{
   width: 70px;
   text-align: center;
   color: white;
+}
+.doctor-invoice-merge{
+  display: flex;
+  justify-content: space-between;
+}
+.input-invoice-data{
+  margin-top: -0.5px;
+  height: 30px;
+}
+.invoice-number-text{
+  font-size: 1rem;
 }
 .merge-tabe{
   width: 10%;
@@ -92,7 +107,7 @@
   justify-content: space-between;
 }
 .pharma-doctor-input{
-  width: 15%;
+  width: 60%;
   margin-left: 1%;
   
 }

@@ -9,7 +9,8 @@ import { FaPlusCircle } from "react-icons/fa";
 const PharmacyBilling = () => {
   const [quantity, setQuantity] = useState('');
   const [selectedProduct, setSelectedProduct] = useState('');
-
+  // const [filteredStockists, setFilteredStockists] = useState([]); 
+  // const currentStockists = filteredStockists.slice(indexOfFirstItem, indexOfLastItem);
   const [manufacturer, setManufacturer] = useState('');
   const [Gst, setGst] = useState('');
   const [batchExpiry, setBatchExpiry] = useState('');
@@ -28,7 +29,7 @@ const PharmacyBilling = () => {
   const [products, setProducts] = useState([]);
   const [signature, setsignature] = useState('');
   const [doctorName, setdoctorName] = useState("");
-
+  const [invoiceNumber, setInvoiceNumber] = useState(1);
   const [items, setItems] = useState([
     {
       _id: 1,
@@ -155,6 +156,7 @@ const PharmacyBilling = () => {
         patientName,
         doctorName,
         mobilenumber,
+        invoiceNumber,
         ptr,
         date,
         items,
@@ -164,6 +166,7 @@ const PharmacyBilling = () => {
       });
       if (response && response.data) {
         console.log('PatientBill submitted successfully:', response.data);
+        setInvoiceNumber((prevInvoiceNumber) => prevInvoiceNumber + 1);
         setPatientName('');
         setmobilenumber('');
         setdoctorName('');
@@ -309,7 +312,10 @@ const PharmacyBilling = () => {
               <div>
               <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 113px; height: 113px; margin-left: -150px; margin-top:38px;">
               </div>
-              <div><h2 style="font-size:50px; margin-top:60px;">	&CirclePlus;</h2></div>
+              <div><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" style="margin-top:70;" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg></div>
               <div class='main-heading'>
               <h1>TAX INVOICE</h1>
               <h1>ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
@@ -317,7 +323,10 @@ const PharmacyBilling = () => {
               <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
               Hampinagara , Bengaluru-560104</h3>
               </div>
-              <div><h2 style="font-size:50px; margin-top:60px;">	&#8853;</h2></div>
+              <div><svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" style="margin-top:68;" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg></div>
               <div >
               <h3 style="font-size:13px; margin-top:-1px;">GSTIN:29BFNPM5181H1ZX</h3>
               <h3 style="font-size:13px; margin-top:-10px; font-weight:light;">PHONE:+91 9886819877</h3>
@@ -442,7 +451,8 @@ const PharmacyBilling = () => {
             />
           </div>
         </div>
-        <div>
+        <div  className="doctor-invoice-merge">
+          <div>
           <label className="pharma-patientname-labels">Doctor Name : </label>
           <input
             type="text"
@@ -450,6 +460,13 @@ const PharmacyBilling = () => {
             value={doctorName}
             onChange={(e) => setdoctorName(e.target.value)}
           />
+          </div>
+          <div className="invoice-invoicenumber-merge">
+          <h1 className="invoice-number-text">Invoice Number: </h1>
+          {/* <p  className="input-invoice-data" >INV00{invoiceNumber}</p> */}
+          <p className="input-invoice-data">{`INV${invoiceNumber.toString().padStart(3, '0')}`}</p>
+
+          </div>
         </div>
         <div className="pharma-bill-details-2">
           <div>
@@ -461,6 +478,7 @@ const PharmacyBilling = () => {
               onChange={(e) => setmobilenumber(e.target.value)}
             />
           </div>
+          
           <div>
             <label className="pharma-date-label">Date : </label>
             <input
