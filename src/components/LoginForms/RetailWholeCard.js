@@ -17,7 +17,7 @@ const RetailWholecard = () => {
       <div className="Card1-con-vik">
       <MDBContainer fluid 
       className='d-flex align-items-center justify-content-center bg-image-vik'
-      style={{backgroundImage: 'url(https://img.freepik.com/free-photo/medicines-medical-supplies-placed-blue_1150-19139.jpg?size=626&ext=jpg&ga=GA1.1.1108439072.1703323631&semt=sph)'}}
+      style={{backgroundImage: 'url(https://t3.ftcdn.net/jpg/04/58/20/28/360_F_458202839_NYIas4yn9Ic40flVfPo2tWZo9Fztkf1s.jpg)'}}
       >
         
         <Link to="/RetailLogin" class="card-vik">
