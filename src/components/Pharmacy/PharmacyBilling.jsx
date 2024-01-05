@@ -74,9 +74,6 @@ const PharmacyBilling = () => {
     setQuantity(value);
   };
 
-  useEffect(() => {
-    handleAddRow();
-  }, []);
 
   const handleAddRow = () => {
     const newItem = {
@@ -193,7 +190,6 @@ const PharmacyBilling = () => {
         console.error('Unexpected response format:', response);
       }
 
-      // import { FaPlusCircle } from "react-icons/fa";
       const imageUrl = process.env.PUBLIC_URL + '/PharmacyLogo.jpg';
       console.log('Image URL:', imageUrl);
       const img = new Image();
@@ -203,6 +199,7 @@ const PharmacyBilling = () => {
             <!DOCTYPE html>
             <html>
               <head>
+            
                 <!-- Include any necessary stylesheets or styling here -->
                 <style>
                 body {
@@ -223,9 +220,7 @@ const PharmacyBilling = () => {
                   overflow-y: auto;
                   padding: 20px;
                   border-radius: 5px;
-                 
-                  background: #fff;
-                 
+                  background: #fff;   
                   position: relative;
                 }
                 .print-title {
@@ -285,8 +280,22 @@ const PharmacyBilling = () => {
                 .goods-class1{
                   font-size:15px;
                 }
+                .fa-flag{
+                  font-size:20px;
+                }
               
               </style>
+
+               <!-- <link rel="stylesheet" href="make.css">
+               <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">-->
+               <link rel="icon" type="image/png" href="icona.png" sizes="32x32" />
+               <link rel="icon" type="image/png" href="iconb.png" sizes="32x32" />
+               <link rel="icon" type="image/png" href="iconc.png" sizes="32x32" />
+               <link rel="icon" type="image/png" href="icond.png" sizes="32x32" />
+               <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+               <meta name="viewport" content="width=device-width, initial-scale=1">
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+              
               </head>
               <body>
               <div class="print-container">
@@ -298,9 +307,9 @@ const PharmacyBilling = () => {
               </div>
               <div style='display:flex'> 
               <div>
-              <FaPlusCircle />
               <img src="${imageUrl}" alt="Pharmacy Logo" style="width: 113px; height: 113px; margin-left: -150px; margin-top:38px;">
               </div>
+              <div><h2 style="font-size:50px; margin-top:60px;">	&CirclePlus;</h2></div>
               <div class='main-heading'>
               <h1>TAX INVOICE</h1>
               <h1>ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
@@ -308,7 +317,7 @@ const PharmacyBilling = () => {
               <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
               Hampinagara , Bengaluru-560104</h3>
               </div>
-  
+              <div><h2 style="font-size:50px; margin-top:60px;">	&#8853;</h2></div>
               <div >
               <h3 style="font-size:13px; margin-top:-1px;">GSTIN:29BFNPM5181H1ZX</h3>
               <h3 style="font-size:13px; margin-top:-10px; font-weight:light;">PHONE:+91 9886819877</h3>

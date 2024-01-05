@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./MedicineList.css";
 import { FiAlertTriangle } from "react-icons/fi";
-import { AiOutlineAlignRight, AiOutlineAlignLeft, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineAlignRight, AiOutlineAlignLeft,  AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
 import { BiSolidEditAlt } from "react-icons/bi";
 import PharmacyNav from "./PharmacyNav";
 import { ToastContainer, toast } from "react-toastify";
@@ -42,24 +42,24 @@ function MedicineList() {
     if (editedMedicine) {
       // Ensure editedMedicine is not null before proceeding
       const { MedId, Medicine, Manufacturer, Category, Quantity } = editedMedicine;
-
+  
       if (Medicine !== null && Manufacturer !== null && Category !== null) {
         try {
           await axios.put(
             `http://localhost:5000/api/updateMedicineQuantity/${MedId}`,
             { Quantity }
           );
-
+  
           const updatedMedicines = medicines.map((medicine) =>
             medicine.MedId === MedId ? editedMedicine : medicine
           );
-
+  
           setMedicines(updatedMedicines);
           setEditedMedicine(null);
           toast.success("Data updated successfully", {
             autoClose: 2000,
           });
-
+  
           fetchMedicines();
         } catch (error) {
           console.error("Error updating medicine:", error);
@@ -72,11 +72,11 @@ function MedicineList() {
       console.error("No edited medicine to save.");
     }
   };
-
+  
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1);
+    setCurrentPage(1); 
   };
 
   const handlePageChange = (newPage) => {
@@ -118,11 +118,11 @@ function MedicineList() {
       <PharmacyNav />
       <div className="main-cont-PO-11">
         <p className="Listheading-PO-11">
-          <h1 style={{ fontFamily: 'roboto' }}>
-            <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
+          <h1 style={{fontFamily:'roboto'}}>
+            <Link to="/PharmacyHome"  style={{ color: "#9b8bf4" }}>
               <FaArrowCircleLeft className="med-list-arrow" />
             </Link>{" "}
-            <span >List Medicines</span>
+          <span >List Medicines</span>
           </h1>
         </p>
 
@@ -130,7 +130,7 @@ function MedicineList() {
           <input
             type="text"
             placeholder="Search Medicines"
-            style={{ width: '300px', padding: '.5rem', margin: '.3rem' }}
+            style={{width:'300px',padding:'.5rem',margin:'.3rem'}}
             value={searchQuery}
             onChange={handleSearchInputChange}
           />
@@ -142,19 +142,19 @@ function MedicineList() {
               <thead>
                 <tr>
                   <th>
-                    MEDID <AiOutlineAlignRight />
+                    MEDID 
                   </th>
                   <th>
-                    Medname <AiOutlineAlignLeft />
+                    Medname 
                   </th>
                   <th>
-                    Mfr <AiOutlineAlignLeft />
+                    Mfr 
                   </th>
                   <th>
-                    Category <AiOutlineAlignLeft />
+                    Shedule 
                   </th>
-                  <th>Stock Alert</th>
-                  <th>Edit</th>
+                  {/* <th>Stock Alert</th>
+                  <th>Edit</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -172,9 +172,9 @@ function MedicineList() {
                       <tr key={nestedIndex}>
                         <td>{nestedMedicine.MedId}</td>
                         <td>{nestedMedicine.Medicine}</td>
-                        <td>{nestedMedicine.Manufacturer}</td>
-                        <td>{nestedMedicine.Category}</td>
-                        <td>
+                        <td>{nestedMedicine.manufacturer}</td>
+                        <td>{nestedMedicine.schedule}</td>
+                        {/* /* <td>
                           {parseInt(nestedMedicine.Quantity) < 50 ? (
                             <button className="stock-alert-button red">
                               <FiAlertTriangle />
@@ -192,8 +192,8 @@ function MedicineList() {
                           >
                             <BiSolidEditAlt />
                           </button>
-                        </td>
-                      </tr>
+                        </td>*/}
+                      </tr> 
                     ))
                 )}
               </tbody>
@@ -210,85 +210,85 @@ function MedicineList() {
         />
       </div>
       {isPopupOpen && editedMedicine && ( // Display the popup when isPopupOpen is true and editedMedicine is not null
-        <div className="popup-ml">
-          <div className="popup-content-ml">
-            <span className="close" onClick={closePopup}>
-              &times;
-            </span>
-            <h2>Edit Medicine</h2>
-            <div className="input-group">
-              <label htmlFor="editedMedname">Medname:</label>
-              <input
-                type="text"
-                id="editedMedname"
-                value={editedMedicine.Medicine}
-                onChange={(e) =>
-                  setEditedMedicine({
-                    ...editedMedicine,
-                    Medicine: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="manufacturer">Manufacturer:</label>
-              <input
-                type="text"
-                id="manufacturer"
-                value={editedMedicine.Manufacturer}
-                onChange={(e) =>
-                  setEditedMedicine({
-                    ...editedMedicine,
-                    Manufacturer: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="editedcategory">Category:</label>
-              <input
-                type="text"
-                id="editedcategory"
-                value={editedMedicine.Category}
-                onChange={(e) =>
-                  setEditedMedicine({
-                    ...editedMedicine,
-                    Category: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="editedstock">Stock:</label>
-              <input
-                type="number"
-                id="editedstock"
-                value={editedMedicine.Quantity}
-                onChange={(e) =>
-                  setEditedMedicine({
-                    ...editedMedicine,
-                    Quantity: e.target.value,
-                  })
-                }
-              />
-            </div>
-            <div className="popup-ml-button">
-              <button
-                className="popup-ml-save"
-                onClick={handleSave}
-              >
-                <AiOutlineCheck />
-              </button>
-              <button
-                className="popup-ml-cancel"
-                onClick={closePopup}
-              >
-                <AiOutlineClose />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+  <div className="popup-ml">
+    <div className="popup-content-ml">
+      <span className="close" onClick={closePopup}>
+        &times;
+      </span>
+      <h2>Edit Medicine</h2>
+      <div className="input-group">
+        <label htmlFor="editedMedname">Medname:</label>
+        <input
+          type="text"
+          id="editedMedname"
+          value={editedMedicine.Medicine}
+          onChange={(e) =>
+            setEditedMedicine({
+              ...editedMedicine,
+              Medicine: e.target.value,
+            })
+          }
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="manufacturer">Manufacturer:</label>
+        <input
+          type="text"
+          id="manufacturer"
+          value={editedMedicine.Manufacturer}
+          onChange={(e) =>
+            setEditedMedicine({
+              ...editedMedicine,
+              Manufacturer: e.target.value,
+            })
+          }
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="editedcategory">Category:</label>
+        <input
+          type="text"
+          id="editedcategory"
+          value={editedMedicine.Category}
+          onChange={(e) =>
+            setEditedMedicine({
+              ...editedMedicine,
+              Category: e.target.value,
+            })
+          }
+        />
+      </div>
+      <div className="input-group">
+        <label htmlFor="editedstock">Stock:</label>
+        <input
+          type="number"
+          id="editedstock"
+          value={editedMedicine.Quantity}
+          onChange={(e) =>
+            setEditedMedicine({
+              ...editedMedicine,
+              Quantity: e.target.value,
+            })
+          }
+        />
+      </div>
+      <div className="popup-ml-button">
+        <button
+          className="popup-ml-save"
+          onClick={handleSave}
+        >
+          <AiOutlineCheck />
+        </button>
+        <button
+          className="popup-ml-cancel"
+          onClick={closePopup}
+        >
+         <AiOutlineClose />
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
     </>
   );
