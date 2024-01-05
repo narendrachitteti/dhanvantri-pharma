@@ -551,14 +551,14 @@ const PharmacyBilling = () => {
                 <td>
                   <input
                     className='value-input'
-                    type="number"
+                    type="text"
                     id="Gst"
                     value={taxableValues[index] || ''}
                   // value={Gst}
                   />
                   <input
                     className='value-input'
-                    type="number"
+                    type="text"
                     disabled
                     id="Gst"
                     value={item.totalValue || ''}
