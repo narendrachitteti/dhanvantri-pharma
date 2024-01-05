@@ -1,3 +1,4 @@
+
 import "./Pharmacystock.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -71,11 +72,11 @@ function Pharmacystock() {
       <div className="page-container-177">
         <div className="content-container-177">
           <div className="left-side-177">
-            <h1 style={{ fontFamily: 'roboto' }}>
+            <h1 style={{fontFamily:'roboto'}}>
               <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
                 <FaArrowCircleLeft />
               </Link>{" "}
-              Pharmacy Stocks
+             Pharmacy Stocks
             </h1>
           </div>
         </div>
@@ -83,7 +84,7 @@ function Pharmacystock() {
           <div className="">
             <input
               type="text"
-              style={{ width: '300px', padding: '.5rem', margin: '.3rem' }}
+              style={{width:'300px',padding:'.5rem',margin:'.3rem'}}
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -107,11 +108,11 @@ function Pharmacystock() {
                 <th className="table-cell-177 table-header-177" colSpan="2">
                   Units
                 </th>
-                <th className="table-cell-177 table-header-177" rowSpan="2">
+                {/* <th className="table-cell-177 table-header-177" rowSpan="2">
                   Units in Stock
-                </th>
+                </th> */}
                 <th className="table-cell-177 table-header-177" rowSpan="2">
-                  Expiry
+                  Expiry Date
                 </th>
                 <th className="table-cell-177 table-header-177" colSpan="2">
                   Percent
@@ -134,15 +135,14 @@ function Pharmacystock() {
                     <tr key={medIndex} className="table-row-177">
                       <td className="table-cell-177">{medicine.Medicine}</td>
                       <td className="table-cell-177">{invoice.invoiceNumber}</td>
-                      <td className="table-cell-177">{medicine.Batch}</td>
+                      <td className="table-cell-177">{medicine.batchno}</td>
                       <td className="table-cell-177">{medicine.price}</td>
                       <td className="table-cell-177">{medicine.MRP}</td>
-                      <td className="table-cell-177">{medicine.Unit}</td>
-                      <td className="table-cell-177">
-                        {calculateUnitsPerPrice(medicine.Unit, medicine.price)}
-                      </td>
-                      <td className="table-cell-177">{medicine.Quantity}</td>
-                      <td className="table-cell-177">{medicine.BatchExpiry}</td>
+                      <td className="table-cell-177">{medicine.Capsules}</td>
+                      <td className="table-cell-177">{medicine.capsulePrice}</td>
+
+                      {/* <td className="table-cell-177">{medicine.Quantity}</td> */}
+                      <td className="table-cell-177">{medicine.expiryDate}</td>
                       <td className="table-cell-177">{medicine.Discount}</td>
                       <td className="table-cell-177">{medicine.Gst}</td>
                     </tr>
