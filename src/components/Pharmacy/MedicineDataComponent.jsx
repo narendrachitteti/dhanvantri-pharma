@@ -169,6 +169,79 @@ const MedicineDataComponent = () => {
     fetchItemsForToday();
   }, []);
 
+
+// Inside the fetchMedicineData function, calculate total capsules for each medicine
+const fetchMedicineData = async () => {
+  try {
+    const response = await axios.get('http://localhost:5000/api/getMedicine');
+    const data = response.data.medicines;
+
+    const aggregatedData = {};
+    data.forEach((medicine) => {
+      const medicineName = medicine.Medicine;
+      if (aggregatedData[medicineName]) {
+        aggregatedData[medicineName].strips += parseInt(medicine.strips) || 0;
+        aggregatedData[medicineName].freeStrips += parseInt(medicine.Freestrips) || 0;
+      } else {
+        aggregatedData[medicineName] = {
+          Medicine: medicineName,
+          strips: parseInt(medicine.strips) || 0,
+          freeStrips: parseInt(medicine.Freestrips) || 0,
+        };
+      }
+      // Calculate total capsules for each medicine
+      aggregatedData[medicineName].totalCapsules =
+        (parseInt(medicine.strips) || 0 + parseInt(medicine.Freestrips) || 0) * medicine.capsulesPerStrip;
+    });
+
+    const aggregatedArray = Object.values(aggregatedData);
+
+    setMedicineData(aggregatedArray);
+    setLoading(false);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+
+// Inside the existing useEffect where you fetch medicine data, ensure you calculate total capsules
+useEffect(() => {
+  const fetchMedicineData = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/getMedicine');
+      const data = response.data.medicines;
+
+      const aggregatedData = {};
+      data.forEach((medicine) => {
+        const medicineName = medicine.Medicine;
+        if (aggregatedData[medicineName]) {
+          aggregatedData[medicineName].strips += parseInt(medicine.strips) || 0;
+          aggregatedData[medicineName].freeStrips += parseInt(medicine.Freestrips) || 0;
+        } else {
+          aggregatedData[medicineName] = {
+            Medicine: medicineName,
+            strips: parseInt(medicine.strips) || 0,
+            freeStrips: parseInt(medicine.Freestrips) || 0,
+          };
+        }
+        // Calculate total capsules for each medicine
+        aggregatedData[medicineName].totalCapsules =
+          ((parseInt(medicine.strips) || 0) + (parseInt(medicine.Freestrips) || 0)) * (medicine.capsulesPerStrip || 1);
+      });
+
+      const aggregatedArray = Object.values(aggregatedData);
+
+      setMedicineData(aggregatedArray);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchMedicineData();
+}, []);
+
+
   return (
     <>
       <PharmacyNav />
@@ -185,6 +258,7 @@ const MedicineDataComponent = () => {
             <tr className='mdc-trow'>
               <th className='mdc-thhss'>Medicine / Product</th>
               <th className='mdc-thhss'>Total Strips</th>
+              <th className='mdc-thhss'>Totalcapsules</th>
               <th className='mdc-thh'>Billed</th>
               <th className='mdc-thhss'>Remaining Strips</th>
             </tr>
@@ -199,6 +273,12 @@ const MedicineDataComponent = () => {
                   {calculateTotalStrips(medicine.strips, medicine.freeStrips)}
 
                 </td>
+                <td className='mdc-tddhs'>
+        {medicine.totalCapsules} {/* Display total capsules */}
+      </td>
+
+
+               
                 <td className='mdc-tdd'>
                   {
                     aggregatedItems[medicine.Medicine]

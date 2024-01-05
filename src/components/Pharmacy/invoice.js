@@ -174,7 +174,7 @@ const Invoice = () => {
                             <li key={index} className="invoice-item-sk143">
                                 <h2 className="patient-info-heading-sk143">Patient Information</h2>
                                 <p className="patient-name-sk143">Patient Name: {invoice.patientName}</p>
-                                <p className="patient-name-sk143">Doctor Name: {invoice.DoctorName}</p>
+                                <p className="patient-name-sk143">Doctor Name: {invoice.doctorName}</p>
                                 <p className="patient-name-sk143">MobileNumber: {invoice.mobilenumber}</p>
                                 <p className="date-sk143">Date: {invoice.date}</p>
 
@@ -222,8 +222,8 @@ const Invoice = () => {
                                                                 <label>Doctor Name:</label>
                                                                 <input
                                                                     type="text"
-                                                                    value={editedData.DoctorName}
-                                                                    onChange={(e) => setEditedData({ ...editedData, DoctorName: e.target.value })}
+                                                                    value={editedData.doctorName}
+                                                                    onChange={(e) => setEditedData({ ...editedData, doctorName: e.target.value })}
                                                                 />
                                                             </div>
 

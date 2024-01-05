@@ -115,7 +115,7 @@
   width: 35%;
   height: 40px;
   margin-left: 50px;
-  background-color: #9b8bf4;
+  background-color: #20c997;
   border-radius: 10px;
   border: none;
   margin-top: 10px;
@@ -162,7 +162,7 @@ margin-left: 3%;
   /* text-align: left; */
 }
 .pharma-bill-tablehead{
-  background-color: #9b8bf4;
+  background-color: #20c997;
   border-collapse: collapse;
   /* width: 10vw; */
 }
@@ -206,7 +206,7 @@ margin-left: 3%;
   border-radius: 5px;
   border: none;
   font-weight: bold;
-  background-color: #9b8bf4;
+  background-color: #20c997;
   color: #fff;
   margin-left: 45%;
   margin-bottom: 1%;
@@ -223,7 +223,7 @@ margin-left: 3%;
   border-radius: 3px;
   border: none;
   
-  background-color: #9b8bf4;
+  background-color: #20c997;
   color: #fff;
 }
 .pharma-title{
@@ -232,7 +232,7 @@ font-size: 3rem;
 font-weight: bold;
 }
 .submit-btn{
-  background-color:#9b8bf4 ;
+  background-color:#20c997 ;
 }
 .title-row{
   display: flex;
@@ -347,7 +347,7 @@ margin-left: -25%;
 .pharma-bill-submit-btn-del-btn{
   border: none;
   color: white;
-  background-color:#9b8bf4 ;
+  background-color:#20c997;
   height: 5vh;
   width: 5vw;
   border-radius: 1vh;
@@ -375,7 +375,7 @@ margin-left: -25%;
   .pharma-bill-submit-btn-del-btn{
     border: none;
     color: white;
-    background-color:#9b8bf4 ;
+    background-color:#20c997 ;
     height: 5vh;
     width: 15vw;
     border-radius: 1vh;
@@ -470,7 +470,7 @@ margin-left: -25%;
   border-radius: 5px;
   border: none;
   font-weight: bold;
-  background-color: #9b8bf4;
+  background-color: #20c997;
   color: #fff;
   margin-left: 45%;
   font-size: 13px;
@@ -495,7 +495,7 @@ margin-left: -25%;
   border-radius: 3px;
   border: none;
   
-  background-color: #9b8bf4;
+  background-color: #20c997;
   color: #fff;
 }
 
@@ -529,7 +529,7 @@ margin-left: -25%;
   .pharma-bill-submit-btn-del-btn{
     border: none;
     color: white;
-    background-color:#9b8bf4 ;
+    background-color:#20c997 ;
     height: 5vh;
     width: 15vw;
     border-radius: 1vh;

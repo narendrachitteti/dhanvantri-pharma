@@ -38,7 +38,7 @@
   position: absolute;
   top: 55px;
   right: 0;
-  background-color: #9b8bf4;
+  background-color: #20c997;
   border: 1px solid white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   width: 210px;
@@ -117,7 +117,7 @@
 
 /* Change color when hovering over dropdown options */
 .nav-item .dropdown-content a:hover {
-  color: #9b8bf4;
+  color: #20c997;
 }
 .nav-item .billrepote{
   color: black;
@@ -139,5 +139,6 @@
 
   .navbar-doctor1 {
     font-size: 0.8rem; /* Adjust as needed */
+    background-color: #20c997;
   }
 }

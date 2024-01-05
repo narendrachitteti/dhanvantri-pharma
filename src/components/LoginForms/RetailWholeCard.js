@@ -14,25 +14,22 @@ import "./Loginvi.css";
 
 const RetailWholecard = () => {
   return (
-      <div className="Card1-con-vik">
-      <MDBContainer fluid 
-      className='d-flex align-items-center justify-content-center bg-image-vik'
-      style={{backgroundImage: 'url(https://t3.ftcdn.net/jpg/04/58/20/28/360_F_458202839_NYIas4yn9Ic40flVfPo2tWZo9Fztkf1s.jpg)'}}
+      <div className="Card1-con-vik"   style={{backgroundImage: 'url(https://www.gea.com/en/binaries/advancing-pharmaceutical-processing-transforming-the-future-saving-lives_tcm11-91721.jpg)'}}
       >
-        
-        <Link to="/RetailLogin" class="card-vik">
-          <h2> Retail</h2>
+     
+       <div className="Card1-con-vik-123">
+         
+       <Link to="/RetailLogin" class="card-vik">
+          <h2 className="retail"> Retail</h2>
         </Link>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
+       
         <Link to="/WholesaleLogin" class="card-vik">
-          <h2> Wholesale </h2>
+          <h2 className="retail"> Wholesale </h2>
         </Link>
     
       
-      </MDBContainer>
+       </div>
+    
     </div>
   );
 };

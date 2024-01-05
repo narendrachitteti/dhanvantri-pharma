@@ -109,7 +109,7 @@ const ItemEditPage = () => {
             {data.map((item) => (
               <tr key={item._id}>
                 <td>{item.product}</td>
-                <td>{item.taxCode}</td>
+                <td>{item.Gst}</td>
                 <td>{item.manufacturer}</td>
                 <td>{item.batchno}</td>
                 <td>{item.schedule}</td>

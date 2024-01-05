@@ -452,7 +452,7 @@ const CreatePurchaseOrder = () => {
         <div className="print-container">
           <div className="stocklist-cpo-table">
             <table className="stocklist-table-cpo">
-              <thead style={{ backgroundColor: "#9b8bf4" }}>
+              <thead style={{ backgroundColor: "#20c997" }}>
                 <tr>
                   <th>Medicine</th>
                   <th>Stockist Name</th>
@@ -506,7 +506,7 @@ const CreatePurchaseOrder = () => {
             className="print-co"
             onClick={handlePrint}
             disabled={tableData.length === 0}
-            style={{ backgroundColor: "#9b8bf4" }}
+            style={{ backgroundColor: "#20c997" }}
           >
             <AiFillPrinter />
           </button>
@@ -514,7 +514,7 @@ const CreatePurchaseOrder = () => {
             className="download-co"
             onClick={handleDownload}
             disabled={tableData.length === 0}
-            style={{ backgroundColor: "#9b8bf4" }}
+            style={{ backgroundColor: "#20c997" }}
           >
             <BiSolidDownload />
           </button>

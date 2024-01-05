@@ -132,7 +132,7 @@ const PharmaLab = () => {
           </button>
         </div>
         <table className="lab-service-table_5">
-          <thead style={{ backgroundColor: '#3d50ae' }}>
+          <thead style={{ backgroundColor: '#20c997' }}>
             <tr className="product-ooi">
               <th className="product-ooi"> Product Composition</th>
               <th className="product-ooi">Product Name</th>
