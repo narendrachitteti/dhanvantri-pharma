@@ -170,7 +170,7 @@ const [doctorName , setdoctorName] = useState("");
         setPatientName('');
         setmobilenumber('');
         setdoctorName('');
-        setp
+        setTaxableValues('');
         setSign('');
         setDate('');
         setItems([
@@ -183,6 +183,7 @@ const [doctorName , setdoctorName] = useState("");
             group: "",
             // category: "",
             // purchaseRate: "",
+            manufacturer: "",
             batch: "",
             Gst: "",
           },

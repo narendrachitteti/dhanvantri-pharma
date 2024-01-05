@@ -5,6 +5,9 @@
   padding: 10px;
   border: 2px solid grey;
 }
+/* .hide-table{
+  display: none;
+} */
 .oty-table{
   width: 70px;
   text-align: center;
