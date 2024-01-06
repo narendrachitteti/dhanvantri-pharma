@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import ReactJsPagination from "react-js-pagination";
+import { BASE_URL } from "../../Services/Helper";
 
 const Stockists = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,7 +29,7 @@ const Stockists = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/stockists")
+      .get(`${BASE_URL}/api/stockists`)
       .then((response) => {
         setStockists(response.data);
         console.log(response.data);
@@ -84,7 +85,7 @@ const Stockists = () => {
 
     // Send a POST request to add a new stockist
     axios
-      .post("http://localhost:5000/api/stockists", postData)
+      .post(`${BASE_URL}/api/stockists`, postData)
 
       .then((response) => {
         // Handle the success case
@@ -100,7 +101,7 @@ const Stockists = () => {
 
         // Fetch the updated stockists data here
         axios
-          .get("http://localhost:5000/api/stockists")
+          .get(`${BASE_URL}/api/stockists`)
           .then((response) => {
             setStockists(response.data);
             console.log(response.data);
@@ -145,7 +146,7 @@ const Stockists = () => {
 
       axios
         .put(
-          `http://localhost:5000/api/stockists/${selectedStockist._id}`,
+          `${BASE_URL}/api/stockists/${selectedStockist._id}`,
           editedData
         )
         .then((response) => {
@@ -158,7 +159,7 @@ const Stockists = () => {
 
           // Fetch the updated stockists data here
           axios
-            .get("http://localhost:5000/api/stockists")
+            .get(`${BASE_URL}/api/stockists`)
             .then((response) => {
               setStockists(response.data);
             })

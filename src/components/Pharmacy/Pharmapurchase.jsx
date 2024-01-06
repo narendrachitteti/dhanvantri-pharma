@@ -4,6 +4,7 @@ import Select from "react-select";
 import './Pharmapurchase.css'
 import { IoCalendarNumber } from "react-icons/io5";
 import Navbar from "./PharmacyNav";
+import { BASE_URL } from "../../Services/Helper";
 
 const Pharmapurchase = () => {
     const [medicines, setMedicines] = useState([]);
@@ -73,7 +74,7 @@ const Pharmapurchase = () => {
     useEffect(() => {
         const fetchSuppliers = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/allSuppliers');
+                const response = await axios.get(`${BASE_URL}/api/allSuppliers`);
                 const suppliers = response.data.map((supplier) => ({
                     value: supplier.id,
                     label: `${supplier.name} - ${supplier.id}`,
@@ -96,7 +97,7 @@ const Pharmapurchase = () => {
         try {
           setSupplierData({ ...supplierData, supplier: selectedOption.value });
       
-          const response = await axios.get(`http://localhost:5000/api/supplier/${selectedOption.value}`);
+          const response = await axios.get(`${BASE_URL}/api/supplier/${selectedOption.value}`);
           const selectedSupplierDetails = response.data;
     
           setSupplierData((prevSupplierData) => ({
@@ -156,7 +157,7 @@ const Pharmapurchase = () => {
       useEffect(() => {
         const fetchMedicines = async () => {
           try {
-            const response = await axios.get('http://localhost:5000/api/allmedicines');
+            const response = await axios.get(`${BASE_URL}/api/allmedicines`);
             console.log('Response:', response.data);
                 if (response.data && Array.isArray(response.data)) {
               const allMedicines = response.data.map((medicine) => ({
@@ -181,7 +182,7 @@ const Pharmapurchase = () => {
 
     const fetchMedicineDetails = async (medicineId) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/allmedicines/${medicineId}`);
+            const response = await axios.get(`${BASE_URL}/api/allmedicines/${medicineId}`);
             console.log('Response:', response.data);
             const details = response.data; 
             setMedicineDetails({ ...details, medicineDetails: details.medicine });
@@ -218,7 +219,7 @@ const Pharmapurchase = () => {
             // setSelectedMedicine(selectedOption);
             setSelectedMedicine({ value: selectedOption.value, label: selectedOption.label });
             if (selectedOption && selectedOption.value) {
-                const response = await axios.get(`http://localhost:5000/api/allmedicines/${selectedOption.value}`);
+                const response = await axios.get(`${BASE_URL}/api/allmedicines/${selectedOption.value}`);
                 console.log('Response:', response.data);
                 console.log("Selected Medicine Option:", selectedOption);
     
@@ -264,7 +265,7 @@ const Pharmapurchase = () => {
                 supplierData: supplierData,
                 medicineDetails: medicineDetails,
             };
-            const response = await axios.post('http://localhost:5000/api/submitPurchaseDetails', postData);
+            const response = await axios.post(`${BASE_URL}/api/submitPurchaseDetails`, postData);
             console.log('Submit response:', response.data);
         } catch (error) {
             console.error('Error submitting data:', error);

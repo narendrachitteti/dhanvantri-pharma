@@ -1,6 +1,7 @@
 //this is for the Drug Composition
 import React, { useState, useEffect } from 'react';
 import './PharmaForm.css';
+import { BASE_URL } from "../../Services/Helper";
 
 const PharmaForm = ({ selectedService, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({

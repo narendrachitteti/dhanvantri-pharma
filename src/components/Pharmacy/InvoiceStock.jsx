@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import "./InvoiceStock.css";
 import PharmacyNav from "./PharmacyNav";
+import { BASE_URL } from "../../Services/Helper";
 
 const InvoiceStock = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -49,7 +50,7 @@ const InvoiceStock = () => {
   useEffect(() => {
     const fetchStockistOptions = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/stockists");
+        const response = await axios.get(`${BASE_URL}/api/stockists`);
         const stockistData = response.data;
         const options = stockistData.map((stockist) => ({
           value: stockist.name,
@@ -140,7 +141,7 @@ const InvoiceStock = () => {
         PurchaseAmount: calculateTotalAmounts(),
       }; 
       const response = await axios.post(
-        "http://localhost:5000/api/addInvoice",
+        "${BASE_URL}/api/addInvoice",
         newInvoice
       );
       console.log(response.data);
@@ -223,7 +224,7 @@ const InvoiceStock = () => {
       email: newStockistData.email,
     };
     axios
-      .post("http://localhost:5000/api/stockists", postData)
+      .post(`${BASE_URL}/api/stockists`, postData)
       .then((response) => {
         alert("Stockist added successfully.");
         setNewStockistData({
@@ -233,7 +234,7 @@ const InvoiceStock = () => {
         });
         setShowPopup(false);
         axios
-          .get("http://localhost:5000/api/stockists")
+          .get(`${BASE_URL}/api/stockists`)
           .then((response) => {
             setStockists(response.data);
             console.log(response.data);
@@ -269,7 +270,7 @@ const InvoiceStock = () => {
     const fetchStockistNames = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/get-stockist-names"
+          `${BASE_URL}/api/get-stockist-names`
         );
         setStockistNames(response.data);
       } catch (error) {
@@ -297,7 +298,7 @@ const handleProductChange = async (e) => {
 
   // Fetch product details based on the selected product value
   try {
-    const response = await axios.get(`http://localhost:5000/api/itemdec/details?productName=${selectedProductValue}`);
+    const response = await axios.get(`${BASE_URL}/api/itemdec/details?productName=${selectedProductValue}`);
     const productDetails = response.data;
 
     // Update state variables with fetched details
@@ -317,7 +318,7 @@ const handleProductChange = async (e) => {
 useEffect(() => {
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/itemdec');
+      const response = await axios.get(`${BASE_URL}/api/itemdec`);
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);

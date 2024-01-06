@@ -6,6 +6,7 @@ import PharmacyNav from "./PharmacyNav";
 import { Link } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import ReactJsPagination from "react-js-pagination";
+import { BASE_URL } from "../../Services/Helper";
 
 function Pharmacystock() {
   const [medicines, setMedicines] = useState([]);
@@ -15,7 +16,7 @@ function Pharmacystock() {
 
   const fetchMedicines = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getInvoices");
+      const response = await axios.get(`${BASE_URL}/api/getInvoices`);
       setMedicines(response.data);
     } catch (error) {
       console.error("Error fetching medicines:", error);

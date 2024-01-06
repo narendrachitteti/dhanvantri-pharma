@@ -11,6 +11,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import PharmacyNav from "./PharmacyNav";
 import { Link } from "react-router-dom";
 import { FaArrowCircleLeft, FaSave } from "react-icons/fa";
+import { BASE_URL } from "../../Services/Helper";
 
 const CreatePurchaseOrder = () => {
   const [stockistValue, setStockistValue] = useState("");
@@ -39,7 +40,7 @@ const CreatePurchaseOrder = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
+        const response = await axios.get(`${BASE_URL}/api/products`);
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -49,7 +50,7 @@ const CreatePurchaseOrder = () => {
     const fetchUnitPerBoxes = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/unitPerBoxes"
+          `${BASE_URL}/api/unitPerBoxes`
         );
         setUnitPerBoxes(response.data);
       } catch (error) {
@@ -66,7 +67,7 @@ const CreatePurchaseOrder = () => {
 
     try {
       // Fetch product information, including the company name
-      const response = await axios.get(`http://localhost:5000/api/getCompanyByProduct/${e.target.value}`);
+      const response = await axios.get(`${BASE_URL}/api/getCompanyByProduct/${e.target.value}`);
       const responseData = response.data;
 
       // Check if the response contains the company
@@ -91,7 +92,7 @@ const CreatePurchaseOrder = () => {
     const fetchStockistNames = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/get-stockist-names"
+          `${BASE_URL}/api/get-stockist-names`
         );
         setStockistNames(response.data);
       } catch (error) {
@@ -111,7 +112,7 @@ const CreatePurchaseOrder = () => {
   const handleDownload = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/downloadOrdersCSV"
+        `${BASE_URL}/api/downloadOrdersCSV`
       );
       const blob = new Blob([response.data], { type: "text/csv" });
       const downloadLink = document.createElement("a");
@@ -207,7 +208,7 @@ const CreatePurchaseOrder = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:5000/api/createPurOrder",
+        `${BASE_URL}/api/createPurOrder`,
         newOrder
       );
 
@@ -233,13 +234,13 @@ const CreatePurchaseOrder = () => {
   const fetchCreateOrder = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/getCreatePurchaseOrders"
+        `${BASE_URL}/api/getCreatePurchaseOrders`
       );
       const orders = response.data;
 
       const orderDetailsPromises = orders.map(async (order) => {
         const stockistResponse = await axios.get(
-          `http://localhost:5000/api/stockists/${order.stockistName}`
+          `${BASE_URL}/api/stockists/${order.stockistName}`
         );
         const stockist = stockistResponse.data;
         return {
@@ -277,7 +278,7 @@ const CreatePurchaseOrder = () => {
   useEffect(() => {
     const fetchStockistOptions = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/stockists");
+        const response = await axios.get(`${BASE_URL}/api/stockists`);
         const stockistData = response.data;
         const options = stockistData.map((stockist) => ({
           value: stockist.name,
@@ -310,7 +311,7 @@ const CreatePurchaseOrder = () => {
     const fetchUnits = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/unitPerBox"
+          `${BASE_URL}/api/unitPerBox`
         );
         setUnits(response.data);
       } catch (error) {

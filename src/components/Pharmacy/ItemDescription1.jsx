@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import PharmacyNav from "./PharmacyNav";
 
 import { Form, Button } from "react-bootstrap";
+import { BASE_URL } from "../../Services/Helper";
 
 const ItemDescription1 = () => {
   const [formData, setFormData] = useState({
@@ -35,7 +36,7 @@ const ItemDescription1 = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/itemdec", {
+      const response = await fetch(`${BASE_URL}/api/itemdec`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +68,7 @@ const ItemDescription1 = () => {
               <label className="label-product">
                 Product:
                 <input
-                  className="item-pro-in"
+                  className="tax-input001"
                   name="product"
                   value={formData.product}
                   onChange={handleChange}
@@ -113,7 +114,7 @@ const ItemDescription1 = () => {
                 <label className="item-narr-label">
                   Manufacturer:
                   <input
-                    className="item-narr-input"
+                    className="tax-input001"
                     name="manufacturer"
                     value={formData.manufacturer}
                     onChange={handleChange}
@@ -209,7 +210,7 @@ const ItemDescription1 = () => {
 
               <label className="item-narr-label-narr">Narration:</label>
               <input
-                className="item-narr-input-narr"
+                className="tax-input001"
                 type="text"
                 name="narration"
                 value={formData.narration}

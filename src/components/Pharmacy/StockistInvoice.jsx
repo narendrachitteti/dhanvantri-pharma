@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { FaEdit, FaTrash, FaCheck, FaTimes, FaSave } from 'react-icons/fa';
 import ReactJsPagination from "react-js-pagination";
+import { BASE_URL } from "../../Services/Helper";
 
 const StockistInvoice = () => {
   const [invoices, setInvoices] = useState([]);
@@ -25,7 +26,7 @@ const StockistInvoice = () => {
 
   const fetchInvoices = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getInvoices");
+      const response = await axios.get(`${BASE_URL}/api/getInvoices`);
       const fetchedInvoices = response.data;
       setInvoices(fetchedInvoices);
 
@@ -56,7 +57,7 @@ const StockistInvoice = () => {
 
   const handleConfirmDelete = async (invoiceId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/deleteInvoice/${invoiceId}`);
+      await axios.delete(`${BASE_URL}/api/deleteInvoice/${invoiceId}`);
       fetchInvoices();
       setConfirmDeleteId(null);
       toast.success("Invoice deleted successfully");
@@ -81,7 +82,7 @@ const StockistInvoice = () => {
       };
 
       await axios.put(
-        `http://localhost:5000/api/updateInvoice/${invoiceId}`,
+        `${BASE_URL}/api/updateInvoice/${invoiceId}`,
         updatedInvoice
       );
 

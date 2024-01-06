@@ -3,6 +3,7 @@ import Select from "react-select";
 import './Itemdescription.css'
 import PharmacyNav from "./PharmacyNav";
 import { Refresh } from "@mui/icons-material";
+import { BASE_URL } from "../../Services/Helper";
 
 const ItemDescription = () => {
   const [companyData, setCompanyData] = useState([]);
@@ -92,7 +93,7 @@ const ItemDescription = () => {
     console.log("Form data submitted:", formData);
 
     try {
-      const response = await fetch("http://localhost:5000/api/submit-form", {
+      const response = await fetch(`${BASE_URL}/api/submit-form`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -113,7 +114,7 @@ const ItemDescription = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/distinctCompanies");
+        const response = await fetch(`${BASE_URL}/api/distinctCompanies`);
         const data = await response.json();
 
         if (data && typeof data === "object") {
@@ -163,7 +164,7 @@ const ItemDescription = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/companiesAndHsncodes");
+        const response = await fetch(`${BASE_URL}/api/companiesAndHsncodes`);
         const data = await response.json();
 
         if (data && typeof data === "object") {
@@ -200,7 +201,7 @@ const ItemDescription = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/distincttaxcodes");
+        const response = await fetch(`${BASE_URL}/api/distincttaxcodes`);
         const data = await response.json();
 
         if (data && typeof data === "object") {
@@ -239,7 +240,7 @@ const ItemDescription = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/distinctdrug");
+        const response = await fetch(`${BASE_URL}/api/distinctdrug`);
         const data = await response.json();
 
         if (data && typeof data === "object") {

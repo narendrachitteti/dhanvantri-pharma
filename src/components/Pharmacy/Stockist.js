@@ -3,6 +3,7 @@ import ReactJsPagination from 'react-js-pagination';
 import axios from 'axios';
 import './Stockist.css';
 import PharmacyNav from './PharmacyNav';
+import { BASE_URL } from "../../Services/Helper";
 
 const Stockist = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,7 +32,7 @@ const Stockist = () => {
 
   const fetchStockists = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/get-stockists');
+      const response = await axios.get(`${BASE_URL}/api/get-stockists`);
       const fetchedStockists = response.data;
       setStockists(fetchedStockists);
     } catch (error) {
@@ -69,11 +70,11 @@ const Stockist = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:5000/api/submit-stockist', { postData: newStockistData });
+      const response = await axios.post(`${BASE_URL}/api/submit-stockist`, { postData: newStockistData });
 
       fetchStockists();
 
-      const updatedResponse = await axios.get('http://localhost:5000/api/get-stockists');
+      const updatedResponse = await axios.get(`${BASE_URL}/api/get-stockists`);
       const updatedStockists = updatedResponse.data;
 
       setStockists(updatedStockists);
@@ -105,9 +106,9 @@ const Stockist = () => {
 
   const handleEditStockist = async (stockistId) => {
     try {
-      await axios.put(`http://localhost:5000/api/update-stockist/${stockistId}`, editStockistData);
+      await axios.put(`${BASE_URL}/api/update-stockist/${stockistId}`, editStockistData);
 
-      const response = await axios.get('http://localhost:5000/api/get-stockists');
+      const response = await axios.get(`${BASE_URL}/api/get-stockists`);
       const updatedStockists = response.data;
 
       setStockists(updatedStockists);

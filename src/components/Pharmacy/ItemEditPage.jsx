@@ -3,6 +3,7 @@ import "./ItemEditPage.css";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import PharmacyNav from "./PharmacyNav";
+import { BASE_URL } from "../../Services/Helper";
 
 const ItemEditPage = () => {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ const ItemEditPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/itemdec");
+        const response = await fetch(`${BASE_URL}/api/itemdec`);
         const data = await response.json();
         setData(data);
       } catch (error) {
@@ -30,7 +31,7 @@ const ItemEditPage = () => {
 
   const handleDeleteClick = async (itemId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/itemdec/${itemId}`, {
+      const response = await fetch(`${BASE_URL}/api/itemdec/${itemId}`, {
         method: "DELETE",
       });
 
@@ -50,7 +51,7 @@ const ItemEditPage = () => {
   const handleSaveClick = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/itemdec/${selectedItem._id}`,
+        `${BASE_URL}/api/itemdec/${selectedItem._id}`,
         {
           method: "PUT",
           headers: {

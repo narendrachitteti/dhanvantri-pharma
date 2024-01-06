@@ -11,6 +11,7 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import "./Loginvi.css";
+import { BASE_URL } from "../../Services/Helper";
 
 const RetailLogin = () => {
   const [email, setEmail] = useState("");
@@ -32,7 +33,7 @@ const handleLogin = async () => {
     }
 
     // Make a GET request to the backend login route
-    const response = await fetch(`http://localhost:5000/api/user?email=${email}&password=${password}`);
+    const response = await fetch(`${BASE_URL}/api/user?email=${email}&password=${password}`);
 
     const data = await response.json();
 

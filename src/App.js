@@ -28,7 +28,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import PurchaseSalepopup from './components/Pages/PurchaseSalepopup.js';
 import Stockist from './components/Pharmacy/Stockist'
-import Form4 from './components/Form4';
+
 import Invoice from './components/Pharmacy/invoice.js';
 import WholsaleRegis from './components/LoginForms/WholsaleRegis.js';
 import MedicineDataComponent from './components/Pharmacy/MedicineDataComponent.jsx';
@@ -71,7 +71,6 @@ function App() {
           <Route path="/SalesReceipt" element={<SalesReceipt/>}/>
           <Route path="/PharmaLab" element={<PharmaLab/>}/>
           <Route path="/Form3" element={<Form3/>}/>
-          <Route path='/Form4' element={<Form4/>}/>
           <Route path="/RetailLogin" element={<RetailLogin/>}/>
           <Route path="/WholesaleLogin" element={<WholesaleLogin/>}/>
           <Route path="/PurchaseSalepopup" element={<PurchaseSalepopup/>}/>

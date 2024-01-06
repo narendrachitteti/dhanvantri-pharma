@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import * as XLSX from 'xlsx';
 import './Billingreports.css';
 import PharmacyNav from './PharmacyNav';
+import { BASE_URL } from "../../Services/Helper";
 
 
 function Billingreports() {
@@ -29,7 +30,7 @@ function Billingreports() {
 
   const handleFilter = () => {
     axios
-      .get('http://localhost:5000/api/pharmacy-billing/filter', {
+      .get(`${BASE_URL}/api/pharmacy-billing/filter`, {
         params: {
           fromDate,
           toDate,
@@ -44,7 +45,7 @@ function Billingreports() {
       });
 
     axios
-      .get('http://localhost:5000/api/pharmacy-billing', {
+      .get(`${BASE_URL}/api/pharmacy-billing`, {
         params: {
           fromDate,
           toDate,

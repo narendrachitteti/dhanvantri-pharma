@@ -4,6 +4,7 @@ import "./BillingDashboard.css";
 import axios from "axios";
 import PharmacyNav from "./PharmacyNav";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../Services/Helper";
 
 function BillingDashboard() {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -41,7 +42,7 @@ function BillingDashboard() {
 
   const handleFilter = () => {
     axios
-      .get('http://localhost:5000/api/pharmacy-billing/filter', {
+      .get(`${BASE_URL}/api/pharmacy-billing/filter`, {
         params: {
           fromDate,
           toDate,
@@ -78,7 +79,7 @@ function BillingDashboard() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:5000/api/pharmacy-billing"
+        `${BASE_URL}/api/pharmacy-billing`
       );
       setSalesData(response.data.reverse());
     } catch (error) {
@@ -106,7 +107,7 @@ function BillingDashboard() {
   // Function to fetch fast-moving medicines
   const fetchFastMovingMedicines = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/pharmacy-billing");
+      const response = await axios.get(`${BASE_URL}/api/pharmacy-billing`);
       const fastMovingMedicinesData = response.data
         .map((item) => item.pharmacyTable) // Extract the pharmacyTable from each item
         .flat() // Flatten the array
@@ -130,7 +131,7 @@ function BillingDashboard() {
 
   const fetchInventoryData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getInvoices");
+      const response = await axios.get(`${BASE_URL}/api/getInvoices`);
 
       // Initialize variables to store calculated values
       let totalMedicines = 0;
@@ -184,7 +185,7 @@ function BillingDashboard() {
 
   const fetchCollectionData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getIn");
+      const response = await axios.get(`${BASE_URL}/api/getIn`);
       const data = response.data;
       const subtotalWithGSTSum = data.reduce((sum, item) => {
         return sum + (item.subtotalWithGST || 0); // Use 0 if subtotalWithGST is undefined or null
@@ -203,7 +204,7 @@ function BillingDashboard() {
 
   const fetchTotalBilldata = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getIn");
+      const response = await axios.get("${BASE_URL}/api/getIn");
       const totalbills = response.data.length;
       setTotalbills(totalbills);
 

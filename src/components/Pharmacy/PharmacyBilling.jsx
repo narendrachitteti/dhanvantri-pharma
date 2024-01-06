@@ -5,6 +5,7 @@ import PharmacyNav from "./PharmacyNav";
 import imageUrl from './PharmacyLogo.jpg';
 // import image from './pharmalogo.png';
 import { FaPlusCircle } from "react-icons/fa";
+import { BASE_URL } from "../../Services/Helper";
 
 const PharmacyBilling = () => {
   const [quantity, setQuantity] = useState('');
@@ -100,7 +101,7 @@ const PharmacyBilling = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/itemdec');
+        const response = await axios.get(`${BASE_URL}/api/itemdec`);
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -112,7 +113,7 @@ const PharmacyBilling = () => {
   // useEffect(() => {
   //   const fetchProducts = async () => {
   //     try {
-  //       const response = await axios.get("http://localhost:5000/api/getInvoices");
+  //       const response = await axios.get("${BASE_URL}/api/getInvoices");
   //       setProducts(response.data);
   //     } catch (error) {
   //       console.error('Error fetching products:', error);
@@ -123,7 +124,7 @@ const PharmacyBilling = () => {
   const handleProductChange = async (e, index) => {
     const selectedProductValue = e.target.value;
     try {
-      const response = await axios.get(`http://localhost:5000/api/itemdec/details?productName=${selectedProductValue}`);
+      const response = await axios.get(`${BASE_URL}/api/itemdec/details?productName=${selectedProductValue}`);
       const productDetails = response.data;
       setManufacturer(productDetails.manufacturer);
       setBatch(productDetails.batchno);
@@ -163,7 +164,7 @@ const PharmacyBilling = () => {
 
   const handlePrintAndSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/patient-bill', {
+      const response = await axios.post(`${BASE_URL}/api/patient-bill`, {
         patientName,
         doctorName,
         mobilenumber,
@@ -396,7 +397,7 @@ const PharmacyBilling = () => {
                   <h1 style='font-size:15px'>Signature: ${sign}</h1>
                   <div>
                   <h1 style='font-size:15px; margin-left:45%;'>Goods once sold cannot be taken back or exchanged</h1>
-                  <h1 style='font-size:15px; margin-left:45%;'>Subjected to Bengular-560104 Jurisdiction</h1>
+                  <h1 style='font-size:15px; margin-left:45%;'>Subjected to Bengalur-560104 Jurisdiction</h1>
                 </div>
                 </div>
               </body>
@@ -515,8 +516,8 @@ const PharmacyBilling = () => {
               <th className="merge-tabe">
                 <th colspan="2" className="table-value">Value</th>
                 <tr className="table-bill-row">
-                  <th className="with-gst">without Gst</th>
-                  <th className="table-cell-177-table-header-177">with Gst</th>
+                  <th className="with-gst"colSpan={2}>without Gst</th>
+                  <th className="with-gst"rowSpan={2}>with Gst</th>
                 </tr>
               </th>
               <th className="product-action-table">Action</th>
@@ -537,9 +538,9 @@ const PharmacyBilling = () => {
                 <td>
                   <select
                     className="select-p1"
-                    id={`productSelect_${index}`}  // Use a unique id for each select
+                    id={`productSelect_${index}`}  
                     value={item.selectedProduct}
-                    onChange={(e) => handleProductChange(e, index)}  // Pass the index here
+                    onChange={(e) => handleProductChange(e, index)} 
                   >
                     <option value="">Select a product</option>
                     {products.map((product) => (
@@ -595,14 +596,14 @@ const PharmacyBilling = () => {
                     id="Gst"
                     value={taxableValues[index] || ''}
                   // value={Gst}
-                  />
+                  />&nbsp;&nbsp;&nbsp;
                   <input
                     className='value-input'
                     type="text"
                     disabled
                     id="Gst"
                     value={item.totalValue || ''}
-                  // value={Gst}
+                  
                   />
                 </td>
                 <td className="add-del">
@@ -642,7 +643,7 @@ const PharmacyBilling = () => {
           </div>
           <div>
             <h1 className="goods-class">Goods once sold cannot be taken back or exchanged</h1>
-            <h1 className="goods-class">Subjected to Bengular-560104 Jurisdiction</h1>
+            <h1 className="goods-class">Subjected to Bengalur-560104 Jurisdiction</h1>
           </div>
         </div>
       </div>
