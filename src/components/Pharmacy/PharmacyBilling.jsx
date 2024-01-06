@@ -109,6 +109,17 @@ const PharmacyBilling = () => {
     fetchProducts();
   }, []);
 
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:5000/api/getInvoices");
+  //       setProducts(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching products:', error);
+  //     }
+  //   };
+  //   fetchProducts();
+  // }, []);
   const handleProductChange = async (e, index) => {
     const selectedProductValue = e.target.value;
     try {
@@ -434,7 +445,7 @@ const PharmacyBilling = () => {
           <FaPlusCircle className="icon-plus-main" />
 
           <div className='main-heading'>
-
+          <h2 className="dhanvantri-heading">ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h2>
             <h2 className="dhanvantri-heading">Dhanvantri Pharma</h2>
             <h5 className="dhanvantri-heading-address"> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h5>
             <h5 className="dhanvantri-heading-hampinagar">Hampinagara , Bengaluru-560104</h5>
@@ -617,7 +628,7 @@ const PharmacyBilling = () => {
         <div className="merge-sign-para">
           <div>
             <div className="pharma-sign">
-              <label>Sign : </label>
+              <label>QP Signature : </label>
               <input
                 type="textarea"
                 className="sign-area"
