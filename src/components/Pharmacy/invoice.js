@@ -4,7 +4,6 @@ import './invoice.css';
 import PharmacyNav from './PharmacyNav';
 import { BsPrinter } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import { BASE_URL } from "../../Services/Helper";
 
 const Invoice = () => {
@@ -187,7 +186,7 @@ const Invoice = () => {
                                             <th className="price-th-sk143">Price</th>
                                             <th className="manufacturer-th-sk143">Manufacturer</th>
                                             <th className="batch-no-th-sk143">Batch No</th>
-                                            <th className="expiry-date-th-sk143">Expiry Date</th>
+                                            {/* <th className="expiry-date-th-sk143">Expiry Date</th> */}
                                             <th className="gst-th-sk143">GST</th>
                                             <th className="gst-th-sk143">Print</th>
                                             <th className="gst-th-sk143">Action</th>
@@ -200,11 +199,11 @@ const Invoice = () => {
                                             <tr key={itemIndex} className="item-row-sk143">
                                                 <td className="product-td-sk143">{item.product}</td>
                                                 <td className="quantity-td-sk143">{item.quantity}</td>
-                                                <td className="price-td-sk143">&#8377; {item.price}</td>
+                                                <td className="price-td-sk143">&#8377; {item.ptr}</td>
                                                 <td className="manufacturer-td-sk143">{item.manufacturer}</td>
                                                 <td className="batch-no-td-sk143">{item.batch}</td>
-                                                <td className="expiry-date-td-sk143">{item.batchExpiry}</td>
-                                                <td className="gst-td-sk143">{item.gst}%</td>
+                                                {/* <td className="expiry-date-td-sk143">{item.batchExpiry}</td> */}
+                                                <td className="gst-td-sk143">{item.Gst}%</td>
                                                 <td className="gst-td-sk143" onClick={() => handlePrint(invoice)}>{item.print}<BsPrinter /></td>
                                                 {/* <td className="gst-td-sk143" onClick={handlePrint}>{item.print}<BsPrinter /></td> */}
                                                 <td className="gst-td-sk143">
@@ -264,8 +263,8 @@ const Invoice = () => {
                                                                 <label>Price</label>
                                                                 <input
                                                                     type="text"
-                                                                    value={editedData.price}
-                                                                    onChange={(e) => setEditedData({ ...editedData, price: e.target.value })}
+                                                                    value={editedData.ptr}
+                                                                    onChange={(e) => setEditedData({ ...editedData, ptr: e.target.value })}
                                                                 />
                                                             </div>
                                                             <div>
@@ -284,20 +283,20 @@ const Invoice = () => {
                                                                     onChange={(e) => setEditedData({ ...editedData, batch: e.target.value })}
                                                                 />
                                                             </div>
-                                                            <div>
+                                                            {/* <div>
                                                                 <label>Batch Expiry</label>
                                                                 <input
                                                                     type="text"
                                                                     value={editedData.batchExpiry}
                                                                     onChange={(e) => setEditedData({ ...editedData, batchExpiry: e.target.value })}
                                                                 />
-                                                            </div>
+                                                            </div> */}
                                                             <div>
                                                                 <label>Gst</label>
                                                                 <input
                                                                     type="text"
-                                                                    value={editedData.gst}
-                                                                    onChange={(e) => setEditedData({ ...editedData, gst: e.target.value })}
+                                                                    value={editedData.Gst}
+                                                                    onChange={(e) => setEditedData({ ...editedData, Gst: e.target.value })}
                                                                 />
                                                             </div>
                                                             <button onClick={handleSave}>Update</button>
@@ -312,13 +311,13 @@ const Invoice = () => {
                                         ))}
                                     </tbody>
                                 </table>
-                                <p className="total-without-gst-sk143">
+                                {/* <p className="total-without-gst-sk143">
                                     Total (without GST): &#8377; {invoices.reduce((total, item) => total + item.subtotalWithoutGST, 0).toFixed(2)}
-                                </p>
+                                </p> */}
 
-                                <p className="total-with-gst-sk143">
+                                {/* <p className="total-with-gst-sk143">
                                     Total (with GST): &#8377; {invoices.reduce((total, invoice) => total + invoice.subtotalWithGST, 0).toFixed(2)}
-                                </p>
+                                </p> */}
 
 
                             </li>

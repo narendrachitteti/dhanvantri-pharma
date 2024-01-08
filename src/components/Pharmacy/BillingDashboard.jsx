@@ -174,7 +174,7 @@ function BillingDashboard() {
           <h1 className="date2" >
             Billing Dashboard
           </h1>
-          <div className="date-container">
+          {/* <div className="date-container">
             <label className="la-bill-dash" >From: </label>
             <input className="billing-data-sel"
               type="date"
@@ -192,25 +192,25 @@ function BillingDashboard() {
               onChange={(e) => setToDate(e.target.value)}
             />
             <button className="billing-dash-go" >Go</button>
-          </div>
+          </div> */}
         </div>
         <hr />
         <div className="dbicon-box">
-          <Link to="/Dbdetails" className="dbcard-container">
+          <Link to="/BillingDashboard" className="dbcard-container">
             <div className="dbcard">
               <label>Total Bills</label>
               {/* <p>{billingData.Billed}</p> */}
               <p>{totalbills}</p>
             </div>
           </Link>
-          <Link to="/Dbdetails" className="dbcard-container">
+          <Link to="/BillingDashboard" className="dbcard-container">
             <div className="dbcard">
               <label>Total Collection</label>
               {/* <p>₹&nbsp;{billingData.Collection}</p> */}
               <p>{totalCollection}</p>
             </div>
           </Link>
-          <Link to="/Dbdetails" className="dbcard-container">
+          <Link to="/BillingDashboard" className="dbcard-container">
             <div className="dbcard">
               <label>Collected by Cash</label>
               <p>₹&nbsp;{totalCollection}</p>
