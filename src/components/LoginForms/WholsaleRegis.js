@@ -16,7 +16,7 @@ function  WholsaleRegis() {
 
     const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
+    userid: '',
     email: '',
     password: '',
   });
@@ -29,7 +29,7 @@ function  WholsaleRegis() {
     e.preventDefault();
 
     // Add client-side validations
-    if (!formData.username || !formData.email || !formData.password) {
+    if (!formData.userid || !formData.email || !formData.password) {
       alert('Please provide all required fields.');
       return;
     }
@@ -47,7 +47,7 @@ function  WholsaleRegis() {
 
       if (response.ok) {
     
-        setFormData({ username: '', email: '', password: '' });
+        setFormData({ userid: '', email: '', password: '' });
         navigate('/WholesaleRegis');
         alert(data.message);
         window.location.href='/WholesaleLogin'
@@ -80,8 +80,8 @@ function  WholsaleRegis() {
 
 <form  onSubmit={handleSubmit} className='wholsaleregis'>
 <label>
-Username:
-<input type="text" name="username" value={formData.username} onChange={handleChange} />
+User ID:
+<input type="text" name="userid" value={formData.userid} onChange={handleChange} />
 </label>
 <br />
 <label>

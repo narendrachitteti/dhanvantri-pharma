@@ -14,7 +14,7 @@ import "./Loginvi.css";
 import { BASE_URL } from "../../Services/Helper";
 
 const RetailLogin = () => {
-  const [email, setEmail] = useState("");
+  const [userid, setUserID] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("success");
@@ -24,16 +24,16 @@ const RetailLogin = () => {
 // Update the handleLogin function
 const handleLogin = async () => {
   try {
-    // Validate email and password
-    if (!email || !password) {
+    // Validate userid and password
+    if (!userid || !password) {
       setShowAlert(true);
       setAlertType('danger');
-      setAlertMessage('Please provide both email and password.');
+      setAlertMessage('Please provide both userid and password.');
       return;
     }
 
     // Make a GET request to the backend login route
-    const response = await fetch(`${BASE_URL}/api/user?email=${email}&password=${password}`);
+    const response = await fetch(`${BASE_URL}/api/user?userid=${userid}&password=${password}`);
 
 
 const data = await response.json();
@@ -87,8 +87,8 @@ const data = await response.json();
                   label="User Id"
                   type="text"
                   size="lg"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={userid}
+                  onChange={(e) => setUserID(e.target.value)}
                  
                 />
                 <MDBInput

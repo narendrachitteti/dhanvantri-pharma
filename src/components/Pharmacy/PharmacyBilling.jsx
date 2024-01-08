@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./PatientBill.css";
 import PharmacyNav from "./PharmacyNav";
-import imageUrl from './PharmacyLogo.jpg';
+import imageUrl from './Dp16.png';
 // import image from './pharmalogo.png';
 import { FaPlusCircle } from "react-icons/fa";
 import { BASE_URL } from "../../Services/Helper";

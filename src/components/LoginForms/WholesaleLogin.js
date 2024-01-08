@@ -18,7 +18,7 @@ import { BASE_URL } from "../../Services/Helper";
 
 function WholesaleLogin() {
   
-  const [email, setEmail] = useState("");
+  const [userid, setUserID] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("success");
@@ -29,16 +29,16 @@ function WholesaleLogin() {
 // Update the handleLogin function
 const handleLogin = async () => {
   try {
-    // Validate email and password
-    if (!email || !password) {
+    // Validate userid and password
+    if (!userid || !password) {
       setShowAlert(true);
       setAlertType('danger');
-      setAlertMessage('Please provide both email and password.');
+      setAlertMessage('Please provide both userid and password.');
       return;
     }
 
     // Make a GET request to the backend login route
-    const response = await fetch(`${BASE_URL}/api/user?email=${email}&password=${password}`);
+    const response = await fetch(`${BASE_URL}/api/user?userid=${userid}&password=${password}`);
 
     const data = await response.json();
 
@@ -58,10 +58,6 @@ const handleLogin = async () => {
     console.error('Error during login:', error);
   }
 };
-
-
-
-
 
   return (
     <div>
@@ -98,8 +94,8 @@ style={{backgroundImage: 'url(https://img.freepik.com/free-photo/some-pills-spra
                   label="User Id"
                   type="text"
                   size="lg"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={userid}
+                  onChange={(e) => setUserID(e.target.value)}
                 />
                 <MDBInput
                   wrapperClass="mb-4 mx-5 w-100"

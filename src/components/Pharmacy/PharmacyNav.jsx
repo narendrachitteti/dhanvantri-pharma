@@ -4,7 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import './PharmacyNav.css';
-import img from './dp-logo.png';
+import img from './Dp16.png';
 import { BASE_URL } from "../../Services/Helper";
 const logstaffid = localStorage.getItem("staffid");
 
