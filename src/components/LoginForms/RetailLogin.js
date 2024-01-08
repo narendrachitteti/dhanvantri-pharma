@@ -40,7 +40,7 @@ const data = await response.json();
     // Inside the if (response.ok) block in handleLogin function
     if (response.ok) {
       // Save user details in local storage
-      localStorage.setItem("staffid", data.user.staffid);
+      localStorage.setItem("userid", data.user.userid);
       // Navigate to the pharmacynav route
       navigate('/pharmabilling', { state: { user: data.user } });
     } else {

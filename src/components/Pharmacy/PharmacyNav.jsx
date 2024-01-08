@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 import './PharmacyNav.css';
 import img from './Dp16.png';
 import { BASE_URL } from "../../Services/Helper";
-const logstaffid = localStorage.getItem("staffid");
 
 
 
@@ -23,7 +22,6 @@ const PharmacyNav = () => {
   const location = useLocation();
   const user = location.state?.user;
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-  const [, setStaffList] = useState([]);
   const [matchingStaff, setMatchingStaff] = useState(null);
   const colorFilter = `
   <filter id="white-out">
@@ -35,29 +33,6 @@ const PharmacyNav = () => {
   " />
 </filter>
   `;
- 
-
-  useEffect(() => {
-    fetchStaffDetails();
-  }, []);
-  const fetchStaffDetails = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/api/user`);
-      if (Array.isArray(response.data.data)) {
-        setStaffList(response.data.data);
-        const foundStaff = response.data.data.find(
-          (staff) => staff.staffid === logstaffid
-        );
-        if (foundStaff) {
-          setMatchingStaff(foundStaff); 
-        }
-      } else {
-        console.error("User not found.");
-      }
-    } catch (error) {
-      console.error("Error fetching staff details:", error);
-    }
-  };
 
 
   const toggleProfileDropdown = () => {
@@ -65,7 +40,7 @@ const PharmacyNav = () => {
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem("staffid");
+    localStorage.removeItem("userid");
     localStorage.removeItem("hasPageReloaded");
   };
 
@@ -155,15 +130,6 @@ const PharmacyNav = () => {
            
             </div>
           </div>
-
-
-
-
-
-
-
-
-
           <div
 
             onMouseEnter={toggleProfileDropdown}
@@ -182,29 +148,25 @@ const PharmacyNav = () => {
               </div>
 
               {showProfileDropdown && (
-                <div className="profile-dropdown-logout">
-                  {matchingStaff && (
-                    <div className="dropdown-item-logout">
-                      <div className="user-id">
-                        Name:{capitalizeFirstLetter(matchingStaff.name)}
-                      </div>
-                      <div className="user-id">
-                        Staff ID: {matchingStaff.staffid}
-                      </div>
-                      <div className="user-id">
-                        Department:{" "}
-                        {capitalizeFirstLetter(matchingStaff.specialization)}
-                      </div>
-                    </div>
-                  )}
+  <div className="profile-dropdown-logout">
+    {matchingStaff && (
+      <div className="dropdown-item-logout">
+        <div className="user-id">
+          User ID: {capitalizeFirstLetter(matchingStaff.userid)}
+        </div>
+        <div className="user-id">
+          Department: {capitalizeFirstLetter(matchingStaff.specialization)}
+        </div>
+      </div>
+    )}
 
-                  <div className="linkedin">
-                    <Link to="/" onClick={handleLogOut} className="profile-link">
-                      Sign Out
-                    </Link>
-                  </div>
-                </div>
-              )}
+    <div className="linkedin">
+      <Link to="/" onClick={handleLogOut} className="profile-link">
+        Sign Out
+      </Link>
+    </div>
+  </div>
+)}
             </div>
           </div>
 
