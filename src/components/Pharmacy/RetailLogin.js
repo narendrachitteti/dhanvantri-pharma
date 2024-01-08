@@ -48,7 +48,7 @@ const RetailLogin = () => {
 
     try {
       // Make a GET request to the server endpoint for validation
-      const response = await fetch(`http://localhost:5000/api/getAllLogins/validateLogin?emailOrUserId=${emailOrUserId}&password=${password}`);
+      const response = await fetch(`${BASE_URL}/api/getAllLogins/validateLogin?emailOrUserId=${emailOrUserId}&password=${password}`);
       const data = await response.json();
 
       if (data.success) {

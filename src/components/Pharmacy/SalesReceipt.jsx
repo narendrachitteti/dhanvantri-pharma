@@ -3,6 +3,7 @@ import './SalesReceipt.css'
 import { MdNoteAlt } from "react-icons/md";
 import Select from 'react-select';
 import Navbar from './PharmacyNav';
+import { BASE_URL } from "../../Services/Helper";
 
 const SalesReceipt = () => {
 
@@ -113,7 +114,7 @@ const SalesReceipt = () => {
         },
       };
 
-      const response = await fetch('http://localhost:5000/api/submitShopDetails', {
+      const response = await fetch('${BASE_URL}/api/submitShopDetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -184,7 +185,7 @@ const SalesReceipt = () => {
 
   useEffect(() => {
     // Fetch names from the server when the component mounts
-    fetch('http://localhost:5000/api/getNames')
+    fetch('${BASE_URL}/api/getNames')
       .then(response => response.json())
       .then(data => {
         // Set the fetched names as options
@@ -201,7 +202,7 @@ const SalesReceipt = () => {
   useEffect(() => {
     // Fetch details from the server when the selected shop data changes
     if (selectedShopData) {
-      fetch(`http://localhost:5000/api/getDetails?name=${selectedShopData.label}`)
+      fetch(`${BASE_URL}/api/getDetails?name=${selectedShopData.label}`)
         .then(response => response.json())
         .then(data => {
           // Update the tableData state with the fetched details

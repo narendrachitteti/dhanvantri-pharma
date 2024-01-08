@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import ReactJsPagination from "react-js-pagination";
+import { BASE_URL } from "../../Services/Helper";
 
 function MedicineList() {
   const [medicines, setMedicines] = useState([]);
@@ -22,7 +23,7 @@ function MedicineList() {
   // Function to fetch medicines from the backend
   const fetchMedicines = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getInvoices");
+      const response = await axios.get(`${BASE_URL}/api/getInvoices`);
       setMedicines(response.data);
     } catch (error) {
       console.error("Error fetching medicines:", error);
@@ -46,7 +47,7 @@ function MedicineList() {
       if (Medicine !== null && Manufacturer !== null && Category !== null) {
         try {
           await axios.put(
-            `http://localhost:5000/api/updateMedicineQuantity/${MedId}`,
+            `${BASE_URL}/api/updateMedicineQuantity/${MedId}`,
             { Quantity }
           );
   

@@ -15,7 +15,7 @@
 
 //   const fetchStockAdjustments = async () => {
 //     try {
-//       const response = await fetch('http://localhost:5000/api/stockadjustment');
+//       const response = await fetch('${BASE_URL}/api/stockadjustment');
 //       const data = await response.json();
 //       setStockAdjustments(data);
 //     } catch (error) {

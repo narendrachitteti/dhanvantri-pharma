@@ -11,6 +11,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardDoubleArrowLeft from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRight from '@mui/icons-material/KeyboardDoubleArrowRight';
+import { BASE_URL } from "../../Services/Helper";
 
 const PharmaLab = () => {
 
@@ -30,7 +31,7 @@ const PharmaLab = () => {
   const fetchLabServices = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5000/api/Drug-composition'
+        `${BASE_URL}/api/Drug-composition`
       );
       setLabServices(response.data);
     } catch (error) {
@@ -51,13 +52,13 @@ const PharmaLab = () => {
     try {
       if (selectedService) {
         await axios.put(
-          `http://localhost:5000/api/Drug-composition/${selectedService._id}`,
+          `${BASE_URL}/api/Drug-composition/${selectedService._id}`,
           formData
         );
 
 
       } else {
-        await axios.post('http://localhost:5000/api/Drug-composition/', formData);
+        await axios.post(`${BASE_URL}/api/Drug-composition/`, formData);
       }
       fetchLabServices();
       setSelectedService(null);
@@ -99,7 +100,7 @@ const PharmaLab = () => {
   };
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/Drug-composition/${id}`);
+      await axios.delete(`${BASE_URL}/api/Drug-composition/${id}`);
       fetchLabServices();
     } catch (error) {
       console.error("Error deleting lab service:", error);

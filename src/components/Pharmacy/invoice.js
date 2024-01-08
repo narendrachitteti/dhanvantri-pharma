@@ -5,6 +5,7 @@ import PharmacyNav from './PharmacyNav';
 import { BsPrinter } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { BASE_URL } from "../../Services/Helper";
 
 const Invoice = () => {
     const [invoices, setInvoices] = useState(null);
@@ -13,7 +14,7 @@ const Invoice = () => {
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/patient-bill');
+                const response = await axios.get(`${BASE_URL}/api/patient-bill`);
                 setInvoices(response.data);
             } catch (error) {
                 console.error('Error fetching invoices:', error);
@@ -113,7 +114,7 @@ const Invoice = () => {
     const handleSave = async () => {
         try {
             // Assuming you have an API endpoint for updating patient data
-            await axios.put(`http://localhost:5000/api/update-patient/${editingInvoice._id}`, {
+            await axios.put(`${BASE_URL}/api/update-patient/${editingInvoice._id}`, {
                 patientName: editedData.patientName,
                 mobilenumber: editedData.mobilenumber,
                 date: editedData.date,

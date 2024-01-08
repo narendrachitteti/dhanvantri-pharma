@@ -6,6 +6,7 @@ import PharmacyNav from "./PharmacyNav";
 import { Link } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import ReactJsPagination from "react-js-pagination";
+import { BASE_URL } from "../../Services/Helper";
 
 function Inventory() {
   const [activeCategory, setActiveCategory] = useState("stocks");
@@ -24,16 +25,16 @@ function Inventory() {
 
       switch (category) {
         case "stocks":
-          response = await axios.get("http://127.0.0.1:5000/api/getInvoices");
+          response = await axios.get(`${BASE_URL}/api/getInvoices`);
           break;
         case "expiry":
-          response = await axios.get("http://127.0.0.1:5000/api/getInvoices");
+          response = await axios.get(`${BASE_URL}/api/getInvoices`);
           break;
         case "low":
-          response = await axios.get("http://127.0.0.1:5000/api.getInvoices");
+          response = await axios.get(`${BASE_URL}/api.getInvoices`);
           break;
         case "zero":
-          response = await axios.get("http://127.0.0.1:5000/api/getInvoices");
+          response = await axios.get(`${BASE_URL}/api/getInvoices`);
           break;
         default:
           break;

@@ -3,6 +3,7 @@ import ReactJsPagination from 'react-js-pagination';
 import axios from 'axios';
 import './Account.css';
 import PharmacyNav from './PharmacyNav';
+import { BASE_URL } from "../../Services/Helper";
 
 const AccountDetails = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,7 +47,7 @@ const AccountDetails = () => {
       }
 
       // Send newAccountData to the backend
-      const response = await axios.post('http://localhost:5000/api/submit-account', newAccountData);
+      const response = await axios.post(`${BASE_URL}/api/submit-account`, newAccountData);
 
       // Update the accounts state with the response data from the server
       setAccounts([...accounts, response.data.account]); // Assuming the response contains the added account data
@@ -76,7 +77,7 @@ const AccountDetails = () => {
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/get-accounts');
+        const response = await axios.get(`${BASE_URL}/api/get-accounts`);
         setAccounts(response.data); // Assuming the response contains an array of accounts
       } catch (error) {
         console.error('Error fetching accounts:', error);
@@ -97,8 +98,8 @@ const AccountDetails = () => {
 
   const handleEditAccount = async (accountID) => {
     try {
-      await axios.put(`http://localhost:5000/api/update-Account/${accountID}`, editAccountData);
-      const response = await axios.get('http://localhost:5000/api/get-accounts');
+      await axios.put(`${BASE_URL}/api/update-Account/${accountID}`, editAccountData);
+      const response = await axios.get(`${BASE_URL}/api/get-accounts`);
       const updatedAccounts = response.data;
       setAccounts(updatedAccounts);
 

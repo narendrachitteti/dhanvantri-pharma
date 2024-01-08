@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import ReactJsPagination from "react-js-pagination";
+import { BASE_URL } from "../../Services/Helper";
 
 function Search({ filterText, onFilterTextChange }) {
   return (
@@ -33,7 +34,7 @@ function OrderList() {
   const itemsPerPage = 3;
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/getCreatePurchaseOrders")
+    fetch(`${BASE_URL}/api/getCreatePurchaseOrders`)
       .then((response) => response.json())
       .then((data) => {
         const initialOrders = data.map((order) => ({
@@ -63,7 +64,7 @@ function OrderList() {
 
   const updateStatus = async (customOrderId, newStatus) => {
     try {
-      await fetch(`http://localhost:5000/api/updateOrder/${customOrderId}`, {
+      await fetch(`${BASE_URL}/api/updateOrder/${customOrderId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +96,7 @@ function OrderList() {
 
   const deleteOrder = async (customOrderId) => {
     try {
-      await fetch(`http://localhost:5000/api/deleteOrder/${customOrderId}`, {
+      await fetch(`${BASE_URL}/api/deleteOrder/${customOrderId}`, {
         method: "DELETE",
       });
 
@@ -123,7 +124,7 @@ function OrderList() {
         (order) => order.customOrderId === customOrderId
       );
 
-      await fetch(`http://localhost:5000/api/updateOrder/${customOrderId}`, {
+      await fetch(`${BASE_URL}/api/updateOrder/${customOrderId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

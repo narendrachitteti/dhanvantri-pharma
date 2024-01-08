@@ -3,6 +3,7 @@ import Select from "react-select";
 import "./creditcard.css";
 import PharmacyNav from "./PharmacyNav";
 import axios from "axios";
+import { BASE_URL } from "../../Services/Helper";
 
 const Note = () => {
   const [formDatas, setFormDatas] = useState({
@@ -22,7 +23,7 @@ const Note = () => {
   useEffect(() => {
     const fetchNewCrNo = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/credit-notes/new-id");
+        const response = await axios.get(`${BASE_URL}/api/credit-notes/new-id`);
         const nextCrNo = response.data.CrNo;
 
         setFormDatas((prevData) => ({ ...prevData, CrNo: nextCrNo }));
@@ -35,7 +36,7 @@ const Note = () => {
   useEffect(() => {
     const fetchNewDrNo = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/Debit-notes/new-id");
+        const response = await axios.get(`${BASE_URL}/api/Debit-notes/new-id`);
         const nextDrNo = response.data.DrNo;
 
         setFormData((prevData) => ({ ...prevData, DrNo: nextDrNo }));
@@ -61,7 +62,7 @@ const Note = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/submitDebitNote",
+        `${BASE_URL}/api/submitDebitNote`,
         formData
       );
 
@@ -69,7 +70,7 @@ const Note = () => {
       console.log("Debit Note data submitted successfully");
 
       // Fetch the next DR number and update the form fields
-      const nextDrResponse = await axios.get("http://localhost:5000/api/Debit-notes/new-id");
+      const nextDrResponse = await axios.get(`${BASE_URL}/api/Debit-notes/new-id`);
       const nextDrNo = nextDrResponse.data.DrNo;
 
       setFormData({
@@ -87,7 +88,7 @@ const Note = () => {
   const handleSubmits = async () => {
     try {
       const submitResponse = await axios.post(
-        "http://localhost:5000/api/submitCreditNote",
+        `${BASE_URL}/api/submitCreditNote`,
         formDatas
       );
 
@@ -95,7 +96,7 @@ const Note = () => {
       console.log("Credit Note data submitted successfully");
 
       // Fetch the next CR number and update the form fields
-      const response = await axios.get("http://localhost:5000/api/credit-notes/new-id");
+      const response = await axios.get(`${BASE_URL}/api/credit-notes/new-id`);
       const nextCrNo = response.data.CrNo;
 
       setFormDatas({

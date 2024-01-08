@@ -11,6 +11,7 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import "./Loginvi.css";
+import { BASE_URL } from "../../Services/Helper";
 
 const RetailLogin = () => {
   const [email, setEmail] = useState("");
@@ -31,13 +32,9 @@ const handleLogin = async () => {
       return;
     }
 
-    const response = await fetch("http://localhost:5000/api/login", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({ email, password }),
-});
+    // Make a GET request to the backend login route
+    const response = await fetch(`${BASE_URL}/api/user?email=${email}&password=${password}`);
+
 
 const data = await response.json();
     // Inside the if (response.ok) block in handleLogin function

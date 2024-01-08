@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './medicinedatacomponent.css'
 import PharmacyNav from './PharmacyNav';
+import { BASE_URL } from "../../Services/Helper";
 
 const MedicineDataComponent = () => {
   const [medicineData, setMedicineData] = useState([]);
@@ -15,7 +16,7 @@ const MedicineDataComponent = () => {
   useEffect(() => {
     const fetchItemsByDate = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/items-by-date?date=${selectedDate}`);
+        const response = await axios.get(`${BASE_URL}/api/items-by-date?date=${selectedDate}`);
         setItems(response.data.items);
       } catch (error) {
         console.error('Error fetching items by date:', error);
@@ -32,7 +33,7 @@ const MedicineDataComponent = () => {
   useEffect(() => {
     const fetchItemsForToday = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/items-for-today');
+        const response = await axios.get(`${BASE_URL}/api/items-for-today`);
         setFilteredItems(response.data.items);
       } catch (error) {
         console.error('Error fetching items for today:', error);
@@ -47,7 +48,7 @@ const MedicineDataComponent = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/items'); // Replace '/api/items' with your actual backend endpoint
+        const response = await axios.get(`${BASE_URL}/api/items`); // Replace '/api/items' with your actual backend endpoint
         setItems(response.data.items);
       } catch (error) {
         console.error('Error fetching items:', error);
@@ -61,7 +62,7 @@ const MedicineDataComponent = () => {
   useEffect(() => {
     const fetchMedicineData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/getMedicine');
+        const response = await axios.get(`${BASE_URL}/api/getMedicine`);
         const data = response.data.medicines;
 
         // Aggregate medicines to sum up strips and free strips for each unique medicine
@@ -133,7 +134,7 @@ const MedicineDataComponent = () => {
 
   const fetchItemsByDate = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/items-by-date?date=${selectedDate}`);
+      const response = await axios.get(`${BASE_URL}/api/items-by-date?date=${selectedDate}`);
       setItems(response.data.items);
     } catch (error) {
       console.error('Error fetching items by date:', error);
@@ -144,7 +145,7 @@ const MedicineDataComponent = () => {
   // Function to fetch items for today
   const fetchItemsForToday = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/items-for-today');
+      const response = await axios.get(`${BASE_URL}/api/items-for-today`);
       setItems(response.data.items);
     } catch (error) {
       console.error('Error fetching items for today:', error);
@@ -173,7 +174,7 @@ const MedicineDataComponent = () => {
 // Inside the fetchMedicineData function, calculate total capsules for each medicine
 const fetchMedicineData = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/api/getMedicine');
+    const response = await axios.get(`${BASE_URL}/api/getMedicine`);
     const data = response.data.medicines;
 
     const aggregatedData = {};
@@ -208,7 +209,7 @@ const fetchMedicineData = async () => {
 useEffect(() => {
   const fetchMedicineData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/getMedicine');
+      const response = await axios.get(`${BASE_URL}/api/getMedicine`);
       const data = response.data.medicines;
 
       const aggregatedData = {};

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import "./PatientBill.css";
 import Navbar from "./PharmacyNav";
+import { BASE_URL } from "../../Services/Helper";
+
 const PatientBill = () => {
   const [quantity, setQuantity] = useState('');
   const [medicines, setMedicines] = useState([]);
@@ -107,7 +109,7 @@ const PatientBill = () => {
   useEffect(() => {
     const fetchBatches = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/batchNumbers');
+        const response = await axios.get(`${BASE_URL}/api/batchNumbers`);
         setBatches(response.data.batchNumbers);
       } catch (error) {
         console.error('Error fetching batches:', error);
@@ -120,7 +122,7 @@ const PatientBill = () => {
   useEffect(() => {
     const fetchMedicineNames = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/medicines');
+        const response = await axios.get(`${BASE_URL}/api/medicines`);
         setMedicines(response.data.medicines);
       } catch (error) {
         console.error('Error fetching medicines:', error);
@@ -132,7 +134,7 @@ const PatientBill = () => {
 
   const handleProductSelect = async (medicineName, index) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/medicineDetails/${medicineName}`);
+      const response = await axios.get(`${BASE_URL}/api/medicineDetails/${medicineName}`);
       const medicineDetails = response.data;
   
       const updatedItems = [...items];
@@ -151,7 +153,7 @@ const PatientBill = () => {
   
   const handleBatchSelect = async (batchNumber, index) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/batchDetails/${batchNumber}`);
+      const response = await axios.get(`${BASE_URL}/api/batchDetails/${batchNumber}`);
       const fullExpiryDate = response.data.BatchExpiry;
   
       // Extract month and last two digits of the year
@@ -176,7 +178,7 @@ const PatientBill = () => {
   
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/patient-bill', {
+      const response = await axios.post(`${BASE_URL}/api/patient-bill`, {
         patientName,
         mobilenumber,
         date,
@@ -384,11 +386,6 @@ const PatientBill = () => {
     };
   };
 };
-
-
-
-  
- 
 
   return (
     <>

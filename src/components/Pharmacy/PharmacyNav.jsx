@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import './PharmacyNav.css';
 import img from './dp-logo.png';
+import { BASE_URL } from "../../Services/Helper";
 const logstaffid = localStorage.getItem("staffid");
+
 
 
 const capitalizeFirstLetter = (str) => {
@@ -33,21 +35,22 @@ const PharmacyNav = () => {
   " />
 </filter>
   `;
-
+ 
 
   useEffect(() => {
     fetchStaffDetails();
   }, []);
   const fetchStaffDetails = async () => {
     try {
-      if (!logstaffid) {
-        console.error("Staff ID is undefined");
-        return;
-      }
-  
-      const response = await axios.get(`http://localhost:5000/api/user?staffid=${logstaffid}`);
-      if (response.data.user) {
-        setMatchingStaff(response.data.user);
+      const response = await axios.get(`${BASE_URL}/api/user`);
+      if (Array.isArray(response.data.data)) {
+        setStaffList(response.data.data);
+        const foundStaff = response.data.data.find(
+          (staff) => staff.staffid === logstaffid
+        );
+        if (foundStaff) {
+          setMatchingStaff(foundStaff); 
+        }
       } else {
         console.error("User not found.");
       }
@@ -55,10 +58,6 @@ const PharmacyNav = () => {
       console.error("Error fetching staff details:", error);
     }
   };
-  useEffect(() => {
-    fetchStaffDetails();
-  }, [logstaffid]);
-    
 
 
   const toggleProfileDropdown = () => {
@@ -91,14 +90,14 @@ const PharmacyNav = () => {
       <div className="navbar-doctor1" >
         <div className="left-1">
           <div className="nav-item">
-            <Link to="/pharmabilling" style={{ textDecoration: 'none', color: 'white', fontWeight: 'bolder', fontSize: '2rem' }} >
-
-              <img src={img} alt='logo' style={{ width: '50px', height: '50px', marginTop: '-25px' }} filter={colorFilter} />
+            <Link to="/pharmabilling" style={{textDecoration:'none', color:'white',fontWeight:'bolder',fontSize:'2rem'}} >
+             
+            <img  src={img}alt='logo'  style={{ width: '50px', height: '50px',marginTop:'-25px'}} filter={colorFilter} />
             </Link>
           </div>
           <div className="nav-item">
             <div className="dropdown">
-              <h6 style={{ textDecoration: 'none', color: 'white', fontWeight: 'bolder' }}> Billing</h6>
+           <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Billing</h6>
               <div className="dropdown-content">
                 <Link to="/pharmabilling">Bill</Link>
                 <Link to="/BillingDashboard">Dashboard</Link>
@@ -107,7 +106,7 @@ const PharmacyNav = () => {
           </div>
           <div className="nav-item">
             <div className="dropdown">
-              <h6 style={{ textDecoration: 'none', color: 'white', fontWeight: 'bolder' }}> Inventory</h6>
+              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Inventory</h6>
               <div className="dropdown-content">
                 {/* <Link to="/Inventory">Inventory Stock</Link> */}
                 <Link to="/MedicineList">Product</Link>
@@ -115,10 +114,10 @@ const PharmacyNav = () => {
               </div>
             </div>
           </div>
-
+  
           <div className="nav-item">
             <div className="dropdown">
-              <h6 style={{ textDecoration: 'none', color: 'white', fontWeight: 'bolder' }}>Item Description</h6>
+              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Item Description</h6>
               <div className="dropdown-content">
                 <Link to="/ItemDescription">Item Description</Link>
                 <Link to="/Stockist">Stockists</Link>
@@ -130,32 +129,41 @@ const PharmacyNav = () => {
           </div>
           <div className="nav-item">
             <div className="dropdown">
-              <h6 style={{ textDecoration: 'none', color: 'white', fontWeight: 'bolder' }}> Purchase Order</h6>
+              <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Purchase Order</h6>
               <div className="dropdown-content">
                 <Link to="/CreateOrder">Create Order</Link>
                 <Link to="/OrderList">Order list</Link>
                 <Link to="/Drugmaster">Drug Master</Link>
                 <Link to="/Creditnote">Credit/Debit Note</Link>
-
+                
 
               </div>
             </div>
-
+           
           </div>
           <div className="nav-item">
-            <div className="dropdown">
+          <div className="dropdown">
 
-              <h6 style={{ textDecoration: 'none', color: 'white', fontWeight: 'bolder' }}>Patient Details</h6>
-
-              <div className="dropdown-content">
-                <Link to='/invoice'> Invoice Details  </Link>
-                <Link to='/MedicineDataComponent'> Product Details  </Link>
-                <Link to='/Account'> Account Details</Link>
-
-              </div>
+          <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Patient Details</h6>
+           
+  <div className="dropdown-content">
+           <Link to='/invoice'> Invoice Details  </Link>
+           <Link to='/MedicineDataComponent'> Product Details  </Link>
+           <Link to='/Account'> Account Details</Link>
 
             </div>
+           
+            </div>
           </div>
+
+
+
+
+
+
+
+
+
           <div
 
             onMouseEnter={toggleProfileDropdown}
@@ -176,19 +184,19 @@ const PharmacyNav = () => {
               {showProfileDropdown && (
                 <div className="profile-dropdown-logout">
                   {matchingStaff && (
-                  <div className="dropdown-item-logout">
-                    <div className="user-id">
-                      Name: {matchingStaff.name ? capitalizeFirstLetter(matchingStaff.name) : ""}
+                    <div className="dropdown-item-logout">
+                      <div className="user-id">
+                        Name:{capitalizeFirstLetter(matchingStaff.name)}
+                      </div>
+                      <div className="user-id">
+                        Staff ID: {matchingStaff.staffid}
+                      </div>
+                      <div className="user-id">
+                        Department:{" "}
+                        {capitalizeFirstLetter(matchingStaff.specialization)}
+                      </div>
                     </div>
-                    <div className="user-id">
-                      Staff ID: {matchingStaff.staffid ? matchingStaff.staffid : ""}
-                    </div>
-                    <div className="user-id">
-                      Department:{" "}
-                      {matchingStaff.specialization ? capitalizeFirstLetter(matchingStaff.specialization) : ""}
-                    </div>
-                  </div>
-                )}
+                  )}
 
                   <div className="linkedin">
                     <Link to="/" onClick={handleLogOut} className="profile-link">

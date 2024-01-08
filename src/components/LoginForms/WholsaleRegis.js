@@ -10,6 +10,8 @@ import {
 }
 from 'mdb-react-ui-kit';
 import './WhlosaleRegis.css'
+import { BASE_URL } from "../../Services/Helper";
+
 function  WholsaleRegis() {
 
     const navigate = useNavigate();
@@ -33,7 +35,7 @@ function  WholsaleRegis() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/register', {
+      const response = await fetch(`${BASE_URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

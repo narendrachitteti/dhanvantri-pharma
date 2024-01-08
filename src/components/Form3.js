@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Form3.css'; // Import the CSS file
 import PharmacyNav from './Pharmacy/PharmacyNav';
+import { BASE_URL } from "../Services/Helper";
 
 const Form3 = () => {
   const [taxes, setTaxes] = useState([]);
@@ -21,7 +22,7 @@ const Form3 = () => {
 
   const fetchTaxes = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/taxes');
+      const response = await axios.get(`${BASE_URL}/api/taxes`);
       setTaxes(response.data);
     } catch (error) {
       console.error('Error fetching taxes:', error.message);
@@ -30,7 +31,7 @@ const Form3 = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/taxes/${id}`);
+      await axios.delete(`${BASE_URL}/api/taxes/${id}`);
       // After deleting, fetch the updated list of taxes
       fetchTaxes();
     } catch (error) {
@@ -46,7 +47,7 @@ const Form3 = () => {
 
   const handleAddTax = async () => {
     try {
-      await axios.post('http://localhost:5000/api/taxes', newTax);
+      await axios.post('${BASE_URL}/api/taxes', newTax);
       // After adding, fetch the updated list of taxes
       fetchTaxes();
       // Close the form
@@ -64,7 +65,7 @@ const Form3 = () => {
 
   const handleEditTax = async () => {
     try {
-      await axios.put(`http://localhost:5000/api/taxes/${selectedTax._id}`, selectedTax);
+      await axios.put(`${BASE_URL}/api/taxes/${selectedTax._id}`, selectedTax);
       // After editing, fetch the updated list of taxes
       fetchTaxes();
       // Close the form

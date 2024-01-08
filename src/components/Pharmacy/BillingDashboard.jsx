@@ -4,22 +4,19 @@ import "./BillingDashboard.css";
 import axios from "axios";
 import PharmacyNav from "./PharmacyNav";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../Services/Helper";
 
 function BillingDashboard() {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [salesData, setSalesData] = useState([]);
   const [fastMovingProducts, setFastMovingProducts] = useState([]);
-  const [filteredFastMovingProducts, setFilteredFastMovingProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  
   const [totalMedicines, setTotalMedicines] = useState(0);
   const [totalManufacturers, setTotalManufacturers] = useState(0);
   const [currentInventoryCost, setCurrentInventoryCost] = useState(0);
   const [currentInventoryMRP, setCurrentInventoryMRP] = useState(0);
   const [inStockInventoryQuantity, setInStockInventoryQuantity] = useState(0);
   const [medicineOutOfStock, setMedicineOutOfStock] = useState(0);
-  const [salesSearchQuery, setSalesSearchQuery] = useState("");
-  const [fastMovingSearchQuery, setFastMovingSearchQuery] = useState("");
   const [totalCollection, setTotalCollection] = useState(0);
   const [totalbills, setTotalbills] = useState(0);
 
@@ -38,26 +35,6 @@ function BillingDashboard() {
 
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-
-  const handleFilter = () => {
-    axios
-      .get('http://localhost:5000/api/pharmacy-billing/filter', {
-        params: {
-          fromDate,
-          toDate,
-        },
-      })
-      .then((response) => {
-        setBillingData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  };
-
-  useEffect(() => {
-    handleFilter();
-  },);
 
   useEffect(() => {
     fetchData();
@@ -78,7 +55,7 @@ function BillingDashboard() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:5000/api/pharmacy-billing"
+        `${BASE_URL}/api/pharmacy-billing`
       );
       setSalesData(response.data.reverse());
     } catch (error) {
@@ -86,27 +63,11 @@ function BillingDashboard() {
     }
   };
 
-  const renderSalesData = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    const slicedData = salesData.slice(startIndex, endIndex);
-
-    return slicedData.map((data, index) => (
-      <tr key={index}>
-        <td>{startIndex + index + 1}</td>
-        <td>{data.patientDetails.name}</td>
-        <td>{data.billId}</td>
-        <td>{data.paidAmount}</td>
-        <td>{data.paymentMode}</td>
-      </tr>
-    ));
-  };
 
   // Function to fetch fast-moving medicines
   const fetchFastMovingMedicines = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/pharmacy-billing");
+      const response = await axios.get(`${BASE_URL}/api/pharmacy-billing`);
       const fastMovingMedicinesData = response.data
         .map((item) => item.pharmacyTable) // Extract the pharmacyTable from each item
         .flat() // Flatten the array
@@ -117,20 +78,10 @@ function BillingDashboard() {
     }
   };
 
-  // Function to render fast-moving medicines
-  const renderFastMovingMedicines = () => {
-    return fastMovingProducts.map((medicine, index) => (
-      <tr key={index}>
-        <td>{medicine.medicineName}</td>
-        <td>{medicine.quantity}</td>
-      </tr>
-    ));
-  };
-
 
   const fetchInventoryData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getInvoices");
+      const response = await axios.get(`${BASE_URL}/api/getInvoices`);
 
       // Initialize variables to store calculated values
       let totalMedicines = 0;
@@ -183,18 +134,18 @@ function BillingDashboard() {
   };
 
   const fetchCollectionData = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/api/getIn");
-      const data = response.data;
-      const subtotalWithGSTSum = data.reduce((sum, item) => {
-        return sum + (item.subtotalWithGST || 0); // Use 0 if subtotalWithGST is undefined or null
-      }, 0);
-      setTotalCollection(subtotalWithGSTSum);
+  try {
+    const response = await axios.get(`${BASE_URL}/api/getIn`);
+    const data = response.data;
+    const totalCollectionSum = data.reduce((sum, item) => {
+      return sum + (item.Collection || 0); // Use 0 if Collection is undefined or null
+    }, 0);
+    setTotalCollection(totalCollectionSum);
+  } catch (error) {
+    console.error("API Error:", error);
+  }
+};
 
-    } catch (error) {
-      console.error("API Error:", error);
-    }
-  };
 
   useEffect(() => {
     fetchCollectionData();
@@ -203,7 +154,7 @@ function BillingDashboard() {
 
   const fetchTotalBilldata = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getIn");
+      const response = await axios.get(`${BASE_URL}/api/getIn`);
       const totalbills = response.data.length;
       setTotalbills(totalbills);
 
@@ -240,7 +191,7 @@ function BillingDashboard() {
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
             />
-            <button className="billing-dash-go" onClick={handleFilter}>Go</button>
+            <button className="billing-dash-go" >Go</button>
           </div>
         </div>
         <hr />
@@ -265,18 +216,6 @@ function BillingDashboard() {
               <p>₹&nbsp;{totalCollection}</p>
             </div>
           </Link>
-          {/* <Link to="/Dbdetails" className="dbcard-container">
-            <div className="dbcard">
-              <label>Collected by Card</label>
-              <p>₹&nbsp;{billingData.Card}</p>
-            </div>
-          </Link> */}
-          {/* <Link to="/Dbdetails" className="dbcard-container">
-            <div className="dbcard">
-              <label>Collected by UPI</label>
-              <p>₹&nbsp;{billingData.UPI}</p>
-            </div>
-          </Link> */}
         </div>
       </div>
       <div className="card-container2" style={{ fontFamily: "Inria Serif" }}>
@@ -287,10 +226,6 @@ function BillingDashboard() {
               <label>Total Medicines</label>
               <p>{totalMedicines}</p>
             </div>
-            {/* <div className="statistic">
-              <label>Total Manufacturers</label>
-              <p>{totalManufacturers}</p>
-            </div> */}
             <div className="statistic">
               <label>Medicine out of stock</label>
               <p>{medicineOutOfStock}</p>

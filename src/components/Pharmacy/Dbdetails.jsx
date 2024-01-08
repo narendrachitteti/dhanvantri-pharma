@@ -5,6 +5,7 @@ import PharmacyNav from "./PharmacyNav";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ReactJsPagination from "react-js-pagination"; // Import pagination component
+import { BASE_URL } from "../../Services/Helper";
 
 const Dbdetails = () => {
   const [pharmacyData, setPharmacyData] = useState([]);
@@ -14,7 +15,7 @@ const Dbdetails = () => {
   useEffect(() => {
     // Fetch data from the backend API for Pharmacy billing
     axios
-      .get("http://localhost:5000/api/pharmacy-billing")
+      .get(`${BASE_URL}/api/pharmacy-billing`)
       .then((response) => {
         console.log("Received pharmacy data:", response.data);
         setPharmacyData(response.data);
