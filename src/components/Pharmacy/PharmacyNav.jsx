@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import './PharmacyNav.css';
 import img from './dp-logo.png';
 const logstaffid = localStorage.getItem("staffid");
@@ -17,6 +18,8 @@ const capitalizeFirstLetter = (str) => {
 };
 
 const PharmacyNav = () => {
+  const location = useLocation();
+  const user = location.state?.user;
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [, setStaffList] = useState([]);
   const [matchingStaff, setMatchingStaff] = useState(null);
@@ -35,25 +38,27 @@ const PharmacyNav = () => {
   useEffect(() => {
     fetchStaffDetails();
   }, []);
-
   const fetchStaffDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/user");
-      if (Array.isArray(response.data.data)) {
-        setStaffList(response.data.data);
-        const foundStaff = response.data.data.find(
-          (staff) => staff.staffid === logstaffid
-        );
-        if (foundStaff) {
-          setMatchingStaff(foundStaff);
-        }
+      if (!logstaffid) {
+        console.error("Staff ID is undefined");
+        return;
+      }
+  
+      const response = await axios.get(`http://localhost:5000/api/user?staffid=${logstaffid}`);
+      if (response.data.user) {
+        setMatchingStaff(response.data.user);
       } else {
-        console.error("Invalid data received from the server:", response.data);
+        console.error("User not found.");
       }
     } catch (error) {
-      console.error("Error fetching staff list:", error);
+      console.error("Error fetching staff details:", error);
     }
   };
+  useEffect(() => {
+    fetchStaffDetails();
+  }, [logstaffid]);
+    
 
 
   const toggleProfileDropdown = () => {
@@ -65,6 +70,7 @@ const PharmacyNav = () => {
     localStorage.removeItem("hasPageReloaded");
   };
 
+  // 
   const renderProfileIcon = () => {
     if (matchingStaff) {
       const nameParts = matchingStaff.name.split(" ");
@@ -80,8 +86,6 @@ const PharmacyNav = () => {
       return <CgProfile />;
     }
   };
-
-
   return (
     <>
       <div className="navbar-doctor1" >
@@ -152,15 +156,6 @@ const PharmacyNav = () => {
 
             </div>
           </div>
-
-
-
-
-
-
-
-
-
           <div
 
             onMouseEnter={toggleProfileDropdown}
@@ -181,19 +176,19 @@ const PharmacyNav = () => {
               {showProfileDropdown && (
                 <div className="profile-dropdown-logout">
                   {matchingStaff && (
-                    <div className="dropdown-item-logout">
-                      <div className="user-id">
-                        Name:{capitalizeFirstLetter(matchingStaff.name)}
-                      </div>
-                      <div className="user-id">
-                        Staff ID: {matchingStaff.staffid}
-                      </div>
-                      <div className="user-id">
-                        Department:{" "}
-                        {capitalizeFirstLetter(matchingStaff.specialization)}
-                      </div>
+                  <div className="dropdown-item-logout">
+                    <div className="user-id">
+                      Name: {matchingStaff.name ? capitalizeFirstLetter(matchingStaff.name) : ""}
                     </div>
-                  )}
+                    <div className="user-id">
+                      Staff ID: {matchingStaff.staffid ? matchingStaff.staffid : ""}
+                    </div>
+                    <div className="user-id">
+                      Department:{" "}
+                      {matchingStaff.specialization ? capitalizeFirstLetter(matchingStaff.specialization) : ""}
+                    </div>
+                  </div>
+                )}
 
                   <div className="linkedin">
                     <Link to="/" onClick={handleLogOut} className="profile-link">

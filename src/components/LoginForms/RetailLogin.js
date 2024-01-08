@@ -31,23 +31,28 @@ const handleLogin = async () => {
       return;
     }
 
-    // Make a GET request to the backend login route
-    const response = await fetch(`http://localhost:5000/api/user?email=${email}&password=${password}`);
+    const response = await fetch("http://localhost:5000/api/login", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ email, password }),
+});
 
-    const data = await response.json();
-
+const data = await response.json();
     // Inside the if (response.ok) block in handleLogin function
-      if (response.ok) {
-        // Save user details in local storage
-        localStorage.setItem("staffid", data.staffid);
-        // Navigate to the pharmacynav route
-        navigate('/pharmabilling');
+    if (response.ok) {
+      // Save user details in local storage
+      localStorage.setItem("staffid", data.user.staffid);
+      // Navigate to the pharmacynav route
+      navigate('/pharmabilling', { state: { user: data.user } });
     } else {
       // If the login fails, display an error message
       setShowAlert(true);
       setAlertType('danger');
       setAlertMessage(data.message);
     }
+    
   } catch (error) {
     console.error('Error during login:', error);
   }
