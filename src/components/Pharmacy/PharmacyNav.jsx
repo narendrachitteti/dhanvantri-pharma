@@ -72,11 +72,11 @@ const PharmacyNav = () => {
           </div>
           <div className="nav-item">
             <div className="dropdown">
-           <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Billing</h6>
-              <div className="dropdown-content">
+            <Link to="/pharmabilling"> <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Billing</h6></Link>
+              {/* <div className="dropdown-content">
                 <Link to="/pharmabilling">Bill</Link>
                 <Link to="/BillingDashboard">Dashboard</Link>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="nav-item">

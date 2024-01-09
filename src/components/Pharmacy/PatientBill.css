@@ -57,7 +57,7 @@
 }
 .goods-class{
   font-size: 13px;
-  margin-left:40rem;
+  margin-left:55rem;
   width: 350px;
   text-align:start;
   /* align-items: flex-end; */
@@ -253,7 +253,7 @@ font-weight: bold;
   margin-left: -35%;
 }
 .dhanvantri-heading-address{
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   width: 36%;
   margin-left: 15%;
 }

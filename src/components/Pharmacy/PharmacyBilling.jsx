@@ -394,7 +394,7 @@ const PharmacyBilling = () => {
             .join("")}
                     </tbody>
                   </table>
-                  <h1 style='font-size:15px'>Signature: ${sign}</h1>
+                  <h1 style='font-size:15px'>QP Signature: ${sign}</h1>
                   <div>
                   <h1 style='font-size:15px; margin-left:45%;'>Goods once sold cannot be taken back or exchanged</h1>
                   <h1 style='font-size:15px; margin-left:45%;'>Subjected to Bengalur-560104 Jurisdiction</h1>
@@ -448,8 +448,8 @@ const PharmacyBilling = () => {
           <div className='main-heading'>
           <h2 className="dhanvantri-heading">ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h2>
             <h2 className="dhanvantri-heading">Dhanvantri Pharma</h2>
-            <h5 className="dhanvantri-heading-address"> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h5>
-            <h5 className="dhanvantri-heading-hampinagar">Hampinagara , Bengaluru-560104</h5>
+            <h6 className="dhanvantri-heading-address"> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h6>
+            <h6 className="dhanvantri-heading-address">Hampinagara , Bengaluru-560104</h6>
           </div>
           <FaPlusCircle className="icon-plus-main-second" />
         </div>
@@ -509,7 +509,7 @@ const PharmacyBilling = () => {
               <th className="oty-table">Qty</th>
               <th className="product-product-table">Product</th>
               <th className="product-price-table">Product Price</th>
-              <th className="product-price-table">Mfr name</th>
+              <th className="product-price-table">Mfr</th>
               <th className="product-price-table">Batch No</th>
               <th className="product-price-table">Taxable Value</th>
               <th className="product-price-table">GST (%)</th>
@@ -517,7 +517,7 @@ const PharmacyBilling = () => {
                 <th colspan="2" className="table-value">Value</th>
                 <tr className="table-bill-row">
                   <th className="with-gst"colSpan={2}>without Gst</th>
-                  <th className="with-gst"rowSpan={2}>with Gst</th>
+                  <th className="with-gst"colSpan={2}>with Gst</th>
                 </tr>
               </th>
               <th className="product-action-table">Action</th>
@@ -596,7 +596,7 @@ const PharmacyBilling = () => {
                     id="Gst"
                     value={taxableValues[index] || ''}
                   // value={Gst}
-                  />&nbsp;&nbsp;&nbsp;
+                  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input
                     className='value-input'
                     type="text"
@@ -628,8 +628,9 @@ const PharmacyBilling = () => {
         </div>
         <div className="merge-sign-para">
           <div>
-            <div className="pharma-sign">
-              <label>QP Signature : </label>
+            <div>
+              <h5>For Dhanvantri Pharma</h5><br/>
+              <h6>QP Signature: </h6>
               <input
                 type="textarea"
                 className="sign-area"
