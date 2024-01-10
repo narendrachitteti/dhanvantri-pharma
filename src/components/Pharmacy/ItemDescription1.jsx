@@ -123,15 +123,14 @@ const ItemDescription1 = () => {
               </div>
 
               <div className="item-company-name">
-                <label className="label">Batch No:</label>
+                {/* <label className="label">Batch No:</label>
                 <input
                   className="batch-input09"
                   name="batchno"
                   value={formData.batchno}
                   onChange={handleChange}
                 >
-                  {/* Options for batchno */}
-                </input>
+                </input> */}
 
                 <label className="item-schedu-label1">Schedule:</label>
                 <select

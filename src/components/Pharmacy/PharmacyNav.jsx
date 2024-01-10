@@ -18,9 +18,11 @@ const capitalizeFirstLetter = (str) => {
     .join(" ");
 };
 
+
 const PharmacyNav = () => {
   const location = useLocation();
   const user = location.state?.user;
+  const [userid, setUserID] = useState("");
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [matchingStaff, setMatchingStaff] = useState(null);
   const colorFilter = `
@@ -154,9 +156,9 @@ const PharmacyNav = () => {
         <div className="user-id">
           User ID: {capitalizeFirstLetter(matchingStaff.userid)}
         </div>
-        <div className="user-id">
+        {/* <div className="user-id">
           Department: {capitalizeFirstLetter(matchingStaff.specialization)}
-        </div>
+        </div> */}
       </div>
     )}
 

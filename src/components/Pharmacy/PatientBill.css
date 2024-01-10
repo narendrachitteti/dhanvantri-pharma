@@ -122,8 +122,8 @@
 color: white;
 }
 .print-btn:hover{
-  background-color: #674df7;
-}
+   background-color: #70c0a8;
+} 
 .flex-change34{
   display:flex;
   /* justify-content: space-between; */
@@ -212,7 +212,7 @@ margin-left: 3%;
   margin-bottom: 1%;
 }
 .Add-btn:hover{
-  background-color: #674df7;
+  background-color: #70c0a8;
 }
 .class567{
   text-align: center !important;

@@ -39,7 +39,7 @@
     margin-top: -25px;
    }
    .item-company-name{
-       display: flex;
+       /* display: flex; */
        flex-wrap: wrap;
        margin-top: 1.5%;
        align-items: center;
@@ -64,7 +64,7 @@
      width: 21%;
    }
    .item-schedu-label1{
-    margin-left: 9.5%;
+    margin-left: 3.5%;
     display: inline;
    }
    .merge-product-sale{
