@@ -429,7 +429,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
             <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
               <FaArrowCircleLeft />
             </Link>{" "}
-            &nbsp;Add invoice
+            &nbsp;Purchase invoice
           </h3>
           <hr />
           <div className="input-row">
@@ -454,7 +454,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
               </div>
             </div>
             <div className="input-container">
-              <label htmlFor="date"> Invoice Date</label>
+              <label htmlFor="date"> Invoice Date</label><br/>
               <input
                 type="date"
                 id="date1"
@@ -472,7 +472,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
               />
             </div>
             <div className="input-container">
-              <label htmlFor="date"> Supplied Date</label>
+              <label htmlFor="date"> Supplied Date</label><br/>
               <input
                 type="date"
                 id="date2"
@@ -506,7 +506,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
             &nbsp;
 
 
-<div className="input-container-1">
+{/* <div className="input-container-1">
   <label htmlFor="schedule">Category</label>
   <input
     type="schedule"
@@ -514,8 +514,8 @@ const calculateTotalCapsulesTimesCapsules = () => {
     value={schedule}
     onChange={(e) => setschedule(e.target.value)}
   />
-</div>
-            &nbsp;
+</div> */}
+            {/* &nbsp;
 
             <div className="input-container-2">
         <label htmlFor="HSNCode">hsnCode</label>
@@ -524,7 +524,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
           value={hsnCode}
         />
       </div>
-            &nbsp;
+            &nbsp; */}
             <div className="input-container-1">
               <label htmlFor="Manufacturer">manufacturer</label>
               <input

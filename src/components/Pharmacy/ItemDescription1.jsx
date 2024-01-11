@@ -165,7 +165,7 @@ const ItemDescription1 = () => {
                   </label>
                 </fieldset>
                 <fieldset className="filed-sets">
-                  <legend className="item-legends">Sales</legend>
+                  <legend className="item-legends">MRP</legend>
                   <label className="label">
                     Rate:
                     <input

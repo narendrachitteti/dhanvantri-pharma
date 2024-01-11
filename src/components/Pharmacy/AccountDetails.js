@@ -198,10 +198,10 @@ const AccountDetails = () => {
                   setNewAccountData({ ...newAccountData, AccountNumber: e.target.value })
                 }
               />
-              <label className='nameclass-label001'>ifccs code:</label>
+              <label className='nameclass-label001'>ifsc code:</label>
               <input
                 type="text"
-                placeholder="ifcs code"
+                placeholder="ifsc code"
                 value={newAccountData.ifcscode}
                 onChange={(e) => setNewAccountData({ ...newAccountData, ifcscode: e.target.value })}
               />

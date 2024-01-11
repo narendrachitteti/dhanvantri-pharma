@@ -330,8 +330,8 @@ const PharmacyBilling = () => {
             </svg></div>
               <div class='main-heading'>
               <h1>TAX INVOICE</h1>
-              <h1>ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h1>
-              <h1>Dhanvantri Pharmacy </h1>
+              <h1>ಧನ್ವಂತ್ರಿ ಫಾರ್ಮಾ</h1>
+              <h1>Dhanvantri Pharma </h1>
               <h3> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,
               Hampinagara , Bengaluru-560104</h3>
               </div>
@@ -341,7 +341,7 @@ const PharmacyBilling = () => {
             </svg></div>
               <div >
               <h3 style="font-size:13px; margin-top:-1px;">GSTIN:29BFNPM5181H1ZX</h3>
-              <h3 style="font-size:13px; margin-top:-10px; font-weight:light;">PHONE:+91 9886819877</h3>
+              <h3 style="font-size:13px; margin-top:-10px; font-weight:light;">PHONE:+91 9916351311</h3>
               </div>
               </div>
               </div>
@@ -394,6 +394,7 @@ const PharmacyBilling = () => {
             .join("")}
                     </tbody>
                   </table>
+                  <h1 style='font-size:15px'>For Dhanvantri Pharma</h1>
                   <h1 style='font-size:15px'>QP Signature: ${sign}</h1>
                   <div>
                   <h1 style='font-size:15px; margin-left:45%;'>Goods once sold cannot be taken back or exchanged</h1>
@@ -436,7 +437,7 @@ const PharmacyBilling = () => {
           </div>
           <div className="gst-ph-head">
             <span className="gst-text">GSTIN:29BFNPM5181H1ZX</span>
-            <span className="phone-text">PHONE:+91 9886819877</span>
+            <span className="phone-text">PHONE:+91 9916351311</span>
           </div>
         </div>
         <h3 className="tax-title">TAX INVOICE</h3>
@@ -446,7 +447,7 @@ const PharmacyBilling = () => {
           <FaPlusCircle className="icon-plus-main" />
 
           <div className='main-heading'>
-          <h2 className="dhanvantri-heading">ಧನ್ವಂತರಿ ಫಾರ್ಮಾ</h2>
+          <h2 className="dhanvantri-heading">ಧನ್ವಂತ್ರಿ ಫಾರ್ಮಾ</h2>
             <h2 className="dhanvantri-heading">Dhanvantri Pharma</h2>
             <h6 className="dhanvantri-heading-address"> # 16,1st Main Road,Vijayanagara 2nd Stage ,Vijayanagara Club Road,</h6>
             <h6 className="dhanvantri-heading-address">Hampinagara , Bengaluru-560104</h6>

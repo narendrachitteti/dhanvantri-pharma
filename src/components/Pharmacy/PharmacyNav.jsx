@@ -74,11 +74,8 @@ const PharmacyNav = () => {
           </div>
           <div className="nav-item">
             <div className="dropdown">
-            <Link to="/pharmabilling"> <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Billing</h6></Link>
-              {/* <div className="dropdown-content">
-                <Link to="/pharmabilling">Bill</Link>
-                <Link to="/BillingDashboard">Dashboard</Link>
-              </div> */}
+            <Link to="/pharmabilling"> <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Tax Invoice</h6></Link>
+              
             </div>
           </div>
           <div className="nav-item">
@@ -123,13 +120,14 @@ const PharmacyNav = () => {
 
           <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Patient Details</h6>
            
-  <div className="dropdown-content">
+            <div className="dropdown-content">
            <Link to='/invoice'> Invoice Details  </Link>
            <Link to='/MedicineDataComponent'> Product Details  </Link>
            <Link to='/Account'> Account Details</Link>
-
             </div>
-           
+            <div className="dropdown">
+              
+            </div>
             </div>
           </div>
           <div
