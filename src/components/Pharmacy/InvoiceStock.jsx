@@ -429,7 +429,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
             <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
               <FaArrowCircleLeft />
             </Link>{" "}
-            &nbsp;Purchase invoice
+            &nbsp;Purchase Entry
           </h3>
           <hr />
           <div className="input-row">
@@ -526,7 +526,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
       </div>
             &nbsp; */}
             <div className="input-container-1">
-              <label htmlFor="Manufacturer">manufacturer</label>
+              <label htmlFor="Manufacturer">Mfr</label>
               <input
                 type="text"
                 id="Manufacturer"
@@ -537,7 +537,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
             &nbsp;
             &nbsp;
             <div className="input-container-1">
-              <label htmlFor="Batch">batchno </label>
+              <label htmlFor="Batch">B.no. </label>
               <input
                 type="Batch"
                 id="Batch"
@@ -560,7 +560,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
             &nbsp; &nbsp;
             &nbsp;
             <div className="input-container-1">
-              <label htmlFor="price">Price/perStrip</label>
+              <label htmlFor="price">Price/Strip</label>
               <input
                 id="salesRateSelect"
                 value={ptr}
@@ -583,7 +583,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
           
 
             <div className="input-container-1">
-              <label htmlFor="Capsules">Capsules/PerStrip</label>
+              <label htmlFor="Capsules">Unit/PerStrip</label>
               <input
                 type="Capsules"
                 id="Capsules"
@@ -598,7 +598,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
 
           &nbsp;
           <div className="input-container-1">
-  <label htmlFor="TotalCapsulesTimesCapsules">Total Capsules</label>
+  <label htmlFor="TotalCapsulesTimesCapsules">Total units</label>
   <input
     type="number"
     id="TotalCapsulesTimesCapsules"
@@ -611,7 +611,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
 
             &nbsp; &nbsp;
             <div className="input-container-1">
-                <label htmlFor="capsuleprice">Capsule/Price</label>
+                <label htmlFor="capsuleprice">Unit/Price</label>
                 <input
                   type="capsulePrice"
                   id="capsulePrice"
@@ -667,7 +667,7 @@ const calculateTotalCapsulesTimesCapsules = () => {
           
             &nbsp; &nbsp; &nbsp;
             <div className="input-container-2">
-  <label> totalValue </label>
+  <label> Total Value </label>
   <input
     type="text"
     value={calculateTotalValue()}

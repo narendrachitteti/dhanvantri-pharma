@@ -87,7 +87,7 @@ const ItemDescription1 = () => {
               </div> */}
 
 
-              <div className="item-expiry-date">
+              {/* <div className="item-expiry-date">
                 <Form.Group controlId="expiryDate">
                   <Form.Label>Expiry Date:</Form.Label>
                   <Form.Control
@@ -98,7 +98,7 @@ const ItemDescription1 = () => {
                     onChange={handleChange}
                   />
                 </Form.Group>
-              </div>
+              </div> */}
 
               <div className="item-company-name">
                 <label className="tax-c-label">GST %:</label>
@@ -112,7 +112,7 @@ const ItemDescription1 = () => {
                 </input>
 
                 <label className="item-narr-label">
-                  Manufacturer:
+                  Company:
                   <input
                     className="tax-input001"
                     name="manufacturer"

@@ -14,7 +14,7 @@ import "./Loginvi.css";
 
 const RetailWholecard = () => {
   return (
-      <div className="Card1-con-vik"   style={{backgroundImage: 'url(https://www.gea.com/en/binaries/advancing-pharmaceutical-processing-transforming-the-future-saving-lives_tcm11-91721.jpg)'}}
+      <div className="Card1-con-vik"   style={{backgroundImage: 'url(https://raw.githubusercontent.com/narendrachitteti/dhanvantri-pharma/master/src/components/Pharmacy/pharma1.jpeg)'}}
       >
      
        <div className="Card1-con-vik-123">

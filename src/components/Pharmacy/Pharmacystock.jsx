@@ -74,7 +74,7 @@ function Pharmacystock() {
         <div className="content-container-177">
           <div className="left-side-177">
             <h1 style={{fontFamily:'roboto'}}>
-              <Link to="/PharmacyHome" style={{ color: "#9b8bf4" }}>
+              <Link to="/pharmabilling" style={{ color: "#9b8bf4" }}>
                 <FaArrowCircleLeft />
               </Link>{" "}
              Pharmacy Stocks

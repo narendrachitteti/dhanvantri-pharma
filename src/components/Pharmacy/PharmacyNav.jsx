@@ -83,7 +83,7 @@ const PharmacyNav = () => {
               <h6 style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}> Inventory</h6>
               <div className="dropdown-content">
                 {/* <Link to="/Inventory">Inventory Stock</Link> */}
-                <Link to="/MedicineList">Product</Link>
+                <Link to="/MedicineList">Product List</Link>
                 <Link to="/Pharmacystock">Stocks</Link>
               </div>
             </div>
@@ -118,11 +118,12 @@ const PharmacyNav = () => {
           <div className="nav-item">
           <div className="dropdown">
 
-          <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Patient Details</h6>
+          <h6  style={{textDecoration:'none', color:'white',fontWeight:'bolder'}}>Invoice Details</h6>
            
             <div className="dropdown-content">
-           <Link to='/invoice'> Invoice Details  </Link>
+          
            <Link to='/MedicineDataComponent'> Product Details  </Link>
+           <Link to='/invoice'> Invoice Details  </Link>
            <Link to='/Account'> Account Details</Link>
             </div>
             <div className="dropdown">
